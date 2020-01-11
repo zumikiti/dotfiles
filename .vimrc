@@ -2,7 +2,7 @@
 set shell=/bin/zsh
 
 " setting
-"文字コードをUFT-8に設定
+" 文字コードをUFT-8に設定
 set fenc=utf-8
 " バックアップファイルを作らない
 set nobackup
@@ -14,7 +14,8 @@ set autoread
 set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
-
+" ヤンクをクリップボードへ引き継ぐ
+set clipboard+=unnamed
 
 " 見た目系
 " 行番号を表示
@@ -38,7 +39,8 @@ nnoremap j gj
 nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
-
+" 行数を相対的に表示
+set relativenumber
 
 " Tab系
 " 不可視文字を可視化(タブが「▸-」と表示される)
@@ -82,18 +84,49 @@ nnoremap sh <C-w>h
 nnoremap ss :<C-u>sp<CR><C-w>j
 nnoremap sv :<C-u>vs<CR><C-w>l
 
+" option + | でファイル内の文字置換
+nnoremap \ :%s/old/new/g<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+
 "plugin
 call plug#begin('~/.vim/plugged')
 
-Plug 'joshdick/onedark.vim'
+Plug 'nanotech/jellybeans.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'scrooloose/nerdcommenter'
+Plug 'simeji/winresizer'
+Plug 'vim-airline/vim-airline'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 call plug#end()
 
 " カラーテーマ
 syntax on
-colorscheme onedark
+colorscheme jellybeans
 
 
+let NERDSpaceDelims = 1
+filetype on
+
+" vim-airline の設定
+let g:airline_theme = 'wombat'
+set laststatus=2
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#wordcount#enabled = 0
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
+let g:airline_section_c = '%t'
+let g:airline_section_x = '%{&filetype}'
+let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
+let g:airline#extensions#ale#error_symbol = 'E:'
+let g:airline#extensions#ale#warning_symbol = 'W:'
+let g:airline#extensions#default#section_truncate_width = {}
+let g:airline#extensions#whitespace#enabled = 1
+
+" govode の設定
+let g:go_gocode_unimported_packages = 1

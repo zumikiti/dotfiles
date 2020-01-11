@@ -8,7 +8,7 @@ function homestead() {
 }
 
 alias phpunit='vendor/bin/phpunit'
-alias gf='git fetch'
+alias gf='git fetch -p'
 alias pull='git pull'
 alias push='git push'
 alias gs='git status'
@@ -17,3 +17,4 @@ alias lint='composer lint'
 alias le='less'
 alias ll='ls -al'
 
+alias t='tmux'
