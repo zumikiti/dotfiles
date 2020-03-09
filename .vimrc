@@ -16,6 +16,11 @@ set hidden
 set showcmd
 " ヤンクをクリップボードへ引き継ぐ
 set clipboard+=unnamed
+" 挿入モードでバックスペース削除を有効
+set backspace=indent,eol,start
+" xで削除した時はヤンクしない
+vnoremap x "_x
+nnoremap x "_x
 
 " 見た目系
 " 行番号を表示
@@ -51,7 +56,6 @@ set expandtab
 set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
-
 
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
