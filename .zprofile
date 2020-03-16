@@ -18,3 +18,5 @@ alias le='less'
 alias ll='ls -al'
 
 alias t='tmux'
+
+setopt no_flow_control

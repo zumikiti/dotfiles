@@ -88,6 +88,18 @@ nnoremap sh <C-w>h
 nnoremap ss :<C-u>sp<CR><C-w>j
 nnoremap sv :<C-u>vs<CR><C-w>l
 
+" tab 操作
+" 新規タブを開く
+nnoremap st :tabnew
+" 次のタブに移動
+nnoremap sn gt
+" 前のタブに移動
+nnoremap sp gT
+" 閉じる
+nnoremap sq :q
+" バッファを閉じる
+nnoremap sQ :bd
+
 " option + | でファイル内の文字置換
 nnoremap \ :%s/old/new/g<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 
@@ -105,6 +117,7 @@ Plug 'simeji/winresizer'
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 call plug#end()
@@ -113,9 +126,11 @@ call plug#end()
 syntax on
 colorscheme jellybeans
 
-
+" NERDSpace の設定
 let NERDSpaceDelims = 1
 filetype on
+" C-a でディレクトリツリーを表示
+nnoremap <silent><C-a> :NERDTreeFind<CR>:vertical res 30<CR>
 
 " vim-airline の設定
 let g:airline_theme = 'wombat'
