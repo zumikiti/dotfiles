@@ -56,6 +56,16 @@ set expandtab
 set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
+" 新規タブを開く
+nnoremap st :tabnew
+" 次のタブに移動
+nnoremap sn gt
+" 前のタブに移動
+nnoremap sp gT
+" 閉じる
+nnoremap sq :q
+" バッファを閉じる
+nnoremap sQ :bd
 
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
@@ -88,18 +98,6 @@ nnoremap sh <C-w>h
 nnoremap ss :<C-u>sp<CR><C-w>j
 nnoremap sv :<C-u>vs<CR><C-w>l
 
-" tab 操作
-" 新規タブを開く
-nnoremap st :tabnew
-" 次のタブに移動
-nnoremap sn gt
-" 前のタブに移動
-nnoremap sp gT
-" 閉じる
-nnoremap sq :q
-" バッファを閉じる
-nnoremap sQ :bd
-
 " option + | でファイル内の文字置換
 nnoremap \ :%s/old/new/g<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 
@@ -119,6 +117,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -149,3 +149,14 @@ let g:airline#extensions#whitespace#enabled = 1
 
 " govode の設定
 let g:go_gocode_unimported_packages = 1
+
+" fzf
+command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+    \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+    \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+    \ <bang>0)
+nnoremap <C-g> :Rg<Space>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <C-h> :History<CR>
