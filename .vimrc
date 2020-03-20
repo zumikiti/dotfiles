@@ -56,16 +56,6 @@ set expandtab
 set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
-" 新規タブを開く
-nnoremap st :tabnew
-" 次のタブに移動
-nnoremap sn gt
-" 前のタブに移動
-nnoremap sp gT
-" 閉じる
-nnoremap sq :q
-" バッファを閉じる
-nnoremap sQ :bd
 
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
@@ -98,6 +88,18 @@ nnoremap sh <C-w>h
 nnoremap ss :<C-u>sp<CR><C-w>j
 nnoremap sv :<C-u>vs<CR><C-w>l
 
+" タブの操作
+" 新規タブを開く
+nnoremap st :tabnew
+" 次のタブに移動
+nnoremap sn gt
+" 前のタブに移動
+nnoremap sp gT
+" 閉じる
+nnoremap sq :q
+" バッファを閉じる
+nnoremap sQ :bd
+
 " option + | でファイル内の文字置換
 nnoremap \ :%s/old/new/g<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 
@@ -119,6 +121,9 @@ Plug 'preservim/nerdtree'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -160,3 +165,6 @@ command! -bang -nargs=* Rg
 nnoremap <C-g> :Rg<Space>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-h> :History<CR>
+
+" indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
