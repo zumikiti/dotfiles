@@ -90,13 +90,13 @@ nnoremap sv :<C-u>vs<CR><C-w>l
 
 " タブの操作
 " 新規タブを開く
-nnoremap st :tabnew
-" 次のタブに移動
-nnoremap sn gt
-" 前のタブに移動
-nnoremap sp gT
+nnoremap st :tablast <bar> tabnew<CR>
+" Tab で次のタブに移動
+nmap <Tab> :tabnext<CR>
+" Shift + Tab で前のタブに移動
+nmap <S-Tab> :tabprevious<CR>
 " 閉じる
-nnoremap sq :q
+nnoremap sq :tabclose<CR>
 " バッファを閉じる
 nnoremap sQ :bd
 
