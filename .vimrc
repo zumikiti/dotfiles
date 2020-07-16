@@ -131,11 +131,20 @@ call plug#end()
 syntax on
 colorscheme jellybeans
 
-" NERDSpace の設定
+" NERDCommenter の設定
 let NERDSpaceDelims = 1
 filetype on
+" ,, でコメント、アンコメント
+nmap ,, <Plug>NERDCommenterToggle
+vmap ,, <Plug>NERDCommenterToggle
+
+" NERDtree
+" デフォルトで隠しファイルを表示
+let NERDTreeShowHidden = 1
 " C-a でディレクトリツリーを表示
-nnoremap <silent><C-a> :NERDTreeFind<CR>:vertical res 30<CR>
+nmap <silent><C-a> :NERDTreeFind<CR>:vertical res 30<CR>
+" The NERD Treeのウィンドウだけが残るような場合にVimを終了
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " vim-airline の設定
 let g:airline_theme = 'wombat'
