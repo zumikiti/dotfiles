@@ -103,6 +103,14 @@ nnoremap sQ :bd
 " option + | でファイル内の文字置換
 nnoremap \ :%s/old/new/g<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 
+" tig を開く
+nnoremap tig :vertical terminal ++close tig<Enter>
+nnoremap fn :FloatermNew<Enter>
+nnoremap git :FloatermNew lazygit<Enter>
+let g:floaterm_width=0.9
+let g:floaterm_height=0.9
+let g:floaterm_autoclose=2
+
 "plugin
 call plug#begin('~/.vim/plugged')
 
@@ -124,6 +132,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
+Plug 'voldikss/vim-floaterm'
 
 call plug#end()
 
