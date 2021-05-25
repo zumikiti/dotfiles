@@ -110,7 +110,7 @@ nnoremap sQ :bd
 
 " tig を開く
 nnoremap tig :vertical terminal ++close tig<Enter>
-nnoremap fn :FloatermNew<Enter>
+nnoremap fn :FloatermNew fish<Enter>
 nnoremap git :FloatermNew lazygit<Enter>
 let g:floaterm_width=0.9
 let g:floaterm_height=0.9
