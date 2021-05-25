@@ -3,6 +3,7 @@ set shell=/bin/zsh
 
 " setting
 " 文字コードをUFT-8に設定
+set encoding=utf-8
 set fenc=utf-8
 " バックアップファイルを作らない
 set nobackup
@@ -27,6 +28,10 @@ nnoremap x "_x
 set number
 " 現在の行を強調表示
 set cursorline
+" highlight CursorLine guibg=#0000A0 ctermbg=000
+" 列を強調表示
+set cursorcolumn
+" highlight CursorColumn guibg=#0000A0 ctermbg=000
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore
 " インデントはスマートインデント
@@ -115,6 +120,7 @@ let g:floaterm_autoclose=2
 call plug#begin('~/.vim/plugged')
 
 Plug 'nanotech/jellybeans.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
@@ -123,8 +129,8 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'scrooloose/nerdcommenter'
 Plug 'simeji/winresizer'
 Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -132,17 +138,38 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'shougo/vimfiler.vim'
+Plug 'shougo/unite.vim'
+Plug 'vim-scripts/gtags.vim'
+Plug 'vim-scripts/taglist.vim'
 Plug 'voldikss/vim-floaterm'
+Plug 'vim-test/vim-test'
+Plug 'kamykn/spelunker.vim'
+Plug 'kamykn/popup-menu.nvim'
+Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
+Plug 'neoclide/coc-vetur'
+Plug 'posva/vim-vue'
 
 call plug#end()
 
 " カラーテーマ
 syntax on
 colorscheme jellybeans
+let g:jellybeans_overrides = {
+      \    'background': { 'ctermbg': 'none', '256ctermbg': 'none' },
+      \}
+if has('termguicolors') && &termguicolors
+  let g:jellybeans_overrides['background']['guibg'] = 'none'
+endif
+" syntax enable
+" set background=dark
+" colorscheme solarized
 
 " NERDCommenter の設定
 let NERDSpaceDelims = 1
 filetype on
+
 " ,, でコメント、アンコメント
 nmap ,, <Plug>NERDCommenterToggle
 vmap ,, <Plug>NERDCommenterToggle
@@ -150,13 +177,16 @@ vmap ,, <Plug>NERDCommenterToggle
 " NERDtree
 " デフォルトで隠しファイルを表示
 let NERDTreeShowHidden = 1
+" font icon 指定
+let g:webdevicons_enable_nerdtree = 1
+set guifont=Hack_Nerd_Font:h9
 " C-a でディレクトリツリーを表示
 nmap <silent><C-a> :NERDTreeFind<CR>:vertical res 30<CR>
 " The NERD Treeのウィンドウだけが残るような場合にVimを終了
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " vim-airline の設定
-let g:airline_theme = 'wombat'
+let g:airline_theme = 'deus'
 set laststatus=2
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -164,11 +194,11 @@ let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
 let g:airline_section_c = '%t'
 let g:airline_section_x = '%{&filetype}'
-let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
-let g:airline#extensions#ale#error_symbol = 'E:'
-let g:airline#extensions#ale#warning_symbol = 'W:'
+let g:airline_section_z = '%3l:%2v'
 let g:airline#extensions#default#section_truncate_width = {}
 let g:airline#extensions#whitespace#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:webdevicons_enable_airline_tabline = 1
 
 " govode の設定
 let g:go_gocode_unimported_packages = 1
@@ -186,3 +216,49 @@ nnoremap <C-h> :History<CR>
 
 " indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
+
+
+" set tags = tags
+let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"  " ctagsのコマンド
+let Tlist_Show_One_File = 1                   " 現在表示中のファイルのみのタグしか表示しない
+let Tlist_Use_Right_Window = 1                " 右側にtag listのウインドうを表示する
+let Tlist_Exit_OnlyWindow = 1                 " taglistのウインドウだけならVimを閉じる
+map <silent> <leader>l :TlistToggle<CR>       " \lでtaglistウインドウを開いたり閉じたり出来るショートカット
+let g:tlist_php_settings = 'php;c:class;d:constant;f:function'''
+
+" vim-test
+nmap <silent> t<C-f> :TestFile<CR> " 現在開いているテストファイルを実行
+nmap <silent> t<C-l> :TestLast<CR> " 最後に実行したテストファイルを実行
+
+
+" phpactor
+" 画面を分割して定義元へのジャンプ
+function! DefinitionJumpWithPhpactor()
+    split
+    call phpactor#GotoDefinition()
+endfunction
+
+
+" useの補完
+nmap <silent><Leader>u      :<C-u>call phpactor#UseAdd()<CR>
+" コンテキストメニューの起動(カーソル下のクラスやメンバに対して実行可能な選択肢を表示してくれます)
+nmap <silent><Leader>mm     :<C-u>call phpactor#ContextMenu()<CR>
+" ナビゲーションメニューの起動(クラスの参照元を列挙したり、他ファイルへのジャンプなど)
+nmap <silent><Leader>nn     :<C-u>call phpactor#Navigate()<CR>
+" カーソル下のクラスやメンバの定義元にジャンプ
+nmap <silent><Leader>o      :<C-u>call phpactor#GotoDefinition()<CR>
+" 編集中のクラスに対し各種の変更を加える(コンストラクタ補完、インタフェース実装など)
+nmap <silent><Leader>tt     :<C-u>call phpactor#Transform()<CR>
+" 新しいクラスを生成する(編集中のファイルに)
+nmap <silent><Leader>cc     :<C-u>call phpactor#ClassNew()<CR>
+" 選択した範囲を変数に抽出する
+nmap <silent><Leader>ee     :<C-u>call phpactor#ExtractExpression(v:false)<CR>
+" 選択した範囲を変数に抽出する
+vmap <silent><Leader>ee     :<C-u>call phpactor#ExtractExpression(v:true)<CR>
+" 選択した範囲を新たなメソッドとして抽出する
+vmap <silent><Leader>em     :<C-u>call phpactor#ExtractMethod()<CR>
+" split → jump
+nmap <silent><C-w><Leader>o :<C-u>call DefinitionJumpWithPhpactor()<CR>
+" カーソル下のクラスや変数の情報を表示する
+" 他のエディタで、マウスカーソルをおいたときに表示されるポップアップなどに相当
+vmap <silent><Leader>hh     :<C-u>call phpactor#Hover()<CR>
