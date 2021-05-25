@@ -106,7 +106,7 @@ nnoremap sq :tabclose<CR>
 nnoremap sQ :bd
 
 " option + | でファイル内の文字置換
-nnoremap \ :%s/old/new/g<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
+" nnoremap \ :%s/old/new/g<LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT><LEFT>
 
 " tig を開く
 nnoremap tig :vertical terminal ++close tig<Enter>
