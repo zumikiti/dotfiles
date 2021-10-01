@@ -1,6 +1,10 @@
 " シェルを指定してください
 set shell=/bin/zsh
 
+" .ts ファイルを開くとシンタックスが無効になる事象回避設定
+" https://github.com/fatih/vim-go/issues/3171
+set re=0
+
 " setting
 " 文字コードをUFT-8に設定
 set encoding=utf-8
@@ -110,6 +114,7 @@ nnoremap sQ :bd
 
 " tig を開く
 nnoremap tig :vertical terminal ++close tig<Enter>
+" nnoremap tig :FloatermNew tig<Enter>
 nnoremap fn :FloatermNew fish<Enter>
 nnoremap git :FloatermNew lazygit<Enter>
 let g:floaterm_width=0.9
