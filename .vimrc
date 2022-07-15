@@ -157,6 +157,7 @@ Plug 'kamykn/popup-menu.nvim'
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 Plug 'neoclide/coc-vetur'
 Plug 'posva/vim-vue'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
