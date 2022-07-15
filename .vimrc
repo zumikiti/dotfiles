@@ -1,6 +1,8 @@
 " シェルを指定してください
 set shell=/bin/zsh
 
+set synmaxcol=320
+
 " .ts ファイルを開くとシンタックスが無効になる事象回避設定
 " https://github.com/fatih/vim-go/issues/3171
 set re=0
