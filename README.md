@@ -23,6 +23,9 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 # install node
 fisher install jorgebucaran/nvm.fish
 nvm i --lts
+
+# install ripgrep (use fzf.vim)
+brew install ripgrep
 ```
 
 ## install vim 
