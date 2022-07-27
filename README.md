@@ -2,10 +2,9 @@
 
 ## set symbolic links
 ```sh
-cd dotfiles
-ln -l .vimrc ~/.vimrc
-ln -l .tigrc ~/.tigrc
-ln -l .tmux.conf ~/.tmux.conf
+ln -s dotfiles/.vimrc ~/.vimrc
+ln -s dotfiles/.tigrc ~/.tigrc
+ln -s dotfiles/.tmux.conf ~/.tmux.conf
 ```
 
 ## install homebrew
@@ -17,12 +16,17 @@ ln -l .tmux.conf ~/.tmux.conf
 ```sh
 brew install fish
 
+fish
+
 # install fisher
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
 # install node
 fisher install jorgebucaran/nvm.fish
-nvm i --lts
+nvm install lts
+
+# install theme
+fisher install oh-my-fish/theme-bobthefish 
 
 # install ripgrep (use fzf.vim)
 brew install ripgrep
@@ -36,7 +40,10 @@ https://iterm2.com/index.html
 
 2. download Hack Nerd Font
 
-https://www.nerdfonts.com/font-downloads
+```sh
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+```
 
 3. set Hack Nerd Font
 
@@ -59,5 +66,12 @@ brew install tmux
 tmux
 
 # install tmux plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # press `C-s + I` in tmux
+```
+
+### install tig
+```sh
+brew install tig
 ```
