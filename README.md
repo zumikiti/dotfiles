@@ -30,6 +30,11 @@ fisher install oh-my-fish/theme-bobthefish
 
 # install ripgrep (use fzf.vim)
 brew install ripgrep
+
+# replace config.fish
+cd ~/.config/fish
+mv ./config.fish ./config.fish.bak
+ln -s ~/dotfiles/config.fish (pwd)/config.fish
 ```
 
 ## install vim 
