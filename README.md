@@ -7,6 +7,18 @@ ln -s dotfiles/.tigrc ~/.tigrc
 ln -s dotfiles/.tmux.conf ~/.tmux.conf
 ```
 
+## install & set karabiner
+1. download & install
+
+https://karabiner-elements.pqrs.org/
+
+2. set karabiner.json
+
+```sh
+rm ~/.config/karabiner/karabiner.json
+ln -s ~/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
+```
+
 ## install homebrew
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
