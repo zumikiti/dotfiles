@@ -6,6 +6,8 @@ end
 set --export --prepend PATH "$HOME/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
+### set node
+nvm use 16
 
 ### MY FUNCTIONS
 # lsd
