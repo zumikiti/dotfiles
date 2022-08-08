@@ -73,7 +73,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 vim ~/.vimrc
 
-# :PluginInstall
+# :PlugInInstall
 ```
 
 ## install tmux
