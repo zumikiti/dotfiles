@@ -29,8 +29,8 @@ function gf --wraps='git fetch -p' --description 'alias gf=git fetch -p'
   git fetch -p $argv; 
 end
 
-function gco --wraps='git checkout' --description 'alias gco=git checkout'
-  git checkout $argv; 
+function gs --wraps='git switch' --description 'alias gs=git switch'
+  git switch $argv; 
 end
 
 function pull --description 'alias pull=git pull'
