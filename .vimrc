@@ -156,6 +156,7 @@ Plug 'kamykn/popup-menu.nvim'
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 Plug 'posva/vim-vue'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'mattn/vim-sqlfmt'
 
 call plug#end()
 
