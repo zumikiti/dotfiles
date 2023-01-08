@@ -48,3 +48,7 @@ end
 function pop --description 'alias pop=git stash pop'
   git stash pop $argv;
 end
+
+function glog --description 'alias git log --oneline --decorate --graph --all'
+  git log --oneline --decorate --graph --all
+end
