@@ -269,3 +269,21 @@ nmap <silent><C-w><Leader>o :<C-u>call DefinitionJumpWithPhpactor()<CR>
 " カーソル下のクラスや変数の情報を表示する
 " 他のエディタで、マウスカーソルをおいたときに表示されるポップアップなどに相当
 vmap <silent><Leader>hh     :<C-u>call phpactor#Hover()<CR>
+
+" enter で候補の決定ができなくなったので以下設定
+" https://www.reddit.com/r/vim/comments/ekmt45/cocnvim_blocks_enter_key_although_no_suggestion/
+" ==========================
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() 
+      \ ? coc#pum#confirm()
+      \ : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" ==========================
