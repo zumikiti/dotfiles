@@ -34,10 +34,8 @@ nnoremap x "_x
 set number
 " 現在の行を強調表示
 set cursorline
-" highlight CursorLine guibg=#0000A0 ctermbg=000
 " 列を強調表示
 set cursorcolumn
-" highlight CursorColumn guibg=#0000A0 ctermbg=000
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore
 " インデントはスマートインデント
