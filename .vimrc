@@ -245,6 +245,8 @@ function! DefinitionJumpWithPhpactor()
     call phpactor#GotoDefinition()
 endfunction
 
+" fugitive の設定
+nmap gb :Git blame<CR>
 
 " useの補完
 nmap <silent><Leader>u      :<C-u>call phpactor#UseAdd()<CR>
