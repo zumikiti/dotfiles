@@ -1,0 +1,27 @@
+# [env]
+# TERM = "xterm-256color"
+
+# 設定ファイル変更時にオートリロード
+live_config_reload = true
+
+# [shell]
+# program = "/usr/local/bin/fish"
+
+# [window]
+# padding.x = 10
+# padding.y = 10
+
+# decorations = "Buttonless"
+
+# blur = true
+
+# option_as_alt = "Both"
+[window]
+startup_mode = "Windowed"
+title = "Alacritty"
+dynamic_title = true 
+opacity = 0.9
+
+[font]
+normal = { family = "Hack Nerd Font" }
+size = 12

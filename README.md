@@ -50,10 +50,15 @@ ln -s ~/dotfiles/config.fish (pwd)/config.fish
 ```
 
 ## install vim 
-### iTerm2
-1. download iTerm2
+### Alacritty
+1. download Alacritty
 
-https://iterm2.com/index.html
+```sh
+brew install alacritty
+```
+
+または、公式からDL
+https://alacritty.org/index.html
 
 2. download Hack Nerd Font
 
@@ -62,9 +67,14 @@ brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font
 ```
 
-3. set Hack Nerd Font
+3. set alacritty.toml
 
-iTerm2 > config > Profiles > Font
+```sh
+cd ~/dotfiles
+ln -s ~/dotfiles/alacritty ~/.config/alacritty
+```
+
+4. Alacritty 起動
 
 ### vim-plugin
 ```sh
