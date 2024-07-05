@@ -17,7 +17,7 @@ end
 
 # docker
 function dc --wraps=docker-compose --description 'alias dc docker-compose'
-  docker-compose $argv; 
+  docker compose $argv; 
 end
 
 function dcc --wraps='dc -f docker-compose.custom.yml' --description 'alias dcc=dc -f docker-compose.custom.yml'
