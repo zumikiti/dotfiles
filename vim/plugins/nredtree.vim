@@ -1,3 +1,6 @@
+" NERDCommenter の設定
+let g:NERDSpaceDelims = 1
+filetype on
 " ,, でコメント、アンコメント
 nmap ,, <Plug>NERDCommenterToggle
 vmap ,, <Plug>NERDCommenterToggle
