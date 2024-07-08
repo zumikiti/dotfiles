@@ -6,6 +6,8 @@ end
 set --export --prepend PATH "$HOME/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
+set -x GIT_EDITOR nvim
+
 ### set node
 nvm use lts
 
