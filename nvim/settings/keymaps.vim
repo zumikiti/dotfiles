@@ -29,4 +29,4 @@ let g:floaterm_autoclose=2
 
 nnoremap qq :q<Enter>
 nnoremap wq :wq<Enter>
-nnoremap ww :w<Enter>
+nnoremap WW :w<Enter>
