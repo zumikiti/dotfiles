@@ -33,7 +33,7 @@ end
 
 # git
 function gf --wraps='git fetch -p' --description 'alias gf=git fetch -p'
-  git fetch -p $argv; 
+  git fetch -p $argv;
 end
 
 function gs --wraps='git switch' --description 'alias gs=git switch'
