@@ -19,7 +19,7 @@ nnoremap sq :tabclose<CR>
 nnoremap sQ :bd
 
 " tig を開く
-nnoremap tig :vertical terminal ++close tig<Enter>
+nnoremap tig :vertical terminal tig<Enter>
 " nnoremap tig :FloatermNew tig<Enter>
 nnoremap fn :FloatermNew fish<Enter>
 nnoremap git :FloatermNew lazygit<Enter>
