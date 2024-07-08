@@ -10,6 +10,11 @@ set --export --prepend PATH "$HOME/.rd/bin"
 nvm use lts
 
 ### MY FUNCTIONS
+# nvim
+function nv --wraps=nv --wraps='nvim' --description 'alias nv=nvim'
+  nvim $argv; 
+end
+
 # lsd
 function ll --wraps=ls --wraps='lsd -al' --description 'alias ll=lsd -al'
   lsd -al $argv; 
