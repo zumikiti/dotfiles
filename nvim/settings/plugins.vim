@@ -45,6 +45,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/plugged/gocode/vim/symlink.sh' }
 
+" ハイライト
+" :TSInstall vue javascript typescript html css scss
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "php 用
