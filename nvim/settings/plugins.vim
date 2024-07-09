@@ -79,3 +79,6 @@ source ~/.config/nvim/settings/plugins/telescope.vim
 source ~/.config/nvim/settings/plugins/go.vim
 
 source ~/.config/nvim/settings/plugins/php.vim
+
+" vim-indent-guides を有効
+let g:indent_guides_enable_on_vim_startup = 1
