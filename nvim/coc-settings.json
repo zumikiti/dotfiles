@@ -1,0 +1,8 @@
+"languageserver": {
+    "phpactor": {
+        "command": "~/.local/bin/phpactor",
+        "args": ["language-server"],
+        "trace.server": "verbose",
+        "filetypes": ["php"]
+    }
+}
