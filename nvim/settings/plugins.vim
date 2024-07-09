@@ -15,13 +15,11 @@ Plug 'shougo/unite.vim'
 
 Plug 'simeji/winresizer'
 
-"置換用
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode'
 
-Plug 'sheerun/vim-polyglot'
+" 多くのファイルに対応（csv など見る時はあるといい？）
+" Plug 'sheerun/vim-polyglot'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
@@ -54,8 +52,6 @@ Plug 'vim-scripts/gtags.vim'
 Plug 'vim-scripts/taglist.vim'
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
 
-Plug 'posva/vim-vue'
-"
 "プロジェクトの editorconfig お読むやつ
 Plug 'editorconfig/editorconfig-vim'
 
