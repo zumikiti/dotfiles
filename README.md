@@ -80,7 +80,7 @@ ln -s ~/dotfiles/alacritty ~/.config/alacritty
 
 ### vim-plugin
 ```sh
-ln -s (pwd)/coc-settings ~/.config/nvim/coc-settings
+ln -s (pwd)/coc-settings.json ~/.config/nvim/coc-settings.json
 
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
