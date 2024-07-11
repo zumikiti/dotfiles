@@ -25,6 +25,6 @@ let g:floaterm_width=0.9
 let g:floaterm_height=0.9
 let g:floaterm_autoclose=2
 
-nnoremap qq :q<Enter>
-nnoremap wq :wq<Enter>
+nnoremap QQ :q<Enter>
+nnoremap WQ :wq<Enter>
 nnoremap WW :w<Enter>
