@@ -22,7 +22,15 @@ set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
 " ヤンクをクリップボードへ引き継ぐ
-set clipboard+=unnamed
+" mac の場合
+if system('uname -s') == "Darwin\n"
+  set clipboard+=unnamed
+endif
+" linux の場合
+" sudo apt install xclip も必要
+if system('uname -s') == "Linux\n"
+  set clipboard=unnamedplus
+endif
 " 挿入モードでバックスペース削除を有効
 set backspace=indent,eol,start
 " xで削除した時はヤンクしない
