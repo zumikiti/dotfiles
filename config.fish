@@ -6,6 +6,8 @@ end
 set --export --prepend PATH "$HOME/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
+starship init fish | source
+
 set -x GIT_EDITOR nvim
 
 zoxide init fish | source
