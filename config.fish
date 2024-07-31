@@ -6,10 +6,22 @@ end
 set --export --prepend PATH "$HOME/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
+set -x GIT_EDITOR nvim
+
+zoxide init fish | source
+function j --wraps=zi --description 'alias j=zi'
+  zi $argv;
+end
+
 ### set node
 nvm use lts
 
 ### MY FUNCTIONS
+# nvim
+function nv --wraps=nv --wraps='nvim' --description 'alias nv=nvim'
+  nvim $argv; 
+end
+
 # lsd
 function ll --wraps=ls --wraps='lsd -al' --description 'alias ll=lsd -al'
   lsd -al $argv; 
@@ -26,7 +38,7 @@ end
 
 # git
 function gf --wraps='git fetch -p' --description 'alias gf=git fetch -p'
-  git fetch -p $argv; 
+  git fetch -p $argv;
 end
 
 function gs --wraps='git switch' --description 'alias gs=git switch'

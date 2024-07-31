@@ -1,0 +1,48 @@
+{
+  "languageserver": {
+    "phpactor": {
+      "command": "~/.local/bin/phpactor",
+      "args": ["language-server"],
+      "trace.server": "verbose",
+      "filetypes": ["php"]
+    },
+    "intelephense": {
+      "command": "intelephense",
+      "args": ["--stdio"],
+      "filetypes": ["php"],
+      "initializationOptions": {
+        "storagePath": "~/.local/tmp/intelephense"
+      }
+    }
+  },
+  "eslint.filetypes": ["javascript", "vue"],
+
+  // vim-go seting
+  "suggest.noselect": false,
+  "diagnostic.errorSign": "✘",
+  "diagnostic.warningSign": "!",
+  "diagnostic.infoSign": "?",
+  "diagnostic.checkCurrentLine": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "html",
+    "json",
+    "css",
+    "scss",
+    "go"
+  ],
+  "coc.preferences.hoverTarget": "float",
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  },
+  "go.goplsOptions": {
+    "staticcheck": true
+  },
+
+  "intelephense.files.maxSize": 5000000, // 任意の設定例
+  "intelephense.telemetry.enable": false
+}

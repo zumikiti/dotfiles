@@ -2,10 +2,11 @@
 
 ## set symbolic links
 ```sh
-ln -s dotfiles/.vimrc ~/.vimrc
-ln -s dotfiles/vim ~/.vim/settings
-ln -s dotfiles/.tigrc ~/.tigrc
-ln -s dotfiles/.tmux.conf ~/.tmux.conf
+mkdir -p ~/.config/nvim
+ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
+ln -s ~/dotfiles/nvim/settings ~/.config/nvim/settings
+ln -s ~/dotfiles/.tigrc ~/.tigrc
+ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ```
 
 ## install & set karabiner
@@ -79,10 +80,12 @@ ln -s ~/dotfiles/alacritty ~/.config/alacritty
 
 ### vim-plugin
 ```sh
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+ln -s (pwd)/coc-settings.json ~/.config/nvim/coc-settings.json
+
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-vim ~/.vimrc
+nvim ~/.config/nvim/init.vim
 
 # :PlugInInstall
 ```
