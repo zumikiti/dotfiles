@@ -8,6 +8,11 @@ set --export --prepend PATH "$HOME/.rd/bin"
 
 set -x GIT_EDITOR nvim
 
+zoxide init fish | source
+function j --wraps=zi --description 'alias j=zi'
+  zi $argv;
+end
+
 ### set node
 nvm use lts
 
