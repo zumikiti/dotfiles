@@ -28,3 +28,14 @@ let g:floaterm_autoclose=2
 nnoremap QQ :q<Enter>
 nnoremap WQ :wq<Enter>
 nnoremap WW :w<Enter>
+
+" xで削除した時はヤンクしない
+vnoremap x "_x
+nnoremap x "_x
+
+" 折り返し時に表示行単位での移動できるようにする
+nnoremap j gj
+nnoremap k gk
+
+" ESC連打でハイライト解除
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
