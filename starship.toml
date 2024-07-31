@@ -5,8 +5,9 @@
 
 [memory_usage]
 disabled = false
+format = 'via $symbol [${ram_pct}( | ${swap_pct})]($style) '
 threshold = -1
-symbol = ' '
+symbol = 'MEM'
 style = 'bold dimmed green'
 
 [git_status]
@@ -17,10 +18,10 @@ diverged = '👆${ahead_count}👇${behind_count}'
 up_to_date = ''
 untracked = '🤷'
 stashed = ''
-modified = '[!!\($count\)](yellow)'
+modified = '[M\($count\)](yellow)'
 staged = '[++\($count\)](green)'
-renamed = '[≫\($count\)](yellow)'
-deleted = '[✘\($count\)](red)'
+renamed = '[R\($count\)](yellow)'
+deleted = '[D\($count\)](red)'
 
 # コマンド実行に5秒以上かかった場合に表示
 [cmd_duration]
@@ -32,5 +33,3 @@ disabled = true
 
 [golang]
 format = 'via [Go $version](bold cyan) '
-
-
