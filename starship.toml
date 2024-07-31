@@ -1,0 +1,36 @@
+# starship
+# https://starship.rs/
+# シンボリックリンクを貼る
+# ln -s (ped)/starship.toml ~/.config/starship.toml
+
+[memory_usage]
+disabled = false
+threshold = -1
+symbol = ' '
+style = 'bold dimmed green'
+
+[git_status]
+conflicted = '🏳'
+ahead = '👆${count}'
+behind = '👇${count}'
+diverged = '👆${ahead_count}👇${behind_count}'
+up_to_date = ''
+untracked = '🤷'
+stashed = ''
+modified = '[!!\($count\)](yellow)'
+staged = '[++\($count\)](green)'
+renamed = '[≫\($count\)](yellow)'
+deleted = '[✘\($count\)](red)'
+
+# コマンド実行に5秒以上かかった場合に表示
+[cmd_duration]
+min_time = 500
+format = 'underwent [$duration](bold yellow)'
+
+[docker_context]
+disabled = true
+
+[golang]
+format = 'via [Go $version](bold cyan) '
+
+
