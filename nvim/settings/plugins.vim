@@ -16,7 +16,6 @@ Plug 'shougo/unite.vim'
 Plug 'simeji/winresizer'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'dhruvasagar/vim-table-mode'
 
 " 多くのファイルに対応（csv など見る時はあるといい？）
 " Plug 'sheerun/vim-polyglot'
@@ -55,8 +54,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-scripts/gtags.vim'
 Plug 'vim-scripts/taglist.vim'
 Plug 'phpactor/phpactor', {'for': 'php', 'branch': 'master', 'do': 'composer install --no-dev -o'}
+Plug 'yaegassy/coc-intelephense', {'do': 'yarn install --frozen-lockfile'}
 
-"プロジェクトの editorconfig お読むやつ
+Plug 'pangloss/vim-javascript'
+
+"プロジェクトの editorconfig を読むやつ
 Plug 'editorconfig/editorconfig-vim'
 
 "sqlのフォーマッター
