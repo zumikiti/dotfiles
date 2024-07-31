@@ -3,6 +3,7 @@
 ## set symbolic links
 ```sh
 ln -s dotfiles/.vimrc ~/.vimrc
+ln -s dotfiles/vim ~/.vim/settings
 ln -s dotfiles/.tigrc ~/.tigrc
 ln -s dotfiles/.tmux.conf ~/.tmux.conf
 ```
