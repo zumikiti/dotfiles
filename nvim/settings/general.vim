@@ -1,5 +1,12 @@
-" シェルを指定してください
-set shell=/bin/zsh
+" シェルを指定
+if system('uname -s') == "Darwin\n"
+  " mac の場合
+  set shell=/bin/zsh
+endif
+if system('uname -s') == "Linux\n"
+  " linux の場合
+  set shell=/usr/bin/bash
+endif
 
 set synmaxcol=320
 
