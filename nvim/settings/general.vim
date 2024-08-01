@@ -1,5 +1,5 @@
 " シェルを指定
-if system('uname -s') == "Darwin\n"
+if has('mac') == 1
   " mac の場合
   set shell=/bin/zsh
 else
@@ -29,10 +29,10 @@ set hidden
 set showcmd
 
 " ヤンクをクリップボードへ引き継ぐ
-" mac の場合
-if system('uname -s') == "Darwin\n"
+if has('mac') == 1
+  " mac の場合
   set clipboard+=unnamed
-else 
+else
   " linux の場合
   " sudo apt install xclip も必要
   set clipboard=unnamedplus
