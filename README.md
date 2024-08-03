@@ -32,15 +32,15 @@ brew install fish
 
 fish
 
-# install fisher
+# install fisher && node
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-
-# install node
 fisher install jorgebucaran/nvm.fish
 nvm install lts
 
-# install theme
-fisher install oh-my-fish/theme-bobthefish 
+# install starship
+cd ~/dotfiles
+brew install starship
+ln -s (pwd)/starship.toml ~/.config/starship.toml
 
 # install ripgrep (use fzf.vim)
 brew install ripgrep
