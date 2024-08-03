@@ -1,7 +1,7 @@
 # starship
 # https://starship.rs/
 # シンボリックリンクを貼る
-# ln -s (ped)/starship.toml ~/.config/starship.toml
+# ln -s (pwd)/starship.toml ~/.config/starship.toml
 
 [memory_usage]
 disabled = false
