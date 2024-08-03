@@ -1,9 +1,8 @@
 " シェルを指定
-if system('uname -s') == "Darwin\n"
+if has('mac') == 1
   " mac の場合
   set shell=/bin/zsh
-endif
-if system('uname -s') == "Linux\n"
+else
   " linux の場合
   set shell=/usr/bin/bash
 endif
@@ -28,21 +27,19 @@ set autoread
 set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
+
 " ヤンクをクリップボードへ引き継ぐ
-" mac の場合
-if system('uname -s') == "Darwin\n"
+if has('mac') == 1
+  " mac の場合
   set clipboard+=unnamed
-endif
-" linux の場合
-" sudo apt install xclip も必要
-if system('uname -s') == "Linux\n"
+else
+  " linux の場合
+  " sudo apt install xclip も必要
   set clipboard=unnamedplus
 endif
+
 " 挿入モードでバックスペース削除を有効
 set backspace=indent,eol,start
-" xで削除した時はヤンクしない
-vnoremap x "_x
-nnoremap x "_x
 
 " 見た目系
 " 行番号を表示
@@ -63,9 +60,6 @@ set showmatch
 set laststatus=2
 " コマンドラインの補完
 set wildmode=list:longest
-" 折り返し時に表示行単位での移動できるようにする
-nnoremap j gj
-nnoremap k gk
 " シンタックスハイライトの有効化
 syntax enable
 " 行数を相対的に表示
@@ -92,8 +86,6 @@ set incsearch
 set wrapscan
 " 検索語をハイライト表示
 set hlsearch
-" ESC連打でハイライト解除
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " 括弧の補完
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
