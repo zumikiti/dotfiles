@@ -23,10 +23,8 @@ staged = '[++\($count\)](green)'
 renamed = '[R\($count\)](yellow)'
 deleted = '[D\($count\)](red)'
 
-# コマンド実行に5秒以上かかった場合に表示
 [cmd_duration]
-min_time = 500
-format = 'underwent [$duration](bold yellow)'
+disabled = true
 
 [docker_context]
 disabled = true
