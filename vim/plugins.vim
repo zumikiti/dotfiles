@@ -60,9 +60,6 @@ Plug 'posva/vim-vue'
 "プロジェクトの editorconfig お読むやつ
 Plug 'editorconfig/editorconfig-vim'
 
-"sqlのフォーマッター
-Plug 'mattn/vim-sqlfmt'
-
 "htmlタグを ul>li*3 などで作れるやつ
 Plug 'mattn/emmet-vim'
 
