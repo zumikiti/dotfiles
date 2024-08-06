@@ -32,3 +32,6 @@ vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true, silent = true })
 
 -- ESC連打でハイライト解除
 vim.api.nvim_set_keymap('n', '<Esc><Esc>', ':nohlsearch<CR><Esc>', { noremap = true, silent = true })
+
+-- coc の補完をEnterで決定できる
+vim.api.nvim_set_keymap('i', '<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { noremap = true, expr = true, silent = true })
