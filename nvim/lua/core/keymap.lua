@@ -18,13 +18,6 @@ vim.api.nvim_set_keymap('n', 'sq', ':tabclose<CR>', { noremap = true, silent = t
 -- バッファを閉じる
 vim.api.nvim_set_keymap('n', 'sQ', ':bd<CR>', { noremap = true, silent = true })
 
--- tig を開く
-vim.api.nvim_set_keymap('n', 'tig', ':FloatermNew tig<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'fn', ':FloatermNew fish<CR>', { noremap = true, silent = true })
-vim.g.floaterm_width = 0.9
-vim.g.floaterm_height = 0.9
-vim.g.floaterm_autoclose = 2
-
 vim.api.nvim_set_keymap('n', 'QQ', ':q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'WQ', ':wq<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'WW', ':w<CR>', { noremap = true, silent = true })
