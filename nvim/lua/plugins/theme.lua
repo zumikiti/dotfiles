@@ -1,6 +1,8 @@
 return {
-  "folke/tokyonight.nvim",
+  'nanotech/jellybeans.vim',
   lazy = false,
   priority = 1000,
   opts = {},
+  config = function()
+  end,
 }
