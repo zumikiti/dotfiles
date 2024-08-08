@@ -1,10 +1,27 @@
 return {
-    'numToStr/Comment.nvim',
-    opts = {
-        -- add any options here
+  'numToStr/Comment.nvim',
+  opts = {
+    -- ノーマルモードのキーマップ
+    toggler = {
+      ---Line-comment toggle keymap
+      line = ',,',
+      ---Block-comment toggle keymap
+      block = '<leader>,',
     },
-    init = function()
-      require('Comment').setup()
-    end,
+    ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+    opleader = {
+      ---Line-comment keymap
+      line = ',,',
+      ---Block-comment keymap
+      block = '<leader>,',
+    },
+    mappings = {
+      ---Extra mapping; `gco`, `gcO`, `gcA`
+      extra = false,
+    },
+  },
+  init = function()
+    require('Comment').setup()
+  end,
 }
 
