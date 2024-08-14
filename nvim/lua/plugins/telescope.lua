@@ -6,12 +6,12 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   keys = {
-    { 'ff', "<cmd>Telescope find_files find_command=rg,--files,--hidden,--glob,!*.git <cr>" },
-    { 'fw', "<cmd>Telescope live_grep <cr>" },
-    { 'fz', "<cmd>Telescope grep_string <cr>" },
-    { 'fb', "<cmd>Telescope buffers <cr>" },
+    { 'ff' , "<cmd>Telescope find_files find_command=rg,--files,--hidden,--glob,!*.git <cr>" },
+    { 'fw' , "<cmd>Telescope live_grep <cr>" },
+    { 'fz' , "<cmd>Telescope grep_string <cr>" },
+    { 'fb' , "<cmd>Telescope buffers <cr>" },
     { 'fgc', "<cmd>Telescope git_bcommits <cr>" },
-    { 'fh', "<cmd>Telescope help_tags <cr>" },
+    { 'fh' , "<cmd>Telescope help_tags <cr>" },
   },
   config = function()
     local telescope = require('telescope')
