@@ -3,8 +3,8 @@
 ## set symbolic links
 ```sh
 mkdir -p ~/.config/nvim
-ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
-ln -s ~/dotfiles/nvim/settings ~/.config/nvim/settings
+ln -s ~/dotfiles/nvim/init.lua ~/.config/nvim/init.lua
+ln -s ~/dotfiles/nvim/lua ~/.config/nvim/lua
 ln -s ~/dotfiles/.tigrc ~/.tigrc
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ```
@@ -78,17 +78,8 @@ ln -s ~/dotfiles/alacritty ~/.config/alacritty
 
 4. Alacritty 起動
 
-### vim-plugin
-```sh
-ln -s (pwd)/coc-settings.json ~/.config/nvim/coc-settings.json
-
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-nvim ~/.config/nvim/init.vim
-
-# :PlugInInstall
-```
+### nvim install plugins (lazy)
+nvim を起動すると、自動でlazyでプラグインのインストールが始まる。
 
 ## install tmux
 ```sh
@@ -102,7 +93,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # press `C-s + I` in tmux
 ```
 
-### install tig
+## install tig
 ```sh
 brew install tig
 ```
