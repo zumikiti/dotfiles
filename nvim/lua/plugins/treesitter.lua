@@ -7,12 +7,11 @@ return {
   opts = {
     highlight = { enable = true },
     indent = { enable = true },
+    auto_install = true,
     ensure_installed = {
       "bash",
+      "fish",
       "diff",
-      "html",
-      "javascript",
-      "jsdoc",
       "json",
       "jsonc",
       "lua",
@@ -22,10 +21,15 @@ return {
       "markdown_inline",
       "toml",
       "tsx",
-      "typescript",
       "vim",
       "vimdoc",
       "yaml",
+
+      "html",
+      "javascript",
+      "jsdoc",
+      "typescript",
+
       "php",
       "go",
       "rust",

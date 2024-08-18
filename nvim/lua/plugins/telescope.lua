@@ -11,6 +11,7 @@ return {
     { 'fz' , "<cmd>Telescope grep_string <cr>" },
     { 'fb' , "<cmd>Telescope buffers <cr>" },
     { 'fgc', "<cmd>Telescope git_bcommits <cr>" },
+    { 'ft' , "<cmd>Telescope treesitter <cr>", "Show this class symbols (type / var / methods list)" },
     { 'fh' , "<cmd>Telescope help_tags <cr>" },
   },
   config = function()
