@@ -47,9 +47,9 @@ opt.backspace = 'indent,eol,start'
 -- 行番号を表示
 opt.number = true
 -- 現在の行を強調表示
-opt.cursorline = true
+opt.cursorline = false
 -- 列を強調表示
-opt.cursorcolumn = true
+opt.cursorcolumn = false
 -- 行末の1文字先までカーソルを移動できるように
 opt.virtualedit = 'onemore'
 -- インデントはスマートインデント
