@@ -11,10 +11,6 @@ api.nvim_set_keymap('n', 'sv', ':<C-u>vs<CR><C-w>l', { noremap = true, silent = 
 -- タブの操作
 -- 新規タブを開く
 api.nvim_set_keymap('n', 'st', ':tablast | tabnew<CR>', { noremap = true, silent = true })
--- Tab で次のタブに移動
-api.nvim_set_keymap('n', '<Tab>', ':tabnext<CR>', { noremap = true, silent = true })
--- Shift + Tab で前のタブに移動
-api.nvim_set_keymap('n', '<S-Tab>', ':tabprevious<CR>', { noremap = true, silent = true })
 -- 閉じる
 api.nvim_set_keymap('n', 'sq', ':tabclose<CR>', { noremap = true, silent = true })
 -- バッファを閉じる
