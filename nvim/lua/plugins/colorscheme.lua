@@ -1,6 +1,7 @@
 return {
-  'nanotech/jellybeans.vim',
-  lazy = false,
+  "catppuccin/nvim",
+  name = "catppuccin",
+  lazy = true,
   priority = 1000,
   opts = {},
   config = function()
