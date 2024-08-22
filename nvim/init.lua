@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 
 require("core.lazy")
 
-vim.cmd.colorscheme("jellybeans")
+vim.cmd.colorscheme("nightfox")
 
 vim.api.nvim_create_autocmd("User", {
   callback = function()
