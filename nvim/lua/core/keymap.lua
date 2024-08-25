@@ -16,6 +16,10 @@ api.nvim_set_keymap('n', 'sq', ':tabclose<CR>', { noremap = true, silent = true 
 -- バッファを閉じる
 api.nvim_set_keymap('n', 'sQ', ':bd<CR>', { noremap = true, silent = true })
 
+-- ペインサイズ変更
+api.nvim_set_keymap('n', '<C-j>', '20<C-w>-', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<C-k>', '20<C-w>+', { noremap = true, silent = true })
+
 api.nvim_set_keymap('n', 'QQ', ':q<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', 'WQ', ':wq<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', 'WW', ':w<CR>', { noremap = true, silent = true })
@@ -39,6 +43,3 @@ api.nvim_set_keymap('i', '(<CR>', '()<Left><CR><ESC><S-o>', { noremap = true, si
 -- クオーテーションの補完
 api.nvim_set_keymap('i', "'", "''<Left>", { noremap = true, silent = true })
 api.nvim_set_keymap('i', '"', '""<Left>', { noremap = true, silent = true })
-
--- coc の補完をEnterで決定できる
-api.nvim_set_keymap('i', '<CR>', 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { noremap = true, expr = true, silent = true })
