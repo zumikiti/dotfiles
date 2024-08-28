@@ -6,12 +6,15 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   keys = {
-    { 'ff' , "<cmd>Telescope find_files find_command=rg,--files,--hidden,--glob,!*.git <cr>" },
+    { 'ff' , "<cmd>Telescope git_files <cr>",              desc = "find git files" },
+    { 'fa' , "<cmd>Telescope find_files hidden=true <cr>", desc = "find all files" },
     { 'fw' , "<cmd>Telescope live_grep <cr>" },
     { 'fz' , "<cmd>Telescope grep_string <cr>" },
     { 'fb' , "<cmd>Telescope buffers <cr>" },
     { 'fgc', "<cmd>Telescope git_bcommits <cr>" },
-    { 'ft' , "<cmd>Telescope treesitter <cr>", "Show this class symbols (type / var / methods list)" },
+    { 'ft' , "<cmd>Telescope treesitter <cr>",             desc = "Show this class symbols (type / var / methods list)" },
+    { 'fo' , "<cmd>Telescope old_files <cr>",              desc = "Show file history" },
+    { 'fc' , "<cmd>Telescope git_bcommits <cr>",           desc = "Show current file commit history" },
     { 'fh' , "<cmd>Telescope help_tags <cr>" },
   },
   config = function()
