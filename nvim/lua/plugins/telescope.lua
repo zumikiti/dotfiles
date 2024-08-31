@@ -13,7 +13,7 @@ return {
     { 'fb' , "<cmd>Telescope buffers <cr>" },
     { 'fgc', "<cmd>Telescope git_bcommits <cr>" },
     { 'ft' , "<cmd>Telescope treesitter <cr>",             desc = "Show this class symbols (type / var / methods list)" },
-    { 'fo' , "<cmd>Telescope old_files <cr>",              desc = "Show file history" },
+    { 'fo' , "<cmd>Telescope oldfiles <cr>",               desc = "Show file history" },
     { 'fc' , "<cmd>Telescope git_bcommits <cr>",           desc = "Show current file commit history" },
     { 'fh' , "<cmd>Telescope help_tags <cr>" },
   },
