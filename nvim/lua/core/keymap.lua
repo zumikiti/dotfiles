@@ -1,10 +1,6 @@
 local api = vim.api
 
 -- 画面分割系
-api.nvim_set_keymap('n', 'sj', '<C-w>j', { noremap = true, silent = true })
-api.nvim_set_keymap('n', 'sk', '<C-w>k', { noremap = true, silent = true })
-api.nvim_set_keymap('n', 'sl', '<C-w>l', { noremap = true, silent = true })
-api.nvim_set_keymap('n', 'sh', '<C-w>h', { noremap = true, silent = true })
 api.nvim_set_keymap('n', 'ss', ':<C-u>sp<CR><C-w>j', { noremap = true, silent = true })
 api.nvim_set_keymap('n', 'sv', ':<C-u>vs<CR><C-w>l', { noremap = true, silent = true })
 
@@ -15,6 +11,12 @@ api.nvim_set_keymap('n', 'st', ':tablast | tabnew<CR>', { noremap = true, silent
 api.nvim_set_keymap('n', 'sq', ':tabclose<CR>', { noremap = true, silent = true })
 -- バッファを閉じる
 api.nvim_set_keymap('n', 'sQ', ':bd<CR>', { noremap = true, silent = true })
+
+-- ペイン 移動
+api.nvim_set_keymap('n', 'sj', '<C-w>j', { noremap = true, silent = true })
+api.nvim_set_keymap('n', 'sk', '<C-w>k', { noremap = true, silent = true })
+api.nvim_set_keymap('n', 'sl', '<C-w>l', { noremap = true, silent = true })
+api.nvim_set_keymap('n', 'sh', '<C-w>h', { noremap = true, silent = true })
 
 -- ペインサイズ変更
 api.nvim_set_keymap('n', '<C-j>', '20<C-w>-', { noremap = true, silent = true })
