@@ -13,3 +13,12 @@ opacity = 0.9
 [font]
 normal.family = "Hack Nerd Font"
 size = 12
+
+[keyboard]
+bindings = [
+  # mac だと ALT と合わせると特殊文字入力となるため、 Alacritty でそのまま認識されるように設定
+  { key = "H", mods = "Alt", chars = "\u001bh" },
+  { key = "J", mods = "Alt", chars = "\u001bj" },
+  { key = "K", mods = "Alt", chars = "\u001bk" },
+  { key = "L", mods = "Alt", chars = "\u001bl" },
+]

@@ -21,7 +21,8 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode'
 
-Plug 'sheerun/vim-polyglot'
+" ハイライト表示
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -58,9 +59,6 @@ Plug 'posva/vim-vue'
 "
 "プロジェクトの editorconfig お読むやつ
 Plug 'editorconfig/editorconfig-vim'
-
-"sqlのフォーマッター
-Plug 'mattn/vim-sqlfmt'
 
 "htmlタグを ul>li*3 などで作れるやつ
 Plug 'mattn/emmet-vim'
