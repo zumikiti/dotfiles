@@ -6,7 +6,7 @@ end
 set --export --prepend PATH "$HOME/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
-starship init fish | source
+oh-my-posh init fish --config './posh-themes/tokyonight_storm.omp.json' | source
 
 set -x GIT_EDITOR nvim
 
