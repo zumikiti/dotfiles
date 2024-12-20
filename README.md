@@ -37,11 +37,6 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 fisher install jorgebucaran/nvm.fish
 nvm install lts
 
-# install starship
-cd ~/dotfiles
-brew install starship
-ln -s (pwd)/starship.toml ~/.config/starship.toml
-
 # install ripgrep (use fzf.vim)
 brew install ripgrep
 
@@ -49,6 +44,11 @@ brew install ripgrep
 cd ~/.config/fish
 mv ./config.fish ./config.fish.bak
 ln -s ~/dotfiles/config.fish (pwd)/config.fish
+
+# install OMP
+cd ~/.config/fish
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+ln -s ~/dotfiles/posh/themes ./posh-themes
 ```
 
 ## install vim 
