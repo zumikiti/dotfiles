@@ -138,6 +138,19 @@ return {
           },
         })
       end,
+      ["voler"] = function()
+        lspconfig["voler"].setup({
+          capabilities = capabilities,
+          filetypes = {
+            "typescript",
+            "javascript",
+            "typescriptreact",
+            "javascriptreact",
+            "vue",
+            "json",
+          },
+        })
+      end,
     })
   end,
 }
