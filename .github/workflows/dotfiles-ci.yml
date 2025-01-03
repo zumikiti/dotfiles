@@ -1,0 +1,60 @@
+name: Dotfiles CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  lint-and-format:
+    name: Lint and Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリのチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 必要なツールのインストール
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lua-check stylua shellcheck
+
+      # Lua ファイルのリント
+      - name: Lint Lua files
+        run: |
+          find . -name "*.lua" | xargs luacheck
+
+      # Lua ファイルのフォーマットチェック
+      - name: Check Lua formatting
+        run: |
+          find . -name "*.lua" | xargs stylua --check
+
+      # シェルスクリプトのリント
+      - name: Lint shell scripts
+        run: |
+          find . -name "*.sh" | xargs shellcheck
+
+  test-apply:
+    name: Test Dotfiles Apply
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリのチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 必要なツールのインストール
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git stow
+
+      # dotfiles を適用するテスト
+      - name: Apply dotfiles
+        run: |
+          stow -t ~ */
