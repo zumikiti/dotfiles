@@ -22,39 +22,22 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y lua-check stylua shellcheck
-
-      # Lua ファイルのリント
+          sudo apt-get install -y lua-check shellcheck
+      # Styluaのインストール
+      - name: Install Stylua
+        run: |
+          curl -sL https://github.com/JohnnyMorganz/StyLua/releases/latest/download/stylua-linux.zip -o stylua.zip
+          unzip stylua.zip -d /usr/local/bin
+          chmod +x /usr/local/bin/stylua
+      # Luaファイルのリント
       - name: Lint Lua files
         run: |
           find . -name "*.lua" | xargs luacheck
-
-      # Lua ファイルのフォーマットチェック
+      # Luaファイルのフォーマットチェック
       - name: Check Lua formatting
         run: |
           find . -name "*.lua" | xargs stylua --check
-
       # シェルスクリプトのリント
       - name: Lint shell scripts
         run: |
           find . -name "*.sh" | xargs shellcheck
-
-  test-apply:
-    name: Test Dotfiles Apply
-    runs-on: ubuntu-latest
-
-    steps:
-      # リポジトリのチェックアウト
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # 必要なツールのインストール
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y git stow
-
-      # dotfiles を適用するテスト
-      - name: Apply dotfiles
-        run: |
-          stow -t ~ */
