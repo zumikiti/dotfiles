@@ -22,12 +22,11 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y lua-check shellcheck
+          sudo apt-get install -y lua-check shellcheck curl
       # Styluaのインストール
       - name: Install Stylua
         run: |
-          curl -sL https://github.com/JohnnyMorganz/StyLua/releases/latest/download/stylua-linux.zip -o stylua.zip
-          unzip stylua.zip -d /usr/local/bin
+          curl -sL https://github.com/JohnnyMorganz/StyLua/releases/latest/download/stylua-linux-x86_64 -o /usr/local/bin/stylua
           chmod +x /usr/local/bin/stylua
       # Luaファイルのリント
       - name: Lint Lua files
