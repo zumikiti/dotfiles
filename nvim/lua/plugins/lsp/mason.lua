@@ -37,6 +37,8 @@ return {
         "eslint",
         "gopls",
         "rust_analyzer",
+        "ts_ls",
+        "eslint",
       },
     })
 
