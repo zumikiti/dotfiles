@@ -11,6 +11,8 @@ return {
     { "<leader>f", "<cmd>Neotree filesystem reveal left<cr>", desc = "NeoTree" },
   },
   config = function()
-    require("neo-tree").setup()
+    require("neo-tree").setup({
+      close_if_last_window = true,
+    })
   end,
 }

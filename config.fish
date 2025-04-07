@@ -16,7 +16,8 @@ function j --wraps=zi --description 'alias j=zi'
 end
 
 ### set node
-nvm use lts
+fnm env --use-on-cd --shell fish | source
+fnm use 22
 
 ### MY FUNCTIONS
 # nvim
