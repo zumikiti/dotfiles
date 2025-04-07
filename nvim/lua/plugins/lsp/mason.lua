@@ -37,7 +37,6 @@ return {
         "eslint",
         "gopls",
         "rust_analyzer",
-        "ts_ls",
         "eslint",
       },
     })
@@ -47,6 +46,7 @@ return {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
         "eslint_d",
+        "typescript-language-server",
       },
     })
   end,
