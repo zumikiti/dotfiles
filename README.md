@@ -30,12 +30,13 @@ ln -s ~/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
 ```sh
 brew install fish
 
+# install fnm && node
+brew install fnm
+
 fish
 
-# install fisher && node
+# install fisher
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-fisher install jorgebucaran/nvm.fish
-nvm install lts
 
 # install ripgrep (use fzf.vim)
 brew install ripgrep
