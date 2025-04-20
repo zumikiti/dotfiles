@@ -1,19 +1,53 @@
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
-  version = false, -- Never set this value to "*"! Never!
+  version = false,
   opts = {
-    provider = "ollama",
-    ollama = { -- <- openai から ollama に変更
-      endpoint = "http://localhost:11434", -- Ollama の正しいエンドポイントに修正 (通常は http)
-      model = "gemma3", -- 使用したい Ollama モデル名
+    provider = "claude",
+    behaviour = {
+      -- 自動提案を有効にする
+      auto_suggestions = true,
+      -- ハイライトグループを自動設定する
+      auto_set_highlight_group = true,
+      -- キーマップを自動設定する
+      auto_set_keymaps = true,
+      -- 生成後の差分を自動適用する
+      auto_apply_diff_after_generation = true,
+      -- クリップボードからのペーストをサポートする
+      support_paste_from_clipboard = true,
+    },
+    windows = {
+      -- サイドバーの位置
+      position = "right",
+      -- サイドバーの幅
+      width = 30,
+      sidebar_header = {
+        -- ヘッダーのテキスト配置
+        align = "center",
+        -- 角を丸くしない
+        rounded = false,
+      },
+      ask = {
+        -- フローティングウィンドウを使用
+        floating = true,
+        -- 起動時にインサートモードに入る
+        start_insert = true,
+        -- ウィンドウの境界線を丸くする
+        border = "rounded"
+      }
+    },
+    -- providers-setting
+    ollama = {
+      endpoint = "http://localhost:11434",
+      model = "gemma3",
       timeout = 30000,
       temperature = 0,
       max_completion_tokens = 8192,
-      -- その他の Ollama 固有の設定があればここに追加
     },
-    -- openai の設定は不要であれば削除するか、必要であれば別途残します
-    -- openai = { ... },
+    claude = {
+      model = "claude-3-5-sonnet-20241022",
+      max_tokens = 8000,
+    },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
