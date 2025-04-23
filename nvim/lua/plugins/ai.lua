@@ -5,8 +5,8 @@ return {
   opts = {
     provider = "claude",
     behaviour = {
-      -- 自動提案を有効にする
-      auto_suggestions = true,
+      -- 自動提案を無効にする
+      auto_suggestions = false,
       -- ハイライトグループを自動設定する
       auto_set_highlight_group = true,
       -- キーマップを自動設定する
