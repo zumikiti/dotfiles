@@ -33,7 +33,7 @@ jobs:
       # Luaファイルのリント
       - name: Lint Lua files
         run: |
-          find . -name "*.lua" -print0 | xargs -0 luacheck --globals vim || echo "Luacheck found issues, but continuing workflow"
+          find . -name "*.lua" -print0 | xargs -0 luacheck || echo "Luacheck found issues, but continuing workflow"
       # Luaファイルのフォーマットチェック
       - name: Check Lua formatting
         run: |
