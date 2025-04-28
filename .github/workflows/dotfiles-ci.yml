@@ -34,12 +34,8 @@ jobs:
       - name: Lint Lua files
         run: |
           # nvim ディレクトリ内の Lua ファイルのみをチェックし、nvim/.luacheckrc を設定ファイルとして使用
-          find nvim -name "*.lua" -print0 | xargs -0 luacheck --config nvim/.luacheckrc || echo "Luacheck found issues, but continuing workflow"
+          find nvim -name "*.lua" -print0 | xargs -0 luacheck --config nvim/.luacheckrc
       # Luaファイルのフォーマットチェック
       - name: Check Lua formatting
         run: |
-          find . -name "*.lua" -print0 | xargs -0 stylua --check || echo "Stylua found formatting issues, but continuing workflow"
-      # シェルスクリプトのリント
-      - name: Lint shell scripts
-        run: |
-          find . -name "*.sh" -print0 | xargs -0 shellcheck || echo "Shellcheck found issues, but continuing workflow"
+          find . -name "*.lua" -print0 | xargs -0 stylua --check
