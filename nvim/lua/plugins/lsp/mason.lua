@@ -47,6 +47,7 @@ return {
         "stylua", -- lua formatter
         "eslint_d",
         "typescript-language-server",
+        "prisma-language-server",
       },
     })
   end,

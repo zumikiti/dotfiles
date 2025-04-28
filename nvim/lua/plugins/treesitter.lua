@@ -29,6 +29,7 @@ return {
       "javascript",
       "jsdoc",
       "typescript",
+      "prisma",
 
       "php",
       "go",
