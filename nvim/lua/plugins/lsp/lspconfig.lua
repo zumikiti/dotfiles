@@ -15,29 +15,29 @@ return {
           vim.keymap.set(mode or 'n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        map('gd'        , telescope.lsp_definitions                                         , 'Go to Definition')
-        map('gr'        , telescope.lsp_references                                          , 'Show all References')
-        map('go'        , telescope.lsp_type_definitions                                    , 'Show Type Definitions')
-        map('gv'        , ':vsplit | lua require("telescope.builtin").lsp_definitions()<CR>', 'Go to Declaration in new vsplit')
-        map('gi'        , telescope.lsp_implementations                                     , 'Show all Implementations')
+        map('gd', telescope.lsp_definitions                                         , '定義へ移動')
+        map('gr', telescope.lsp_references                                          , '参照一覧を表示')
+        map('go', telescope.lsp_type_definitions                                    , '型定義を表示')
+        map('gv', ':vsplit | lua require("telescope.builtin").lsp_definitions()<CR>', '新しい垂直分割で定義へ移動')
+        map('gi', telescope.lsp_implementations                                     , '実装一覧を表示')
 
-        map('<leader>sd', telescope.lsp_document_symbols         , 'Document Symbols')
-        map('<leader>sw', telescope.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
+        map('<leader>sd', telescope.lsp_document_symbols         , 'ドキュメントシンボル')
+        map('<leader>sw', telescope.lsp_dynamic_workspace_symbols, 'ワークスペースシンボル')
 
-        map('gK'        , vim.lsp.buf.hover         , 'Hover')
-        map('gD'        , vim.lsp.buf.declaration   , 'Go to Declaration')
-        map('<C-b>'     , vim.lsp.buf.signature_help, 'Show signature help', 'i')
-        map('<leader>rn', vim.lsp.buf.rename        , 'Rename')
-        map('<leader>ca', vim.lsp.buf.code_action   , 'Show Code Actions')
+        map('gK'        , vim.lsp.buf.hover         , 'ホバー情報表示')
+        map('gD'        , vim.lsp.buf.declaration   , '宣言へ移動')
+        map('<C-b>'     , vim.lsp.buf.signature_help, 'シグネチャヘルプ表示', 'i')
+        map('<leader>rn', vim.lsp.buf.rename        , '名前変更')
+        map('<leader>ca', vim.lsp.buf.code_action   , 'コードアクション表示')
 
-        map('[d'        , vim.diagnostic.goto_prev , 'Prev Diagnostic')
-        map(']d'        , vim.diagnostic.goto_next , 'Next Diagnostic')
-        map('<leader>cd', vim.diagnostic.setloclist, 'Show Diagnostic List')
+        map('[d'        , vim.diagnostic.goto_prev , '前の診断へ移動')
+        map(']d'        , vim.diagnostic.goto_next , '次の診断へ移動')
+        map('<leader>cd', vim.diagnostic.setloclist, '診断リスト表示')
 
-        map('<leader>ll', function() vim.lsp.buf.format { async = true } end, 'Format')
-        map('<leader>lk', ':EslintFixAll<CR>'                               , 'Fix all ESLint issues')
-        map('<leader>lr', ':LspRestart<CR>'                                 , 'Restart')
-        map('<leader>li', ':LspInfo<CR>'                                    , 'Show Info')
+        map('<leader>ll', function() vim.lsp.buf.format { async = true } end, 'フォーマット')
+        map('<leader>lk', ':EslintFixAll<CR>'                               , 'ESLint問題を全て修正')
+        map('<leader>lr', ':LspRestart<CR>'                                 , 'LSP再起動')
+        map('<leader>li', ':LspInfo<CR>'                                    , 'LSP情報表示')
 
         -- The following two autocommands are used to highlight references of
         -- the word under your cursor when your cursor rests there for a
