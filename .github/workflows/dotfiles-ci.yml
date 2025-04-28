@@ -33,7 +33,8 @@ jobs:
       # Luaファイルのリント
       - name: Lint Lua files
         run: |
-          find . -name "*.lua" -print0 | xargs -0 luacheck || echo "Luacheck found issues, but continuing workflow"
+          # nvim ディレクトリ内の Lua ファイルのみをチェックし、nvim/.luacheckrc を設定ファイルとして使用
+          find nvim -name "*.lua" -print0 | xargs -0 luacheck --config nvim/.luacheckrc || echo "Luacheck found issues, but continuing workflow"
       # Luaファイルのフォーマットチェック
       - name: Check Lua formatting
         run: |
