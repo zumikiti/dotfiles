@@ -1,5 +1,6 @@
 return {
   'numToStr/Comment.nvim',
+  version = "*", -- 最新のタグを使用
   opts = {
     -- ノーマルモードのキーマップ
     toggler = {

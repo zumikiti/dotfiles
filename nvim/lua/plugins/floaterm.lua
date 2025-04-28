@@ -1,5 +1,6 @@
 return {
   'voldikss/vim-floaterm',
+  version = "*", -- 最新のタグを使用
   keys = {
     { 'tig', ':FloatermNew tig<CR>', { noremap = true, silent = true } },
     { 'fn', ':FloatermNew fish<CR>', { noremap = true, silent = true } },

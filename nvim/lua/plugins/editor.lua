@@ -2,6 +2,7 @@ return {
   -- tmux integration
   {
     "aserowy/tmux.nvim",
+    version = "*", -- 最新のタグを使用
     event = "VeryLazy",
     opts = {
       copy_sync = {

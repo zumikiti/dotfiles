@@ -1,5 +1,6 @@
 return {
   'fatih/vim-go',
+  version = "*", -- 最新のタグを使用
   event = "VimEnter",
   build = ":GoUpdateBinaries",
   init = function ()

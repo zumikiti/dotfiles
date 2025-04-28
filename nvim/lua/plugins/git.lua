@@ -1,5 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
+  version = "*", -- 最新のタグを使用
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
