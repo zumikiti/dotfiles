@@ -88,7 +88,12 @@ return {
       priority = 1000,
       config = function()
         require("copilot").setup {
-          suggestion = { enabled = false },
+          suggestion = {
+            auto_trigger = true,
+            keymap = {
+              accept = "<Tab>", -- Tab で提案を受け入れる
+            },
+          },
           panel = { enabled = false },
           server_opts_overrides = {
             trace = "verbose",
