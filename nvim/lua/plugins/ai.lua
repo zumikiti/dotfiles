@@ -47,25 +47,27 @@ return {
         border = "rounded"
       }
     },
-    -- providers-setting
-    ollama = {
-      endpoint = "http://localhost:11434",
-      model = "gemma3",
-      timeout = 30000,
-      temperature = 0,
-      max_completion_tokens = 8192,
-    },
-    claude = {
-      model = "claude-3-7-sonnet-20250219",
-      timeout = 30000,
-      max_tokens = 8000,
-    },
-    copilot = {
-      enabled = true,
-      endpoint = "https://api.githubcopilot.com",
-      model = "claude-3.7-sonnet",
-      timeout = 30000,
-      max_tokens = 8000,
+    providers = {
+      ollama = {
+        endpoint = "http://localhost:11434",
+        model = "qwen3:4b",
+        timeout = 30000,
+        temperature = 0,
+        max_completion_tokens = 8192,
+      },
+      claude = {
+        model = "claude-3-7-sonnet-20250219",
+        timeout = 30000,
+        extra_request_body = {
+          max_tokens = 8000,
+        },
+      },
+      copilot = {
+        enabled = true,
+        endpoint = "https://api.githubcopilot.com",
+        model = "claude-sonnet-4",
+        timeout = 30000,
+      },
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
