@@ -3,15 +3,17 @@ return {
   event = "VeryLazy",
   version = false,
   opts = {
-    provider = "claude",
+    provider = "copilot",
     -- 共通のシステムプロンプト設定
     system_prompt = [[
-あなたはプロフェッショナルなコーディングアシスタントです。
-ユーザーのコードに関する質問に答えたり、コードの生成、修正、説明、デバッグのサポートを行います。
-回答は分かりやすく、簡潔にまとめてください。
-コードを示す際は、必ず Markdown のコードブロックを使用してください。
-ユーザーからの指示に忠実に従い、親切かつ丁寧に対応します。
-日本語で回答してください。
+    あなたはプロフェッショナルなコーディングアシスタントです。
+    ユーザーのコードに関する質問に答えたり、コードの生成、修正、説明、デバッグのサポートを行います。
+    回答は分かりやすく、簡潔にまとめてください。
+    コードを示す際は、必ず Markdown のコードブロックを使用してください。
+    ユーザーからの指示に忠実に従い、親切かつ丁寧に対応します。
+    言語固有の慣習やベストプラクティスに従い、効率的なコードを提案してください。
+    エラーメッセージの解析や問題解決においては、根本的な原因を特定し具体的な解決策を示してください。
+    日本語で回答してください。
     ]],
     behaviour = {
       -- 自動提案を無効にする
@@ -38,25 +40,34 @@ return {
       },
       ask = {
         -- フローティングウィンドウを使用
-        floating = true,
+        floating = false,
         -- 起動時にインサートモードに入る
         start_insert = true,
         -- ウィンドウの境界線を丸くする
         border = "rounded"
       }
     },
-    -- providers-setting
-    ollama = {
-      endpoint = "http://localhost:11434",
-      model = "gemma3",
-      timeout = 30000,
-      temperature = 0,
-      max_completion_tokens = 8192,
-    },
-    claude = {
-      model = "claude-3-7-sonnet-20250219",
-      timeout = 30000,
-      max_tokens = 8000,
+    providers = {
+      ollama = {
+        endpoint = "http://localhost:11434",
+        model = "qwen3:4b",
+        timeout = 30000,
+        temperature = 0,
+        max_completion_tokens = 8192,
+      },
+      claude = {
+        model = "claude-3-7-sonnet-20250219",
+        timeout = 30000,
+        extra_request_body = {
+          max_tokens = 8000,
+        },
+      },
+      copilot = {
+        enabled = true,
+        endpoint = "https://api.githubcopilot.com",
+        model = "claude-sonnet-4",
+        timeout = 30000,
+      },
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -73,6 +84,47 @@ return {
     "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
     "ibhagwan/fzf-lua", -- for file_selector provider fzf
     "echasnovski/mini.icons",
+    {
+      "zbirenbaum/copilot.lua",
+      lazy = false,
+      priority = 1000,
+      config = function()
+        require("copilot").setup {
+          suggestion = {
+            auto_trigger = true,
+            keymap = {
+              accept = "<Tab>", -- Tab で提案を受け入れる
+            },
+          },
+          panel = { enabled = false },
+          server_opts_overrides = {
+            trace = "verbose",
+            cmd = {
+              vim.fn.expand("~/.config/nvim/copilot/bin/copilot-language-server"),
+              "--stdio"
+            },
+            settings = {
+              advanced = {
+                listCount = 10,
+                inlineSuggestCount = 3,
+              },
+            },
+          },
+          filetypes = {
+            yaml = true,
+            markdown = true,
+            help = false,
+            gitcommit = true,
+            gitrebase = true,
+            hgcommit = false,
+            svn = false,
+            cvs = false,
+            ["."] = false,
+            ["*"] = true,
+          },
+        }
+      end,
+    },
     {
       -- support for image pasting
       "HakonHarnes/img-clip.nvim",
