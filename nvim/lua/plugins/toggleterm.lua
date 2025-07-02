@@ -6,7 +6,7 @@ return {
   -- 既存の設定をそのまま活かしています
   ----------------------------------------------------------------------
   opts = {
-    size = 80,
+    size = 50,
     open_mapping = [[<c-\>]], -- Ctrl+\ でデフォルトターミナルを開く
     hide_numbers = true,
     shade_filetypes = {},
@@ -53,12 +53,7 @@ return {
     -- ターミナルモードに入った時のキーマッピング
     function _G.set_terminal_keymaps()
       local t_opts = { buffer = 0 } -- 現在のバッファにのみマッピング
-      vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], t_opts)
-      vim.keymap.set('t', 'jk', [[<C-\><C-n>]], t_opts)
-      vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], t_opts)
-      vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], t_opts)
-      vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], t_opts)
-      vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], t_opts)
+      vim.keymap.set('t', '<C-t>', '<cmd>ToggleTerm<cr>', t_opts)
     end
     vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
   end,
@@ -68,8 +63,7 @@ return {
   ----------------------------------------------------------------------
   keys = {
     -- 基本的なターミナル操作
-    { '<leader>tt', '<cmd>ToggleTerm<cr>', desc = 'Toggle terminal' },
-    { '<leader>tf', '<cmd>ToggleTerm direction=float<cr>', desc = 'Terminal (Float)' },
+    { '<C-t>', '<cmd>ToggleTerm<cr>', desc = 'Toggle terminal' },
     { '<leader>th', '<cmd>ToggleTerm direction=horizontal<cr>', desc = 'Terminal (Horizontal)' },
     { '<leader>tv', '<cmd>ToggleTerm direction=vertical<cr>', desc = 'Terminal (Vertical)' },
 
