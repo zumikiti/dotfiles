@@ -64,6 +64,7 @@ return {
   keys = {
     -- 基本的なターミナル操作
     { '<C-t>', '<cmd>ToggleTerm<cr>', desc = 'Toggle terminal' },
+    { '<leader>tf', '<cmd>ToggleTerm direction=float<cr>', desc = 'Terminal (float)' },
     { '<leader>th', '<cmd>ToggleTerm direction=horizontal<cr>', desc = 'Terminal (Horizontal)' },
     { '<leader>tv', '<cmd>ToggleTerm direction=vertical<cr>', desc = 'Terminal (Vertical)' },
 
