@@ -68,9 +68,6 @@ return {
     { '<leader>th', '<cmd>ToggleTerm direction=horizontal<cr>', desc = 'Terminal (Horizontal)' },
     { '<leader>tv', '<cmd>ToggleTerm direction=vertical<cr>', desc = 'Terminal (Vertical)' },
 
-    -- カスタムターミナルのトグル (効率化済み)
-    { 'tig', function() _G.tig_term:toggle() end, desc = 'tig' },
-
     -- 番号指定ターミナル
     { '<leader>t1', '<cmd>1ToggleTerm<cr>', desc = 'Terminal 1' },
     { '<leader>t2', '<cmd>2ToggleTerm<cr>', desc = 'Terminal 2' },
