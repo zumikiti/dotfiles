@@ -67,3 +67,7 @@ end
 function glog --description 'alias git log --oneline --decorate --graph --all'
   git log --oneline --decorate --graph --all
 end
+
+function cc --wraps=claude --description 'alias cc=claude'
+  claude $argv
+end
