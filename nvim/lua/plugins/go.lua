@@ -13,5 +13,8 @@ return {
     vim.g.go_highlight_extra_types = 1
     vim.g.go_highlight_build_constraints = 1
     vim.g.go_highlight_generate_tags = 1
+    
+    -- Disable vim-go default key mappings to avoid conflicts
+    vim.g.go_def_mapping_enabled = 0
   end
 }

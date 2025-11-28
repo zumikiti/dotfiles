@@ -17,7 +17,7 @@ end
 
 ### set node
 fnm env --use-on-cd --shell fish | source
-fnm use 22
+fnm use 22 > /dev/null
 
 ### MY FUNCTIONS
 # nvim
@@ -70,4 +70,18 @@ end
 
 function cc --wraps=claude --description 'alias cc=claude'
   claude $argv
+end
+
+function tmuxpopup -d "toggle tmux popup window"
+  set width '80%'
+  set height '80%'
+  set session (tmux display-message -p -F "#{session_name}")
+  set current_dir (basename (tmux display-message -p -F "#{pane_current_path}"))
+  set popup_session "popup_$current_dir"
+  
+  if string match -q "popup_*" $session
+    tmux detach-client
+  else
+    tmux display-popup -d '#{pane_current_path}' -xC -yC -w$width -h$height -E "tmux attach -t $popup_session || tmux new -s $popup_session"
+  end
 end
