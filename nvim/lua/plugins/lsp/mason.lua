@@ -6,7 +6,10 @@ return {
       "mason-org/mason-lspconfig.nvim",
       version = "*",
     },
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      version = "*",
+    },
   },
   config = function()
     -- import mason
