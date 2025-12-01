@@ -3,8 +3,19 @@
   "theme": "tokyonight",
   "tools": {
     "write": false,
-    "bash": false,
+    "bash": true,
     "webfetch": true
+  },
+  "permission": {
+    "bash": {
+      "*": "deny",
+      "git status": "allow",
+      "git diff": "allow",
+      "ls": "allow",
+      "cat": "allow",
+      "pwd": "allow",
+      "rg": "allow"
+    }
   },
   "mcp": {
     "context7": {
