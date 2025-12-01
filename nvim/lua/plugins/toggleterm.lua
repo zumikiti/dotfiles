@@ -41,7 +41,7 @@ return {
     -- デフォルト設定を適用
     require('toggleterm').setup(opts)
 
-    -- カスタムターミナルを一度だけ定義し、グローバル変数に格納
+    -- カスタムターミナルを一度だけ定義
     local Terminal = require('toggleterm.terminal').Terminal
     _G.tig_term = Terminal:new({
       cmd = "tig",
@@ -51,12 +51,19 @@ return {
     })
 
     -- ターミナルモードに入った時のキーマッピング
-    function _G.set_terminal_keymaps()
-      local t_opts = { buffer = 0 } -- 現在のバッファにのみマッピング
+    local function set_terminal_keymaps()
+      local t_opts = { buffer = 0 } -- 現在のバッファのみにマッピング
       vim.keymap.set('t', '<C-t>', '<cmd>ToggleTerm<cr>', t_opts)
     end
-    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+    local group = vim.api.nvim_create_augroup("toggleterm_keymaps", { clear = true })
+    vim.api.nvim_create_autocmd("TermOpen", {
+      group = group,
+      pattern = "term://*",
+      callback = set_terminal_keymaps,
+    })
   end,
+
 
   ----------------------------------------------------------------------
   -- ここにすべてのキーマッピングを集約
