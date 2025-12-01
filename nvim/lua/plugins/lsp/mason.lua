@@ -44,7 +44,6 @@ return {
         "eslint",
         "gopls",
         "rust_analyzer",
-        "eslint",
       },
     })
 

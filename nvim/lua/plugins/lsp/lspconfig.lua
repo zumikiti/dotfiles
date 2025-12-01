@@ -26,7 +26,7 @@ return {
 
         map('gK'        , vim.lsp.buf.hover         , 'Hover')
         map('gD'        , vim.lsp.buf.declaration   , 'Go to Declaration')
-        map('<C-b>'     , vim.lsp.buf.signature_help, 'Show signature help', 'i')
+        map('<C-s>'     , vim.lsp.buf.signature_help, 'Show signature help', 'i')
         map('<leader>rn', vim.lsp.buf.rename        , 'Rename')
         map('<leader>ca', vim.lsp.buf.code_action   , 'Show Code Actions')
 

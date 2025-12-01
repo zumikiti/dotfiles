@@ -21,8 +21,5 @@ return {
       extra = false,
     },
   },
-  init = function()
-    require('Comment').setup()
-  end,
 }
 
