@@ -2,7 +2,7 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "tokyonight",
   "tools": {
-    "write": false,
+    "write": true,
     "bash": true,
     "webfetch": true
   },
@@ -11,10 +11,16 @@
       "*": "deny",
       "git status": "allow",
       "git diff": "allow",
+      "git add": "ask",
+      "git commit": "ask",
+      "git log": "allow",
       "ls": "allow",
       "cat": "allow",
       "pwd": "allow",
-      "rg": "allow"
+      "rg": "allow",
+      "go build": "allow",
+      "go test": "allow",
+      "go mod tidy": "allow"
     }
   },
   "mcp": {
