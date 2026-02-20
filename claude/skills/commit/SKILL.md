@@ -1,4 +1,5 @@
 ---
+model: sonnet
 name: commit
 description: |-
   Gitコミットガイド。
@@ -45,7 +46,6 @@ description: |-
 - Conventional Commits のプレフィックスを付ける: `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`, `modify:`, `test:` 等
 - プレフィックスの後に半角スペースを1つ入れる
 - 「何をしたか」を簡潔に書く（1行、50文字目安）
-- 末尾に `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>` を付与する
 - コミットメッセージはHEREDOCで渡す
 
 ### 4. pre-commit hookが失敗した場合
