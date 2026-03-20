@@ -1,0 +1,46 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "tokyonight",
+  "tools": {
+    "write": true,
+    "bash": true,
+    "webfetch": true
+  },
+  "permission": {
+    "bash": {
+      "*": "deny",
+      "git status": "allow",
+      "git diff": "allow",
+      "git add": "ask",
+      "git commit": "ask",
+      "git log": "allow",
+      "ls": "allow",
+      "cat": "allow",
+      "pwd": "allow",
+      "rg": "allow",
+      "go build": "allow",
+      "go test": "allow",
+      "go mod tidy": "allow"
+    }
+  },
+  "mcp": {
+    "context7": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "enabled": true,
+      "environment": {}
+    }
+  },
+  "agent": {
+    "plan": {
+      "tools": {
+        "write": false,
+        "bash": false
+      }
+    }
+  }
+}

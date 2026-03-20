@@ -1,9 +1,10 @@
 return {
   "EdenEast/nightfox.nvim",
-  version = "*", -- 最新のタグを使用
-  lazy = true,
+  version = "*",
+  lazy = false,
   priority = 1000,
   opts = {},
   config = function()
+    vim.cmd.colorscheme("nightfox")
   end,
 }

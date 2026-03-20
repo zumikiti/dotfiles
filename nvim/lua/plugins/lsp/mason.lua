@@ -1,8 +1,15 @@
 return {
   "williamboman/mason.nvim",
+  version = "*",
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    {
+      "mason-org/mason-lspconfig.nvim",
+      version = "*",
+    },
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      version = "*",
+    },
   },
   config = function()
     -- import mason
@@ -37,7 +44,6 @@ return {
         "eslint",
         "gopls",
         "rust_analyzer",
-        "eslint",
       },
     })
 
