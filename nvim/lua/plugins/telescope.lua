@@ -27,14 +27,15 @@ return {
           },
         },
 
+        layout_strategy = "vertical",
         layout_config = {
-          horizontal = {
+          vertical = {
             preview_width = 0.55,
             results_width = 0.8,
           },
-          width = 0.85,
-          height = 0.80,
-          preview_cutoff = 120,
+          width = 0.95,
+          height = 0.9,
+          preview_cutoff = 10,
         },
       },
 
