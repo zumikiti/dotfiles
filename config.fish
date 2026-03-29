@@ -85,3 +85,11 @@ function tmuxpopup -d "toggle tmux popup window"
     tmux display-popup -d '#{pane_current_path}' -xC -yC -w$width -h$height -E "tmux attach -t $popup_session || tmux new -s $popup_session"
   end
 end
+
+function dh --wraps='gh dash -c ~/dotfiles/gh-dash/config.yml' --description 'alias dash=gh dash -c ~/dotfiles/gh-dash/config.yml'
+  gh dash -c ~/dotfiles/gh-dash/config.yml $argv
+end
+
+function wt-clean --description 'Remove all worktrees except main'
+  wt remove -f -y (wt list --format=json | jq -r '.[] | select(.is_main | not) | .branch')
+end
