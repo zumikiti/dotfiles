@@ -84,10 +84,10 @@ keybindings:
         cd {{.RepoPath}}; tig
   prs:
     - key: C
-      name: code review
+      name: checkout on worktree
       command: >
         tmux new-window -n "PR-{{.PrNumber}}"
-        "wt switch pr:{{.PrNumber}} && claude '/pr-review {{.PrNumber}}'"
+        "wt switch pr:{{.PrNumber}}"
 
 theme:
   colors:
