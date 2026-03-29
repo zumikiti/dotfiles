@@ -45,7 +45,11 @@ function gf --wraps='git fetch -p' --description 'alias gf=git fetch -p'
 end
 
 function gs --wraps='git switch' --description 'alias gs=git switch'
-  git switch $argv; 
+  if test (count $argv) -eq 0
+    git branch --format='%(refname:short)' | fzf | xargs -r git switch
+  else
+    git switch $argv
+  end
 end
 
 function pull --description 'alias pull=git pull'
