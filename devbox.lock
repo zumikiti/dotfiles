@@ -1,0 +1,25 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "github:NixOS/nixpkgs/nixpkgs-unstable": {
+      "last_modified": "2026-03-28T12:40:58Z",
+      "resolved": "github:NixOS/nixpkgs/b63fe7f000adcfa269967eeff72c64cafecbbebe?lastModified=1774701658"
+    },
+    "lua5_4": {
+      "resolved": "github:NixOS/nixpkgs/b63fe7f000adcfa269967eeff72c64cafecbbebe#lua5_4",
+      "source": "nixpkg"
+    },
+    "luajitPackages.luacheck": {
+      "resolved": "github:NixOS/nixpkgs/b63fe7f000adcfa269967eeff72c64cafecbbebe#luajitPackages.luacheck",
+      "source": "nixpkg"
+    },
+    "luarocks": {
+      "resolved": "github:NixOS/nixpkgs/b63fe7f000adcfa269967eeff72c64cafecbbebe#luarocks",
+      "source": "nixpkg"
+    },
+    "stylua": {
+      "resolved": "github:NixOS/nixpkgs/b63fe7f000adcfa269967eeff72c64cafecbbebe#stylua",
+      "source": "nixpkg"
+    }
+  }
+}
