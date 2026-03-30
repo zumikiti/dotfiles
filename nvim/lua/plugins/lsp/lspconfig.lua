@@ -18,8 +18,9 @@ return {
         map('gd'        , telescope.lsp_definitions                                         , 'Go to Definition')
         map('gr'        , telescope.lsp_references                                          , 'Show all References')
         map('go'        , telescope.lsp_type_definitions                                    , 'Show Type Definitions')
-        map('gv'        , ':vsplit | lua require("telescope.builtin").lsp_definitions()<CR>', 'Go to Declaration in new vsplit')
-        map('gi'        , telescope.lsp_implementations                                     , 'Show all Implementations')
+        map('gv', ':vsplit | lua require("telescope.builtin").lsp_definitions()<CR>',
+          'Go to Declaration in new vsplit')
+        map('gi', telescope.lsp_implementations, 'Show all Implementations')
 
         map('<leader>sd', telescope.lsp_document_symbols         , 'Document Symbols')
         map('<leader>sw', telescope.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
