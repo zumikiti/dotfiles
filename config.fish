@@ -45,7 +45,11 @@ function gf --wraps='git fetch -p' --description 'alias gf=git fetch -p'
 end
 
 function gs --wraps='git switch' --description 'alias gs=git switch'
-  git switch $argv; 
+  if test (count $argv) -eq 0
+    git branch --format='%(refname:short)' | fzf | xargs -r git switch
+  else
+    git switch $argv
+  end
 end
 
 function pull --description 'alias pull=git pull'
@@ -73,8 +77,8 @@ function cc --wraps=claude --description 'alias cc=claude'
 end
 
 function tmuxpopup -d "toggle tmux popup window"
-  set width '80%'
-  set height '80%'
+  set width '90%'
+  set height '90%'
   set session (tmux display-message -p -F "#{session_name}")
   set current_dir (basename (tmux display-message -p -F "#{pane_current_path}"))
   set popup_session "popup_$current_dir"

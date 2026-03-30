@@ -13,8 +13,7 @@ description: 今日の日報にメモや学びを追記する
 2. **日次エントリの存在確認**
    - `mcp__dailymemo__get_report` で該当日付の日次エントリが存在するか確認
    - 日次エントリが存在しない場合（"Day entry for {date} not found in monthly report" エラー）:
-     - ユーザーに「{日付}の日次エントリが存在しません。新規作成してもよいですか？」と確認
-     - ユーザーが承諾した場合のみ `mcp__dailymemo__create_daily_report` で作成（`sections` パラメータで「本日の作業内容」「メモ」をデフォルトセクションとして指定）
+     - 確認なしで `mcp__dailymemo__create_daily_report` で作成（`sections` パラメータで「本日の作業内容」「メモ」をデフォルトセクションとして指定）
 
 3. **メモの追記**
    - 日報の内容を確認し、追記内容に最も適したセクションを選択
