@@ -3,7 +3,7 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    require("copilot").setup {
+    require("copilot").setup({
       suggestion = {
         auto_trigger = true,
         keymap = {
@@ -15,7 +15,7 @@ return {
         trace = "verbose",
         cmd = {
           vim.fn.expand("~/.config/nvim/copilot/bin/copilot-language-server"),
-          "--stdio"
+          "--stdio",
         },
         settings = {
           advanced = {
@@ -36,6 +36,6 @@ return {
         ["."] = false,
         ["*"] = true,
       },
-    }
+    })
   end,
 }

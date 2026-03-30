@@ -10,59 +10,60 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(event)
-        local telescope = require('telescope.builtin')
+        local telescope = require("telescope.builtin")
         local map = function(keys, func, desc, mode)
-          vim.keymap.set(mode or 'n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          vim.keymap.set(mode or "n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
         end
 
-        map('gd'        , telescope.lsp_definitions                                         , 'Go to Definition')
-        map('gr'        , telescope.lsp_references                                          , 'Show all References')
-        map('go'        , telescope.lsp_type_definitions                                    , 'Show Type Definitions')
-        map('gv', ':vsplit | lua require("telescope.builtin").lsp_definitions()<CR>',
-          'Go to Declaration in new vsplit')
-        map('gi', telescope.lsp_implementations, 'Show all Implementations')
+        map("gd", telescope.lsp_definitions, "Go to Definition")
+        map("gr", telescope.lsp_references, "Show all References")
+        map("go", telescope.lsp_type_definitions, "Show Type Definitions")
+        map("gv", ':vsplit | lua require("telescope.builtin").lsp_definitions()<CR>', "Go to Declaration in new vsplit")
+        map("gi", telescope.lsp_implementations, "Show all Implementations")
 
-        map('<leader>sd', telescope.lsp_document_symbols         , 'Document Symbols')
-        map('<leader>sw', telescope.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
+        map("<leader>sd", telescope.lsp_document_symbols, "Document Symbols")
+        map("<leader>sw", telescope.lsp_dynamic_workspace_symbols, "Workspace Symbols")
 
-        map('gK'        , vim.lsp.buf.hover         , 'Hover')
-        map('gD'        , vim.lsp.buf.declaration   , 'Go to Declaration')
-        map('<C-s>'     , vim.lsp.buf.signature_help, 'Show signature help', 'i')
-        map('<leader>rn', vim.lsp.buf.rename        , 'Rename')
-        map('<leader>ca', vim.lsp.buf.code_action   , 'Show Code Actions')
+        map("gK", vim.lsp.buf.hover, "Hover")
+        map("gD", vim.lsp.buf.declaration, "Go to Declaration")
+        map("<C-s>", vim.lsp.buf.signature_help, "Show signature help", "i")
+        map("<leader>rn", vim.lsp.buf.rename, "Rename")
+        map("<leader>ca", vim.lsp.buf.code_action, "Show Code Actions")
 
-        map('[d'        , vim.diagnostic.goto_prev , 'Prev Diagnostic')
-        map(']d'        , vim.diagnostic.goto_next , 'Next Diagnostic')
-        map('<leader>cd', vim.diagnostic.setloclist, 'Show Diagnostic List')
+        map("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
+        map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
+        map("<leader>cd", vim.diagnostic.setloclist, "Show Diagnostic List")
 
-        map('<leader>ll', function() vim.lsp.buf.format { async = true } end, 'Format')
-        map('<leader>lk', ':EslintFixAll<CR>'                               , 'Fix all ESLint issues')
-        map('<leader>lr', ':LspRestart<CR>'                                 , 'Restart')
-        map('<leader>li', ':LspInfo<CR>'                                    , 'Show Info')
+        map("<leader>ll", function()
+          vim.lsp.buf.format({ async = true })
+        end, "Format")
+        map("<leader>lk", ":EslintFixAll<CR>", "Fix all ESLint issues")
+        map("<leader>lr", ":LspRestart<CR>", "Restart")
+        map("<leader>li", ":LspInfo<CR>", "Show Info")
 
         -- The following two autocommands are used to highlight references of
         -- the word under your cursor when your cursor rests there for a
         -- little while.
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.documentHighlightProvider then
-          local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+          local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+          vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             buffer = event.buf,
             group = highlight_augroup,
             callback = vim.lsp.buf.document_highlight,
           })
 
-          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+          vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
             buffer = event.buf,
             group = highlight_augroup,
             callback = vim.lsp.buf.clear_references,
           })
 
-          vim.api.nvim_create_autocmd('LspDetach', {
-            group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+          vim.api.nvim_create_autocmd("LspDetach", {
+            group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
             callback = function(event2)
               vim.lsp.buf.clear_references()
-              vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+              vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
             end,
           })
         end
@@ -72,9 +73,9 @@ return {
         --
         -- This may be unwanted, since they displace some of your code
         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-          map('<leader>th', function()
+          map("<leader>th", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, '[T]oggle Inlay [H]ints')
+          end, "[T]oggle Inlay [H]ints")
         end
       end,
     })

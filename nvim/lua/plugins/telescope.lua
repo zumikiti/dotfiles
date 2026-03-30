@@ -1,26 +1,25 @@
 return {
-  'nvim-telescope/telescope.nvim',
-  tag = 'v0.2.0',
+  "nvim-telescope/telescope.nvim",
+  tag = "v0.2.0",
   dependencies = {
-    'nvim-lua/plenary.nvim',
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   keys = {
-    { 'ff' , "<cmd>Telescope git_files <cr>",              desc = "find git files" },
-    { 'fa' , "<cmd>Telescope find_files hidden=true <cr>", desc = "find all files" },
-    { 'fw' , "<cmd>Telescope live_grep <cr>" },
-    { 'fz' , "<cmd>Telescope grep_string <cr>" },
-    { 'fb' , "<cmd>Telescope buffers <cr>" },
-    { 'ft' , "<cmd>Telescope treesitter <cr>",
-      desc = "Show this class symbols (type / var / methods list)" },
-    { 'fo' , "<cmd>Telescope oldfiles <cr>",               desc = "Show file history" },
-    { 'fc' , "<cmd>Telescope git_bcommits <cr>",           desc = "Show current file commit history" },
-    { 'fh' , "<cmd>Telescope help_tags <cr>" },
+    { "ff", "<cmd>Telescope git_files <cr>", desc = "find git files" },
+    { "fa", "<cmd>Telescope find_files hidden=true <cr>", desc = "find all files" },
+    { "fw", "<cmd>Telescope live_grep <cr>" },
+    { "fz", "<cmd>Telescope grep_string <cr>" },
+    { "fb", "<cmd>Telescope buffers <cr>" },
+    { "ft", "<cmd>Telescope treesitter <cr>", desc = "Show this class symbols (type / var / methods list)" },
+    { "fo", "<cmd>Telescope oldfiles <cr>", desc = "Show file history" },
+    { "fc", "<cmd>Telescope git_bcommits <cr>", desc = "Show current file commit history" },
+    { "fh", "<cmd>Telescope help_tags <cr>" },
   },
   config = function()
-    local telescope = require('telescope')
+    local telescope = require("telescope")
 
-    telescope.setup {
+    telescope.setup({
       defaults = {
         mappings = {
           i = {
@@ -56,7 +55,7 @@ return {
           only_sort_text = false,
         },
       },
-    }
+    })
 
     -- Load fzf extension
     telescope.load_extension("fzf")
