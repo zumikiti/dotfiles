@@ -1,5 +1,5 @@
 return {
-  'akinsho/toggleterm.nvim',
+  "akinsho/toggleterm.nvim",
   version = "*",
 
   ----------------------------------------------------------------------
@@ -15,11 +15,11 @@ return {
     start_in_insert = true,
     insert_mappings = true, -- ターミナル内でマッピングを有効にする
     persist_size = true,
-    direction = 'float', -- デフォルトはフローティング
+    direction = "float", -- デフォルトはフローティング
     close_on_exit = true,
     shell = vim.o.shell,
     float_opts = {
-      border = 'curved',
+      border = "curved",
       winblend = 0,
       highlights = {
         border = "Normal",
@@ -39,21 +39,23 @@ return {
   ----------------------------------------------------------------------
   config = function(_, opts)
     -- デフォルト設定を適用
-    require('toggleterm').setup(opts)
+    require("toggleterm").setup(opts)
 
     -- カスタムターミナルを一度だけ定義
-    local Terminal = require('toggleterm.terminal').Terminal
+    local Terminal = require("toggleterm.terminal").Terminal
     _G.tig_term = Terminal:new({
       cmd = "tig",
       hidden = true,
       direction = "float",
-      on_open = function(_) vim.cmd("startinsert!") end,
+      on_open = function(_)
+        vim.cmd("startinsert!")
+      end,
     })
 
     -- ターミナルモードに入った時のキーマッピング
     local function set_terminal_keymaps()
       local t_opts = { buffer = 0 } -- 現在のバッファのみにマッピング
-      vim.keymap.set('t', '<C-t>', '<cmd>ToggleTerm<cr>', t_opts)
+      vim.keymap.set("t", "<C-t>", "<cmd>ToggleTerm<cr>", t_opts)
     end
 
     local group = vim.api.nvim_create_augroup("toggleterm_keymaps", { clear = true })
@@ -64,19 +66,18 @@ return {
     })
   end,
 
-
   ----------------------------------------------------------------------
   -- ここにすべてのキーマッピングを集約
   ----------------------------------------------------------------------
   keys = {
     -- 基本的なターミナル操作
-    { '<C-t>', '<cmd>ToggleTerm<cr>', desc = 'Toggle terminal' },
-    { '<leader>tf', '<cmd>ToggleTerm direction=float<cr>', desc = 'Terminal (float)' },
-    { '<leader>th', '<cmd>ToggleTerm direction=horizontal<cr>', desc = 'Terminal (Horizontal)' },
-    { '<leader>tv', '<cmd>ToggleTerm direction=vertical<cr>', desc = 'Terminal (Vertical)' },
+    { "<C-t>", "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+    { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Terminal (float)" },
+    { "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Terminal (Horizontal)" },
+    { "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", desc = "Terminal (Vertical)" },
 
     -- 番号指定ターミナル
-    { '<leader>t1', '<cmd>1ToggleTerm<cr>', desc = 'Terminal 1' },
-    { '<leader>t2', '<cmd>2ToggleTerm<cr>', desc = 'Terminal 2' },
+    { "<leader>t1", "<cmd>1ToggleTerm<cr>", desc = "Terminal 1" },
+    { "<leader>t2", "<cmd>2ToggleTerm<cr>", desc = "Terminal 2" },
   },
 }

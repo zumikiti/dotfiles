@@ -1,0 +1,47 @@
+name: Dotfiles CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-format-nvim: # ジョブ名をより具体的に
+    name: Lint and Format Check (nvim Lua) # ジョブ名をより具体的に
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. リポジトリのチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      # 2. Lua と LuaRocks のセットアップ
+      - name: Set up Lua
+        uses: leafo/gh-actions-lua@35bcb06abec04ec87df82e08caa84d545348536e # v10
+        with:
+          luaVersion: '5.4' # luacheck実行用。luajit-openrestyはmanifestの65536定数制限でluarocks installが失敗するため5.4を使用
+
+      - name: Set up LuaRocks
+        uses: leafo/gh-actions-luarocks@e65774a6386cb4f24e293dca7fc4ff89165b64c5 # v4
+
+      # 3. luacheck のインストール
+      - name: Install luacheck
+        run: luarocks install luacheck
+
+      # 4. Luaファイルのリント (nvim ディレクトリ内)
+      - name: Lint Lua files (nvim)
+        run: |
+          # luacheck コマンドは PATH に追加されているはず
+          # nvim ディレクトリ全体を対象にし、設定ファイルを指定
+          luacheck nvim --config nvim/.luacheckrc
+          # もしファイルが非常に多い場合や特定のパターンのみ対象にしたい場合は find を使うことも可能
+          # find nvim -name "*.lua" -print0 | xargs -0 luacheck --config nvim/.luacheckrc
+
+      # 5. stylua のセットアップとフォーマットチェック
+      - name: Set up stylua
+        uses: JohnnyMorganz/stylua-action@479972f01e665acfcba96ada452c36608bdbbb5e # v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check --color always nvim/

@@ -99,6 +99,27 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 brew install tig
 ```
 
+## 開発 (CI / Lint / Format)
+
+[Devbox](https://www.jetify.com/devbox) を使ってローカルで CI と同等のチェックを実行できます。
+
+```sh
+# Devbox のインストール（未インストールの場合）
+curl -fsSL https://get.jetify.com/devbox | bash
+
+# Lint (luacheck)
+devbox run lint
+
+# Format チェック (stylua)
+devbox run format:check
+
+# Format 自動修正
+devbox run format
+
+# Lint + Format チェック（CI と同等）
+devbox run ci
+```
+
 ## Claude Code の設定
 ```sh
 # Claude Code の設定ファイルをシンボリックリンクで配置

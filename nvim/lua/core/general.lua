@@ -1,11 +1,11 @@
 local opt = vim.opt
 -- シェルを指定
-if vim.fn.has('mac') == 1 then
+if vim.fn.has("mac") == 1 then
   -- mac の場合
-  opt.shell = '/bin/zsh'
+  opt.shell = "/bin/zsh"
 else
   -- linux の場合
-  opt.shell = '/usr/bin/bash'
+  opt.shell = "/usr/bin/bash"
 end
 
 opt.synmaxcol = 320
@@ -16,9 +16,9 @@ opt.re = 0
 
 -- setting
 -- 文字コードをUFT-8に設定
-opt.encoding = 'utf-8'
+opt.encoding = "utf-8"
 opt.ma = true
-opt.fenc = 'utf-8'
+opt.fenc = "utf-8"
 -- バックアップファイルを作らない
 opt.backup = false
 -- スワップファイルを作らない
@@ -31,17 +31,17 @@ opt.hidden = true
 opt.showcmd = true
 
 -- ヤンクをクリップボードへ引き継ぐ
-if vim.fn.has('mac') == 1 then
+if vim.fn.has("mac") == 1 then
   -- mac の場合
-  opt.clipboard:append('unnamed')
+  opt.clipboard:append("unnamed")
 else
   -- linux の場合
   -- sudo apt install xclip も必要
-  opt.clipboard = 'unnamedplus'
+  opt.clipboard = "unnamedplus"
 end
 
 -- 挿入モードでバックスペース削除を有効
-opt.backspace = 'indent,eol,start'
+opt.backspace = "indent,eol,start"
 
 -- 見た目系
 -- 行番号を表示
@@ -51,7 +51,7 @@ opt.cursorline = false
 -- 列を強調表示
 opt.cursorcolumn = false
 -- 行末の1文字先までカーソルを移動できるように
-opt.virtualedit = 'onemore'
+opt.virtualedit = "onemore"
 -- インデントはスマートインデント
 opt.smartindent = true
 -- ビープ音を可視化
@@ -61,16 +61,16 @@ opt.showmatch = true
 -- ステータスラインを常に表示
 opt.laststatus = 2
 -- コマンドラインの補完
-opt.wildmode = 'list:longest'
+opt.wildmode = "list:longest"
 -- シンタックスハイライトの有効化
-vim.cmd('syntax enable')
+vim.cmd("syntax enable")
 -- 行数を相対的に表示
 opt.relativenumber = true
 
 -- Tab系
 -- 不可視文字を可視化(タブが「▸-」と表示される)
 opt.list = true
-opt.listchars = { tab = '▸-' }
+opt.listchars = { tab = "▸-" }
 -- Tab文字を半角スペースにする
 opt.expandtab = true
 -- 行頭以外のTab文字の表示幅（スペースいくつ分）

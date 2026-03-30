@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
+  "packages": [
+    "lua5_4",
+    "luarocks",
+    "stylua",
+    "luajitPackages.luacheck"
+  ],
+  "shell": {
+    "scripts": {
+      "lint": [
+        "luacheck nvim --config nvim/.luacheckrc"
+      ],
+      "format:check": [
+        "stylua --check --color always nvim/"
+      ],
+      "format": [
+        "stylua nvim/"
+      ],
+      "ci": [
+        "devbox run lint && devbox run format:check"
+      ]
+    }
+  }
+}

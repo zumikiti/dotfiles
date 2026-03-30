@@ -1,10 +1,10 @@
 return {
   -- タブラインの表示
   {
-    'akinsho/bufferline.nvim',
+    "akinsho/bufferline.nvim",
     version = "*",
     event = "VeryLazy",
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    dependencies = "nvim-tree/nvim-web-devicons",
     keys = {
       { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
       { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
@@ -44,7 +44,7 @@ return {
           use_treesitter = true,
         },
       })
-    end
+    end,
   },
 
   -- 通知
@@ -63,10 +63,10 @@ return {
 
   -- status line
   {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    init = function ()
-      require('lualine').setup()
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    init = function()
+      require("lualine").setup()
     end,
   },
 }
