@@ -38,19 +38,10 @@ jobs:
           # もしファイルが非常に多い場合や特定のパターンのみ対象にしたい場合は find を使うことも可能
           # find nvim -name "*.lua" -print0 | xargs -0 luacheck --config nvim/.luacheckrc
 
-      # 5. stylua のセットアップ
+      # 5. stylua のセットアップとフォーマットチェック
       - name: Set up stylua
         uses: JohnnyMorganz/stylua-action@479972f01e665acfcba96ada452c36608bdbbb5e # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          version: latest # または v0.20.0 のように固定バージョンを指定
-
-      # 6. Luaファイルのフォーマットチェック (nvim ディレクトリ内)
-      - name: Check Lua format (nvim)
-        run: |
-          # --check でフォーマットが正しいかチェック
-          # --color always でログに色付け
-          # 対象ディレクトリを 'nvim/' に指定
-          stylua --check --color always nvim/
-          # find を使う場合:
-          # find nvim -name "*.lua" -print0 | xargs -0 stylua --check --color always
+          version: latest
+          args: --check --color always nvim/
