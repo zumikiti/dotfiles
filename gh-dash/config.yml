@@ -87,7 +87,7 @@ keybindings:
       name: checkout on worktree
       command: >
         tmux new-window -n "PR-{{.PrNumber}}"
-        "wt switch pr:{{.PrNumber}}"
+        "wt switch pr:{{.PrNumber}} && $SHELL"
 
 theme:
   colors:
