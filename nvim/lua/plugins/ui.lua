@@ -47,18 +47,51 @@ return {
     end,
   },
 
-  -- 通知
+  -- コマンドライン・メッセージ・通知のUI強化
   {
-    "rcarriga/nvim-notify",
+    "folke/noice.nvim",
     event = "VeryLazy",
-    config = function()
-      local notify = require("notify")
-      notify.setup({
-        stages = "fade_in_slide_out",
-        timeout = 3000,
-      })
-      vim.notify = notify
-    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    opts = {
+      notify = {
+        enabled = true,
+        view = "notify",
+      },
+      views = {
+        cmdline_popup = {
+          position = {
+            row = "40%",
+            col = "50%",
+          },
+          size = {
+            width = 60,
+            height = "auto",
+          },
+          border = {
+            style = "rounded",
+            padding = { 0, 1 },
+          },
+        },
+        popupmenu = {
+          relative = "editor",
+          position = {
+            row = "40%",
+            col = "50%",
+          },
+          size = {
+            width = 60,
+            height = 10,
+          },
+          border = {
+            style = "rounded",
+            padding = { 0, 1 },
+          },
+        },
+      },
+    },
   },
 
   -- status line
