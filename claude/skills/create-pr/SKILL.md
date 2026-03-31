@@ -1,3 +1,7 @@
+---
+description: Draft Pull Requestを自動作成
+---
+
 現在のブランチから Draft Pull Request を作成してください。
 
 ## 手順
