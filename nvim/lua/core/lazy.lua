@@ -22,8 +22,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Auto-open an empty buffer on startup
-vim.cmd("autocmd VimEnter * if argc() == 0 | enew | endif")
 
 -- Setup lazy.nvim
 require("lazy").setup({
