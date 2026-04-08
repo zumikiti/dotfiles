@@ -88,6 +88,10 @@ keybindings:
       command: >
         tmux new-window -n "PR-{{.PrNumber}}"
         "wt switch pr:{{.PrNumber}} && $SHELL"
+    - key: O
+      name: open in octo.nvim
+      command: >
+        nvim -c "Octo pr edit {{.PrNumber}}"
 
 theme:
   colors:

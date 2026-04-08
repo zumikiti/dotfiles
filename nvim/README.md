@@ -16,3 +16,6 @@ https://github.com/echasnovski/mini.align
 2. スペース `r` `n` の順に入力
 3. 名前変更
 4. enter で決定
+
+### 警告などの表示方法
+- `[d`, `]d` で前後の警告に移動
