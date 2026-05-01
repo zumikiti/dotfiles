@@ -1,5 +1,4 @@
 ---
-model: sonnet
 name: commit
 description: |-
   Gitコミットガイド。
