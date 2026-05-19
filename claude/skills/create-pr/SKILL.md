@@ -1,4 +1,5 @@
 ---
+model: Haiku
 description: Draft Pull Requestを自動作成
 ---
 

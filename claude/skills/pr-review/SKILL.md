@@ -1,4 +1,5 @@
 ---
+model: Opus
 description: PR番号を指定してプルリクエストの内容をレビューするコマンド
 allowed-tools:
   - Bash
