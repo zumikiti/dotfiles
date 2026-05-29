@@ -124,7 +124,7 @@ devbox run ci
 ```sh
 # Claude Code の設定ファイルをシンボリックリンクで配置
 ln -s ~/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
-ln -s ~/dotfiles/claude/commands ~/.claude/commands
+ln -s ~/dotfiles/claude/skills ~/.claude/
 
 # Claude Code がインストールされていない場合は公式ガイドに従ってインストール
 # https://docs.anthropic.com/en/docs/claude-code
