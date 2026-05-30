@@ -1,0 +1,13 @@
+version = 1
+
+[install]
+ripgrep.pkg-path = "ripgrep"
+tmux.pkg-path = "tmux"
+tig.pkg-path = "tig"
+oh-my-posh.pkg-path = "oh-my-posh"
+lsd.pkg-path = "lsd"
+zoxide.pkg-path = "zoxide"
+fzf.pkg-path = "fzf"
+
+[options]
+systems = ["aarch64-darwin", "x86_64-darwin"]

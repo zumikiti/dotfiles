@@ -26,6 +26,12 @@ ln -s ~/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+## install flox
+```sh
+# first-wave CLI tools are defined in .flox/env/manifest.toml
+flox activate
+```
+
 ## install fish
 ```sh
 brew install fish
@@ -38,17 +44,16 @@ fish
 # install fisher
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
-# install ripgrep (use fzf.vim)
-brew install ripgrep
+# first-wave CLI tools are available after flox activation
+flox activate
 
 # replace config.fish
 cd ~/.config/fish
 mv ./config.fish ./config.fish.bak
 ln -s ~/dotfiles/config.fish (pwd)/config.fish
 
-# install OMP
+# OMP theme files are tracked in this repo
 cd ~/.config/fish
-brew install jandedobbeleer/oh-my-posh/oh-my-posh
 ln -s ~/dotfiles/posh/themes ./posh-themes
 ```
 
@@ -84,7 +89,7 @@ nvim を起動すると、自動でlazyでプラグインのインストール�
 
 ## install tmux
 ```sh
-brew install tmux
+flox activate
 
 tmux
 
@@ -96,7 +101,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ## install tig
 ```sh
-brew install tig
+flox activate
 ```
 
 ## 開発 (CI / Lint / Format)
