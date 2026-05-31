@@ -13,7 +13,7 @@ if not vim.loop.fs_stat(lazypath) then
     "-C",
     lazypath,
     "checkout",
-    "306a05526ada86a7b30af95c5cc81ffba93fef97",
+    "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a",
   })
 end
 vim.opt.rtp:prepend(lazypath)
