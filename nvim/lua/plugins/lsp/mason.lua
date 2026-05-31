@@ -1,14 +1,11 @@
 return {
   "williamboman/mason.nvim",
-  version = "*",
   dependencies = {
     {
       "mason-org/mason-lspconfig.nvim",
-      version = "*",
     },
     {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      version = "*",
     },
   },
   config = function()
@@ -22,7 +19,14 @@ return {
 
     -- enable mason and configure icons
     mason.setup({
+      registries = {
+        "github:mason-org/mason-registry",
+      },
+      registry_cache = {
+        refresh = false,
+      },
       ui = {
+        check_outdated_packages_on_open = false,
         icons = {
           package_installed = "✓",
           package_pending = "➜",
@@ -48,6 +52,8 @@ return {
     })
 
     mason_tool_installer.setup({
+      auto_update = false,
+      run_on_start = false,
       ensure_installed = {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
