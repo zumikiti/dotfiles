@@ -1,5 +1,5 @@
 ---
-model: sonnet
+model: Haiku
 name: commit
 description: |-
   Gitコミットガイド。
