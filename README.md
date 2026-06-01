@@ -41,21 +41,36 @@ brew install fnm
 
 fish
 
-# install fisher
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-
 # first-wave CLI tools are available after flox activation
 flox activate
 
 # replace config.fish
 cd ~/.config/fish
 mv ./config.fish ./config.fish.bak
-ln -s ~/dotfiles/config.fish (pwd)/config.fish
+ln -s ~/dotfiles/fish/config.fish (pwd)/config.fish
 
 # OMP theme files are tracked in this repo
 cd ~/.config/fish
-ln -s ~/dotfiles/posh/themes ./posh-themes
+ln -s ~/dotfiles/fish/posh-themes ./posh-themes
 ```
+
+## install fisher plugins
+fisher のプラグインは `fish/fish_plugins` に commit SHA で固定して管理する（[ADR 0002](docs/adr/0002-pin-fisher-plugins.md)）。
+
+```sh
+# pinned plugin list を symlink で配置
+cd ~/.config/fish
+ln -s ~/dotfiles/fish/fish_plugins ./fish_plugins
+
+# fisher 本体を fish_plugins に記載した固定 SHA から bootstrap
+set -l fisher_sha (string split '@' (string match -r '^jorgebucaran/fisher@.*' < ./fish_plugins))[2]
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/$fisher_sha/functions/fisher.fish | source
+
+# fish_plugins に記載された固定バージョンを一括インストール
+fisher update
+```
+
+> 更新は Manual Update Policy に従い、`fish/fish_plugins` の SHA を編集してから `fisher update` を実行し、変更をコミットする。
 
 ## install vim 
 ### Alacritty
