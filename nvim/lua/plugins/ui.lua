@@ -26,7 +26,7 @@ return {
       require("hlchunk").setup({
         chunk = {
           enable = true,
-          use_treesitter = true,
+          use_treesitter = false,
           chars = {
             horizontal_line = "━",
             vertical_line = "┃",
@@ -40,7 +40,7 @@ return {
         },
         line_num = {
           enable = true,
-          use_treesitter = true,
+          use_treesitter = false,
         },
       })
     end,
