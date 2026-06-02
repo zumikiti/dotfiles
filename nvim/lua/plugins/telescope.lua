@@ -11,7 +11,7 @@ return {
     { "fw", "<cmd>Telescope live_grep <cr>" },
     { "fz", "<cmd>Telescope grep_string <cr>" },
     { "fb", "<cmd>Telescope buffers <cr>" },
-    { "ft", "<cmd>Telescope treesitter <cr>", desc = "Show this class symbols (type / var / methods list)" },
+    { "ft", "<cmd>Telescope lsp_document_symbols <cr>", desc = "Show this class symbols (type / var / methods list)" },
     { "fo", "<cmd>Telescope oldfiles <cr>", desc = "Show file history" },
     { "fc", "<cmd>Telescope git_bcommits <cr>", desc = "Show current file commit history" },
     { "fh", "<cmd>Telescope help_tags <cr>" },
