@@ -3,6 +3,9 @@
   "manifest": {
     "schema-version": "1.12.0",
     "install": {
+      "diffnav": {
+        "pkg-path": "diffnav"
+      },
       "fish": {
         "pkg-path": "fish"
       },
@@ -17,9 +20,6 @@
       },
       "neovim": {
         "pkg-path": "neovim"
-      },
-      "nodejs_24": {
-        "pkg-path": "nodejs_24"
       },
       "oh-my-posh": {
         "pkg-path": "oh-my-posh"
@@ -42,6 +42,126 @@
     "options": {}
   },
   "packages": [
+    {
+      "attr_path": "diffnav",
+      "broken": false,
+      "derivation": "/nix/store/68mnq21zw85kwhpj5282vhiw4zxgppag-diffnav-0.11.0.drv",
+      "description": "Git diff pager based on delta but with a file tree, à la GitHub",
+      "install_id": "diffnav",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "diffnav-0.11.0",
+      "pname": "diffnav",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:06:03.201423Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/i41kip47ycz815zcdldxhvf3akyl9s2v-diffnav-0.11.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "diffnav",
+      "broken": false,
+      "derivation": "/nix/store/0fbrxvmpsk4kiiri1i1nw0q2b6y2jd9y-diffnav-0.11.0.drv",
+      "description": "Git diff pager based on delta but with a file tree, à la GitHub",
+      "install_id": "diffnav",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "diffnav-0.11.0",
+      "pname": "diffnav",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:34:26.598386Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/m066z30z1yyd6kvlm9kdps01j07130wm-diffnav-0.11.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "diffnav",
+      "broken": false,
+      "derivation": "/nix/store/1hjh0pahz2aklis2igzrsid9gz115nbf-diffnav-0.11.0.drv",
+      "description": "Git diff pager based on delta but with a file tree, à la GitHub",
+      "install_id": "diffnav",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "diffnav-0.11.0",
+      "pname": "diffnav",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:02:12.402613Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/wqfhrvc8lpi7q60lkwczfy4ym90zyay5-diffnav-0.11.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "diffnav",
+      "broken": false,
+      "derivation": "/nix/store/bdspjvhswlnx6drr8xi4n9v07dp8yh0h-diffnav-0.11.0.drv",
+      "description": "Git diff pager based on delta but with a file tree, à la GitHub",
+      "install_id": "diffnav",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "diffnav-0.11.0",
+      "pname": "diffnav",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:32:51.730550Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.11.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/hihr7bmdvcyzli5z88bfawh9ljg5x6fc-diffnav-0.11.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
     {
       "attr_path": "fish",
       "broken": false,
@@ -669,126 +789,6 @@
       ],
       "outputs": {
         "out": "/nix/store/7idwf19b7b53wn7rznqgccymyif7kmwh-neovim-0.12.2"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "nodejs_24",
-      "broken": false,
-      "derivation": "/nix/store/4f7gz4vdm9msfw3958cy6d7b4mn8zcpn-nodejs-24.15.0.drv",
-      "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs_24",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
-      "name": "nodejs-24.15.0",
-      "pname": "nodejs_24",
-      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
-      "rev_count": 1004030,
-      "rev_date": "2026-05-23T18:24:25Z",
-      "scrape_date": "2026-05-26T07:06:28.042609Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "24.15.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/3mvbmkd7lmxi3xlka1avra24flwbgjv9-nodejs-24.15.0"
-      },
-      "system": "aarch64-darwin",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "nodejs_24",
-      "broken": false,
-      "derivation": "/nix/store/lzdf2d8kky8k67nqjv07r9zbcqmihns7-nodejs-24.15.0.drv",
-      "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs_24",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
-      "name": "nodejs-24.15.0",
-      "pname": "nodejs_24",
-      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
-      "rev_count": 1004030,
-      "rev_date": "2026-05-23T18:24:25Z",
-      "scrape_date": "2026-05-26T07:35:05.604494Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "24.15.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/rmdjmd0iy5zlyg0j2i1cd0s7ha1562fs-nodejs-24.15.0"
-      },
-      "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "nodejs_24",
-      "broken": false,
-      "derivation": "/nix/store/3q3jmp4ahvdy9dr6zhwsd2zhv12nw3d2-nodejs-24.15.0.drv",
-      "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs_24",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
-      "name": "nodejs-24.15.0",
-      "pname": "nodejs_24",
-      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
-      "rev_count": 1004030,
-      "rev_date": "2026-05-23T18:24:25Z",
-      "scrape_date": "2026-05-26T08:02:36.832416Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "24.15.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/rhv8jiklgw2bw4ljh4nm3h3r3bpnkcl3-nodejs-24.15.0"
-      },
-      "system": "x86_64-darwin",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "nodejs_24",
-      "broken": false,
-      "derivation": "/nix/store/jk98cvnvcb5adz3d58r8x6zxrvnhlng0-nodejs-24.15.0.drv",
-      "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs_24",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
-      "name": "nodejs-24.15.0",
-      "pname": "nodejs_24",
-      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
-      "rev_count": 1004030,
-      "rev_date": "2026-05-23T18:24:25Z",
-      "scrape_date": "2026-05-26T08:33:31.731303Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "24.15.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/5a8ysg1jnj8jmzzyfcfw7rvpvnp5rfpa-nodejs-24.15.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
