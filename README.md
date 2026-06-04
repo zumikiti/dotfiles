@@ -3,10 +3,10 @@
 ## set symbolic links
 ```sh
 mkdir -p ~/.config/nvim
-ln -s ~/dotfiles/nvim/init.lua ~/.config/nvim/init.lua
-ln -s ~/dotfiles/nvim/lua ~/.config/nvim/lua
-ln -s ~/dotfiles/.tigrc ~/.tigrc
-ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/dotfiles/nvim/init.lua ~/.config/nvim/
+ln -s ~/dotfiles/nvim/lua ~/.config/nvim/
+ln -s ~/dotfiles/.tigrc ~/
+ln -s ~/dotfiles/.tmux.conf ~/
 ```
 
 ## install & set karabiner
@@ -18,12 +18,7 @@ https://karabiner-elements.pqrs.org/
 
 ```sh
 rm ~/.config/karabiner/karabiner.json
-ln -s ~/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
-```
-
-## install homebrew
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ln -s ~/dotfiles/karabiner.json ~/.config/karabiner/
 ```
 
 ## install flox
@@ -34,8 +29,6 @@ flox activate
 
 ## install fish
 ```sh
-brew install fish
-
 # install fnm && node
 brew install fnm
 
@@ -47,11 +40,12 @@ flox activate
 # replace config.fish
 cd ~/.config/fish
 mv ./config.fish ./config.fish.bak
-ln -s ~/dotfiles/fish/config.fish (pwd)/config.fish
+ln -s ~/dotfiles/fish/config.fish ./
+ln -s ~/dotfiles/fish/fish_plugins ./
 
 # OMP theme files are tracked in this repo
 cd ~/.config/fish
-ln -s ~/dotfiles/fish/posh-themes ./posh-themes
+ln -s ~/dotfiles/fish/posh-themes ./
 ```
 
 ## install fisher plugins
@@ -143,7 +137,7 @@ devbox run ci
 ## Claude Code の設定
 ```sh
 # Claude Code の設定ファイルをシンボリックリンクで配置
-ln -s ~/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
+ln -s ~/dotfiles/claude/CLAUDE.md ~/.claude/
 ln -s ~/dotfiles/claude/skills ~/.claude/
 
 # Claude Code がインストールされていない場合は公式ガイドに従ってインストール
