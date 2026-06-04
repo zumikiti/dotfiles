@@ -9,6 +9,8 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 
 Ask the questions one at a time, waiting for feedback on each question before continuing.
 
+Present each question and its options as plain text directly in your message — number the options (1, 2, 3...) and include your recommended answer. Do NOT use the AskUserQuestion tool or any arrow-key selection UI; let me reply by typing a number or free text.
+
 If a question can be answered by exploring the codebase, explore the codebase instead.
 
 </what-to-do>
