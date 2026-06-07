@@ -1,4 +1,9 @@
 if status is-interactive
+    if status is-login
+        if type -q flox
+            flox activate
+        end
+    end
     # Commands to run in interactive sessions can go here
 end
 
@@ -14,10 +19,6 @@ zoxide init fish | source
 function j --wraps=zi --description 'alias j=zi'
   zi $argv;
 end
-
-### set node
-fnm env --use-on-cd --shell fish | source
-fnm use 22 > /dev/null
 
 ### MY FUNCTIONS
 # nvim
