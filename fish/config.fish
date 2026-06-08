@@ -1,12 +1,3 @@
-if status is-interactive
-    if status is-login
-        if type -q flox
-            flox activate
-        end
-    end
-    # Commands to run in interactive sessions can go here
-end
-
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 set --export --prepend PATH "$HOME/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

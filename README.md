@@ -24,8 +24,9 @@ ln -s ~/dotfiles/karabiner.json ~/.config/karabiner/
 ## install flox
 ```sh
 # first-wave CLI tools are defined in .flox/env/manifest.toml
-flox activate
+flox activate -d ~/dotfiles
 ```
+`fish` にログインしたときは `fish/config.fish` で自動的に `flox activate -d ~/dotfiles` される。
 
 ## install fish
 ```sh
@@ -34,8 +35,7 @@ brew install fnm
 
 fish
 
-# first-wave CLI tools are available after flox activation
-flox activate
+# fish にログインし直すと dotfiles の flox 環境が有効になる
 
 # replace config.fish
 cd ~/.config/fish
@@ -98,7 +98,7 @@ nvim を起動すると、自動でlazyでプラグインのインストール�
 
 ## install tmux
 ```sh
-flox activate
+fish にログインした後に tmux を起動する
 
 tmux
 
@@ -110,7 +110,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ## install tig
 ```sh
-flox activate
+fish にログインした後に tig を使える
 ```
 
 ## 開発 (CI / Lint / Format)
