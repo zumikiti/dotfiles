@@ -46,7 +46,9 @@
         "pkg-path": "zoxide"
       }
     },
-    "hook": {},
+    "hook": {
+      "on-activate": "  # --- Apply dotfiles: symlink configs into place ---------------------\n  # Idempotent and silent once linked; runs on every `flox activate`\n  # (incl. fish login). A pre-existing real file is backed up to *.bak\n  # before it is replaced by a symlink.\n  dotfiles=\"$FLOX_ENV_PROJECT\"\n\n  _link() {\n    # _link <path-relative-to-dotfiles> <absolute-target>\n    src=\"$dotfiles/$1\"\n    dst=\"$2\"\n    [ -e \"$src\" ] || return 0\n    # already the right symlink? stay quiet.\n    [ \"$(readlink \"$dst\" 2>/dev/null)\" = \"$src\" ] && return 0\n    mkdir -p \"$(dirname \"$dst\")\"\n    if [ -e \"$dst\" ] && [ ! -L \"$dst\" ]; then\n      mv \"$dst\" \"$dst.bak\"\n      echo \"dotfiles: backed up $dst -> $dst.bak\"\n    fi\n    ln -sfn \"$src\" \"$dst\"\n    echo \"dotfiles: linked $dst\"\n  }\n\n  # shell / tmux / tig\n  _link .tigrc            \"$HOME/.tigrc\"\n  _link .tmux.conf        \"$HOME/.tmux.conf\"\n\n  # nvim\n  _link nvim/init.lua     \"$HOME/.config/nvim/init.lua\"\n  _link nvim/lua          \"$HOME/.config/nvim/lua\"\n\n  # fish\n  _link fish/config.fish  \"$HOME/.config/fish/config.fish\"\n  _link fish/fish_plugins \"$HOME/.config/fish/fish_plugins\"\n  _link fish/posh-themes  \"$HOME/.config/fish/posh-themes\"\n\n  # alacritty\n  _link alacritty         \"$HOME/.config/alacritty\"\n\n  # claude code\n  _link claude/CLAUDE.md  \"$HOME/.claude/CLAUDE.md\"\n  _link claude/skills     \"$HOME/.claude/skills\"\n\n  # macOS only: karabiner\n  if [ \"$(uname -s)\" = \"Darwin\" ]; then\n    _link karabiner.json  \"$HOME/.config/karabiner/karabiner.json\"\n  fi\n\n  unset -f _link\n"
+    },
     "profile": {},
     "options": {}
   },
