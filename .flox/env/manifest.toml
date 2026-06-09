@@ -21,6 +21,7 @@ diffnav.pkg-path = "diffnav"
 go.pkg-path = "go"
 gcc.pkg-path = "gcc"
 nodejs.pkg-path = "nodejs"
+rtk.pkg-path = "rtk"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 

@@ -36,6 +36,9 @@
       "ripgrep": {
         "pkg-path": "ripgrep"
       },
+      "rtk": {
+        "pkg-path": "rtk"
+      },
       "tig": {
         "pkg-path": "tig"
       },
@@ -68,6 +71,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:03.201423Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -98,6 +102,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:34:26.598386Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -128,6 +133,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:12.402613Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -158,6 +164,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:32:51.730550Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -188,6 +195,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:03.580476Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -219,6 +227,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:34:27.174140Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -250,6 +259,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:12.772996Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -281,6 +291,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:32:52.359527Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -312,6 +323,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:03.719815Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -344,6 +356,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:34:27.392613Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -376,6 +389,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:12.905388Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -408,6 +422,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:32:52.594188Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -440,6 +455,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:03.753221Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -473,6 +489,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:34:27.444270Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -507,6 +524,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:12.937058Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -540,6 +558,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:32:52.649940Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -547,6 +566,8 @@
       "version": "15.2.0",
       "outputs_to_install": [
         "man",
+        "man",
+        "out",
         "out",
         "out"
       ],
@@ -574,6 +595,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:03.974647Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -608,6 +630,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:34:28.288092Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -643,6 +666,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:13.186103Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -677,6 +701,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:32:53.551884Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -714,6 +739,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:03.983798Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -744,6 +770,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:34:28.305120Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -774,6 +801,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:13.195478Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -804,6 +832,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:32:53.567914Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -834,6 +863,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:23.332450Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -864,6 +894,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:34:58.073118Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -894,6 +925,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:32.236224Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -924,6 +956,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:33:24.400181Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -954,6 +987,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:27.181404Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -984,6 +1018,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:35:04.241734Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1014,6 +1049,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:35.997566Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1044,6 +1080,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:33:30.472335Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1074,6 +1111,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:28.026811Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1104,6 +1142,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:35:05.583415Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1134,6 +1173,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:36.816893Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1164,6 +1204,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:33:31.711302Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1194,6 +1235,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:06:32.755281Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1224,6 +1266,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:35:12.370998Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1254,6 +1297,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:02:41.541977Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1284,6 +1328,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:33:38.003475Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1314,6 +1359,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:07:31.254104Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1344,6 +1390,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:36:30.141498Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1374,6 +1421,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:03:39.742908Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1404,6 +1452,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:34:54.409829Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1414,6 +1463,130 @@
       ],
       "outputs": {
         "out": "/nix/store/ixsp81bia5w1fqd2d59vwbcfqk3n5231-ripgrep-15.1.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "rtk",
+      "broken": false,
+      "derivation": "/nix/store/4a3yj83knbc8hndx5v3f6dp9ipbpdy9w-rtk-0.41.0.drv",
+      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
+      "install_id": "rtk",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "rtk-0.41.0",
+      "pname": "rtk",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:07:31.822794Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.41.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/96gnblzcq9mnlkj7s3lpwkpg8sl1spm2-rtk-0.41.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "rtk",
+      "broken": false,
+      "derivation": "/nix/store/v7ynsasbd6fk090ndjkry401y74vnakw-rtk-0.41.0.drv",
+      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
+      "install_id": "rtk",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "rtk-0.41.0",
+      "pname": "rtk",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:36:31.154942Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.41.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/k5dg8h3is8km1ka43jjvmy5yix5wccw7-rtk-0.41.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "rtk",
+      "broken": false,
+      "derivation": "/nix/store/xl60pd0375nszqrkg65gi7vw5ihqvxak-rtk-0.41.0.drv",
+      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
+      "install_id": "rtk",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "rtk-0.41.0",
+      "pname": "rtk",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:03:40.336879Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.41.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/854hwgy4npbg1gc3673gfs4cqdlv4khm-rtk-0.41.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "rtk",
+      "broken": false,
+      "derivation": "/nix/store/pgwyfp4qdgg233b3aknwmrv44s441whl-rtk-0.41.0.drv",
+      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
+      "install_id": "rtk",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "rtk-0.41.0",
+      "pname": "rtk",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:34:55.660001Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.41.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/4xjbdlyfsvvb9q807ilhh6ysciiid0cl-rtk-0.41.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -1434,6 +1607,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:08:15.017551Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1467,6 +1641,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:37:31.510854Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1500,6 +1675,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:04:23.797112Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1533,6 +1709,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:35:54.137570Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1566,6 +1743,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:08:15.371390Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1598,6 +1776,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:37:32.088923Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1630,6 +1809,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:04:24.156128Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1662,6 +1842,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:35:54.733818Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1694,6 +1875,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:08:51.971771Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1724,6 +1906,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T07:38:22.007848Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1754,6 +1937,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:05:01.189135Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
@@ -1784,6 +1968,7 @@
       "rev_date": "2026-05-23T18:24:25Z",
       "scrape_date": "2026-05-26T08:36:42.949196Z",
       "stabilities": [
+        "stable",
         "staging",
         "unstable"
       ],
