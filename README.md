@@ -97,15 +97,13 @@ ln -s ~/dotfiles/alacritty ~/.config/alacritty
 nvim を起動すると、自動でlazyでプラグインのインストールが始まる。
 
 ## install tmux
+tmux プラグインは TPM をやめ、flox の `[install]`（`tmuxPlugins.*`）で固定管理する。
+`.tmux.conf` 末尾の `run-shell` 群が `$FLOX_ENV` 配下のプラグインを直接読み込むため、
+`flox activate` 済みの環境で tmux を起動すれば自動で適用される（`C-s + I` は不要）。
+
 ```sh
-fish にログインした後に tmux を起動する
-
+# fish にログイン（= flox activate 済み）した後に tmux を起動するだけ
 tmux
-
-# install tmux plugins
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# press `C-s + I` in tmux
 ```
 
 ## install tig

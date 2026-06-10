@@ -36,14 +36,26 @@
       "nodejs": {
         "pkg-path": "nodejs"
       },
+      "nord": {
+        "pkg-path": "tmuxPlugins.nord"
+      },
       "oh-my-posh": {
         "pkg-path": "oh-my-posh"
+      },
+      "power-theme": {
+        "pkg-path": "tmuxPlugins.power-theme"
+      },
+      "resurrect": {
+        "pkg-path": "tmuxPlugins.resurrect"
       },
       "ripgrep": {
         "pkg-path": "ripgrep"
       },
       "rtk": {
         "pkg-path": "rtk"
+      },
+      "sensible": {
+        "pkg-path": "tmuxPlugins.sensible"
       },
       "tig": {
         "pkg-path": "tig"
@@ -53,6 +65,9 @@
       },
       "unzip": {
         "pkg-path": "unzip"
+      },
+      "yank": {
+        "pkg-path": "tmuxPlugins.yank"
       },
       "zoxide": {
         "pkg-path": "zoxide"
@@ -1486,6 +1501,130 @@
       "priority": 5
     },
     {
+      "attr_path": "tmuxPlugins.nord",
+      "broken": false,
+      "derivation": "/nix/store/4a4ss1iv5cb3zhsv1izw4lzfx6d47pdz-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
+      "description": "Nord Tmux theme with plugin support",
+      "install_id": "nord",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
+      "pname": "nord",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:08:15.466589Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-03-03",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ljk59438fcxsgha71y9sqjq5jjay5yvn-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.nord",
+      "broken": false,
+      "derivation": "/nix/store/bq4abj83p6kxyz1did0abr0n1dlc3qwv-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
+      "description": "Nord Tmux theme with plugin support",
+      "install_id": "nord",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
+      "pname": "nord",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:37:32.202954Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-03-03",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/khx0qvz52r4iqg6msaqvc3fmixq77my1-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.nord",
+      "broken": false,
+      "derivation": "/nix/store/wv39md7ivr2m7dqmsq8bm1kw15v2ivq8-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
+      "description": "Nord Tmux theme with plugin support",
+      "install_id": "nord",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
+      "pname": "nord",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:04:24.254114Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-03-03",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/3dpyn4wcxd0vcr83rf0rp3d6x7igsapg-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.nord",
+      "broken": false,
+      "derivation": "/nix/store/mdp1xnlnpnlrs5mnn5ccx7xzb9694mh0-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
+      "description": "Nord Tmux theme with plugin support",
+      "install_id": "nord",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
+      "pname": "nord",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:35:54.852251Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-03-03",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/8gwr649rbm2nrlrbd75w6bjs6f93bx06-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
       "attr_path": "oh-my-posh",
       "broken": false,
       "derivation": "/nix/store/wgrwam6vqxawzlcgl7bwpamscr5plvpp-oh-my-posh-29.14.0.drv",
@@ -1604,6 +1743,254 @@
       ],
       "outputs": {
         "out": "/nix/store/nk0f5h3fkb0p5lwmasgmlzp62b1q3xir-oh-my-posh-29.14.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.power-theme",
+      "broken": false,
+      "derivation": "/nix/store/ac13rjkn7wf4c15wnppzgrsjh5i5l9fp-tmuxplugin-power-unstable-2024-05-12.drv",
+      "description": "Tmux powerline theme",
+      "install_id": "power-theme",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-power-unstable-2024-05-12",
+      "pname": "power-theme",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:08:15.489106Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2024-05-12",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/84zwm2cvaxs927nyvg3jwxxhv818whfx-tmuxplugin-power-unstable-2024-05-12"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.power-theme",
+      "broken": false,
+      "derivation": "/nix/store/xwp35y53jkd6kl2m74j8hxjzkq83w0zx-tmuxplugin-power-unstable-2024-05-12.drv",
+      "description": "Tmux powerline theme",
+      "install_id": "power-theme",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-power-unstable-2024-05-12",
+      "pname": "power-theme",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:37:32.230387Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2024-05-12",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/hds5xmiwnllg47h9iv5pkamq57mh877w-tmuxplugin-power-unstable-2024-05-12"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.power-theme",
+      "broken": false,
+      "derivation": "/nix/store/kqb5f0iw0ndj8r13psq6gwk0i2ml32qn-tmuxplugin-power-unstable-2024-05-12.drv",
+      "description": "Tmux powerline theme",
+      "install_id": "power-theme",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-power-unstable-2024-05-12",
+      "pname": "power-theme",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:04:24.276760Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2024-05-12",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/nbsdcxg3cl5s9y0ixwyaqag0iq0q1g4j-tmuxplugin-power-unstable-2024-05-12"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.power-theme",
+      "broken": false,
+      "derivation": "/nix/store/66y5xdh3pi8cz1d0a4yi6j0c4i7kskdg-tmuxplugin-power-unstable-2024-05-12.drv",
+      "description": "Tmux powerline theme",
+      "install_id": "power-theme",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-power-unstable-2024-05-12",
+      "pname": "power-theme",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:35:54.879169Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2024-05-12",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/3z5x5y04fl2ccdiwjkzm0xjjc4syhf14-tmuxplugin-power-unstable-2024-05-12"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.resurrect",
+      "broken": false,
+      "derivation": "/nix/store/104gyld1y8c36yhl1sfxmrf07h6cqx8m-tmuxplugin-resurrect-unstable-2022-05-01.drv",
+      "description": "Restore tmux environment after system restart",
+      "install_id": "resurrect",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-resurrect-unstable-2022-05-01",
+      "pname": "resurrect",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:08:15.495528Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-05-01",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/yg209cf28fc7wp2878l4ym18aa0f177g-tmuxplugin-resurrect-unstable-2022-05-01"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.resurrect",
+      "broken": false,
+      "derivation": "/nix/store/pzz9744l4hfkirx1mr599r3zn3p2a7pj-tmuxplugin-resurrect-unstable-2022-05-01.drv",
+      "description": "Restore tmux environment after system restart",
+      "install_id": "resurrect",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-resurrect-unstable-2022-05-01",
+      "pname": "resurrect",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:37:32.238201Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-05-01",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/nzna60fhfc55lbzbm8cf1jkrsdyj1kjg-tmuxplugin-resurrect-unstable-2022-05-01"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.resurrect",
+      "broken": false,
+      "derivation": "/nix/store/i050a7iqjbbry2iwczkwq0dxxkca36h6-tmuxplugin-resurrect-unstable-2022-05-01.drv",
+      "description": "Restore tmux environment after system restart",
+      "install_id": "resurrect",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-resurrect-unstable-2022-05-01",
+      "pname": "resurrect",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:04:24.283201Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-05-01",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/7q3zkrkwqr9p7wjz9aqzhygwgfc6pjca-tmuxplugin-resurrect-unstable-2022-05-01"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.resurrect",
+      "broken": false,
+      "derivation": "/nix/store/73r1m9i0r4bm4mkdlr6aqsckk3swj40h-tmuxplugin-resurrect-unstable-2022-05-01.drv",
+      "description": "Restore tmux environment after system restart",
+      "install_id": "resurrect",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-resurrect-unstable-2022-05-01",
+      "pname": "resurrect",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:35:54.886855Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-05-01",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/z3cpsr4p1bq3j1glay47x9pdnwh6bh48-tmuxplugin-resurrect-unstable-2022-05-01"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -1852,6 +2239,122 @@
       ],
       "outputs": {
         "out": "/nix/store/4xjbdlyfsvvb9q807ilhh6ysciiid0cl-rtk-0.41.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/4dghk18rsj2alhccmfrd4sifbbkv8d5f-tmuxplugin-sensible-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-sensible-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:08:15.501976Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/k2hwr60a47iqdp0sd07imn79iyfhfd9b-tmuxplugin-sensible-unstable-2022-08-14"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/yn6insgqqck3yg4gdzgi0xyd3gczjz2c-tmuxplugin-sensible-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-sensible-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:37:32.246031Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/w169fr55q7f0kx483dq3ks4k9v9r52q2-tmuxplugin-sensible-unstable-2022-08-14"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/g6c6s9piczlfybwy93hamvvjls4shd0c-tmuxplugin-sensible-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-sensible-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:04:24.289623Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/0175mw0p839rmjskdj4dar2xkbb11gg3-tmuxplugin-sensible-unstable-2022-08-14"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/zs8b5ckpg8mwlz2ribfxc3mggmzpy78f-tmuxplugin-sensible-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-sensible-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:35:54.894673Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/456fcrba2mrlwicxan9i20bd0zjvyz9y-tmuxplugin-sensible-unstable-2022-08-14"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -2244,6 +2747,122 @@
       ],
       "outputs": {
         "out": "/nix/store/mhw4sjc1rz4zmb3vkdinvfm7ym96fazx-unzip-6.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/cbh3wsblpamcdz19iq8ak3l95508ri7y-tmuxplugin-yank-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-yank-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:08:15.581957Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/c32xkcv47k8n1n3f2957wdq2q24hgmkj-tmuxplugin-yank-unstable-2023-07-19"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/zl2hmxzqrkjdf3dr0v102rhyav0mr9rj-tmuxplugin-yank-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-yank-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:37:32.340914Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/8izkw0f8x5g3i1zh7x3i2iyl29f9s364-tmuxplugin-yank-unstable-2023-07-19"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/smdylg8gcprpys526xih1g8csnzy0dkm-tmuxplugin-yank-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-yank-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:04:24.368645Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/wm55g64l6iy8zym2vwmad7gjdlv1ajpk-tmuxplugin-yank-unstable-2023-07-19"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/2r9hiwd4z90wmxl47s6wy76h748p6vxb-tmuxplugin-yank-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "tmuxplugin-yank-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:35:54.986720Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/h2658l91bzn0vbfj4i6i63xhmdni37xk-tmuxplugin-yank-unstable-2023-07-19"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
