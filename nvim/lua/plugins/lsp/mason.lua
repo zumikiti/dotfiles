@@ -60,6 +60,7 @@ return {
         "eslint_d",
         "typescript-language-server",
         "prisma-language-server",
+        "copilot-language-server",
       },
     })
   end,

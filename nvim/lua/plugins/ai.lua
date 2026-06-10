@@ -14,7 +14,7 @@ return {
       server_opts_overrides = {
         trace = "verbose",
         cmd = {
-          vim.fn.expand("~/.config/nvim/copilot/bin/copilot-language-server"),
+          vim.fn.stdpath("data") .. "/mason/bin/copilot-language-server",
           "--stdio",
         },
         settings = {
