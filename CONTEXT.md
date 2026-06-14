@@ -27,3 +27,11 @@ _Avoid_: local-only, global rollout
 **Manual Update Policy**:
 A rule that version-managed tool definitions and lockfiles change only through explicit user-initiated updates committed to this repository.
 _Avoid_: auto update, rolling latest
+
+**Login Bootstrap**:
+The managed block the Activation Hook maintains in `~/.profile` so an interactive login shell re-enters this flox environment and hands off to `fish`. It is the one entry point that cannot be a Version-managed Installation symlink, because it must run before `flox activate`; the repository stays its source of truth by owning the block's contents.
+_Avoid_: startup script, profile hack, autostart
+
+**Activation Hook**:
+The `on-activate` script in the flox manifest that brings the workstation into its configured state on every `flox activate` — linking CLI Tool configs and maintaining the Login Bootstrap.
+_Avoid_: install script, provisioning
