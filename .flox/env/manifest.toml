@@ -30,6 +30,8 @@ resurrect.pkg-path = "tmuxPlugins.resurrect"
 power-theme.pkg-path = "tmuxPlugins.power-theme"
 sensible.pkg-path = "tmuxPlugins.sensible"
 nord.pkg-path = "tmuxPlugins.nord"
+fnm.pkg-path = "fnm"
+fnm.version = "1.39.0"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 

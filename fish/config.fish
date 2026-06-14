@@ -11,6 +11,11 @@ function j --wraps=zi --description 'alias j=zi'
   zi $argv;
 end
 
+# fnm: switch Node.js per directory via .node-version / .nvmrc (auto on cd)
+if type -q fnm
+  fnm env --use-on-cd --version-file-strategy recursive | source
+end
+
 ### MY FUNCTIONS
 # nvim
 function nv --wraps=nv --wraps='nvim' --description 'alias nv=nvim'

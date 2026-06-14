@@ -9,6 +9,10 @@
       "fish": {
         "pkg-path": "fish"
       },
+      "fnm": {
+        "pkg-path": "fnm",
+        "version": "1.39.0"
+      },
       "fzf": {
         "pkg-path": "fzf"
       },
@@ -327,6 +331,130 @@
       "outputs": {
         "doc": "/nix/store/gm9m3y8vwiifmm2f2rsdwjwc42pkyh7n-fish-4.7.1-doc",
         "out": "/nix/store/gdlvizwr80wwccx2v39h2as02rs0d1nb-fish-4.7.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "fnm",
+      "broken": false,
+      "derivation": "/nix/store/0ydjp99dj7vrn3yh1yhbcahsd9m8wqs2-fnm-1.39.0.drv",
+      "description": "Fast and simple Node.js version manager",
+      "install_id": "fnm",
+      "license": "GPL-3.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "fnm-1.39.0",
+      "pname": "fnm",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:06:03.637904Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.39.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ipxm06g1asi5ip2vvs5czk3cfxi4dl86-fnm-1.39.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "fnm",
+      "broken": false,
+      "derivation": "/nix/store/yja3szzr0vrhi44mj1qkyswpbv2a2k3i-fnm-1.39.0.drv",
+      "description": "Fast and simple Node.js version manager",
+      "install_id": "fnm",
+      "license": "GPL-3.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "fnm-1.39.0",
+      "pname": "fnm",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T07:34:27.255581Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.39.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/pqcyb5yy6gly0m9rc6sws677sqvpj342-fnm-1.39.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "fnm",
+      "broken": false,
+      "derivation": "/nix/store/gx77xspr5q3v02j2hsvi0z8cirhn25ca-fnm-1.39.0.drv",
+      "description": "Fast and simple Node.js version manager",
+      "install_id": "fnm",
+      "license": "GPL-3.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "fnm-1.39.0",
+      "pname": "fnm",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:02:12.827874Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.39.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/0bzi2j25x00ly27ifc0m6qwndygpniin-fnm-1.39.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "fnm",
+      "broken": false,
+      "derivation": "/nix/store/ch0xyxckn9ggg5ay41vg1ygkvi54yh94-fnm-1.39.0.drv",
+      "description": "Fast and simple Node.js version manager",
+      "install_id": "fnm",
+      "license": "GPL-3.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "name": "fnm-1.39.0",
+      "pname": "fnm",
+      "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
+      "rev_count": 1004030,
+      "rev_date": "2026-05-23T18:24:25Z",
+      "scrape_date": "2026-05-26T08:32:52.448030Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.39.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/y1z8k7ilk0dcwrfl3dr6l4sr00sm3r9x-fnm-1.39.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -849,6 +977,7 @@
       "outputs_to_install": [
         "out",
         "out",
+        "out",
         "out"
       ],
       "outputs": {
@@ -1119,6 +1248,7 @@
       "unfree": false,
       "version": "1.26.3",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
@@ -2111,6 +2241,7 @@
       "unfree": false,
       "version": "15.1.0",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
