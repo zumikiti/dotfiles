@@ -1,0 +1,31 @@
+# cocoindex-code — 安全なローカルコード検索(オフライン / ローカル埋め込み)
+#
+# 機種ごとに変わる projects のパスは .env の COCOINDEX_PROJECTS_DIR だけで吸収する。
+# (Mac 上 OrbStack Ubuntu と実機 Ubuntu で同じ compose を使い回せる)
+#
+#   初回のみ : ./bootstrap.sh          (volume 作成・設定 seed・モデル取得。ここだけネット使用)
+#   起動     : docker compose up -d
+#   更新     : docker compose pull && docker compose up -d
+#   停止     : docker compose down     (volume は残る)
+#
+# イメージは digest 固定(供給網対策)。multi-arch index ゆえ amd64/arm64 双方で同一定義が効く。
+services:
+  cocoindex-code:
+    image: ghcr.io/cocoindex-io/cocoindex-code@sha256:fd1f783c66440aa20c95138bb0c9b015e48d1ac7a23c111f15f290798cf05419
+    container_name: cocoindex-code
+    restart: unless-stopped
+    network_mode: none                       # 読んだコードを外に出せぬよう送信を物理遮断
+    environment:
+      COCOINDEX_DISABLE_USAGE_TRACKING: "1"   # テレメトリ無効
+      HF_HUB_OFFLINE: "1"                      # HuggingFace への問い合わせを禁止(キャッシュのみ)
+      TRANSFORMERS_OFFLINE: "1"
+      COCOINDEX_CODE_DIR: /var/cocoindex/code  # グローバル設定を volume 側へ集約
+      COCOINDEX_CODE_HOST_PATH_MAPPING: "/workspace=${COCOINDEX_PROJECTS_DIR:?set COCOINDEX_PROJECTS_DIR in .env}"
+    volumes:
+      - "${COCOINDEX_PROJECTS_DIR:?set COCOINDEX_PROJECTS_DIR in .env}:/workspace"
+      - "cocoindex-data:/var/cocoindex"
+
+volumes:
+  cocoindex-data:
+    external: true                            # bootstrap.sh が作った既存 volume を使う
+    name: cocoindex-data
