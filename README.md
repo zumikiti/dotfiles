@@ -141,3 +141,47 @@ ln -s ~/dotfiles/claude/skills ~/.claude/
 # Claude Code がインストールされていない場合は公式ガイドに従ってインストール
 # https://docs.anthropic.com/en/docs/claude-code
 ```
+
+## cocoindex-code (ccc) — ローカルコード検索
+AST ベースのセマンティックコード検索。Docker コンテナで隔離して動かす。
+イメージは digest 固定、`--network none` で送信を物理遮断、ローカル埋め込みで
+コードを外に出さない（定義は `cocoindex/docker-compose.yml`）。
+
+### セットアップ
+```sh
+cd ~/dotfiles/cocoindex
+
+# 機種ごとの projects 絶対パスを .env に設定（.env は git 管理外）
+cp .env.example .env
+#   Mac 上 OrbStack: COCOINDEX_PROJECTS_DIR=/mnt/mac/Users/<user>/projects
+#   実機 Ubuntu    : COCOINDEX_PROJECTS_DIR=/home/<user>/projects
+
+# 初回のみ: volume 作成・設定 seed・モデル取得（ここだけネット使用）
+./bootstrap.sh
+
+# 起動（再起動後も自動復帰。更新は docker compose pull && up -d）
+docker compose up -d
+```
+
+### fish に ccc ラッパーを追加
+```fish
+# fish の alias は $argv を自動付与するため、関数で定義する
+function ccc
+    docker exec -it -e COCOINDEX_CODE_HOST_CWD="$PWD" cocoindex-code ccc $argv
+end
+```
+
+### 使い方（`$COCOINDEX_PROJECTS_DIR` 配下の repo で）
+```sh
+cd <repo>
+ccc init      # 初回のみ（.cocoindex_code/ は自動で .gitignore される）
+ccc index     # 索引の構築・更新
+ccc search "クエリ"
+```
+
+### Claude Code から使う（MCP・機種ごとに一度）
+```sh
+claude mcp add cocoindex-code --scope user -- \
+  sh -c 'exec docker exec -i -e COCOINDEX_CODE_HOST_CWD="$PWD" cocoindex-code ccc mcp'
+```
+`init` + `index` 済みの repo 内で Claude Code を起動すれば自動で検索が効く。
