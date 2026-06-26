@@ -88,8 +88,9 @@ on-activate = '''
   _link alacritty         "$HOME/.config/alacritty"
 
   # claude code
-  _link claude/CLAUDE.md  "$HOME/.claude/CLAUDE.md"
-  _link claude/skills     "$HOME/.claude/skills"
+  _link claude/CLAUDE.md     "$HOME/.claude/CLAUDE.md"
+  _link claude/skills        "$HOME/.claude/skills"
+  _link claude/settings.json "$HOME/.claude/settings.json"
 
   # macOS only: karabiner
   if [ "$(uname -s)" = "Darwin" ]; then
