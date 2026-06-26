@@ -1,35 +1,35 @@
-# GLOSSARY.md Format
+# GLOSSARY.md の書式
 
-`GLOSSARY.md` is the canonical language for this teaching workspace. All explainers, exercises, and learning records should adhere to its terminology. Building it is itself part of learning: compressing a concept into a tight definition is evidence the user understands it.
+`GLOSSARY.md` は、この学習ワークスペースの正典となる言語である。すべての解説、演習、学習記録は、その用語法に準拠すべきである。用語集を作ること自体が学習の一部である: 概念を引き締まった定義に圧縮することは、ユーザーがそれを理解している証拠だからである。
 
-## Structure
+## 構造
 
 ```md
-# {Topic} Glossary
+# {トピック} Glossary
 
-{One or two sentence description of the topic this glossary covers.}
+{この用語集がカバーするトピックの1〜2文の説明。}
 
-## Terms
+## Terms(用語)
 
-**Hypertrophy**:
-Muscle growth driven by mechanical tension and metabolic stress over repeated training sessions.
-_Avoid_: Bulking, getting big
+**Hypertrophy(筋肥大)**:
+反復的なトレーニングセッションを通じた、機械的張力と代謝ストレスによって駆動される筋の成長。
+_避ける_: バルクアップ、大きくなる
 
-**Progressive overload**:
-Systematically increasing the demand on a muscle over time — via load, volume, or intensity.
-_Avoid_: Pushing harder, levelling up
+**Progressive overload(漸進性過負荷)**:
+時間をかけて筋への要求を体系的に増やすこと ── 負荷、ボリューム、または強度を介して。
+_避ける_: もっと頑張る、レベルアップ
 
-**RPE (Rate of Perceived Exertion)**:
-A 1–10 self-rating of how hard a set felt, where 10 is failure and 8 means two reps left in the tank.
-_Avoid_: Effort score, intensity rating
+**RPE (Rate of Perceived Exertion / 主観的運動強度)**:
+セットがどれだけきつく感じたかの1〜10の自己評価。10が限界、8はあと2レップ残っている状態。
+_避ける_: 努力スコア、強度評価
 ```
 
-## Rules
+## ルール
 
-- **Add a term only when the user understands it.** The glossary is a record of compressed knowledge, not a dictionary the user reads to learn. If the user has just been introduced to a concept, wait until they can use it correctly before promoting it here.
-- **Be opinionated.** When several words exist for the same concept, pick the best one and list the rest as aliases to avoid. This is how language compresses.
-- **Keep definitions tight.** One or two sentences. Define what the term IS, not what it does or how to do it.
-- **Use the glossary's own terms inside definitions.** Once a term is in the glossary, prefer it everywhere — including inside other definitions. This is what makes complex terms easier to grasp later.
-- **Group under subheadings** when natural clusters emerge (e.g. `## Anatomy`, `## Programming`). A flat list is fine when terms cohere.
-- **Flag ambiguities explicitly.** If a term is used loosely in the wider field, note the resolution: "In this workspace, 'set' always means a working set — warm-ups are tracked separately."
-- **Revise as understanding deepens.** A definition the user wrote in week one may be wrong by week six. Update in place; do not leave stale entries.
+- **ユーザーが理解した用語だけを追加する。** 用語集は圧縮された知識の記録であって、ユーザーが学ぶために読む辞書ではない。概念を導入したばかりなら、ユーザーがそれを正しく使えるようになるまで、ここに昇格させるのを待つこと。
+- **意見を持つ(opinionated であれ)。** 同じ概念に複数の語が存在するとき、最良の一つを選び、残りは避けるべき別名として列挙する。これが言語の圧縮のしかたである。
+- **定義は引き締めて。** 1〜2文。その用語が何で _ある_ かを定義し、何をするか・どうやるかは定義しない。
+- **定義の中で用語集自身の用語を使う。** 一度ある用語が用語集に入ったら、他の定義の中も含め、どこでもそれを優先する。これが複雑な用語を後で把握しやすくする。
+- **自然なまとまりが現れたら小見出しでグループ化する**(例: `## 解剖`、`## プログラミング`)。用語がまとまっているなら、フラットな一覧でも構わない。
+- **曖昧さを明示的に示す。** ある用語が広い分野で緩く使われているなら、その解決を記す: 「このワークスペースでは『set』は常にワーキングセットを意味する ── ウォームアップは別途追跡する」。
+- **理解が深まるにつれて改訂する。** 初週に書いた定義が6週目には誤っているかもしれない。その場で更新すること ── 古い項目を残してはならない。
