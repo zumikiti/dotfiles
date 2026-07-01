@@ -17,6 +17,5 @@
   },
   "theme": "dark-daltonized",
   "editorMode": "vim",
-  "autoUpdatesChannel": "stable",
-  "minimumVersion": "2.1.191"
+  "autoUpdatesChannel": "stable"
 }
