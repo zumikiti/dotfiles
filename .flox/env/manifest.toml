@@ -32,6 +32,8 @@ worktrunk.pkg-path = "worktrunk"
 worktrunk.version = "0.53.0"
 jq.pkg-path = "jq"
 jq.version = "1.8.1"
+herdr.pkg-path = "flox/herdr"
+herdr.pkg-group = "herdr"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
