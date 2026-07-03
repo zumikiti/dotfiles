@@ -1,0 +1,20 @@
+onboarding = false
+
+[update]
+channel = "stable"
+version_check = true
+manifest_check = true
+
+[terminal]
+default_shell = "fish"
+
+[keys]
+prefix = "ctrl+s"
+split_horizontal = "prefix+s"
+
+[ui.sound]
+enabled = false
+
+[theme]
+name = "nord"
+auto_switch = false
