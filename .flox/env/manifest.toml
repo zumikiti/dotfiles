@@ -34,6 +34,8 @@ jq.pkg-path = "jq"
 jq.version = "1.8.1"
 herdr.pkg-path = "flox/herdr"
 herdr.pkg-group = "herdr"
+htop.pkg-path = "htop"
+htop.version = "3.5.1"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
@@ -93,6 +95,9 @@ on-activate = '''
   _link claude/CLAUDE.md     "$HOME/.claude/CLAUDE.md"
   _link claude/skills        "$HOME/.claude/skills"
   _link claude/settings.json "$HOME/.claude/settings.json"
+
+  # herdr
+  _link herdr/config.toml    "$HOME/.config/herdr/config.toml"
 
   # macOS only: karabiner
   if [ "$(uname -s)" = "Darwin" ]; then
