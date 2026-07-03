@@ -17,6 +17,12 @@ return {
           vim.fn.stdpath("data") .. "/mason/bin/copilot-language-server",
           "--stdio",
         },
+        -- copilot はファイル編集ごとにインクリメンタル同期を送るが、
+        -- Neovim 0.12.x ではバッファ追跡がズレて sync.lua:195 の
+        -- assert が落ちる。フル同期に切り替えて回避する。
+        flags = {
+          allow_incremental_sync = false,
+        },
         settings = {
           advanced = {
             listCount = 10,
