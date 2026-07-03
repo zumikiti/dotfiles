@@ -106,6 +106,14 @@ return {
         function(server_name)
           lspconfig[server_name].setup({
             capabilities = capabilities,
+            on_init = function(client)
+              -- インクリメンタル同期のバッファ追跡がズレると
+              -- sync.lua:195 で assert が落ちるバグ(Neovim 0.12.x)を回避。
+              -- 変更のたびにファイル全体を送るフル同期へ切り替える。
+              if client.server_capabilities.textDocumentSync then
+                client.server_capabilities.textDocumentSync.change = 1 -- Full
+              end
+            end,
           })
         end,
         ["emmet_ls"] = function()
