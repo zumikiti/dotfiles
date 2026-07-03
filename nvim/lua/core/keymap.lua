@@ -45,3 +45,12 @@ api.nvim_set_keymap("i", "(<CR>", "()<Left><CR><ESC><S-o>", { noremap = true, si
 -- クオーテーションの補完
 api.nvim_set_keymap("i", "'", "''<Left>", { noremap = true, silent = true })
 api.nvim_set_keymap("i", '"', '""<Left>', { noremap = true, silent = true })
+
+-- コメントの切り替え (Neovim 0.10+ 標準のコメント機能を利用)
+-- 標準の gcc/gc/gbc/gb へリマップするため noremap=false にする
+-- ,, : 行コメントのトグル (ノーマルは現在行、ビジュアルは選択範囲)
+api.nvim_set_keymap("n", ",,", "gcc", { noremap = false, silent = true })
+api.nvim_set_keymap("x", ",,", "gc", { noremap = false, silent = true })
+-- <leader>, : ブロックコメントのトグル
+api.nvim_set_keymap("n", "<leader>,", "gbc", { noremap = false, silent = true })
+api.nvim_set_keymap("x", "<leader>,", "gb", { noremap = false, silent = true })

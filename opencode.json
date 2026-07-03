@@ -1,6 +1,9 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "tokyonight",
+  "autoupdate": false,
+  "server": {
+    "hostname": "0.0.0.0"
+  },
   "tools": {
     "write": true,
     "bash": true,
@@ -8,11 +11,12 @@
   },
   "permission": {
     "bash": {
-      "*": "deny",
+      "*": "ask",
       "git status": "allow",
       "git diff": "allow",
-      "git add": "ask",
-      "git commit": "ask",
+      "git add": "allow",
+      "git commit": "allow",
+      "git push": "ask",
       "git log": "allow",
       "ls": "allow",
       "cat": "allow",
@@ -24,15 +28,16 @@
     }
   },
   "mcp": {
-    "context7": {
+    "dailymemo": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "@upstash/context7-mcp"
+        "node",
+        "/Users/akihiro/code/dailymemo/mcp-server/dist/index.js"
       ],
       "enabled": true,
-      "environment": {}
+      "environment": {
+        "DAILYMEMO_PATH": "/Users/akihiro/code/dailymemo"
+      }
     }
   },
   "agent": {

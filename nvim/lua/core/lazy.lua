@@ -6,8 +6,14 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
     lazypath,
+  })
+  vim.fn.system({
+    "git",
+    "-C",
+    lazypath,
+    "checkout",
+    "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a",
   })
 end
 vim.opt.rtp:prepend(lazypath)
@@ -33,5 +39,5 @@ require("lazy").setup({
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "nightfox" } },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false },
 })

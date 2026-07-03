@@ -2,7 +2,6 @@ return {
   -- tmux integration
   {
     "aserowy/tmux.nvim",
-    version = "*", -- 最新のタグを使用
     event = "VeryLazy",
     opts = {
       copy_sync = {
@@ -51,15 +50,5 @@ return {
         resize_step_y = 5,
       },
     },
-  },
-
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
   },
 }

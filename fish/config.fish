@@ -1,7 +1,3 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
-
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 set --export --prepend PATH "$HOME/.rd/bin"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
@@ -14,10 +10,6 @@ zoxide init fish | source
 function j --wraps=zi --description 'alias j=zi'
   zi $argv;
 end
-
-### set node
-fnm env --use-on-cd --shell fish | source
-fnm use 22 > /dev/null
 
 ### MY FUNCTIONS
 # nvim

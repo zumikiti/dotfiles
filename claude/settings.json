@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(./.env.example)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./config/credentials.json)",
+      "Read(./build)"
+    ],
+    "defaultMode": "auto"
+  },
+  "worktree": {
+    "baseRef": "fresh"
+  },
+  "autoUpdatesChannel": "stable",
+  "theme": "dark-daltonized",
+  "editorMode": "vim"
+}

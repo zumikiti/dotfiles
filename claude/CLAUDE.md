@@ -44,3 +44,5 @@ NEVER proactively create documentation files (*.md) or README files. Only create
   - Example: `uses: actions/checkout@a824008085750b8e136effc585c3cd6082bd575f` instead of `uses: actions/checkout@v4`
   - This also protects against supply chain attacks where a bad actor could push malicious updates to a tagged version
   - Trade-off: You won't receive automatic bug fixes or security updates, requiring manual updates
+
+@RTK.md

@@ -2,7 +2,6 @@ return {
   -- タブラインの表示
   {
     "akinsho/bufferline.nvim",
-    version = "*",
     event = "VeryLazy",
     dependencies = "nvim-tree/nvim-web-devicons",
     keys = {
@@ -27,7 +26,7 @@ return {
       require("hlchunk").setup({
         chunk = {
           enable = true,
-          use_treesitter = true,
+          use_treesitter = false,
           chars = {
             horizontal_line = "━",
             vertical_line = "┃",
@@ -41,7 +40,7 @@ return {
         },
         line_num = {
           enable = true,
-          use_treesitter = true,
+          use_treesitter = false,
         },
       })
     end,

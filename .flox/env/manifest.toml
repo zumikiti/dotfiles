@@ -1,0 +1,203 @@
+schema-version = "1.12.0"
+
+
+## Install Packages --------------------------------------------------
+##  $ flox install gum  <- puts a package in [install] section below
+##  $ flox search gum   <- search for a package
+##  $ flox show gum     <- show all versions of a package
+## -------------------------------------------------------------------
+[install]
+ripgrep.pkg-path = "ripgrep"
+tmux.pkg-path = "tmux"
+tig.pkg-path = "tig"
+lsd.pkg-path = "lsd"
+zoxide.pkg-path = "zoxide"
+fzf.pkg-path = "fzf"
+oh-my-posh.pkg-path = "oh-my-posh"
+neovim.pkg-path = "neovim"
+fish.pkg-path = "fish"
+gnumake.pkg-path = "gnumake"
+diffnav.pkg-path = "diffnav"
+go.pkg-path = "go"
+nodejs.pkg-path = "nodejs"
+rtk.pkg-path = "rtk"
+git.pkg-path = "git"
+gh.pkg-path = "gh"
+yank.pkg-path = "tmuxPlugins.yank"
+resurrect.pkg-path = "tmuxPlugins.resurrect"
+power-theme.pkg-path = "tmuxPlugins.power-theme"
+sensible.pkg-path = "tmuxPlugins.sensible"
+nord.pkg-path = "tmuxPlugins.nord"
+worktrunk.pkg-path = "worktrunk"
+worktrunk.version = "0.53.0"
+jq.pkg-path = "jq"
+jq.version = "1.8.1"
+# gum.pkg-path = "gum"
+# gum.version = "^0.14.5"
+
+
+## Environment Variables ---------------------------------------------
+##  ... available for use in the activated environment
+##      as well as [hook], [profile] scripts and [services] below.
+## -------------------------------------------------------------------
+[vars]
+# INTRO_MESSAGE = "It's gettin' Flox in here"
+
+
+## Activation Hook ---------------------------------------------------
+##  ... run by _bash_ shell when you run 'flox activate'.
+## -------------------------------------------------------------------
+[hook]
+on-activate = '''
+  # --- Apply dotfiles: symlink configs into place ---------------------
+  # Idempotent and silent once linked; runs on every `flox activate`
+  # (incl. fish login). A pre-existing real file is backed up to *.bak
+  # before it is replaced by a symlink.
+  dotfiles="$FLOX_ENV_PROJECT"
+
+  _link() {
+    # _link <path-relative-to-dotfiles> <absolute-target>
+    src="$dotfiles/$1"
+    dst="$2"
+    [ -e "$src" ] || return 0
+    # already the right symlink? stay quiet.
+    [ "$(readlink "$dst" 2>/dev/null)" = "$src" ] && return 0
+    mkdir -p "$(dirname "$dst")"
+    if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+      mv "$dst" "$dst.bak"
+      echo "dotfiles: backed up $dst -> $dst.bak"
+    fi
+    ln -sfn "$src" "$dst"
+    echo "dotfiles: linked $dst"
+  }
+
+  # shell / tmux / tig
+  _link .tigrc            "$HOME/.tigrc"
+  _link .tmux.conf        "$HOME/.tmux.conf"
+
+  # nvim
+  _link nvim/init.lua     "$HOME/.config/nvim/init.lua"
+  _link nvim/lua          "$HOME/.config/nvim/lua"
+
+  # fish
+  _link fish/config.fish  "$HOME/.config/fish/config.fish"
+  _link fish/fish_plugins "$HOME/.config/fish/fish_plugins"
+  _link fish/posh-themes  "$HOME/.config/fish/posh-themes"
+
+  # alacritty
+  _link alacritty         "$HOME/.config/alacritty"
+
+  # claude code
+  _link claude/CLAUDE.md     "$HOME/.claude/CLAUDE.md"
+  _link claude/skills        "$HOME/.claude/skills"
+  _link claude/settings.json "$HOME/.claude/settings.json"
+
+  # macOS only: karabiner
+  if [ "$(uname -s)" = "Darwin" ]; then
+    _link karabiner.json  "$HOME/.config/karabiner/karabiner.json"
+  fi
+
+  unset -f _link
+
+  # --- Login bootstrap: auto-enter flox + fish on interactive login ---
+  # (Linux only) Keep a managed block in ~/.profile so interactive login
+  # shells re-enter this flox env and drop into fish. The block is fully
+  # owned by this hook -- the repo is its source of truth. POSIX-only so
+  # /bin/sh (dash) can read it; ~/.profile cannot be symlinked because it
+  # holds other system content and must exist *before* `flox activate`.
+  if [ "$(uname -s)" = "Linux" ]; then
+    _ensure_profile_bootstrap() {
+      profile="$HOME/.profile"
+      begin="# >>> dotfiles flox login >>>"
+      end="# <<< dotfiles flox login <<<"
+      block="$begin
+# Managed by dotfiles flox env (manifest.toml). Do not edit by hand.
+case \$- in *i*)
+  if [ -z \"\$FLOX_ENV\" ] && command -v flox >/dev/null 2>&1; then
+    exec flox activate -d \"\$HOME/dotfiles\" -- fish -l
+  fi ;;
+esac
+$end"
+
+      [ -e "$profile" ] || : > "$profile"
+
+      # new = the file with any prior managed block stripped, then a
+      # freshly rendered block appended. Both sides of the compare go
+      # through command substitution so trailing-newline handling matches
+      # and the rewrite (and its message) stays quiet when unchanged.
+      new="$(
+        awk -v b="$begin" -v e="$end" \
+          '$0==b{skip=1;next} $0==e{skip=0;next} !skip{print}' "$profile"
+        printf '%s\n' "$block"
+      )"
+      if [ "$new" != "$(cat "$profile")" ]; then
+        printf '%s\n' "$new" > "$profile"
+        echo "dotfiles: updated flox login bootstrap in $profile"
+      fi
+    }
+    _ensure_profile_bootstrap
+    unset -f _ensure_profile_bootstrap
+  fi
+'''
+
+
+## Profile script ----------------------------------------------------
+## ... sourced by _your shell_ when you run 'flox activate'.
+## -------------------------------------------------------------------
+[profile]
+# common = '''
+#   gum style \
+#   --foreground 212 --border-foreground 212 --border double \
+#   --align center --width 50 --margin "1 2" --padding "2 4" \
+#     $INTRO_MESSAGE
+# '''
+## Shell-specific customizations such as setting aliases go here:
+# bash = ...
+# zsh  = ...
+# fish = ...
+
+
+## Services ---------------------------------------------------------
+##  $ flox services start             <- Starts all services
+##  $ flox services status            <- Status of running services
+##  $ flox activate --start-services  <- Activates & starts all
+## ------------------------------------------------------------------
+[services]
+# myservice.command = "python3 -m http.server"
+
+
+## Include ----------------------------------------------------------
+## ... environments to create a composed environment
+## ------------------------------------------------------------------
+[include]
+# environments = [
+#     { dir = "../common" }
+# ]
+
+
+## Build and publish your own packages ------------------------------
+##  $ flox build
+##  $ flox publish
+## ------------------------------------------------------------------
+[build]
+# [build.myproject]
+# description = "The coolest project ever"
+# version = "0.0.1"
+# command = """
+#   mkdir -p $out/bin
+#   cargo build --release
+#   cp target/release/myproject $out/bin/myproject
+# """
+
+
+## Other Environment Options -----------------------------------------
+[options]
+# Systems that environment is compatible with
+# systems = [
+#   "aarch64-darwin",
+#   "aarch64-linux",
+#   "x86_64-darwin",
+#   "x86_64-linux",
+# ]
+# Uncomment to disable CUDA detection.
+# cuda-detection = false
