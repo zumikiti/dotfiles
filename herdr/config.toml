@@ -40,7 +40,16 @@ name = "nord"
 auto_switch = false
 
 [ui.toast]
-delivery = "off"
+delivery = "herdr"
+[ui.toast.herdr]
+position = "bottom-left"
+[ui.toast.clipboard]
+enabled = true
+position = "bottom-center"
 
 [experimental]
 pane_history = true
+
+[advanced]
+# ペインごとのスクロールバック上限。既定 10MB → 50MB に増量（ログ見返し用）
+scrollback_limit_bytes = 52428800
