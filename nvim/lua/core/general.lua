@@ -42,6 +42,12 @@ else
   -- (Neovim 0.10+ 標準の OSC52 プロバイダを利用。xclip 等は不要)
   local ok, osc52 = pcall(require, "vim.ui.clipboard.osc52")
   if ok then
+    -- ペーストは OSC52 で端末へ問い合わせず、nvim 自身のレジスタ（直近ヤンク）
+    -- から返す。OSC52 の読み取りは herdr など多重化環境で応答が返らず
+    -- 「Waiting for OSC 52 response」で固まるため。コピーは OSC52 のまま。
+    local function paste()
+      return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+    end
     vim.g.clipboard = {
       name = "OSC 52",
       copy = {
@@ -49,8 +55,8 @@ else
         ["*"] = osc52.copy("*"),
       },
       paste = {
-        ["+"] = osc52.paste("+"),
-        ["*"] = osc52.paste("*"),
+        ["+"] = paste,
+        ["*"] = paste,
       },
     }
   end
