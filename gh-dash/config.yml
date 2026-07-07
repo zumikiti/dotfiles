@@ -84,10 +84,12 @@ keybindings:
         cd {{.RepoPath}}; tig
   prs:
     - key: C
-      name: checkout on worktree
+      name: checkout + claude pr-review
       command: >
-        tmux new-window -n "PR-{{.PrNumber}}"
-        "wt switch pr:{{.PrNumber}} && $SHELL"
+        resp=$(herdr tab create --label "PR-{{.PrNumber}}" --cwd {{.RepoPath}} --focus);
+        pane=$(echo "$resp" | jq -r .result.root_pane.pane_id);
+        tab=$(echo "$resp" | jq -r .result.tab.tab_id);
+        herdr pane run "$pane" 'wt switch --clobber pr:{{.PrNumber}} && begin; claude "/pr-review {{.PrNumber}}"; wt -y remove -D -f --foreground; herdr tab close '"$tab"'; end'
     - key: O
       name: open in octo.nvim
       command: >
