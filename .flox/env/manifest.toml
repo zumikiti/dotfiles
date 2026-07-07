@@ -37,6 +37,8 @@ herdr.pkg-group = "herdr"
 herdr.version = "0.7.0"
 htop.pkg-path = "htop"
 htop.version = "3.5.1"
+gh-dash.pkg-path = "gh-dash"
+gh-dash.version = "4.24.1"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
@@ -99,6 +101,9 @@ on-activate = '''
 
   # herdr
   _link herdr/config.toml    "$HOME/.config/herdr/config.toml"
+
+  # gh-dash
+  _link gh-dash/config.yml "$HOME/.config/gh-dash/config.yml"
 
   # macOS only: karabiner
   if [ "$(uname -s)" = "Darwin" ]; then
