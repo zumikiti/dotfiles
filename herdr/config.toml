@@ -16,6 +16,8 @@ focus_pane_down = "ctrl+j"
 focus_pane_up = "ctrl+k"
 focus_pane_right = "ctrl+l"
 toggle_sidebar = "ctrl+b"
+close_pane = "prefix+q"
+detach = "prefix+shift+q"
 
 [[keys.command]]
 key = "prefix+t"
