@@ -4,6 +4,7 @@ set --export --prepend PATH "$HOME/.rd/bin"
 
 oh-my-posh init fish --config '~/.config/fish/posh-themes/tokyonight_storm.omp.json' | source
 
+set -x EDITOR nvim
 set -x GIT_EDITOR nvim
 
 zoxide init fish | source
