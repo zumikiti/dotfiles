@@ -84,7 +84,11 @@ function tmuxpopup -d "toggle tmux popup window"
 end
 
 function dh --wraps='gh dash -c ~/dotfiles/gh-dash/config.yml' --description 'alias dash=gh dash -c ~/dotfiles/gh-dash/config.yml'
-  gh dash -c ~/dotfiles/gh-dash/config.yml $argv
+  if command -q gh-dash
+    gh-dash -c ~/dotfiles/gh-dash/config.yml $argv
+  else
+    gh dash -c ~/dotfiles/gh-dash/config.yml $argv
+  end
 end
 
 function wt-clean --description 'Remove all worktrees except main'
