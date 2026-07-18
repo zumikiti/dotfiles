@@ -1,0 +1,27 @@
+{
+  "lastChangelogVersion": "0.83.0",
+  "theme": "dark",
+  "quietStartup": true,
+  "compaction": {
+    "enabled": false
+  },
+  "defaultProvider": "openrouter",
+  "defaultModel": "deepseek/deepseek-v4-flash",
+  "defaultThinkingLevel": "high",
+  "skills": [
+    "~/.claude/skills"
+  ],
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3,
+    "baseDelayMs": 2000,
+    "provider": {
+      "timeoutMs": 3600000,
+      "maxRetries": 0,
+      "maxRetryDelayMs": 60000
+    }
+  },
+  "warnings": {
+    "anthropicExtraUsage": false
+  }
+}

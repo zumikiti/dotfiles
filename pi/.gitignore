@@ -1,0 +1,17 @@
+# Runtime data — not tracked in dotfiles
+
+# Auth credentials (API keys, tokens)
+agent/auth.json
+
+# Model cache (auto-generated, large)
+agent/models-store.json
+
+# Session history (runtime artifacts)
+agent/sessions/
+
+# Downloaded binaries
+agent/bin/
+
+# pi's own local state
+agent/*.lock
+agent/*.log

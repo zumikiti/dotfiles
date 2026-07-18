@@ -102,6 +102,9 @@ on-activate = '''
   _link claude/skills        "$HOME/.claude/skills"
   _link claude/settings.json "$HOME/.claude/settings.json"
 
+  # pi
+  _link pi                   "$HOME/.pi"
+
   # herdr
   _link herdr/config.toml    "$HOME/.config/herdr/config.toml"
 
