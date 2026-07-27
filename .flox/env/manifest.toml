@@ -42,6 +42,10 @@ gh-dash.version = "4.24.1"
 jujutsu.pkg-path = "jujutsu"
 jujutsu.pkg-group = "jujutsu"
 jujutsu.version = "0.43.0"
+tuicr.pkg-path = "tuicr"
+tuicr.pkg-group = "tuicr"
+tuicr.version = "0.19.1"
+tuicr.systems = ["aarch64-darwin", "aarch64-linux", "x86_64-linux"]
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 

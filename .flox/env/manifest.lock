@@ -82,6 +82,16 @@
       "tmux": {
         "pkg-path": "tmux"
       },
+      "tuicr": {
+        "pkg-path": "tuicr",
+        "pkg-group": "tuicr",
+        "version": "0.19.1",
+        "systems": [
+          "aarch64-darwin",
+          "aarch64-linux",
+          "x86_64-linux"
+        ]
+      },
       "worktrunk": {
         "pkg-path": "worktrunk",
         "version": "0.53.0"
@@ -3348,6 +3358,213 @@
       },
       "system": "x86_64-linux",
       "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "tuicr",
+      "broken": false,
+      "derivation": "/nix/store/gbx7f2sqs0z9xa7h4jglrxbqpyhv401y-tuicr-0.19.1.drv",
+      "description": "Review AI-generated diffs like a GitHub pull request, right from your terminal",
+      "install_id": "tuicr",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=624af665418d3c65d544145b4d34ad696439570e",
+      "name": "tuicr-0.19.1",
+      "pname": "tuicr",
+      "rev": "624af665418d3c65d544145b4d34ad696439570e",
+      "rev_count": 1042126,
+      "rev_date": "2026-07-26T18:26:09Z",
+      "scrape_date": "2026-07-28T04:56:26.721688Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.19.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/8m05xvwzkhznmzzvhqc73zxf15y4l4f4-tuicr-0.19.1"
+      },
+      "system": "aarch64-darwin",
+      "group": "tuicr",
+      "priority": 5
+    },
+    {
+      "attr_path": "tuicr",
+      "broken": false,
+      "derivation": "/nix/store/wsi7m23437s0fc7gf8vdl7kp5v6j3km3-tuicr-0.19.1.drv",
+      "description": "Review AI-generated diffs like a GitHub pull request, right from your terminal",
+      "install_id": "tuicr",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=624af665418d3c65d544145b4d34ad696439570e",
+      "name": "tuicr-0.19.1",
+      "pname": "tuicr",
+      "rev": "624af665418d3c65d544145b4d34ad696439570e",
+      "rev_count": 1042126,
+      "rev_date": "2026-07-26T18:26:09Z",
+      "scrape_date": "2026-07-28T05:27:13.460556Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.19.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/nr423caqi3nlvnrs6c0966nfz14i534i-tuicr-0.19.1"
+      },
+      "system": "aarch64-linux",
+      "group": "tuicr",
+      "priority": 5
+    },
+    {
+      "attr_path": "tuicr",
+      "broken": false,
+      "derivation": "/nix/store/i69hnw6rzwg3snwnsb7l4ff6kf2qm00p-tuicr-0.19.1.drv",
+      "description": "Review AI-generated diffs like a GitHub pull request, right from your terminal",
+      "install_id": "tuicr",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=624af665418d3c65d544145b4d34ad696439570e",
+      "name": "tuicr-0.19.1",
+      "pname": "tuicr",
+      "rev": "624af665418d3c65d544145b4d34ad696439570e",
+      "rev_count": 1042126,
+      "rev_date": "2026-07-26T18:26:09Z",
+      "scrape_date": "2026-07-28T06:00:07.285394Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.19.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/xgz1cr5q62zl673ppzzj8nl1grggz13h-tuicr-0.19.1"
+      },
+      "system": "x86_64-linux",
+      "group": "tuicr",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/28gc91z9fvg245a3rs6r4v6rx4130ahc-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T03:13:12.573421Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/mwn1fik4pg397khf5c2ajfvnazcm7rjv-jujutsu-0.43.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/n0fhs5w41764q5l1xjnrhcm38mcm557d-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T03:41:44.340431Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ri54j3mpnz9hck1jr4i4myzhqb7lj9h1-jujutsu-0.43.0"
+      },
+      "system": "aarch64-linux",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/v9vi11qvjk1jw8mdnmr9xqvamyhj3shr-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T04:09:22.202831Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ixych7vy9rpv0vcx90h5sv4pmyd87i1n-jujutsu-0.43.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/5p90xpcsr1902vgah3rhwnkh3397cysi-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T04:40:47.832586Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/w10748j1nsa40j6yjxvissjm8ljq4wlf-jujutsu-0.43.0"
+      },
+      "system": "x86_64-linux",
+      "group": "jujutsu",
       "priority": 5
     }
   ]
