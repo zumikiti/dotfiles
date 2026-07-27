@@ -94,6 +94,10 @@ keybindings:
       name: open in octo.nvim
       command: >
         nvim -c "Octo pr edit {{.PrNumber}}"
+    - key: d
+      name: tuicr diff
+      command: >
+        tuicr pr '{{.RepoName}}#{{.PrNumber}}'
 
 theme:
   colors:
