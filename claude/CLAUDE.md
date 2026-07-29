@@ -32,6 +32,18 @@ NEVER proactively create documentation files (*.md) or README files. Only create
   - If AI modifies specific if-statements in the code, it becomes difficult to guarantee no existing functionality is affected. This leads to heavier QA processes and negates the speed benefits of AI assistance.
   - Being able to judge that "this addition is safe because it's within an existing stable mechanism" is extremely valuable.
     - > This principle is particularly important for software running in production. When source code is modified in production software, quality checks such as code reviews and unit tests are required. However, software that follows the Open/Closed Principle can add or modify functionality without changing existing source code. Therefore, quality checks do not need to be re-executed.
+- The ladder: before writing new code, stop at the first rung that holds (adapted from https://github.com/DietrichGebert/ponytail)
+  1. Is it needed at all? (YAGNI) → don't write it
+  2. Already exists in this codebase → reuse it
+  3. Exists in the standard library → use it
+  4. A platform-native feature covers it → use it
+  5. An already-installed dependency solves it → use it
+  6. Can be written in one line → one line
+  7. Still needed → the smallest code that works
+  - Climb the ladder *after* understanding the problem. The smallest change in the wrong place isn't lazy, it's a second bug.
+- No unrequested abstractions: no interface with one implementation, no factory for one product, no config for values that never change
+- Never simplify away: input validation at trust boundaries, error handling that prevents data loss, security, accessibility, or anything explicitly requested
+- Deliberate-shortcut comments: when intentionally simplifying with a known ceiling, leave a comment stating the ceiling and the promotion condition, e.g. `// deliberate: global lock, switch to per-account locks if throughput matters` — grepping `deliberate:` later yields a debt ledger
 
 # Third-Party Tool Security
 - Always verify the trustworthiness of third-party tools before use
