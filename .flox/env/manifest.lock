@@ -41,6 +41,11 @@
         "pkg-path": "jq",
         "version": "1.8.1"
       },
+      "jujutsu": {
+        "pkg-path": "jujutsu",
+        "pkg-group": "jujutsu",
+        "version": "0.43.0"
+      },
       "lsd": {
         "pkg-path": "lsd"
       },
@@ -217,6 +222,126 @@
       },
       "system": "x86_64-linux",
       "group": "herdr",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/28gc91z9fvg245a3rs6r4v6rx4130ahc-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T03:13:12.573421Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/mwn1fik4pg397khf5c2ajfvnazcm7rjv-jujutsu-0.43.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/n0fhs5w41764q5l1xjnrhcm38mcm557d-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T03:41:44.340431Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ri54j3mpnz9hck1jr4i4myzhqb7lj9h1-jujutsu-0.43.0"
+      },
+      "system": "aarch64-linux",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/v9vi11qvjk1jw8mdnmr9xqvamyhj3shr-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T04:09:22.202831Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ixych7vy9rpv0vcx90h5sv4pmyd87i1n-jujutsu-0.43.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/5p90xpcsr1902vgah3rhwnkh3397cysi-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T04:40:47.832586Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/w10748j1nsa40j6yjxvissjm8ljq4wlf-jujutsu-0.43.0"
+      },
+      "system": "x86_64-linux",
+      "group": "jujutsu",
       "priority": 5
     },
     {
