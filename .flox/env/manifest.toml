@@ -103,7 +103,7 @@ on-activate = '''
   _link claude/settings.json "$HOME/.claude/settings.json"
 
   # pi
-  _link pi                   "$HOME/.pi"
+  _link pi/agent/settings.json "$HOME/.pi/agent/settings.json"
 
   # herdr
   _link herdr/config.toml    "$HOME/.config/herdr/config.toml"
