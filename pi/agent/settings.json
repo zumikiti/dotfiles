@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.83.0",
+  "lastChangelogVersion": "0.84.1",
   "theme": "dark",
   "quietStartup": true,
   "compaction": {
@@ -9,7 +9,14 @@
   "defaultModel": "deepseek/deepseek-v4-flash",
   "defaultThinkingLevel": "high",
   "skills": [
-    "~/.claude/skills"
+    "~/.claude/skills/code-review",
+    "~/.claude/skills/commit",
+    "~/.claude/skills/create-pr",
+    "~/.claude/skills/grill-with-docs",
+    "~/.claude/skills/grilling",
+    "~/.claude/skills/jj-commit",
+    "~/.claude/skills/pr-review",
+    "~/.claude/skills/teach"
   ],
   "retry": {
     "enabled": true,

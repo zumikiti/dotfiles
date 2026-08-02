@@ -1,0 +1,48 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "server": {
+    "hostname": "0.0.0.0"
+  },
+  "permission": {
+    "edit": "allow",
+    "webfetch": "allow",
+    "bash": {
+      "*": "ask",
+      "git status": "allow",
+      "git diff": "allow",
+      "git add": "allow",
+      "git commit": "allow",
+      "git push": "ask",
+      "git log": "allow",
+      "ls": "allow",
+      "cat": "allow",
+      "pwd": "allow",
+      "rg": "allow",
+      "go build": "allow",
+      "go test": "allow",
+      "go mod tidy": "allow"
+    }
+  },
+  "mcp": {
+    "dailymemo": {
+      "type": "local",
+      "command": [
+        "node",
+        "/Users/akihiro/code/dailymemo/mcp-server/dist/index.js"
+      ],
+      "enabled": true,
+      "environment": {
+        "DAILYMEMO_PATH": "/Users/akihiro/code/dailymemo"
+      }
+    }
+  },
+  "agent": {
+    "plan": {
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    }
+  }
+}
