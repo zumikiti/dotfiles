@@ -15,6 +15,10 @@
       "gh": {
         "pkg-path": "gh"
       },
+      "gh-dash": {
+        "pkg-path": "gh-dash",
+        "version": "4.24.1"
+      },
       "git": {
         "pkg-path": "git"
       },
@@ -24,9 +28,23 @@
       "go": {
         "pkg-path": "go"
       },
+      "herdr": {
+        "pkg-path": "flox/herdr",
+        "pkg-group": "herdr",
+        "version": "0.7.0"
+      },
+      "htop": {
+        "pkg-path": "htop",
+        "version": "3.5.1"
+      },
       "jq": {
         "pkg-path": "jq",
         "version": "1.8.1"
+      },
+      "jujutsu": {
+        "pkg-path": "jujutsu",
+        "pkg-group": "jujutsu",
+        "version": "0.43.0"
       },
       "lsd": {
         "pkg-path": "lsd"
@@ -76,12 +94,256 @@
       }
     },
     "hook": {
-      "on-activate": "  # --- Apply dotfiles: symlink configs into place ---------------------\n  # Idempotent and silent once linked; runs on every `flox activate`\n  # (incl. fish login). A pre-existing real file is backed up to *.bak\n  # before it is replaced by a symlink.\n  dotfiles=\"$FLOX_ENV_PROJECT\"\n\n  _link() {\n    # _link <path-relative-to-dotfiles> <absolute-target>\n    src=\"$dotfiles/$1\"\n    dst=\"$2\"\n    [ -e \"$src\" ] || return 0\n    # already the right symlink? stay quiet.\n    [ \"$(readlink \"$dst\" 2>/dev/null)\" = \"$src\" ] && return 0\n    mkdir -p \"$(dirname \"$dst\")\"\n    if [ -e \"$dst\" ] && [ ! -L \"$dst\" ]; then\n      mv \"$dst\" \"$dst.bak\"\n      echo \"dotfiles: backed up $dst -> $dst.bak\"\n    fi\n    ln -sfn \"$src\" \"$dst\"\n    echo \"dotfiles: linked $dst\"\n  }\n\n  # shell / tmux / tig\n  _link .tigrc            \"$HOME/.tigrc\"\n  _link .tmux.conf        \"$HOME/.tmux.conf\"\n\n  # nvim\n  _link nvim/init.lua     \"$HOME/.config/nvim/init.lua\"\n  _link nvim/lua          \"$HOME/.config/nvim/lua\"\n\n  # fish\n  _link fish/config.fish  \"$HOME/.config/fish/config.fish\"\n  _link fish/fish_plugins \"$HOME/.config/fish/fish_plugins\"\n  _link fish/posh-themes  \"$HOME/.config/fish/posh-themes\"\n\n  # alacritty\n  _link alacritty         \"$HOME/.config/alacritty\"\n\n  # claude code\n  _link claude/CLAUDE.md  \"$HOME/.claude/CLAUDE.md\"\n  _link claude/skills     \"$HOME/.claude/skills\"\n\n  # macOS only: karabiner\n  if [ \"$(uname -s)\" = \"Darwin\" ]; then\n    _link karabiner.json  \"$HOME/.config/karabiner/karabiner.json\"\n  fi\n\n  unset -f _link\n\n  # --- Login bootstrap: auto-enter flox + fish on interactive login ---\n  # (Linux only) Keep a managed block in ~/.profile so interactive login\n  # shells re-enter this flox env and drop into fish. The block is fully\n  # owned by this hook -- the repo is its source of truth. POSIX-only so\n  # /bin/sh (dash) can read it; ~/.profile cannot be symlinked because it\n  # holds other system content and must exist *before* `flox activate`.\n  if [ \"$(uname -s)\" = \"Linux\" ]; then\n    _ensure_profile_bootstrap() {\n      profile=\"$HOME/.profile\"\n      begin=\"# >>> dotfiles flox login >>>\"\n      end=\"# <<< dotfiles flox login <<<\"\n      block=\"$begin\n# Managed by dotfiles flox env (manifest.toml). Do not edit by hand.\ncase \\$- in *i*)\n  if [ -z \\\"\\$FLOX_ENV\\\" ] && command -v flox >/dev/null 2>&1; then\n    exec flox activate -d \\\"\\$HOME/dotfiles\\\" -- fish -l\n  fi ;;\nesac\n$end\"\n\n      [ -e \"$profile\" ] || : > \"$profile\"\n\n      # new = the file with any prior managed block stripped, then a\n      # freshly rendered block appended. Both sides of the compare go\n      # through command substitution so trailing-newline handling matches\n      # and the rewrite (and its message) stays quiet when unchanged.\n      new=\"$(\n        awk -v b=\"$begin\" -v e=\"$end\" \\\n          '$0==b{skip=1;next} $0==e{skip=0;next} !skip{print}' \"$profile\"\n        printf '%s\\n' \"$block\"\n      )\"\n      if [ \"$new\" != \"$(cat \"$profile\")\" ]; then\n        printf '%s\\n' \"$new\" > \"$profile\"\n        echo \"dotfiles: updated flox login bootstrap in $profile\"\n      fi\n    }\n    _ensure_profile_bootstrap\n    unset -f _ensure_profile_bootstrap\n  fi\n"
+      "on-activate": "  # --- Apply dotfiles: symlink configs into place ---------------------\n  # Idempotent and silent once linked; runs on every `flox activate`\n  # (incl. fish login). A pre-existing real file is backed up to *.bak\n  # before it is replaced by a symlink.\n  dotfiles=\"$FLOX_ENV_PROJECT\"\n\n  _link() {\n    # _link <path-relative-to-dotfiles> <absolute-target>\n    src=\"$dotfiles/$1\"\n    dst=\"$2\"\n    [ -e \"$src\" ] || return 0\n    # already the right symlink? stay quiet.\n    [ \"$(readlink \"$dst\" 2>/dev/null)\" = \"$src\" ] && return 0\n    mkdir -p \"$(dirname \"$dst\")\"\n    if [ -e \"$dst\" ] && [ ! -L \"$dst\" ]; then\n      mv \"$dst\" \"$dst.bak\"\n      echo \"dotfiles: backed up $dst -> $dst.bak\"\n    fi\n    ln -sfn \"$src\" \"$dst\"\n    echo \"dotfiles: linked $dst\"\n  }\n\n  # shell / tmux / tig\n  _link .tigrc            \"$HOME/.tigrc\"\n  _link .tmux.conf        \"$HOME/.tmux.conf\"\n\n  # nvim\n  _link nvim/init.lua     \"$HOME/.config/nvim/init.lua\"\n  _link nvim/lua          \"$HOME/.config/nvim/lua\"\n\n  # fish\n  _link fish/config.fish  \"$HOME/.config/fish/config.fish\"\n  _link fish/fish_plugins \"$HOME/.config/fish/fish_plugins\"\n  _link fish/posh-themes  \"$HOME/.config/fish/posh-themes\"\n\n  # alacritty\n  _link alacritty         \"$HOME/.config/alacritty\"\n\n  # claude code\n  _link claude/CLAUDE.md     \"$HOME/.claude/CLAUDE.md\"\n  _link claude/skills        \"$HOME/.claude/skills\"\n  _link claude/settings.json \"$HOME/.claude/settings.json\"\n\n  # herdr\n  _link herdr/config.toml    \"$HOME/.config/herdr/config.toml\"\n\n  # gh-dash\n  _link gh-dash/config.yml \"$HOME/.config/gh-dash/config.yml\"\n\n  # macOS only: karabiner\n  if [ \"$(uname -s)\" = \"Darwin\" ]; then\n    _link karabiner.json  \"$HOME/.config/karabiner/karabiner.json\"\n  fi\n\n  unset -f _link\n\n  # --- Login bootstrap: auto-enter flox + fish on interactive login ---\n  # (Linux only) Keep a managed block in ~/.profile so interactive login\n  # shells re-enter this flox env and drop into fish. The block is fully\n  # owned by this hook -- the repo is its source of truth. POSIX-only so\n  # /bin/sh (dash) can read it; ~/.profile cannot be symlinked because it\n  # holds other system content and must exist *before* `flox activate`.\n  if [ \"$(uname -s)\" = \"Linux\" ]; then\n    _ensure_profile_bootstrap() {\n      profile=\"$HOME/.profile\"\n      begin=\"# >>> dotfiles flox login >>>\"\n      end=\"# <<< dotfiles flox login <<<\"\n      block=\"$begin\n# Managed by dotfiles flox env (manifest.toml). Do not edit by hand.\ncase \\$- in *i*)\n  if [ -z \\\"\\$FLOX_ENV\\\" ] && command -v flox >/dev/null 2>&1; then\n    exec flox activate -d \\\"\\$HOME/dotfiles\\\" -- fish -l\n  fi ;;\nesac\n$end\"\n\n      [ -e \"$profile\" ] || : > \"$profile\"\n\n      # new = the file with any prior managed block stripped, then a\n      # freshly rendered block appended. Both sides of the compare go\n      # through command substitution so trailing-newline handling matches\n      # and the rewrite (and its message) stays quiet when unchanged.\n      new=\"$(\n        awk -v b=\"$begin\" -v e=\"$end\" \\\n          '$0==b{skip=1;next} $0==e{skip=0;next} !skip{print}' \"$profile\"\n        printf '%s\\n' \"$block\"\n      )\"\n      if [ \"$new\" != \"$(cat \"$profile\")\" ]; then\n        printf '%s\\n' \"$new\" > \"$profile\"\n        echo \"dotfiles: updated flox login bootstrap in $profile\"\n      fi\n    }\n    _ensure_profile_bootstrap\n    unset -f _ensure_profile_bootstrap\n  fi\n"
     },
     "profile": {},
     "options": {}
   },
   "packages": [
+    {
+      "attr_path": "herdr",
+      "broken": false,
+      "derivation": "/nix/store/jp2zks5p7xssi8vqk2j7cnw75ya5i4yi-herdr-0.7.0.drv",
+      "description": "Agent multiplexer that lives in your terminal",
+      "install_id": "herdr",
+      "license": "AGPL-3.0-only",
+      "locked_url": "https://github.com/flox/floxenvs?rev=9335e0828de86d7cbcc83f38226518302179a50a",
+      "name": "herdr-0.7.0",
+      "pname": "herdr",
+      "rev": "9335e0828de86d7cbcc83f38226518302179a50a",
+      "rev_count": 9730,
+      "rev_date": "2026-06-21T19:11:38Z",
+      "scrape_date": "2026-07-06T10:24:11.795616845Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.7.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/28acjf26dih3mn9si5cw649zmknvhrbb-herdr-0.7.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "herdr",
+      "priority": 5
+    },
+    {
+      "attr_path": "herdr",
+      "broken": false,
+      "derivation": "/nix/store/cbivd855wppfc07bihzwj308g35p3v4r-herdr-0.7.0.drv",
+      "description": "Agent multiplexer that lives in your terminal",
+      "install_id": "herdr",
+      "license": "AGPL-3.0-only",
+      "locked_url": "https://github.com/flox/floxenvs?rev=9335e0828de86d7cbcc83f38226518302179a50a",
+      "name": "herdr-0.7.0",
+      "pname": "herdr",
+      "rev": "9335e0828de86d7cbcc83f38226518302179a50a",
+      "rev_count": 9730,
+      "rev_date": "2026-06-21T19:11:38Z",
+      "scrape_date": "2026-07-06T10:24:11.795620970Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.7.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/91v13lzh1qh3h4xhcicsvc9pxsg7cm67-herdr-0.7.0"
+      },
+      "system": "aarch64-linux",
+      "group": "herdr",
+      "priority": 5
+    },
+    {
+      "attr_path": "herdr",
+      "broken": false,
+      "derivation": "/nix/store/nrnf02wir8w41d0alf54nspddz8arxiz-herdr-0.7.0.drv",
+      "description": "Agent multiplexer that lives in your terminal",
+      "install_id": "herdr",
+      "license": "AGPL-3.0-only",
+      "locked_url": "https://github.com/flox/floxenvs.git?rev=05d20dea9caf84413cf63c92028c4723a8643d23",
+      "name": "herdr-0.7.0",
+      "pname": "herdr",
+      "rev": "05d20dea9caf84413cf63c92028c4723a8643d23",
+      "rev_count": 9806,
+      "rev_date": "2026-06-21T20:51:38Z",
+      "scrape_date": "2026-07-06T10:24:11.795621887Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.7.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/lck5i20gag0h83jikl8lhf7n9pi6nwdl-herdr-0.7.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "herdr",
+      "priority": 5
+    },
+    {
+      "attr_path": "herdr",
+      "broken": false,
+      "derivation": "/nix/store/laiyiaq8hzy5zdhnl8iq9bfac5kc4n8f-herdr-0.7.0.drv",
+      "description": "Agent multiplexer that lives in your terminal",
+      "install_id": "herdr",
+      "license": "AGPL-3.0-only",
+      "locked_url": "https://github.com/flox/floxenvs?rev=9335e0828de86d7cbcc83f38226518302179a50a",
+      "name": "herdr-0.7.0",
+      "pname": "herdr",
+      "rev": "9335e0828de86d7cbcc83f38226518302179a50a",
+      "rev_count": 9730,
+      "rev_date": "2026-06-21T19:11:38Z",
+      "scrape_date": "2026-07-06T10:24:11.795622720Z",
+      "stabilities": [
+        "stable",
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.7.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/zqaypqflgh0g7v2qkb4kjgvi7h7b3siw-herdr-0.7.0"
+      },
+      "system": "x86_64-linux",
+      "group": "herdr",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/28gc91z9fvg245a3rs6r4v6rx4130ahc-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T03:13:12.573421Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/mwn1fik4pg397khf5c2ajfvnazcm7rjv-jujutsu-0.43.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/n0fhs5w41764q5l1xjnrhcm38mcm557d-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T03:41:44.340431Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ri54j3mpnz9hck1jr4i4myzhqb7lj9h1-jujutsu-0.43.0"
+      },
+      "system": "aarch64-linux",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/v9vi11qvjk1jw8mdnmr9xqvamyhj3shr-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T04:09:22.202831Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ixych7vy9rpv0vcx90h5sv4pmyd87i1n-jujutsu-0.43.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "jujutsu",
+      "priority": 5
+    },
+    {
+      "attr_path": "jujutsu",
+      "broken": false,
+      "derivation": "/nix/store/5p90xpcsr1902vgah3rhwnkh3397cysi-jujutsu-0.43.0.drv",
+      "description": "Git-compatible DVCS that is both simple and powerful",
+      "install_id": "jujutsu",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
+      "name": "jujutsu-0.43.0",
+      "pname": "jujutsu",
+      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+      "rev_count": 1027867,
+      "rev_date": "2026-07-05T04:06:12Z",
+      "scrape_date": "2026-07-06T04:40:47.832586Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.43.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/w10748j1nsa40j6yjxvissjm8ljq4wlf-jujutsu-0.43.0"
+      },
+      "system": "x86_64-linux",
+      "group": "jujutsu",
+      "priority": 5
+    },
     {
       "attr_path": "diffnav",
       "broken": false,
@@ -339,6 +601,7 @@
       "version": "0.73.1",
       "outputs_to_install": [
         "man",
+        "out",
         "out"
       ],
       "outputs": {
@@ -370,6 +633,7 @@
       "version": "0.73.1",
       "outputs_to_install": [
         "man",
+        "out",
         "out"
       ],
       "outputs": {
@@ -401,6 +665,7 @@
       "version": "0.73.1",
       "outputs_to_install": [
         "man",
+        "out",
         "out"
       ],
       "outputs": {
@@ -432,6 +697,7 @@
       "version": "0.73.1",
       "outputs_to_install": [
         "man",
+        "out",
         "out"
       ],
       "outputs": {
@@ -559,6 +825,122 @@
       "priority": 5
     },
     {
+      "attr_path": "gh-dash",
+      "broken": false,
+      "derivation": "/nix/store/sjz3l438w5cm94ncy67wfrfdq9415x54-gh-dash-4.24.1.drv",
+      "description": "Github Cli extension to display a dashboard with pull requests and issues",
+      "install_id": "gh-dash",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gh-dash-4.24.1",
+      "pname": "gh-dash",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:14:19.988591Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "4.24.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/fvv5xn404rpkbl6kjh6sfhlp939z94g8-gh-dash-4.24.1"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gh-dash",
+      "broken": false,
+      "derivation": "/nix/store/ca82gak39di2zrmczh2mjnxy953242nv-gh-dash-4.24.1.drv",
+      "description": "Github Cli extension to display a dashboard with pull requests and issues",
+      "install_id": "gh-dash",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gh-dash-4.24.1",
+      "pname": "gh-dash",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:46:52.516960Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "4.24.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/iwhnvfhr2wsgwqdm0fv980cg088a03yv-gh-dash-4.24.1"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gh-dash",
+      "broken": false,
+      "derivation": "/nix/store/mfpvq0fddb1pxcdsk2jqii74p4fjyfsp-gh-dash-4.24.1.drv",
+      "description": "Github Cli extension to display a dashboard with pull requests and issues",
+      "install_id": "gh-dash",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gh-dash-4.24.1",
+      "pname": "gh-dash",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:17:44.717167Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "4.24.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/khcp6yhl4w6j6clj5026chdxvmvzqy9v-gh-dash-4.24.1"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gh-dash",
+      "broken": false,
+      "derivation": "/nix/store/006rprwfwl65pgnn7hl9zhsbsd4m1j76-gh-dash-4.24.1.drv",
+      "description": "Github Cli extension to display a dashboard with pull requests and issues",
+      "install_id": "gh-dash",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gh-dash-4.24.1",
+      "pname": "gh-dash",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:53:16.279699Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "4.24.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/zk6qahqfzjzw5d4bwc6mhkbzdyv0xhl0-gh-dash-4.24.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
       "attr_path": "git",
       "broken": false,
       "derivation": "/nix/store/p8rrsh13lk5m9igwj65l48b7kvvnk74w-git-2.54.0.drv",
@@ -578,6 +960,8 @@
       "unfree": false,
       "version": "2.54.0",
       "outputs_to_install": [
+        "out",
+        "out",
         "out"
       ],
       "outputs": {
@@ -608,6 +992,7 @@
       "unfree": false,
       "version": "2.54.0",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
@@ -639,6 +1024,7 @@
       "unfree": false,
       "version": "2.54.0",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
@@ -669,6 +1055,7 @@
       "unfree": false,
       "version": "2.54.0",
       "outputs_to_install": [
+        "out",
         "out",
         "out",
         "out",
@@ -737,6 +1124,7 @@
       "version": "4.4.1",
       "outputs_to_install": [
         "man",
+        "out",
         "out"
       ],
       "outputs": {
@@ -804,6 +1192,7 @@
       "version": "4.4.1",
       "outputs_to_install": [
         "man",
+        "out",
         "out",
         "out",
         "out"
@@ -937,6 +1326,130 @@
       "priority": 5
     },
     {
+      "attr_path": "htop",
+      "broken": false,
+      "derivation": "/nix/store/khh0j0g84685lfpw3w9rjpkn6wd5jwr3-htop-3.5.1.drv",
+      "description": "Interactive process viewer",
+      "install_id": "htop",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "htop-3.5.1",
+      "pname": "htop",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:14:35.206928Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.5.1",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/864faj6ms5yfq4d89d19qqxgd1gsf1z2-htop-3.5.1-man",
+        "out": "/nix/store/qswzqhyg945h6rxb5ffhph4s16ckhv43-htop-3.5.1"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "htop",
+      "broken": false,
+      "derivation": "/nix/store/0qq0jvkblamqi59l07nilm550skbk097-htop-3.5.1.drv",
+      "description": "Interactive process viewer",
+      "install_id": "htop",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "htop-3.5.1",
+      "pname": "htop",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:47:12.835290Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.5.1",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/1y7hqqkvbhqsi7lkzz1b17450b2qa3g4-htop-3.5.1-man",
+        "out": "/nix/store/f8psqg5ml1pk2y9dxf918wbaa4hv24qz-htop-3.5.1"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "htop",
+      "broken": false,
+      "derivation": "/nix/store/q354skr8rj6byjk7901h6sy5kfh14nz0-htop-3.5.1.drv",
+      "description": "Interactive process viewer",
+      "install_id": "htop",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "htop-3.5.1",
+      "pname": "htop",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:18:00.259204Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.5.1",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/sk7nhaxjqh8yd5l45diyl12hrjczhadk-htop-3.5.1-man",
+        "out": "/nix/store/8yzlrlj1b7bgs6g48b9kjgmhsdc2fhsh-htop-3.5.1"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "htop",
+      "broken": false,
+      "derivation": "/nix/store/gdfafzff69brslnvrpr1w49kxrqmkr8f-htop-3.5.1.drv",
+      "description": "Interactive process viewer",
+      "install_id": "htop",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "htop-3.5.1",
+      "pname": "htop",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:53:37.165880Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.5.1",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/3qcjf7r5k1ai8jwk9pw14g71bzymn6fj-htop-3.5.1-man",
+        "out": "/nix/store/m6krqcxjpy79lz037j8dlahiwdlixv4i-htop-3.5.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
       "attr_path": "jq",
       "broken": false,
       "derivation": "/nix/store/bmchk7n1crrqvaw88rk288m1934gwlzq-jq-1.8.1.drv",
@@ -957,6 +1470,10 @@
       "version": "1.8.1",
       "outputs_to_install": [
         "bin",
+        "bin",
+        "bin",
+        "man",
+        "man",
         "man"
       ],
       "outputs": {
@@ -992,6 +1509,8 @@
       "outputs_to_install": [
         "bin",
         "bin",
+        "bin",
+        "man",
         "man"
       ],
       "outputs": {
@@ -1026,6 +1545,8 @@
       "version": "1.8.1",
       "outputs_to_install": [
         "bin",
+        "bin",
+        "man",
         "man"
       ],
       "outputs": {
@@ -1063,6 +1584,9 @@
         "bin",
         "bin",
         "bin",
+        "bin",
+        "bin",
+        "man",
         "man"
       ],
       "outputs": {
@@ -1328,6 +1852,8 @@
       "unfree": false,
       "version": "24.15.0",
       "outputs_to_install": [
+        "out",
+        "out",
         "out"
       ],
       "outputs": {
@@ -1357,6 +1883,7 @@
       "unfree": false,
       "version": "24.15.0",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
@@ -1386,6 +1913,7 @@
       "unfree": false,
       "version": "24.15.0",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
@@ -1415,6 +1943,7 @@
       "unfree": false,
       "version": "24.15.0",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {

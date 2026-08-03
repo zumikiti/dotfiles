@@ -1,0 +1,57 @@
+onboarding = false
+
+[update]
+channel = "stable"
+version_check = true
+manifest_check = true
+
+[terminal]
+default_shell = "fish"
+
+[keys]
+prefix = "ctrl+s"
+split_horizontal = "prefix+a"
+focus_pane_left = "ctrl+h"
+focus_pane_down = "ctrl+j"
+focus_pane_up = "ctrl+k"
+focus_pane_right = "ctrl+l"
+toggle_sidebar = "ctrl+b"
+close_pane = "prefix+q"
+detach = "prefix+shift+q"
+
+[[keys.command]]
+key = "prefix+t"
+type = "pane"
+command = "tig"
+description = "run tig"
+
+[ui]
+show_agent_labels_on_pane_borders = true
+
+[session]
+resume_agents_on_restore = true
+
+[remote]
+manage_ssh_config = false
+
+[ui.sound]
+enabled = true
+
+[theme]
+name = "nord"
+auto_switch = false
+
+[ui.toast]
+delivery = "herdr"
+[ui.toast.herdr]
+position = "bottom-left"
+[ui.toast.clipboard]
+enabled = true
+position = "bottom-center"
+
+[experimental]
+pane_history = true
+
+[advanced]
+# ペインごとのスクロールバック上限。既定 10MB → 50MB に増量（ログ見返し用）
+scrollback_limit_bytes = 52428800

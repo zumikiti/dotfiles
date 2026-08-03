@@ -32,6 +32,16 @@ worktrunk.pkg-path = "worktrunk"
 worktrunk.version = "0.53.0"
 jq.pkg-path = "jq"
 jq.version = "1.8.1"
+herdr.pkg-path = "flox/herdr"
+herdr.pkg-group = "herdr"
+herdr.version = "0.7.0"
+htop.pkg-path = "htop"
+htop.version = "3.5.1"
+gh-dash.pkg-path = "gh-dash"
+gh-dash.version = "4.24.1"
+jujutsu.pkg-path = "jujutsu"
+jujutsu.pkg-group = "jujutsu"
+jujutsu.version = "0.43.0"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
@@ -91,6 +101,12 @@ on-activate = '''
   _link claude/CLAUDE.md     "$HOME/.claude/CLAUDE.md"
   _link claude/skills        "$HOME/.claude/skills"
   _link claude/settings.json "$HOME/.claude/settings.json"
+
+  # herdr
+  _link herdr/config.toml    "$HOME/.config/herdr/config.toml"
+
+  # gh-dash
+  _link gh-dash/config.yml "$HOME/.config/gh-dash/config.yml"
 
   # macOS only: karabiner
   if [ "$(uname -s)" = "Darwin" ]; then
