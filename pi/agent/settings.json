@@ -6,9 +6,10 @@
     "enabled": false
   },
   "defaultProvider": "openrouter",
-  "defaultModel": "deepseek/deepseek-v4-flash",
+  "defaultModel": "deepseek/deepseek-v4-flash-0731",
   "defaultThinkingLevel": "high",
   "skills": [
+    "~/.claude/skills/agents-subagent-model-policy",
     "~/.claude/skills/code-review",
     "~/.claude/skills/commit",
     "~/.claude/skills/create-pr",
@@ -30,5 +31,17 @@
   },
   "warnings": {
     "anthropicExtraUsage": false
+  },
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/.env*)",
+      "Read(**/*secret*)",
+      "Read(**/*.key)",
+      "Read(**/*.pem)",
+      "Bash(cat .env*)",
+      "Bash(cat *secret*)"
+    ]
   }
 }

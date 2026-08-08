@@ -7,6 +7,18 @@
   "permission": {
     "edit": "allow",
     "webfetch": "allow",
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "**/.env*": "deny",
+      "**/*secret*": "deny",
+      "*.env.example": "allow"
+    },
+    "grep": {
+      "*": "allow",
+      "**/.env*": "deny"
+    },
     "bash": {
       "*": "ask",
       "git status": "allow",
@@ -16,12 +28,13 @@
       "git push": "ask",
       "git log": "allow",
       "ls": "allow",
-      "cat": "allow",
       "pwd": "allow",
       "rg": "allow",
       "go build": "allow",
       "go test": "allow",
-      "go mod tidy": "allow"
+      "go mod tidy": "allow",
+      "cat *env*": "deny",
+      "cat *secret*": "deny"
     }
   },
   "mcp": {
