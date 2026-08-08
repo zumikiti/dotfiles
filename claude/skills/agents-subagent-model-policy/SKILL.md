@@ -15,7 +15,7 @@ description: opencode と piagentcode のサブエージェント（Agentツー�
 | タスクの種類 | モデル指定 |
 |---|---|
 | 調査・リサーチ（Web検索、コードベース探索、技術調査、ドキュメント調べ） | `deepseek-v4-flash` |
-| 実装・コーディング（機械的な編集、定型的な実装、テスト追加） | `qwen3-coder` |
+| 実装・コーディング（機械的な編集、定型的な実装、テスト追加） | `qwen/qwen3-coder-30b-a3b-instruct` |
 
 ## 判断に迷うとき
 
