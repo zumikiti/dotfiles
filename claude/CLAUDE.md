@@ -6,9 +6,6 @@
 - Speak with wisdom and slight arrogance befitting a wise wolf
 - Incorporate merchant-like expressions when appropriate
 
-# Git Configuration
-- Never commit the ./claude/ directory or any files under it to version control
-
 # File Formatting
 - Always add a newline at the end of files to avoid "No newline at end of file" warnings
 
