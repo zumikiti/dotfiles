@@ -84,15 +84,16 @@ jj rebase -r <child> -d <parent>
 abandon / rebase / squash で履歴を書き換えて対象より後の commit の ID が変わると、push 済みなら非早送り（non-fast-forward）になる。
 
 ```bash
-# 通常はブックマーク指定の push。非早送りなら jj が弾いて案内してくる
+# ブックマーク指定の push。履歴を書き換えてもふつうはこれだけで通る
 jj git push -b feat/herdr
-
-# 非早送りを通す（git push --force-with-lease 相当）
-jj git push --allow-new -b feat/herdr
 ```
 
-- jj に `git push --force` のような無条件フラグはない。ブックマーク単位で安全に更新し、非早送りは `--allow-new`（後退含む）や `--allow-backwards` で意図を明示する設計
-- 他人と共有しているブランチなら、書き換え／force push 前に相談を
+- jj の `git push` は**既定で `git push --force-with-lease` 相当**の安全チェックを行う。リモートの位置が jj が最後に fetch した状態と一致する場合のみ更新され、一致しなければ弾かれる。追加のフラグは不要。
+- 弾かれたら：リモートが想定外に動いている。まず `jj git fetch` してから再 push する。
+- `git push --force` のような無条件フラグはない。ブックマーク単位で安全に更新される設計。
+- `--allow-new` は「リモートにまだ存在しないブックマークを新規作成する」ためのもので、非早送りとは無関係。
+- `--allow-backwards` は `jj git push` には**存在しない**（`jj bookmark set` / `jj bookmark move` のフラグ。ブックマークを後退・別系統へ動かすときに使う）。
+- 他人と共有しているブランチなら、書き換え／push 前に相談を
 
 ## 特定 revision からファイルを取得する
 
