@@ -1,5 +1,6 @@
 ---
 model: Haiku
+name: create-pr
 description: Draft Pull Requestを自動作成
 ---
 

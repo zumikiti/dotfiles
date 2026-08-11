@@ -1,4 +1,5 @@
 ---
+name: code-review
 description: 実装内容の懸念点と緊急性を評価するコードレビューコマンド
 allowed-tools:
   - Read
