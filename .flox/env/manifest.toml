@@ -97,16 +97,19 @@ on-activate = '''
   # alacritty
   _link alacritty         "$HOME/.config/alacritty"
 
+  # shared agent rules (single source of truth; CLAUDE.md imports it)
+  _link agents/AGENTS.md     "$HOME/.claude/AGENTS.md"
+  _link agents/AGENTS.md     "$HOME/.config/opencode/AGENTS.md"
+  _link agents/AGENTS.md     "$HOME/.pi/agent/AGENTS.md"
+
   # claude code
   _link claude/CLAUDE.md     "$HOME/.claude/CLAUDE.md"
   _link claude/skills        "$HOME/.claude/skills"
   _link claude/settings.json "$HOME/.claude/settings.json"
 
-  # agents / opencode / pi
-  _link agents/AGENTS.md          "$HOME/.config/opencode/AGENTS.md"
-  _link agents/AGENTS.md          "$HOME/.pi/agent/AGENTS.md"
-  _link opencode/opencode.json    "$HOME/.config/opencode/opencode.json"
-  _link opencode/agents           "$HOME/.config/opencode/agents"
+  # opencode
+  _link opencode/opencode.json "$HOME/.config/opencode/opencode.json"
+  _link opencode/agents        "$HOME/.config/opencode/agents"
 
   # pi
   _link pi/agent/settings.json "$HOME/.pi/agent/settings.json"
