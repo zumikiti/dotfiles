@@ -5,36 +5,67 @@
     "hostname": "0.0.0.0"
   },
   "permission": {
-    "edit": "allow",
-    "webfetch": "allow",
     "read": {
       "*": "allow",
       "*.env": "deny",
       "*.env.*": "deny",
-      "**/.env*": "deny",
-      "**/*secret*": "deny",
-      "*.env.example": "allow"
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.pem": "deny",
+      "*id_rsa*": "deny",
+      "*.env.example": "allow",
+      "*.env.sample": "allow"
     },
-    "grep": {
+    "edit": {
       "*": "allow",
-      "**/.env*": "deny"
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.pem": "deny",
+      "*id_rsa*": "deny",
+      "*.env.example": "allow",
+      "*.env.sample": "allow"
     },
+    "webfetch": "allow",
     "bash": {
       "*": "ask",
       "git status": "allow",
+      "git status *": "allow",
       "git diff": "allow",
+      "git diff *": "allow",
       "git add": "allow",
+      "git add *": "allow",
       "git commit": "allow",
+      "git commit *": "allow",
       "git push": "ask",
+      "git push *": "ask",
       "git log": "allow",
+      "git log *": "allow",
       "ls": "allow",
+      "ls *": "allow",
       "pwd": "allow",
       "rg": "allow",
+      "rg *": "allow",
       "go build": "allow",
+      "go build *": "allow",
       "go test": "allow",
+      "go test *": "allow",
       "go mod tidy": "allow",
-      "cat *env*": "deny",
-      "cat *secret*": "deny"
+      "go mod tidy *": "allow",
+      "*.env": "deny",
+      "*.env *": "deny",
+      "*.env.*": "deny",
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.key *": "deny",
+      "*.pem": "deny",
+      "*.pem *": "deny",
+      "*id_rsa*": "deny"
+    },
+    "skill": {
+      "*": "allow",
+      "subagent-model-policy": "deny"
     }
   },
   "mcp": {
