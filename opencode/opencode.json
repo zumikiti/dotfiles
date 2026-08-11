@@ -79,11 +79,11 @@
       "type": "local",
       "command": [
         "node",
-        "/Users/akihiro/code/dailymemo/mcp-server/dist/index.js"
+        "{env:HOME}/code/dailymemo/mcp-server/dist/index.js"
       ],
       "enabled": true,
       "environment": {
-        "DAILYMEMO_PATH": "/Users/akihiro/code/dailymemo"
+        "DAILYMEMO_PATH": "{env:HOME}/code/dailymemo"
       }
     }
   },
