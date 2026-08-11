@@ -81,6 +81,30 @@ on-activate = '''
     echo "dotfiles: linked $dst"
   }
 
+  # _seed: copy a dotfiles FILE into place, overwriting the target each
+  # activate. Used for mutable runtime config (e.g. pi agent settings)
+  # that the app rewrites in place -- a symlink would dirty the repo and
+  # a one-time copy would stop propagating repo-side updates. The repo
+  # copy is the source of truth; user changes in the live file do not
+  # survive the next `flox activate`.
+  _seed() {
+    # _seed <path-relative-to-dotfiles> <absolute-target>
+    src="$dotfiles/$1"
+    dst="$2"
+    [ -e "$src" ] || return 0
+    mkdir -p "$(dirname "$dst")"
+    # Replace any pre-existing symlink with a real file (write-through
+    # would otherwise corrupt the repo); keep a one-time backup.
+    if [ -L "$dst" ]; then
+      rm -f "$dst"
+    elif [ -e "$dst" ] && ! cmp -s "$src" "$dst"; then
+      mv "$dst" "$dst.bak"
+      echo "dotfiles: backed up $dst -> $dst.bak"
+    fi
+    cp "$src" "$dst"
+    echo "dotfiles: seeded $dst"
+  }
+
   # shell / tmux / tig
   _link .tigrc            "$HOME/.tigrc"
   _link .tmux.conf        "$HOME/.tmux.conf"
@@ -97,10 +121,25 @@ on-activate = '''
   # alacritty
   _link alacritty         "$HOME/.config/alacritty"
 
+  # shared agent rules (single source of truth; CLAUDE.md imports it)
+  _link agents/AGENTS.md     "$HOME/.claude/AGENTS.md"
+  _link agents/AGENTS.md     "$HOME/.config/opencode/AGENTS.md"
+  _link agents/AGENTS.md     "$HOME/.pi/agent/AGENTS.md"
+
   # claude code
   _link claude/CLAUDE.md     "$HOME/.claude/CLAUDE.md"
   _link claude/skills        "$HOME/.claude/skills"
   _link claude/settings.json "$HOME/.claude/settings.json"
+
+  # opencode
+  _link opencode/opencode.json "$HOME/.config/opencode/opencode.json"
+  _link opencode/agents        "$HOME/.config/opencode/agents"
+
+  # pi
+  # settings.json is rewritten in place by pi on every run; seed it from
+  # the template on each activate so the repo copy stays the single
+  # source of truth (the symlink version would dirty the repo).
+  _seed pi/agent/settings.json.template "$HOME/.pi/agent/settings.json"
 
   # herdr
   _link herdr/config.toml    "$HOME/.config/herdr/config.toml"

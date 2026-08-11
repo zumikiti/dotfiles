@@ -1,0 +1,98 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "server": {
+    "hostname": "0.0.0.0"
+  },
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.pem": "deny",
+      "*id_rsa*": "deny",
+      "*.env.example": "allow",
+      "*.env.sample": "allow"
+    },
+    "edit": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.pem": "deny",
+      "*id_rsa*": "deny",
+      "*.env.example": "allow",
+      "*.env.sample": "allow"
+    },
+    "webfetch": "allow",
+    "bash": {
+      "*": "ask",
+      "jj *": "allow",
+      "rtk *": "allow",
+      "rtk git push": "ask",
+      "rtk git push *": "ask",
+      "jj git push": "ask",
+      "jj git push *": "ask",
+      "git status": "allow",
+      "git status *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git add": "allow",
+      "git add *": "allow",
+      "git commit": "allow",
+      "git commit *": "allow",
+      "git push": "ask",
+      "git push *": "ask",
+      "git log": "allow",
+      "git log *": "allow",
+      "ls": "allow",
+      "ls *": "allow",
+      "pwd": "allow",
+      "rg": "allow",
+      "rg *": "allow",
+      "go build": "allow",
+      "go build *": "allow",
+      "go test": "allow",
+      "go test *": "allow",
+      "go mod tidy": "allow",
+      "go mod tidy *": "allow",
+      "*.env": "deny",
+      "*.env *": "deny",
+      "*.env.*": "deny",
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.key *": "deny",
+      "*.pem": "deny",
+      "*.pem *": "deny",
+      "*id_rsa*": "deny"
+    },
+    "skill": {
+      "*": "allow",
+      "subagent-model-policy": "deny"
+    }
+  },
+  "mcp": {
+    "dailymemo": {
+      "type": "local",
+      "command": [
+        "node",
+        "/Users/akihiro/code/dailymemo/mcp-server/dist/index.js"
+      ],
+      "enabled": true,
+      "environment": {
+        "DAILYMEMO_PATH": "/Users/akihiro/code/dailymemo"
+      }
+    }
+  },
+  "agent": {
+    "plan": {
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    }
+  }
+}
