@@ -34,8 +34,6 @@
       "rtk *": "allow",
       "rtk git push": "ask",
       "rtk git push *": "ask",
-      "rtk jj git push": "ask",
-      "rtk jj git push *": "ask",
       "jj git push": "ask",
       "jj git push *": "ask",
       "git status": "allow",
