@@ -30,6 +30,9 @@
     "webfetch": "allow",
     "bash": {
       "*": "ask",
+      "jj *": "allow",
+      "jj git push": "ask",
+      "jj git push *": "ask",
       "git status": "allow",
       "git status *": "allow",
       "git diff": "allow",
