@@ -21,7 +21,7 @@ description: opencode と piagentcode のサブエージェント（Agentツー�
 | コーディング・実装 | `Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2` | 主軸。精度と速度のバランス最良 |
 | 計画・設計・推論 | `Qwen3-30B-A3B-Thinking-2507-MLX-4bit` | サーバ側 `enable_thinking:true` 必須 |
 | 軽量・要約・分類 | `Qwen3-30B-A3B-Instruct-2507-4bit` | `small_model` 相当 |
-| 外部知識・クラウド判断 | DeepSeek V4 Flash / Tencent Hy3（クラウド） | 送信前にローカルで仮名化・ZDR 有効化 |
+| 外部知識・クラウド判断 | DeepSeek V4 Flash / Tencent Hy3（クラウド） | 送信前はローカル（Qwen3-Instruct 等）でマスキング（ルール+LLM）、ZDR 有効化 |
 
 ## 使い分け
 
