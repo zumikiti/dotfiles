@@ -1,0 +1,68 @@
+{
+  "providers": {
+    "oxlm": {
+      "name": "OXLM",
+      "baseUrl": "http://100.91.119.36:8888/v1",
+      "apiKey": "$OXLM_API_KEY",
+      "api": "openai-completions",
+      "headers": {},
+      "compat": {
+        "supportsDeveloperRole": false
+      },
+      "models": [
+        {
+          "id": "gemma-4-31b-it-4bit",
+          "name": "OXLM: Gemma 4 31B IT 4bit",
+          "api": "openai-completions",
+          "baseUrl": "http://100.91.119.36:8888/v1",
+          "reasoning": false,
+          "input": ["text"],
+          "contextWindow": 128000,
+          "maxTokens": 8192,
+          "compat": {
+            "supportsDeveloperRole": false
+          }
+        },
+        {
+          "id": "Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2",
+          "name": "OXLM: Qwen3 Coder 30B A3B Instruct 4bit DWQ v2",
+          "api": "openai-completions",
+          "baseUrl": "http://100.91.119.36:8888/v1",
+          "reasoning": false,
+          "input": ["text"],
+          "contextWindow": 128000,
+          "maxTokens": 8192,
+          "compat": {
+            "supportsDeveloperRole": false
+          }
+        },
+        {
+          "id": "Qwen3-30B-A3B-Instruct-2507-4bit",
+          "name": "OXLM: Qwen3 30B A3B Instruct 2507 4bit",
+          "api": "openai-completions",
+          "baseUrl": "http://100.91.119.36:8888/v1",
+          "reasoning": false,
+          "input": ["text"],
+          "contextWindow": 128000,
+          "maxTokens": 8192,
+          "compat": {
+            "supportsDeveloperRole": false
+          }
+        },
+        {
+          "id": "Qwen3-30B-A3B-Thinking-2507-MLX-4bit",
+          "name": "OXLM: Qwen3 30B A3B Thinking 2507 MLX 4bit",
+          "api": "openai-completions",
+          "baseUrl": "http://100.91.119.36:8888/v1",
+          "reasoning": true,
+          "input": ["text"],
+          "contextWindow": 128000,
+          "maxTokens": 8192,
+          "compat": {
+            "supportsDeveloperRole": false
+          }
+        }
+      ]
+    }
+  }
+}

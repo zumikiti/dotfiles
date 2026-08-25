@@ -140,6 +140,8 @@ on-activate = '''
   # the template on each activate so the repo copy stays the single
   # source of truth (the symlink version would dirty the repo).
   _seed pi/agent/settings.json.template "$HOME/.pi/agent/settings.json"
+  # custom oxlm provider definition (models.json is read-only config)
+  _link pi/agent/models.json "$HOME/.pi/agent/models.json"
 
   # herdr
   _link herdr/config.toml    "$HOME/.config/herdr/config.toml"
