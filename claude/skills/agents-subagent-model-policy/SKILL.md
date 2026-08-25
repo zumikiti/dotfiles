@@ -18,26 +18,19 @@ description: opencode と piagentcode のサブエージェント（Agentツー�
 
 | タスク種類 | 推奨モデル (oxlm/) | 備考 |
 |---|---|---|
-| コーディング・実装 | `Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2` | 主軸。精度と速度のバランス最良 |
-| 計画・設計・推論 | `Qwen3-30B-A3B-Thinking-2507-MLX-4bit` | サーバ側 `enable_thinking:true` 必須 |
-| 軽量・要約・分類 | `Qwen3-30B-A3B-Instruct-2507-4bit` | `small_model` 相当 |
-| 外部知識・クラウド判断 | DeepSeek V4 Flash / Tencent Hy3（クラウド） | 送信前はローカル（Qwen3-Instruct 等）でマスキング（ルール+LLM）、ZDR 有効化 |
-
-## 使い分け
-
-| タスクの種類 | opencode（subagent_type） | pi agent code（model） |
-|---|---|---|
-| 調査・リサーチ（Web検索、コードベース探索、技術調査、ドキュメント調べ） | `general` | `deepseek/deepseek-v4-flash-0731` |
-| 実装・コーディング（機械的な編集、定型的な実装、テスト追加） | `coder` | `qwen/qwen3-coder-30b-a3b-instruct` |
-| 計画・設計（複雑な判断、アーキテクチャ） | `plan` | `qwen3-30b-a3b-thinking`（ローカル優先） |
+| コーディング・実装 | `Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2` | 主軸。精度と速度のバランス最良（MoE、実測~9 tok/s） |
+| 計画・設計・推論 | `Qwen3.8-27B-4bit`（思考ON） | opencode は `chat_template_kwargs.enable_thinking:true` 経由、pi は `:<level>`（off=即答）で切替。dense の思考は~7 tok/s |
+| 軽量・要約・分類 | `gemma-4-31b-it-4bit` | `small_model` 相当。要約・訂正の規律が A/B で Qwen3-A3B-Instruct より良好 |
+| vision・画像 | `gemma-4-31b-it-4bit`（opencode）/ `Qwen3.8-27B-4bit:off`（pi） | Qwen3-A3B 系（Coder/Instruct-2507）は vision なし |
+| 外部知識・クラウド判断 | DeepSeek V4 Flash / Tencent Hy3（クラウド） | 送信前はローカル（gemma-4-31b-it-4bit 等の分類系）でマスキング（ルール+LLM）、ZDR 有効化 |
 
 opencode の各エージェントに実際に割り当てられているモデルID:
 - デフォルト（トップレベル `model`）→ `oxlm/Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2`（`opencode.json`）
-- `small_model` → `oxlm/Qwen3-30B-A3B-Instruct-2507-4bit`
-- `plan` → `oxlm/Qwen3-30B-A3B-Thinking-2507-MLX-4bit`（`opencode.json` の `agent.plan`）
-- `general` / `coder` → `opencode/agents/*.md` の `model:` を `oxlm/...` に更新すること（現状は openrouter のまま）
-
-pi 側は `defaultProvider: openrouter` 前提のため prefix を付けない。DeepSeek は pi 側のみ日付固定版を指定している。
+- `small_model` → `oxlm/gemma-4-31b-it-4bit`
+- `plan` → `oxlm/Qwen3.8-27B-4bit`（`opencode.json` の `agent.plan`、chat_template_kwargs 付き）
+- `general` → `oxlm/gemma-4-31b-it-4bit`（`opencode/agents/general.md`）
+- `coder` → `oxlm/Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2`（`opencode/agents/coder.md`）
+- 予備（登録のみ・未割り当て）: `Qwen3-30B-A3B-Instruct-2507-4bit`（方向性を誤りやすい）
 
 ## 判断に迷うとき
 
