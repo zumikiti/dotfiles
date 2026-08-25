@@ -1,7 +1,7 @@
 ---
 description: Researches complex tasks, compares options, and runs multi-step agent loops.
 mode: subagent
-model: openrouter/deepseek/deepseek-v4-flash
+model: oxlm/Qwen3-30B-A3B-Instruct-2507-4bit
 ---
 
 You are a general-purpose research agent.

@@ -1,7 +1,7 @@
 ---
 description: Handles mechanical editing, routine implementation, and test additions.
 mode: subagent
-model: openrouter/qwen/qwen3-coder-30b-a3b-instruct
+model: oxlm/Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2
 ---
 
 Focus on writing code and tests.
