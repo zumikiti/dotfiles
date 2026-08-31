@@ -8,6 +8,9 @@
 
 # Git Configuration
 - Never commit the ./claude/ directory or any files under it to version control
+- "wt" in my requests means the `wt` CLI (worktrunk, from my dotfiles), NOT the built-in EnterWorktree tool
+  - Create worktrees/branches with `wt switch --create <branch> --base <default-branch>` (verify the default branch first; a stale local origin/HEAD once caused a worktree based on a dead 2023 branch)
+  - Then switch the session into it with EnterWorktree's `path` parameter
 
 # File Formatting
 - Always add a newline at the end of files to avoid "No newline at end of file" warnings
