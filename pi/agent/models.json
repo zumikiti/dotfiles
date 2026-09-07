@@ -2,7 +2,7 @@
   "providers": {
     "oxlm": {
       "name": "OXLM",
-      "baseUrl": "http://100.91.119.36:8888/v1",
+      "baseUrl": "$OXLM_BASE_URL",
       "apiKey": "$OXLM_API_KEY",
       "api": "openai-completions",
       "headers": {},
