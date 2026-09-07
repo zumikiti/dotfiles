@@ -49,7 +49,6 @@
     "openrouter/tencent/hy3",
     "oxlm/Qwen3.8-27B-4bit",
     "oxlm/gemma-4-31b-it-4bit",
-    "oxlm/Qwen3-30B-A3B-Instruct-2507-4bit",
     "oxlm/Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2"
   ]
 }
