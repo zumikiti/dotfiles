@@ -116,6 +116,9 @@ on-activate = '''
   # gh-dash
   _link gh-dash/config.yml "$HOME/.config/gh-dash/config.yml"
 
+  # workmux
+  _link workmux/pr-review.yaml "$HOME/.config/workmux/pr-review.yaml"
+
   # macOS only: karabiner
   if [ "$(uname -s)" = "Darwin" ]; then
     _link karabiner.json  "$HOME/.config/karabiner/karabiner.json"

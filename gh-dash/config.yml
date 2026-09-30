@@ -86,9 +86,9 @@ keybindings:
     - key: C
       name: checkout + claude pr-review
       command: >
-        cd {{.RepoPath}} &&
+        cd "{{.RepoPath}}" &&
         workmux add --pr {{.PrNumber}} --name pr-{{.PrNumber}} -o
-        --config ~/dotfiles/workmux/pr-review.yaml
+        --config ~/.config/workmux/pr-review.yaml
         --prompt-file-only -p "/pr-review {{.PrNumber}}"
     - key: O
       name: open in octo.nvim
