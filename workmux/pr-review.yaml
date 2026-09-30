@@ -1,6 +1,9 @@
 # gh-dash の C キー (checkout + claude pr-review) 専用。
-# `workmux add --config` で差し込む。--prompt-file-only で書かれた
-# .workmux/PROMPT-<branch>.md を claude に渡し、終了後に worktree/ブランチ/ウィンドウを片付ける。
+# `workmux add --config` で差し込む。PR 番号は --name pr-<N> で決まる
+# worktree ディレクトリ名 ($PWD) から取り出して claude に `/pr-review <N>` を渡し、
+# 終了後に worktree/ブランチ/ウィンドウを片付ける。
+# 他人の PR のチェックアウト内のファイル (.workmux/PROMPT-*.md 等) は読まない。
+# 読むと PR 作者がコミットしたファイルでプロンプトを差し込めてしまうため。
 panes:
-  - command: 'claude "$(cat .workmux/PROMPT-*.md)"; workmux remove -f'
+  - command: 'claude "/pr-review $(basename "$PWD" | sed "s/^pr-//")"; workmux remove -f'
     focus: true
