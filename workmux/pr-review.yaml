@@ -1,0 +1,6 @@
+# gh-dash の C キー (checkout + claude pr-review) 専用。
+# `workmux add --config` で差し込む。--prompt-file-only で書かれた
+# .workmux/PROMPT-<branch>.md を claude に渡し、終了後に worktree/ブランチ/ウィンドウを片付ける。
+panes:
+  - command: 'claude "$(cat .workmux/PROMPT-*.md)"; workmux remove -f'
+    focus: true
