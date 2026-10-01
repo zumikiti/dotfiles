@@ -6,11 +6,17 @@
       "diffnav": {
         "pkg-path": "diffnav"
       },
+      "ffmpeg": {
+        "pkg-path": "ffmpeg"
+      },
       "fish": {
         "pkg-path": "fish"
       },
       "fzf": {
         "pkg-path": "fzf"
+      },
+      "gcc": {
+        "pkg-path": "gcc"
       },
       "gh": {
         "pkg-path": "gh"
@@ -91,6 +97,10 @@
           "aarch64-linux",
           "x86_64-linux"
         ]
+      },
+      "workmux": {
+        "pkg-path": "flox/workmux",
+        "pkg-group": "workmux"
       },
       "worktrunk": {
         "pkg-path": "worktrunk",
@@ -471,6 +481,154 @@
       "priority": 5
     },
     {
+      "attr_path": "ffmpeg",
+      "broken": false,
+      "derivation": "/nix/store/bw8vxx2rda37rz7vv23rksy7h03pgvi3-ffmpeg-8.1.drv",
+      "description": "Complete, cross-platform solution to record, convert and stream audio and video",
+      "install_id": "ffmpeg",
+      "license": "[ LGPL-2.1-or-later, GPL-2.0-or-later, LGPL-3.0-or-later, GPL-3.0-or-later ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "ffmpeg-8.1",
+      "pname": "ffmpeg",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:14:19.721409Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "8.1",
+      "outputs_to_install": [
+        "bin",
+        "bin",
+        "man"
+      ],
+      "outputs": {
+        "bin": "/nix/store/ngfvm0mvlcl3qy4c0va1xk7ik7hf5z5d-ffmpeg-8.1-bin",
+        "data": "/nix/store/svw1lk5s6hgfvmndi7klg9kp9p65h4wi-ffmpeg-8.1-data",
+        "dev": "/nix/store/arhfvajz4160hqrvllcjri0zlshyl43m-ffmpeg-8.1-dev",
+        "doc": "/nix/store/f8f02xn2j8qjcii07ig0x3jwcd1qd7r9-ffmpeg-8.1-doc",
+        "lib": "/nix/store/rz9xhl5q5v9gh7lhk6z8zgi98h9xzx7n-ffmpeg-8.1-lib",
+        "man": "/nix/store/7i34r2xda7qh2y9jsnm8jxgh31d1nk57-ffmpeg-8.1-man",
+        "out": "/nix/store/wl1lb6gb6isnglzmwvdn55hi48ac1mcl-ffmpeg-8.1"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "ffmpeg",
+      "broken": false,
+      "derivation": "/nix/store/vd3pmc207w1xwc20ay80qpfa00f4x8im-ffmpeg-8.1.drv",
+      "description": "Complete, cross-platform solution to record, convert and stream audio and video",
+      "install_id": "ffmpeg",
+      "license": "[ LGPL-2.1-or-later, GPL-2.0-or-later, LGPL-3.0-or-later, GPL-3.0-or-later ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "ffmpeg-8.1",
+      "pname": "ffmpeg",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:46:52.098724Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "8.1",
+      "outputs_to_install": [
+        "bin",
+        "bin",
+        "man"
+      ],
+      "outputs": {
+        "bin": "/nix/store/9189pnq5pjzsbqmp9l8rkr9kwbwmg2w6-ffmpeg-8.1-bin",
+        "data": "/nix/store/fgjpgi3vfl2ayqfmddfq45wzp5q09q9s-ffmpeg-8.1-data",
+        "dev": "/nix/store/amsa6czh5400dxq2giif31vlnbcjp09z-ffmpeg-8.1-dev",
+        "doc": "/nix/store/8anck5absahqjvikpxb87yn1inpb4fdv-ffmpeg-8.1-doc",
+        "lib": "/nix/store/x57wbkqyx80h7lhdziqh7ikwg8lgraxc-ffmpeg-8.1-lib",
+        "man": "/nix/store/mk17rxwak2j48qrs3axccsknhzwl5733-ffmpeg-8.1-man",
+        "out": "/nix/store/wdrpm09qjhb155kwch9b19pag9wagpkz-ffmpeg-8.1"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "ffmpeg",
+      "broken": false,
+      "derivation": "/nix/store/3sjmfbr2mzvhlbg6cchfn251rfn73hj9-ffmpeg-8.1.drv",
+      "description": "Complete, cross-platform solution to record, convert and stream audio and video",
+      "install_id": "ffmpeg",
+      "license": "[ LGPL-2.1-or-later, GPL-2.0-or-later, LGPL-3.0-or-later, GPL-3.0-or-later ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "ffmpeg-8.1",
+      "pname": "ffmpeg",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:17:44.442953Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "8.1",
+      "outputs_to_install": [
+        "bin",
+        "bin",
+        "man"
+      ],
+      "outputs": {
+        "bin": "/nix/store/qjil0v0y05rcrs2bzyijwyb90d5zfbzw-ffmpeg-8.1-bin",
+        "data": "/nix/store/hrvdbg19nsdh94rzvgxcvvkkq6rkph2k-ffmpeg-8.1-data",
+        "dev": "/nix/store/8r42iwc8pcz420gjczzgmgy86kn8wc39-ffmpeg-8.1-dev",
+        "doc": "/nix/store/mwn24al75gjgm42nck1bckmplv2zdz8h-ffmpeg-8.1-doc",
+        "lib": "/nix/store/7vy887l5yhwaisic91xj6rdp7m7vd8jm-ffmpeg-8.1-lib",
+        "man": "/nix/store/481y1x104ril85y1fdvpf55yk6r9n732-ffmpeg-8.1-man",
+        "out": "/nix/store/his8zz9p0mc0azz3rwjyknydn0d67n6s-ffmpeg-8.1"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "ffmpeg",
+      "broken": false,
+      "derivation": "/nix/store/w2033f07wb4jymqjdbn1qb125bskdpr7-ffmpeg-8.1.drv",
+      "description": "Complete, cross-platform solution to record, convert and stream audio and video",
+      "install_id": "ffmpeg",
+      "license": "[ LGPL-2.1-or-later, GPL-2.0-or-later, LGPL-3.0-or-later, GPL-3.0-or-later ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "ffmpeg-8.1",
+      "pname": "ffmpeg",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:53:15.825092Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "8.1",
+      "outputs_to_install": [
+        "bin",
+        "bin",
+        "man"
+      ],
+      "outputs": {
+        "bin": "/nix/store/281zx8sanx5fcp8j6advwics7gwdvdaz-ffmpeg-8.1-bin",
+        "data": "/nix/store/pxxjhd9y7z2anp67bp6j4002r9bnwizf-ffmpeg-8.1-data",
+        "dev": "/nix/store/7rv05vh6qh1sfiirhjkfjp2gskqhxdp9-ffmpeg-8.1-dev",
+        "doc": "/nix/store/m0k08lknppyyk6dh58157i835da3qnxx-ffmpeg-8.1-doc",
+        "lib": "/nix/store/xvrjmskfrp07gmh1zzlyfkv50nw40dcv-ffmpeg-8.1-lib",
+        "man": "/nix/store/dnnz7b0444c6pb6q8rippk90sl0pnz1n-ffmpeg-8.1-man",
+        "out": "/nix/store/84h52wlvlvb2y7hmm6338m7i4m1mpi0v-ffmpeg-8.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
       "attr_path": "fish",
       "broken": false,
       "derivation": "/nix/store/xyqfqqhsgpnpzjasqp8rcq15v966ccg8-fish-4.7.1.drv",
@@ -713,6 +871,140 @@
       "outputs": {
         "man": "/nix/store/v4rwmla9l2b02373vpyq5lskdffhjfgx-fzf-0.73.1-man",
         "out": "/nix/store/pmddi2yfyf2ldrngm9yr4qa2q8mssa59-fzf-0.73.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gcc",
+      "broken": false,
+      "derivation": "/nix/store/nqiayifqz3bwrf26qbzr9472wdbgw8gm-gcc-wrapper-15.2.0.drv",
+      "description": "GNU Compiler Collection, version 15.2.0 (wrapper script)",
+      "install_id": "gcc",
+      "license": "GPL-3.0-or-later",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gcc-wrapper-15.2.0",
+      "pname": "gcc",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:14:19.923867Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "15.2.0",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "info": "/nix/store/hnw7ac1xs560iykqz0bcpvpkwckjvdwh-gcc-wrapper-15.2.0-info",
+        "man": "/nix/store/brg9p7mk8cnpqyn6l095cp87164scybj-gcc-wrapper-15.2.0-man",
+        "out": "/nix/store/b6igqq05cjkm04jar9b4p3rkp9abcpxi-gcc-wrapper-15.2.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gcc",
+      "broken": false,
+      "derivation": "/nix/store/s98j0lrk70winmakb0slz06lm6g9jkpj-gcc-wrapper-15.2.0.drv",
+      "description": "GNU Compiler Collection, version 15.2.0 (wrapper script)",
+      "install_id": "gcc",
+      "license": "GPL-3.0-or-later",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gcc-wrapper-15.2.0",
+      "pname": "gcc",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:46:52.429441Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "15.2.0",
+      "outputs_to_install": [
+        "man",
+        "out",
+        "out"
+      ],
+      "outputs": {
+        "info": "/nix/store/y01as0p9m8ksp0gw07fkcfyc7ys5j515-gcc-wrapper-15.2.0-info",
+        "man": "/nix/store/ix6iqra08cyg0x3lcd671cimz2kk5bdk-gcc-wrapper-15.2.0-man",
+        "out": "/nix/store/vsj0kl98ggilv1nq2gvxwrk12w2lgvjy-gcc-wrapper-15.2.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gcc",
+      "broken": false,
+      "derivation": "/nix/store/5di0jdzn9qqqcich8w9qbr5irz4dm8jh-gcc-wrapper-15.2.0.drv",
+      "description": "GNU Compiler Collection, version 15.2.0 (wrapper script)",
+      "install_id": "gcc",
+      "license": "GPL-3.0-or-later",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gcc-wrapper-15.2.0",
+      "pname": "gcc",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:17:44.652447Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "15.2.0",
+      "outputs_to_install": [
+        "man",
+        "out"
+      ],
+      "outputs": {
+        "info": "/nix/store/icsmawdpqplpibq89mzxnhv39wyws20b-gcc-wrapper-15.2.0-info",
+        "man": "/nix/store/2q2jzxbhdbqn7q4bw6h7ql2vpra4nxmx-gcc-wrapper-15.2.0-man",
+        "out": "/nix/store/q5dy2amk2l7rq23gq7hi6kxsb520gd5p-gcc-wrapper-15.2.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gcc",
+      "broken": false,
+      "derivation": "/nix/store/y7wnv3kycy9gpxzwmny1sppi7il9i31a-gcc-wrapper-15.2.0.drv",
+      "description": "GNU Compiler Collection, version 15.2.0 (wrapper script)",
+      "install_id": "gcc",
+      "license": "GPL-3.0-or-later",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gcc-wrapper-15.2.0",
+      "pname": "gcc",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:53:16.181338Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "15.2.0",
+      "outputs_to_install": [
+        "man",
+        "man",
+        "man",
+        "out",
+        "out",
+        "out",
+        "out"
+      ],
+      "outputs": {
+        "info": "/nix/store/5b0hplrl0n9g159mcis4jca1fjd4822a-gcc-wrapper-15.2.0-info",
+        "man": "/nix/store/r35yg8h1w630r3lmnyglwhv5nvk284mx-gcc-wrapper-15.2.0-man",
+        "out": "/nix/store/788mx070y81zjlg5ipcl0cra3afviw9k-gcc-wrapper-15.2.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -1238,6 +1530,7 @@
       "unfree": false,
       "version": "1.26.3",
       "outputs_to_install": [
+        "out",
         "out"
       ],
       "outputs": {
@@ -1325,6 +1618,7 @@
       "unfree": false,
       "version": "1.26.3",
       "outputs_to_install": [
+        "out",
         "out",
         "out"
       ],
@@ -1864,6 +2158,7 @@
       "outputs_to_install": [
         "out",
         "out",
+        "out",
         "out"
       ],
       "outputs": {
@@ -1893,6 +2188,7 @@
       "unfree": false,
       "version": "24.15.0",
       "outputs_to_install": [
+        "out",
         "out",
         "out"
       ],
@@ -1924,6 +2220,7 @@
       "version": "24.15.0",
       "outputs_to_install": [
         "out",
+        "out",
         "out"
       ],
       "outputs": {
@@ -1953,6 +2250,7 @@
       "unfree": false,
       "version": "24.15.0",
       "outputs_to_install": [
+        "out",
         "out",
         "out"
       ],
@@ -3448,123 +3746,127 @@
       "priority": 5
     },
     {
-      "attr_path": "jujutsu",
+      "attr_path": "workmux",
       "broken": false,
-      "derivation": "/nix/store/28gc91z9fvg245a3rs6r4v6rx4130ahc-jujutsu-0.43.0.drv",
-      "description": "Git-compatible DVCS that is both simple and powerful",
-      "install_id": "jujutsu",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
-      "name": "jujutsu-0.43.0",
-      "pname": "jujutsu",
-      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
-      "rev_count": 1027867,
-      "rev_date": "2026-07-05T04:06:12Z",
-      "scrape_date": "2026-07-06T03:13:12.573421Z",
+      "derivation": "/nix/store/3ypyi79l2djbmj3mcqfkf8kmaq3fkn1j-workmux-0.1.247.drv",
+      "description": "Git worktrees + tmux windows for zero-friction parallel dev",
+      "install_id": "workmux",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/floxenvs?rev=33b50baaa2c72cbf93a50faff2862d64862146ea",
+      "name": "workmux-0.1.247",
+      "pname": "workmux",
+      "rev": "33b50baaa2c72cbf93a50faff2862d64862146ea",
+      "rev_count": 21959,
+      "rev_date": "2026-08-26T02:01:18Z",
+      "scrape_date": "2026-09-24T05:09:22.278050007Z",
       "stabilities": [
         "staging",
-        "unstable"
+        "unstable",
+        "stable"
       ],
       "unfree": false,
-      "version": "0.43.0",
+      "version": "0.1.247",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/mwn1fik4pg397khf5c2ajfvnazcm7rjv-jujutsu-0.43.0"
+        "out": "/nix/store/yrig9pl0a4zcqw0dcmqlpsm3y0syybv8-workmux-0.1.247"
       },
       "system": "aarch64-darwin",
-      "group": "jujutsu",
+      "group": "workmux",
       "priority": 5
     },
     {
-      "attr_path": "jujutsu",
+      "attr_path": "workmux",
       "broken": false,
-      "derivation": "/nix/store/n0fhs5w41764q5l1xjnrhcm38mcm557d-jujutsu-0.43.0.drv",
-      "description": "Git-compatible DVCS that is both simple and powerful",
-      "install_id": "jujutsu",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
-      "name": "jujutsu-0.43.0",
-      "pname": "jujutsu",
-      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
-      "rev_count": 1027867,
-      "rev_date": "2026-07-05T04:06:12Z",
-      "scrape_date": "2026-07-06T03:41:44.340431Z",
+      "derivation": "/nix/store/ami64aybhqq0k84vrzmycppb4iacg4s6-workmux-0.1.247.drv",
+      "description": "Git worktrees + tmux windows for zero-friction parallel dev",
+      "install_id": "workmux",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/floxenvs?rev=33b50baaa2c72cbf93a50faff2862d64862146ea",
+      "name": "workmux-0.1.247",
+      "pname": "workmux",
+      "rev": "33b50baaa2c72cbf93a50faff2862d64862146ea",
+      "rev_count": 21959,
+      "rev_date": "2026-08-26T02:01:18Z",
+      "scrape_date": "2026-09-24T05:09:22.278058424Z",
       "stabilities": [
         "staging",
-        "unstable"
+        "unstable",
+        "stable"
       ],
       "unfree": false,
-      "version": "0.43.0",
+      "version": "0.1.247",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/ri54j3mpnz9hck1jr4i4myzhqb7lj9h1-jujutsu-0.43.0"
+        "out": "/nix/store/df6phg0gwv7fw5mkzyqnln7pqq7lclk1-workmux-0.1.247"
       },
       "system": "aarch64-linux",
-      "group": "jujutsu",
+      "group": "workmux",
       "priority": 5
     },
     {
-      "attr_path": "jujutsu",
+      "attr_path": "workmux",
       "broken": false,
-      "derivation": "/nix/store/v9vi11qvjk1jw8mdnmr9xqvamyhj3shr-jujutsu-0.43.0.drv",
-      "description": "Git-compatible DVCS that is both simple and powerful",
-      "install_id": "jujutsu",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
-      "name": "jujutsu-0.43.0",
-      "pname": "jujutsu",
-      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
-      "rev_count": 1027867,
-      "rev_date": "2026-07-05T04:06:12Z",
-      "scrape_date": "2026-07-06T04:09:22.202831Z",
+      "derivation": "/nix/store/vbzikkidi8zk5z805rn69d9ff3p47qip-workmux-0.1.238.drv",
+      "description": "Git worktrees + tmux windows for zero-friction parallel dev",
+      "install_id": "workmux",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/floxenvs?rev=d83f8c105fa865ae25ec9b8896b64452d529bba5",
+      "name": "workmux-0.1.238",
+      "pname": "workmux",
+      "rev": "d83f8c105fa865ae25ec9b8896b64452d529bba5",
+      "rev_count": 18865,
+      "rev_date": "2026-08-09T14:00:20Z",
+      "scrape_date": "2026-09-24T05:09:22.278059091Z",
       "stabilities": [
         "staging",
-        "unstable"
+        "unstable",
+        "stable"
       ],
       "unfree": false,
-      "version": "0.43.0",
+      "version": "0.1.238",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/ixych7vy9rpv0vcx90h5sv4pmyd87i1n-jujutsu-0.43.0"
+        "out": "/nix/store/sswys8w80w83i2ilh8k09gl9lk7rp3i6-workmux-0.1.238"
       },
       "system": "x86_64-darwin",
-      "group": "jujutsu",
+      "group": "workmux",
       "priority": 5
     },
     {
-      "attr_path": "jujutsu",
+      "attr_path": "workmux",
       "broken": false,
-      "derivation": "/nix/store/5p90xpcsr1902vgah3rhwnkh3397cysi-jujutsu-0.43.0.drv",
-      "description": "Git-compatible DVCS that is both simple and powerful",
-      "install_id": "jujutsu",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
-      "name": "jujutsu-0.43.0",
-      "pname": "jujutsu",
-      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
-      "rev_count": 1027867,
-      "rev_date": "2026-07-05T04:06:12Z",
-      "scrape_date": "2026-07-06T04:40:47.832586Z",
+      "derivation": "/nix/store/5xaklchk040y926xz6gjk76j2mr3l6wp-workmux-0.1.247.drv",
+      "description": "Git worktrees + tmux windows for zero-friction parallel dev",
+      "install_id": "workmux",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/floxenvs?rev=33b50baaa2c72cbf93a50faff2862d64862146ea",
+      "name": "workmux-0.1.247",
+      "pname": "workmux",
+      "rev": "33b50baaa2c72cbf93a50faff2862d64862146ea",
+      "rev_count": 21959,
+      "rev_date": "2026-08-26T02:01:18Z",
+      "scrape_date": "2026-09-24T05:09:22.278059674Z",
       "stabilities": [
         "staging",
-        "unstable"
+        "unstable",
+        "stable"
       ],
       "unfree": false,
-      "version": "0.43.0",
+      "version": "0.1.247",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/w10748j1nsa40j6yjxvissjm8ljq4wlf-jujutsu-0.43.0"
+        "out": "/nix/store/h511yzhaard4nfccb8a0fxbqvvgl5xa0-workmux-0.1.247"
       },
       "system": "x86_64-linux",
-      "group": "jujutsu",
+      "group": "workmux",
       "priority": 5
     }
   ]

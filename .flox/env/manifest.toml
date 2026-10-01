@@ -46,6 +46,10 @@ tuicr.pkg-path = "tuicr"
 tuicr.pkg-group = "tuicr"
 tuicr.version = "0.19.1"
 tuicr.systems = ["aarch64-darwin", "aarch64-linux", "x86_64-linux"]
+ffmpeg.pkg-path = "ffmpeg"
+gcc.pkg-path = "gcc"
+workmux.pkg-path = "flox/workmux"
+workmux.pkg-group = "workmux"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
@@ -111,6 +115,9 @@ on-activate = '''
 
   # gh-dash
   _link gh-dash/config.yml "$HOME/.config/gh-dash/config.yml"
+
+  # workmux
+  _link workmux/pr-review.yaml "$HOME/.config/workmux/pr-review.yaml"
 
   # macOS only: karabiner
   if [ "$(uname -s)" = "Darwin" ]; then

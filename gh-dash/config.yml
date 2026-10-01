@@ -86,10 +86,9 @@ keybindings:
     - key: C
       name: checkout + claude pr-review
       command: >
-        resp=$(herdr tab create --label "PR-{{.PrNumber}}" --cwd {{.RepoPath}} --focus);
-        pane=$(echo "$resp" | jq -r .result.root_pane.pane_id);
-        tab=$(echo "$resp" | jq -r .result.tab.tab_id);
-        herdr pane run "$pane" 'wt switch --clobber pr:{{.PrNumber}} && begin; claude "/pr-review {{.PrNumber}}"; wt -y remove -D -f --foreground; herdr tab close '"$tab"'; end'
+        cd "{{.RepoPath}}" &&
+        workmux add --pr {{.PrNumber}} --name pr-{{.PrNumber}} -o
+        --config ~/.config/workmux/pr-review.yaml
     - key: O
       name: open in octo.nvim
       command: >

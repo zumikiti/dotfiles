@@ -94,3 +94,16 @@ end
 function wt-clean --description 'Remove all worktrees except main'
   wt remove -f -y (wt list --format=json | jq -r '.[] | select(.is_main | not) | .branch')
 end
+
+# workmux
+function w
+  workmux $argv
+end
+
+function wd
+  w dashboard $argv
+end
+
+function ws
+  w sidebar $argv
+end
