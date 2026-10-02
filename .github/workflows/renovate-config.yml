@@ -1,0 +1,35 @@
+name: Renovate Config
+
+# renovate.json は Dotfiles CI (Lua lint) では検証されないため、
+# 設定が壊れていてもマージできてしまう。本ワークフローで塞ぐ。
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - renovate.json
+      - .github/workflows/renovate-config.yml
+  pull_request:
+    branches: [ main ]
+    paths:
+      - renovate.json
+      - .github/workflows/renovate-config.yml
+
+jobs:
+  validate:
+    name: Validate renovate.json
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      # renovate@44 は Node ^24.11 を要求する。ランナー既定の Node 22 では動かない
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+
+      # 引数なしで実行すると renovate.json をリポジトリ設定として自動検出する。
+      # --strict: 移行が必要な旧キー (fileMatch, config:base 等) も失敗扱いにする
+      - name: Validate renovate config
+        run: npx --yes --package renovate -- renovate-config-validator --strict
