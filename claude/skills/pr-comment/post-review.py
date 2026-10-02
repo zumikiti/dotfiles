@@ -69,8 +69,8 @@ def main() -> None:
     comments = []
     for c in spec['comments']:
         path, line, label = c.get('path'), c.get('line'), c.get('label')
-        if not path or not isinstance(line, int) or not c.get('body'):
-            errors.append(f'{path}:{line} path / line（整数）/ body は必須です')
+        if not path or type(line) is not int or not c.get('body'):  # bool は int 扱いなので isinstance は使わない
+            errors.append(f'{path}:{line!r} path / line（整数）/ body は必須です')
             continue
         if label not in LABELS:
             errors.append(f'{path}:{line} 不明な label "{label}"（{", ".join(sorted(LABELS))}）')

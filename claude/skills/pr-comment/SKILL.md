@@ -15,7 +15,7 @@ allowed-tools:
 # PR インラインコメント投稿
 
 レビュー結果（主に `/pr-review` の出力）から選んだ指摘を、種別付きの短いインラインコメントにして PR へ投稿する。
-ドライバはこのスキルのディレクトリにある `post-review.py`（Python 3 標準ライブラリ + `gh` のみ。以下 `<skill-dir>/post-review.py`。Claude Code なら `~/.claude/skills/pr-comment/post-review.py`）。
+ドライバはこのスキルのディレクトリにある `post-review.py`（Python 3 標準ライブラリ + `gh` のみ。以下 `<skill-dir>/post-review.py`。Claude Code ではスキル読み込み時に示される Base directory、例: `~/.claude/skills/pr-comment/`）。
 
 ## 使用方法
 ```
@@ -24,7 +24,7 @@ allowed-tools:
 - 指摘番号は、直前のレビュー出力の箇条書きを上から数えた通し番号
 - 直前に `/pr-review` の結果が無い場合は、何をコメントするかユーザーに確認する
 - `label` は指定が無ければエージェントが提案し、手順 5 の表で確認を取る
-- 既定では手順 5（dry-run と文面提示）で止まる。「投稿して」「post して」と明示されたときだけ手順 6 へ進む
+- 既定では手順 5（dry-run と文面提示）で止まる。「投稿して」「post して」と明示されたときだけ手順 6 へ進む（「コメントして」は起動の合図であり、投稿の許可ではない）
 
 ## 手順
 
@@ -35,7 +35,7 @@ allowed-tools:
    ```bash
    <skill-dir>/post-review.py <scratchpad>/comments.json --dry-run
    ```
-5. **文面をユーザーに見せる**（表: 行 / 種別 / 要旨）。投稿は外に出る操作ゆえ、ユーザーが「投稿して」と明示していない限りここで止める
+5. **文面をユーザーに見せる**（表: 行 / 種別 / 要旨）。投稿は外に出る操作ゆえ、ユーザーが「投稿して」「post して」と明示していない限りここで止める
 6. **投稿**
    ```bash
    <skill-dir>/post-review.py <scratchpad>/comments.json
