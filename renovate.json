@@ -1,33 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:recommended"],
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Flox manifest version manager",
-      "fileMatch": ["^\.flox/env/manifest\.toml$"],
-      "matchStrings": [
-        "(?<depName>[^\s.]+)\.version = \"(?<currentValue>[^\"]+)\""
-      ],
-      "datasourceTemplate": "github-releases"
-    },
-    {
-      "customType": "regex",
-      "description": "Fish plugins manager",
-      "fileMatch": ["^fish/fish_plugins$"],
-      "matchStrings": [
-        "^([^\s]+)$"
-      ],
-      "depNameTemplate": "fisher/{{{currentValue}}}",
-      "datasourceTemplate": "github-releases"
-    }
-  ],
-  "packageRules": [
-    {
-      "matchPackageNames": ["neovim"],
-      "enabled": false 
+      "description": "fisher plugins pinned by commit SHA (owner/repo@<sha40>)",
+      "managerFilePatterns": ["/^fish/fish_plugins$/"],
+      "matchStrings": ["(?<depName>[\\w.-]+/[\\w.-]+)@(?<currentDigest>[0-9a-f]{40})"],
+      "datasourceTemplate": "git-refs",
+      "packageNameTemplate": "https://github.com/{{{depName}}}"
     }
   ]
 }
