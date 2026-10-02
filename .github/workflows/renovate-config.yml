@@ -14,6 +14,10 @@ on:
       - renovate.json
       - .github/workflows/renovate-config.yml
 
+# 外部パッケージ (renovate) を実行するため、トークン権限は読み取りのみに絞る
+permissions:
+  contents: read
+
 jobs:
   validate:
     name: Validate renovate.json
@@ -31,5 +35,7 @@ jobs:
 
       # 引数なしで実行すると renovate.json をリポジトリ設定として自動検出する。
       # --strict: 移行が必要な旧キー (fileMatch, config:base 等) も失敗扱いにする
+      # deliberate: バージョン固定は actions の SHA ピン留めと同じ方針。package.json が
+      # 無いので Renovate 自身は拾わない。validator が古くなったら手で上げる
       - name: Validate renovate config
-        run: npx --yes --package renovate -- renovate-config-validator --strict
+        run: npx --yes --package renovate@44.132.2 -- renovate-config-validator --strict
