@@ -1,0 +1,157 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "server": {
+    "hostname": "0.0.0.0"
+  },
+  "model": "oxlm/Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2",
+  "small_model": "oxlm/Qwen3-30B-A3B-Instruct-2507-4bit",
+  "provider": {
+    "oxlm": {
+      "api": "openai-compatible",
+      "name": "OXLM",
+      "options": {
+        "baseURL": "http://100.91.119.36:8888/v1",
+        "apiKey": "{env:OXLM_API_KEY}",
+        "timeout": 600000
+      },
+      "models": {
+        "gemma-4-31b-it-4bit": {
+          "name": "OXLM: Gemma 4 31B IT 4bit",
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          },
+          "options": {
+            "temperature": 0.3
+          }
+        },
+        "Qwen3-30B-A3B-Thinking-2507-MLX-4bit": {
+          "name": "OXLM: Qwen3 Thinking",
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          },
+          "options": {
+            "temperature": 0.1,
+            "reasoningEffort": "high",
+            "enable_thinking": true
+          }
+        },
+        "Qwen3-30B-A3B-Instruct-2507-4bit": {
+          "name": "OXLM: Qwen3 Instruct",
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          },
+          "options": {
+            "temperature": 0.2
+          }
+        },
+        "Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2": {
+          "name": "OXLM: Qwen3 Coder",
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          },
+          "options": {
+            "temperature": 0.2
+          }
+        }
+      }
+    }
+  },
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.pem": "deny",
+      "*id_rsa*": "deny",
+      "*.env.example": "allow",
+      "*.env.sample": "allow"
+    },
+    "edit": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.pem": "deny",
+      "*id_rsa*": "deny",
+      "*.env.example": "allow",
+      "*.env.sample": "allow"
+    },
+    "webfetch": "allow",
+    "bash": {
+      "*": "ask",
+      "jj *": "allow",
+      "rtk *": "allow",
+      "rtk git push": "ask",
+      "rtk git push *": "ask",
+      "jj git push": "ask",
+      "jj git push *": "ask",
+      "git status": "allow",
+      "git status *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git add": "allow",
+      "git add *": "allow",
+      "git commit": "allow",
+      "git commit *": "allow",
+      "git push": "ask",
+      "git push *": "ask",
+      "git log": "allow",
+      "git log *": "allow",
+      "ls": "allow",
+      "ls *": "allow",
+      "pwd": "allow",
+      "rg": "allow",
+      "rg *": "allow",
+      "go build": "allow",
+      "go build *": "allow",
+      "go test": "allow",
+      "go test *": "allow",
+      "go mod tidy": "allow",
+      "go mod tidy *": "allow",
+      "*.env": "deny",
+      "*.env *": "deny",
+      "*.env.*": "deny",
+      "*secret*": "deny",
+      "*.key": "deny",
+      "*.key *": "deny",
+      "*.pem": "deny",
+      "*.pem *": "deny",
+      "*id_rsa*": "deny"
+    },
+    "skill": {
+      "*": "allow",
+      "subagent-model-policy": "deny"
+    }
+  },
+  "mcp": {
+    "dailymemo": {
+      "type": "local",
+      "command": [
+        "node",
+        "{env:HOME}/code/dailymemo/mcp-server/dist/index.js"
+      ],
+      "enabled": true,
+      "environment": {
+        "DAILYMEMO_PATH": "{env:HOME}/code/dailymemo"
+      }
+    }
+  },
+  "agent": {
+    "plan": {
+      "model": "oxlm/Qwen3-30B-A3B-Thinking-2507-MLX-4bit",
+      "temperature": 0.1,
+      "permission": {
+        "edit": "deny",
+        "bash": "deny"
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "lastChangelogVersion": "0.84.1",
+  "theme": "dark",
+  "quietStartup": true,
+  "compaction": {
+    "enabled": false
+  },
+  "defaultProvider": "oxlm",
+  "defaultModel": "Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2",
+  "defaultThinkingLevel": "high",
+  "skills": [
+    "~/.claude/skills/agents-subagent-model-policy",
+    "~/.claude/skills/code-review",
+    "~/.claude/skills/commit",
+    "~/.claude/skills/create-pr",
+    "~/.claude/skills/grill-with-docs",
+    "~/.claude/skills/grilling",
+    "~/.claude/skills/jj-commit",
+    "~/.claude/skills/pr-review",
+    "~/.claude/skills/teach"
+  ],
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3,
+    "baseDelayMs": 2000,
+    "provider": {
+      "timeoutMs": 3600000,
+      "maxRetries": 0,
+      "maxRetryDelayMs": 60000
+    }
+  },
+  "warnings": {
+    "anthropicExtraUsage": false
+  },
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/.env*)",
+      "Read(**/*secret*)",
+      "Read(**/*.key)",
+      "Read(**/*.pem)",
+      "Bash(cat .env*)",
+      "Bash(cat *secret*)"
+    ]
+  },
+  "enabledModels": [
+    "openrouter/deepseek/deepseek-v4-flash-0731",
+    "openrouter/tencent/hy3",
+    "oxlm/Qwen3.8-27B-4bit",
+    "oxlm/gemma-4-31b-it-4bit",
+    "oxlm/Qwen3-Coder-30B-A3B-Instruct-4bit-dwq-v2"
+  ]
+}
