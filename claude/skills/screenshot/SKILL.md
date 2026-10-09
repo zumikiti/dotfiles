@@ -9,22 +9,22 @@ description: 新規画面や修正した画面を Claude 自身が目で確認�
 
 ## 前提
 
-- Linux(VM): flox 環境の chromium + noto-fonts-cjk-sans を使う（`flox install chromium noto-fonts-cjk-sans`、chromium は linux 系のみ）
-- Mac: Google Chrome が使われる
-- 初回のみ `~/.claude/skills/screenshot/scripts/` で `npm install`（ブラウザはダウンロードされない）
+- dotfiles の flox 環境（manifest で宣言済み。chromium は Linux のみ、Mac は Google Chrome）を有効にして使う
+- 初回のみ `~/.claude/skills/screenshot/scripts/` で `npm ci`（lock どおりに入れる。ブラウザはダウンロードされない）
 - VM からホストの Docker へは `http://host.internal:<port>`
 
 ## 設定
 
-リポジトリ直下の `.screenshot.env`（git 管理外。無ければ先に `.gitignore` へ追加してから作る）。
+`.screenshot.env` を カレントディレクトリ → git リポジトリ直下 の順で探す（git 管理外。無ければ先に対象アプリのリポジトリの `.gitignore`（または `~/.config/git/ignore`）へ追加してから作る）。
 
 ```
 SCREENSHOT_BASE_URL=http://host.internal:8082
 SCREENSHOT_COOKIE="name=PLACEHOLDER; name2=PLACEHOLDER"
-# SCREENSHOT_CHROMIUM=/path/to/chromium  (任意)
 ```
 
 - 同名の環境変数があればファイルより優先される
+- `SCREENSHOT_CHROMIUM`（chromium のパス、任意）は環境変数のみ。ファイルからは読まない
+- Cookie は `SCREENSHOT_BASE_URL` と同じホストにだけ送られる（別ホストの URL を渡しても注入されない）
 - Cookie はユーザーがホストのブラウザでログイン後、DevTools の Network → 該当リクエストの Request Headers → `Cookie` をそのままコピーして貼る
 - **Claude はこのファイルを絶対に cat/Read しない。値をコマンドに書かない。コミットしない**（認証情報）
 - ファイルの作成・更新はユーザーに `!` プレフィックスのコマンドかエディタで行ってもらう
@@ -38,14 +38,16 @@ SCREENSHOT_COOKIE="name=PLACEHOLDER; name2=PLACEHOLDER"
    ```
    - `/` 始まりは `SCREENSHOT_BASE_URL` に連結される。既定 1440x900、`--full` で全体、`--wait` は networkidle 後の追加待ち(ms)
    - 出力先はセッションの scratchpad ディレクトリ（system prompt に記載があればそれ、無ければ `/tmp/screenshots/`）
-2. 出力 PNG を Read ツールで開いて目視する
-3. 結果（表示崩れ、console error、pageerror、requestfailed）を報告する
+2. 出力 1 行目の `final=` と `title=` で目的のページかを確かめる。同じホストのログイン画面（Laravel の `/login` など）へ飛んだ場合は終了コード 0 のままなので、ここで気づく
+3. 出力 PNG を Read ツールで開いて目視する
+4. 結果（表示崩れ、console error、pageerror、requestfailed）を報告する
 
 ## 終了コード
 
 - 0: 成功
+- 1: 引数誤り・URL 不正・接続失敗やタイムアウト。常時ポーリングのページは networkidle に達せず 30 秒で 1 になる
 - 2: 別ホストへリダイレクトされた（SSO ログイン画面など）。Cookie 切れとしてユーザーに貼り直しを依頼する
-- 3: chromium / playwright-core が見つからない（メッセージに従う）
+- 3: chromium / playwright-core が無い、またはパス指定なのに `SCREENSHOT_BASE_URL` が無い（メッセージに従う）
 
 ## 補足
 
