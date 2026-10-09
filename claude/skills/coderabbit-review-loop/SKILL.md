@@ -31,8 +31,8 @@ PR 1 本（または積み上げ PR の列を下から順に）を、CodeRabbit 
 
 `scripts/pr-status.sh <PR> [owner/repo]`（読み取り専用）。最終 head の SHA に対する CI と CodeRabbit の状態を JSON で出す。
 
-- `ci.verdict`: `success` / `pending` / `failed` / `not_started`（0 件。衝突などで未起動）
-- `coderabbit.latestStateOnHead`: 最終 head に対する CodeRabbit の最新レビュー状態（`APPROVED` / `CHANGES_REQUESTED` / `COMMENTED` / null）。null なら最終 head は未レビュー
+- `ci.verdict`: `success` / `pending` / `failed` / `not_started`（0 件。衝突などで未起動）。check-runs と旧来のコミットステータスの両方を集計する
+- `coderabbit.latestStateOnHead`: 最終 head に対する CodeRabbit の最新レビュー状態（`APPROVED` / `CHANGES_REQUESTED` / `COMMENTED` / `DISMISSED` / `PENDING` / null。GitHub API の値がそのまま入る）。null なら最終 head は未レビュー
 - `coderabbit.recentComments`: CodeRabbit の直近コメント冒頭（レート制限・進行中の判別用）
 - `reviewDecision`: 古い head の APPROVED を引き継ぐことがあるので、承認の根拠には `latestStateOnHead` を使う
 - `baseIsDefault` / `defaultBranch`: base がデフォルトブランチか。true なら手順 8 は人のレビュー待ちで止める
@@ -64,7 +64,8 @@ PR 1 本（または積み上げ PR の列を下から順に）を、CodeRabbit 
 ### 4. 待機
 
 - Monitor か `run_in_background` の until ループ（60 秒間隔で `scripts/pr-status.sh` を呼ぶ）で待つ。foreground の sleep は使えない。
-- 待つ条件は「`ci.verdict` が `pending` でない」かつ「CodeRabbit が最終 head にレビューを返した（`latestStateOnHead` が null でない、またはレート制限コメント）」。
+- 待つ条件は「`ci.verdict` が `pending` でない」かつ「CodeRabbit が最終 head にレビューを返した（`latestStateOnHead` が null でない、またはレート制限コメント）」。CodeRabbit の「Already reviewed the last commit」「Review finished」系のコメントが最終 head に付いたときも抜ける。
+- 待機の上限は 30 分。超えたら打ち切って状態を報告する。
 - `ci.verdict` が `not_started` なら、衝突や権限など CI が走らない原因を調べる（`mergeable` が `CONFLICTING` なら base とのコンフリクト解消が先）。
 - 待機中に同じ調査を重ねない。
 
@@ -101,7 +102,7 @@ CodeRabbit の指摘は `gh api repos/<repo>/pulls/<N>/comments`（インライ�
 ### 8. マージと次の PR へ
 
 1. `baseIsDefault` が true（base がデフォルトブランチ。`gh repo view --json defaultBranchRef` でも確認できる）なら、マージしない。CodeRabbit の承認と CI 成功まで済ませたら「人のレビュー待ち」として止め、報告で人のレビューを依頼する。人の approve が既にあってもマージの可否はユーザーとブランチ保護の方針に従い、迷ったら止める。積み上げ列の最後が main 向けなら、そこで列を終える。
-2. 統合ブランチ向け（`baseIsDefault` が false）は、`ci.verdict` が `success`、承認済み（最終 head）、`mergeable` が `MERGEABLE` を確認でき次第、ユーザーへの確認なしにマージする。
+2. 統合ブランチ向け（`baseIsDefault` が false）は、`ci.verdict` が `success`、承認済み（最終 head）、`mergeable` が `MERGEABLE`、`mergeStateStatus` が `CLEAN`（`UNSTABLE` / `BLOCKED` なら止めて原因を報告）を確認でき次第、ユーザーへの確認なしにマージする。
 3. マージ方式はリポジトリの慣例を確認する（`gh pr list --state merged` のマージコミットの形、CLAUDE.md、ブランチ保護）。積み上げではマージコミットにする（後続ブランチがそのまま乗り、own commits が崩れないため）。
 4. `gh pr merge <N> --merge`（慣例に合わせて変える）。実行環境の権限設定が優先する。auto mode などで拒否されたら回避せず、状態を整理してユーザーに渡す。
 5. 積み上げなら、次の PR の base が付け替わったか `gh pr view <N+1> --json baseRefName` で確認し、されていなければ付け替える。次の PR の own commits を記録し、その PR の手順 1 へ進む。
