@@ -11,7 +11,7 @@ description: 新規画面や修正した画面を Claude 自身が目で確認�
 
 - dotfiles の flox 環境（manifest で宣言済み。chromium は Linux のみ、Mac は Google Chrome）を有効にして使う
 - 初回のみ `~/.claude/skills/screenshot/scripts/` で `npm ci`（lock どおりに入れる。ブラウザはダウンロードされない）
-- VM からホストの Docker へは `http://host.internal:<port>`
+- VM からホストの Docker へは `http://host.internal:<port>`（OrbStack の名前。Docker Desktop なら `host.docker.internal`）
 
 ## 設定
 
@@ -24,7 +24,9 @@ SCREENSHOT_COOKIE="name=PLACEHOLDER; name2=PLACEHOLDER"
 
 - 同名の環境変数があればファイルより優先される
 - `SCREENSHOT_CHROMIUM`（chromium のパス、任意）は環境変数のみ。ファイルからは読まない
-- Cookie は `SCREENSHOT_BASE_URL` と同じホストにだけ送られる（別ホストの URL を渡しても注入されない）
+- Cookie は `SCREENSHOT_BASE_URL` と同じオリジン（スキーム+ホスト+ポート）にだけ送られる（別オリジンの URL を渡しても注入されない）
+- URL のスキームは http / https のみ（`file://` などは拒否）。出力先は `.png` 必須
+- git 管理下（tracked）の `.screenshot.env` は使用を拒否される（他人のチェックアウトに仕込まれた設定を避けるため）
 - Cookie はユーザーがホストのブラウザでログイン後、DevTools の Network → 該当リクエストの Request Headers → `Cookie` をそのままコピーして貼る
 - **Claude はこのファイルを絶対に cat/Read しない。値をコマンドに書かない。コミットしない**（認証情報）
 - ファイルの作成・更新はユーザーに `!` プレフィックスのコマンドかエディタで行ってもらう
