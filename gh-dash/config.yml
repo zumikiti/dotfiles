@@ -102,7 +102,8 @@ keybindings:
       name: claude pr-review-loop
       command: >
         cd "{{.RepoPath}}" &&
-        wt switch pr:{{.PrNumber}} -x claude -- "/pr-review-loop {{.PrNumber}}"
+        workmux add --pr {{.PrNumber}} --name pr-{{.PrNumber}}-loop -o
+        --config ~/.config/workmux/pr-review-loop.yaml
     - key: d
       name: tuicr diff
       command: >

@@ -162,6 +162,7 @@ on-activate = '''
 
   # workmux
   _link workmux/pr-review.yaml "$HOME/.config/workmux/pr-review.yaml"
+  _link workmux/pr-review-loop.yaml "$HOME/.config/workmux/pr-review-loop.yaml"
 
   # macOS only: karabiner
   if [ "$(uname -s)" = "Darwin" ]; then
