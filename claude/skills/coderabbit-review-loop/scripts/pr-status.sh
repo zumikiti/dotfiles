@@ -16,7 +16,7 @@ default_branch=$(gh repo view "$repo" --json defaultBranchRef -q .defaultBranchR
 # CI: コミット SHA 単位で取る（PR 単位の表示は push 直後に旧 head の結果を返すことがある）
 checks=$(gh api --paginate "repos/$repo/commits/$sha/check-runs?per_page=100" --jq '.check_runs[] | {name, status, conclusion}' | jq -s .)
 # 旧来のコミットステータスで報告する CI も verdict に含める
-statuses=$(gh api "repos/$repo/commits/$sha/status" --jq '[.statuses[] | {name: .context, status: (if .state=="pending" then "in_progress" else "completed" end), conclusion: (if .state=="success" then "success" elif .state=="pending" then null else "failure" end)}]')
+statuses=$(gh api "repos/$repo/commits/$sha/status?per_page=100" --jq '[.statuses[] | {name: .context, status: (if .state=="pending" then "in_progress" else "completed" end), conclusion: (if .state=="success" then "success" elif .state=="pending" then null else "failure" end)}]')
 checks=$(jq -s 'add' <<<"$checks$statuses")
 
 # CodeRabbit のレビュー（どの commit に対するものか）

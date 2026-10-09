@@ -17,16 +17,16 @@ try {
     },
   });
 } catch (e) { console.error(`${e.message}\n${USAGE}`); process.exit(1); }
-const num = (name) => {
+const num = (name, min) => {
   const v = parsed.values[name];
   const n = Number(v);
-  if (v.trim() === '' || !Number.isFinite(n) || n < 0) { console.error(`invalid --${name}`); process.exit(1); }
+  if (v.trim() === '' || !Number.isInteger(n) || n < min) { console.error(`invalid --${name}`); process.exit(1); }
   return n;
 };
 const full = Boolean(parsed.values.full);
-const width = num('width');
-const height = num('height');
-const wait = num('wait');
+const width = num('width', 1);
+const height = num('height', 1);
+const wait = num('wait', 0);
 const [target, out] = parsed.positionals;
 if (!target || !out) { console.error(USAGE); process.exit(1); }
 
@@ -83,14 +83,14 @@ try { ({ chromium } = require('playwright-core')); } catch {
           return { name: c.slice(0, i), value: c.slice(i + 1), domain: host, path: '/' };
         });
       } else {
-        console.log('WARN: target host differs from SCREENSHOT_BASE_URL; cookies not sent');
+        console.error('WARN: target host differs from SCREENSHOT_BASE_URL; cookies not sent');
       }
     }
     if (cookies.length) await context.addCookies(cookies);
     const page = await context.newPage();
     // deliberate: hide query/hash in the log; SSO redirects carry long tokens there
     const redact = (u) => {
-      try { const x = new URL(u); x.hash = ''; if (x.search) x.search = '?...'; return x.toString(); } catch { return '<url>'; }
+      try { const x = new URL(u); x.username = ''; x.password = ''; x.hash = ''; if (x.search) x.search = '?...'; return x.toString(); } catch { return '<url>'; }
     };
     page.on('pageerror', (e) => logs.push(`pageerror: ${e.message}`));
     page.on('console', (m) => m.type() === 'error' && logs.push(`console.error: ${m.text()}`));
