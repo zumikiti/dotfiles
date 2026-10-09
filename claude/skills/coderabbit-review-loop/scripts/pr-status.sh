@@ -10,6 +10,8 @@ bot='coderabbitai[bot]'
 
 view=$(gh pr view "$pr" -R "$repo" --json number,state,isDraft,baseRefName,headRefName,headRefOid,mergeable,mergeStateStatus,reviewDecision)
 sha=$(jq -r .headRefOid <<<"$view")
+# 最終 head のコミット日時（「Review finished」が最終 head 以降か判定する基準）
+head_committed_at=$(gh api "repos/$repo/commits/$sha" --jq .commit.committer.date)
 # main 向けは人のレビュー必須の判定に使う
 default_branch=$(gh repo view "$repo" --json defaultBranchRef -q .defaultBranchRef.name)
 
@@ -35,13 +37,13 @@ query($o:String!,$n:String!,$p:Int!,$endCursor:String){repository(owner:$o,name:
   --jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved|not)] | length' | jq -s add)
 unresolved=${unresolved:-0}
 
-jq -n --argjson v "$view" --argjson c "$checks" --argjson r "$reviews" --argjson k "$comments" --argjson u "$unresolved" --arg sha "$sha" --arg def "$default_branch" '
+jq -n --argjson v "$view" --argjson c "$checks" --argjson r "$reviews" --argjson k "$comments" --argjson u "$unresolved" --arg sha "$sha" --arg hca "$head_committed_at" --arg def "$default_branch" '
   ($r | map(select(.commit_id==$sha))) as $onhead
   | ($c|map(select(.status!="completed"))|length) as $pending
   | ($c|map(select(.status=="completed" and (.conclusion|IN("success","skipped","neutral")|not)))|length) as $failed
   | {
     pr: $v.number, state: $v.state, draft: $v.isDraft,
-    base: $v.baseRefName, defaultBranch: $def, baseIsDefault: ($v.baseRefName==$def), head: $v.headRefName, headSha: $sha,
+    base: $v.baseRefName, defaultBranch: $def, baseIsDefault: ($v.baseRefName==$def), head: $v.headRefName, headSha: $sha, headCommittedAt: $hca,
     mergeable: $v.mergeable, mergeStateStatus: $v.mergeStateStatus,
     reviewDecision: $v.reviewDecision,
     ci: {
