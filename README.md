@@ -28,6 +28,8 @@ flox activate -d ~/dotfiles
 ```
 `fish` にログインしたときは `fish/config.fish` で自動的に `flox activate -d ~/dotfiles` される。
 
+`paseo` を使う場合は、dotfiles ディレクトリで一度 `npm ci` を実行しておく（`package-lock.json` 更新後も再実行）。次回の `flox activate` で `~/.local/bin/paseo` にリンクされる。
+
 ## install fish
 ```sh
 # install fnm && node
