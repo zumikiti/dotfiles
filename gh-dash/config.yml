@@ -93,12 +93,12 @@ keybindings:
       name: open in octo.nvim
       command: >
         nvim -c "Octo pr edit {{.PrNumber}}"
-    - key: ctrl+w
+    - key: W
       name: wt switch to PR
       command: >
         cd "{{.RepoPath}}" &&
-        wt switch pr:{{.PrNumber}}
-    - key: ctrl+l
+        wt switch pr:{{.PrNumber}} -x fish
+    - key: L
       name: claude pr-review-loop
       command: >
         cd "{{.RepoPath}}" &&
