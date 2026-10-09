@@ -38,6 +38,7 @@ description: サブエージェント（Agentツール・Workflow）を起動す
 - Haiku は「手順どおりにやれば終わる」かつ「結果を機械的に検証できる」場合に限る。コードを読んで判断させるなら Sonnet に上げる。Haiku で失敗して Sonnet でやり直すと、節約分（Sonnet の半額）は消える
 - 調査寄りの中間タスク（設計判断を含む調査など）→ Opus に倒す。Opus は Sonnet の 2 倍で済み、やり直しより安い
 - `fable` をサブエージェントに指定するのは、親と同等の判断力が本当に必要な場合に限る（原則不要）
+- `subagent_type: "fork"` は `model` を無視して常に親のモデルを継承するため、親が Fable だと 5 倍になる。Fable 親では委譲作業に fork を使わない（この環境の Agent ツール説明で確認済み）
 - Workflow スクリプト内の `agent()` 呼び出しにも同じ方針を適用する（`opts.model`）。Workflow では `opts.effort` も使えるので、機械的な段階は `effort: "low"`、検証・判定の段階だけ高くする
 
 ## サブエージェントへの指示で補うこと（Sonnet 5.5 の既知の癖）
