@@ -11,8 +11,8 @@
 - "wt" in my requests means the `wt` CLI (worktrunk, from my dotfiles), NOT the built-in EnterWorktree tool
   - Create worktrees/branches with `wt switch --create <branch> --base <default-branch>` (verify the default branch first; a stale local origin/HEAD once caused a worktree based on a dead 2023 branch)
   - Then switch the session into it with EnterWorktree's `path` parameter
-- Before comparing branches or environments (e.g. stg vs dev config, a PR branch vs main), always `git fetch origin` and read `origin/main` (`git show origin/main:<path>`), never the local main checkout. A stale local main once made me misreport the stg health check path and list phantom env differences
-  - Also check `git merge-base origin/main <branch>` and its date, so fixes that landed on main after the branch was cut are not missed
+- Before comparing branches or environments (e.g. stg vs dev config, a PR branch vs main), always `git fetch origin` and read `origin/<default-branch>` (usually `origin/main`; `git show origin/<default-branch>:<path>`), never the local main checkout. A stale local main once made me misreport the stg health check path and list phantom env differences
+  - Also check `git merge-base origin/<default-branch> <branch>` and its date, so fixes that landed on main after the branch was cut are not missed
 
 # File Formatting
 - Always add a newline at the end of files to avoid "No newline at end of file" warnings.
