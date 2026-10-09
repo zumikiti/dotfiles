@@ -160,6 +160,10 @@ on-activate = '''
   # workmux
   _link workmux/pr-review.yaml "$HOME/.config/workmux/pr-review.yaml"
 
+  # paseo (npm): linked only after `npm ci` has populated the gitignored
+  # node_modules. ~/.local/bin must be on PATH (not guaranteed by this repo).
+  _link node_modules/.bin/paseo "$HOME/.local/bin/paseo"
+
   # macOS only: karabiner
   if [ "$(uname -s)" = "Darwin" ]; then
     _link karabiner.json  "$HOME/.config/karabiner/karabiner.json"
