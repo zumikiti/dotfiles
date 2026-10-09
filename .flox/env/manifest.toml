@@ -160,9 +160,8 @@ on-activate = '''
   # workmux
   _link workmux/pr-review.yaml "$HOME/.config/workmux/pr-review.yaml"
 
-  # paseo: node_modules is gitignored, so this only links if `npm install`
-  # has populated it in the dotfiles project. The target is user-writable
-  # (~/.local/bin, on PATH), so we do NOT symlink into /nix/store (read-only).
+  # paseo (npm): linked only after `npm ci` has populated the gitignored
+  # node_modules. ~/.local/bin must be on PATH (not guaranteed by this repo).
   _link node_modules/.bin/paseo "$HOME/.local/bin/paseo"
 
   # macOS only: karabiner
