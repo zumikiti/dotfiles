@@ -1,8 +1,7 @@
 # gh-dash の L キー (checkout + claude pr-review-loop) 専用。
 # `workmux add --config` で差し込む。PR 番号は --name pr-<N>-loop で決まる
 # worktree ディレクトリ名 ($PWD) から取り出して claude に `/pr-review-loop <N>` を渡す。
-# 片付けは pr-review-loop スキル自身が workmux remove -f で行う。claude が
-# 異常終了したときの保険として、ここでも終了後に workmux remove -f する。
+# 終了後に worktree/ブランチ/ウィンドウを片付ける（claude を抜けたときに走る。スキル側は閉じない）。
 # 他人の PR のチェックアウト内のファイル (.workmux/PROMPT-*.md 等) は読まない。
 # 読むと PR 作者がコミットしたファイルでプロンプトを差し込めてしまうため。
 panes:

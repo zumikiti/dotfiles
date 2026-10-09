@@ -138,24 +138,21 @@ push 後に CI があれば、正常完了まで見届ける。
   - 既知のフレーキー・無関係な失敗: `gh run rerun <run-id> --failed` で再実行し、再度見届ける。それでも落ちるなら原因と共に報告する
 - 「hook / lint / typecheck は CI 委ね」と書いた項目は、ここで CI の結果に置き換えて報告する
 
-### 7. 終了の見届けと後始末
+### 7. 終了の見届け
 
 「終わった」とは、最終レポートを出し、push と PR 本文更新が済み、6. の CI 監視が `pending` 無しで終了した時点を指す（CI 修正枠を使った場合はその再 CI も含む）。ここまでを Monitor で見届け、途中で終わらない。
 
-- 起動元の判定（workmux も wt も claude に環境変数を残さないので、パスとウィンドウ名で判定する）:
-  - **workmux**: `git rev-parse --show-toplevel` が `*__worktrees/*` 配下（gh-dash の `C` / `L` キーは `workmux add --name pr-<N>` / `pr-<N>-loop` で作る）
-  - **wt**: linked worktree だが `__worktrees/` を含まない（`wt list --format json` で `is_current: true` かつ `is_main: false`。`wt switch pr:<N> -x claude ...` で起動した場合）
-  - **素の tmux ウィンドウ**: メイン worktree のまま、`$TMUX` があり、`tmux display-message -p '#W'` が `pr<N>-loop`（または起動時に「終わったらウィンドウを閉じる」と指示された場合）
-  - どれにも当てはまらない（gh-dash 以外の通常ウィンドウ等）: 閉じない。報告だけして終える
-- 閉じる前に `git status --short` と `git log @{u}..` で未コミット・未 push が無いことを確認する。あれば閉じずに報告する（作業を失わないため）
-- 後始末は**最終レポートを出した後の最後の手順**として実行する（自分のウィンドウや cwd が消えるので、その後に Bash を使わない）:
-  - workmux: `workmux remove -f`（ウィンドウ・worktree・ローカルブランチを消す。起動 yaml の `; workmux remove -f` は claude 終了後にしか走らないので、スキル側から実行する）
-  - wt: `wt remove -f --foreground`（worktree を消す。ブランチは既定ブランチにマージ済み相当のときだけ消え、未マージなら残る。claude 自体は呼び出し元の端末に残るので、ユーザーが抜ける）
-  - 素の tmux: `tmux kill-window -t "$(tmux display-message -p '#I')"`
-- 起動側（別セッションのコーディネーター）は、`tmux list-windows -F '#W'` から `pr<N>-loop` / `pr-<N>-loop` が無くなったこと、または `workmux list` / `wt list` から worktree が消えたことで完了を検知できる
+- 終了時に `git status --short` と `git log @{u}..` を確認し、未コミット・未 push があれば最終レポートに明記する
+- **ウィンドウ・worktree・セッションは閉じない。** 最終レポートをユーザーが読めるよう画面に残したまま終える。起動時に「終わったら閉じて」と指示されていても、閉じる前に最終レポートが読まれたことをユーザーに確認する
+- 片付けは起動側に委ねる:
+  - gh-dash の `C` / `L`（workmux）: ユーザーが claude を抜けると起動 yaml の `; workmux remove -f` が worktree・ウィンドウ・ローカルブランチを消す
+  - wt 起動（`wt switch pr:<N> -x claude ...`）: ユーザーが `wt remove` する
+  - 別セッションのコーディネーターが素の tmux ウィンドウで起動した場合: コーディネーター側が結果を回収してから `tmux kill-window` する
+- 起動側の完了検知: ペインに `📊 最終レビューレポート` が出て `❯` プロンプトに戻っていること（`tmux capture-pane -p -t <pane>`）
 
 ## やってはいけないこと
 
 - 指摘を「方針に合わない」だけで却下する。却下するなら根拠を書く
 - push だけして CI を見届けずに終える
 - スコープ外（PR 本文の「やらない事」）に踏み込む修正。ただし共有リソース衝突の回避のように**既存側に最小の変更が必要な場合**は、変更内容を PR 本文に明記した上で行ってよい
+- 終了時に自分のウィンドウ・worktree・セッションを閉じる（最終レポートが読めなくなる）
