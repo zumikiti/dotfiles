@@ -50,6 +50,9 @@ ffmpeg.pkg-path = "ffmpeg"
 gcc.pkg-path = "gcc"
 workmux.pkg-path = "flox/workmux"
 workmux.pkg-group = "workmux"
+chromium.pkg-path = "chromium"
+chromium.systems = ["aarch64-linux", "x86_64-linux"]
+noto-fonts-cjk-sans.pkg-path = "noto-fonts-cjk-sans"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
