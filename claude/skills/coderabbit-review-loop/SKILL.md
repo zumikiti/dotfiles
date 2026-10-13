@@ -22,7 +22,8 @@ PR 1 本（または積み上げ PR の列を下から順に）を、CodeRabbit 
 - base がデフォルトブランチでない PR（積み上げの途中など）は CodeRabbit が自動レビューしない。
 - 修正を push しても自動では再レビューされない。毎回 `@coderabbitai review` を明示投稿する。
 - レビュー依頼には回数上限（時間あたり）がある。投稿は 1 head につき 1 回だけ。二重投稿は枠の浪費になる。
-- 上限に当たるとレビューされず、その旨の返信が付く。約 15 分あけて再投稿する。
+- 上限に当たるとレビューされず、その旨の返信が付く。返信には残り分数が書かれる（例: 「Your next review will be available in 8 minutes.」）。
+- `@coderabbitai rate limit` とコメントすると現在の状態が返る。解除済みなら「Reviews are available now.」（観測済み）。未解除時の文面は未確認（分数が返ると見込む）。このコメントが回数枠を消費するかは未確認。
 - 新しいコミットが無い head に再依頼すると「Already reviewed the last commit」（Action not completed）と返る。増分レビューなので、push が無ければ再依頼は無駄になる（全体を見直させたいときだけ `@coderabbitai full review`）。
 - `gh pr checks` / `reviewDecision` は直後に旧 head の結果を返したり、古い head の APPROVED を引き継いだりする。判定は必ず最終 head の SHA で行う。
 - base と衝突している PR は CI が起動しない。チェック 0 件は「緑」ではなく「未起動」。
@@ -68,7 +69,7 @@ PR 1 本（または積み上げ PR の列を下から順に）を、CodeRabbit 
 ### 4. 待機
 
 - Monitor か `run_in_background` の until ループ（60 秒間隔で `scripts/pr-status.sh` を呼ぶ）で待つ。foreground の sleep は使えない。
-- 待つ条件は「`ci.verdict` が `pending` でない」かつ「CodeRabbit が最終 head にレビューを返した（`latestStateOnHead` が null でない、またはレート制限コメント）」。CodeRabbit の「Already reviewed the last commit」「Review finished」系のコメントが最終 head に付いたとき（`recentComments[].created_at` > `headCommittedAt`）も抜ける。
+- 待つ条件は「`ci.verdict` が `pending` でない」かつ「CodeRabbit が最終 head にレビューを返した（`latestStateOnHead` が null でない、またはレート制限コメント。レート制限コメントで抜けたら手順 6 のレート制限の流れへ）」。CodeRabbit の「Already reviewed the last commit」「Review finished」系のコメントが最終 head に付いたとき（`recentComments[].created_at` > `headCommittedAt`）も抜ける。
 - 待機の上限は 30 分。超えたら打ち切って状態を報告する。
 - `ci.verdict` が `not_started` なら、衝突や権限など CI が走らない原因を調べる（`mergeable` が `CONFLICTING` なら base とのコンフリクト解消が先）。
 - 待機中に同じ調査を重ねない。
@@ -92,7 +93,13 @@ CodeRabbit の指摘は `gh api repos/<repo>/pulls/<N>/comments --jq '.[] | sele
 ### 6. 再依頼は 1 回だけ
 
 修正 push、または不採用の返信をまとめて終えた後に、`@coderabbitai review` を 1 回投稿する。複数回の push を挟むなら、最後の push の後に 1 回だけ。同じ head への二重投稿をしない。
-レート制限なら約 15 分あけて再投稿し、それでも駄目なら再び 15 分あける。手順 4 に戻る。修正ループは最大 5 回。超えたら止めて報告する。
+レート制限のときは次の流れにする。
+1. 返信に書かれた分数だけ待つ。
+2. `gh pr comment <N> --body "@coderabbitai rate limit"` を投稿し、返信（1〜2 分で付く）が「Reviews are available now」であることを確認する。分数が返ったらその分だけ待って再確認する。
+3. 解除を確認してから `@coderabbitai review` を 1 回投稿する。
+返信が取れないときの保険としてだけ、約 15 分あけて再投稿する。
+
+手順 4 に戻る。修正ループは最大 5 回。超えたら止めて報告する。
 
 ### 7. 承認の確認
 
@@ -139,6 +146,7 @@ CodeRabbit の指摘は `gh api repos/<repo>/pulls/<N>/comments --jq '.[] | sele
 
 - base がデフォルトブランチの PR を、CodeRabbit の承認だけでマージする（人のレビュー必須）
 - 同じ head に `@coderabbitai review` を 2 回投稿する（枠を浪費する）
+- レート制限中に `@coderabbitai review` を投げ続ける（`@coderabbitai rate limit` で解除を確認してから 1 回投稿する）
 - push 直後の `gh pr checks` や `reviewDecision` をそのまま信じる（旧 head の結果の可能性）
 - チェック 0 件・衝突中を CI 成功と扱う
 - 先回りの内部レビューで base を PR ブランチへ merge する（own commits の特定が崩れる）
