@@ -146,7 +146,8 @@ tmux new-window -d -n pr-<N> -c <worktree> "claude --permission-mode auto '/pr-r
 1 PR ずつ、完了したものから行う。ウィンドウを消す前にログを取るのは、消すと最終レポートが読めなくなるから。
 
 ```bash
-tmux capture-pane -p -t <target> -S - > <scratchpad>/pr-<N>-loop.log
+tmux list-panes -t <target> -F '#{pane_index} #{pane_current_command}'   # workmux でない方が claude の pane
+tmux capture-pane -p -t <target>.<claude pane index> -S - > <scratchpad>/pr-<N>-loop.log
 # ログから 📊 最終レビューレポート 以降を抜き出す（総合評価・残指摘・CI 結果）
 git -C <worktree> status --short
 git -C <worktree> log @{u}..                        # 空であること
@@ -204,3 +205,4 @@ cd <main repo> && ~/.claude/skills/close-worktrees/close.sh feature/<slug>
 - 実装エージェントが「テスト通過」と言っても、コマンドと数値が無ければ未確認として扱う
 - loop ウィンドウの claude が `--permission-mode auto` でも、分類器が止めた操作は権限プロンプトで待つ。`[heads-up]` はそのためにある
 - tmux の `base-index` 次第で `<session>:0` が存在しないことがある。target は番号でなくウィンドウ名 `pr-<N>` で指す
+- workmux などのサイドバー pane がウィンドウに追加されるとアクティブ pane がそちらになるため、wait-loop.sh は全 pane を読む。ログ回収の `tmux capture-pane` も `tmux list-panes` で claude の pane（`pane_current_command` が workmux でない方）を選んで指定する

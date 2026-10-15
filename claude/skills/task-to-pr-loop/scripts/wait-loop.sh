@@ -21,6 +21,16 @@ marker="✅ pr-review-loop 完了 (PR #${pr})"
 # 権限プロンプト・選択肢待ちの目印。画面末尾だけを見る (過去ログの誤検知を避ける)
 prompt_re='Do you want to|Allow|Yes, and don.t ask|❯ 1\.|Esc to cancel'
 
+# pane 指定 (session:window.pane / %id) ならそのまま、ウィンドウ指定なら全 pane を読む。
+# ウィンドウ指定だと tmux はアクティブ pane だけ返す。workmux 等のサイドバー pane が
+# アクティブになると claude の出力を見逃すため、pane を列挙して連結する。
+list_panes() {
+  case "$target" in
+    *.*|%*) printf '%s\n' "$target" ;;
+    *) tmux list-panes -t "$target" -F '#{pane_id}' 2>/dev/null ;;
+  esac
+}
+
 start=$(date +%s)
 waiting_since=""
 notified=0
@@ -31,14 +41,21 @@ while :; do
     exit 1
   fi
 
-  pane=$(tmux capture-pane -p -t "$target" -S -400 2>/dev/null || true)
+  pane="" tails=""
+  while IFS= read -r pane_id; do
+    [ -n "$pane_id" ] || continue
+    text=$(tmux capture-pane -p -t "$pane_id" -S -400 2>/dev/null || true)
+    pane+="$text"$'\n'
+    # 入力待ち判定は pane ごとに末尾 15 行 (サイドバーの文字で隠さない)
+    tails+=$(printf '%s\n' "$text" | grep -v '^[[:space:]]*$' | tail -n 15)$'\n'
+  done < <(list_panes)
   if printf '%s\n' "$pane" | grep -qF -- "$marker"; then
     echo "[done] $marker を検出"
     exit 0
   fi
 
   now=$(date +%s)
-  if printf '%s\n' "$pane" | grep -v '^[[:space:]]*$' | tail -n 15 | grep -qE -- "$prompt_re"; then
+  if printf '%s\n' "$tails" | grep -qE -- "$prompt_re"; then
     [ -n "$waiting_since" ] || waiting_since=$now
     if [ $notified -eq 0 ] && [ $((now - waiting_since)) -ge $stuck_after ]; then
       echo "[heads-up] $target が ${stuck_after} 秒以上入力待ちの可能性。ウィンドウで権限プロンプトに答えてください"
