@@ -95,7 +95,7 @@ CodeRabbit の指摘は `gh api repos/<repo>/pulls/<N>/comments --jq '.[] | sele
 修正 push、または不採用の返信をまとめて終えた後に、`@coderabbitai review` を 1 回投稿する。複数回の push を挟むなら、最後の push の後に 1 回だけ。同じ head への二重投稿をしない。
 レート制限のときは次の流れにする。
 1. 返信に書かれた分数だけ待つ。
-2. `gh pr comment <N> --body "@coderabbitai rate limit"` を投稿し、返信（1〜2 分で付く）が「Reviews are available now」であることを確認する。分数が返ったらその分だけ待って再確認する。
+2. `gh pr comment <N> --body "@coderabbitai rate limit"` を投稿し、返信が「Reviews are available now」であることを確認する。投稿後の待ちは 30 秒とし、返信が無ければ 30 秒間隔で再確認する（長い sleep を入れない）。分数が返ったらその分だけ待って再確認する。
 3. 解除を確認してから `@coderabbitai review` を 1 回投稿する。
 返信が取れないときの保険としてだけ、約 15 分あけて再投稿する。
 
