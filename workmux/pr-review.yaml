@@ -5,5 +5,5 @@
 # 他人の PR のチェックアウト内のファイル (.workmux/PROMPT-*.md 等) は読まない。
 # 読むと PR 作者がコミットしたファイルでプロンプトを差し込めてしまうため。
 panes:
-  - command: 'claude "/pr-review $(basename "$PWD" | sed "s/^pr-//")"; workmux remove -f'
+  - command: 'claude "/pr-review $(basename "$PWD" | sed "s/^pr-//") use sub agents"; workmux remove -f'
     focus: true

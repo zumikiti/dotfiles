@@ -93,6 +93,17 @@ keybindings:
       name: open in octo.nvim
       command: >
         nvim -c "Octo pr edit {{.PrNumber}}"
+    - key: W
+      name: wt switch to PR
+      command: >
+        cd "{{.RepoPath}}" &&
+        wt switch pr:{{.PrNumber}} -x fish
+    - key: L
+      name: claude pr-review-loop
+      command: >
+        cd "{{.RepoPath}}" &&
+        workmux add --pr {{.PrNumber}} --name pr-{{.PrNumber}}-loop -o
+        --config ~/.config/workmux/pr-review-loop.yaml
     - key: d
       name: tuicr diff
       command: >
