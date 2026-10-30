@@ -98,6 +98,7 @@ keybindings:
       command: >
         cd "{{.RepoPath}}" &&
         wt switch pr:{{.PrNumber}} -x fish
+    # --name pr-{{.PrNumber}}-loop は workmux/pr-review-loop.yaml が sed 's/^pr-//; s/-loop$//' で PR 番号に戻す。両方を揃えて変えること
     - key: L
       name: claude pr-review-loop
       command: >

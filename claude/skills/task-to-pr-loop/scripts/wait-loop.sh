@@ -36,7 +36,7 @@ esac
 marker="✅ pr-review-loop 完了 (PR #${pr})"
 abort_marker="⛔ pr-review-loop 中断 (PR #${pr})"
 # 権限プロンプト・選択肢待ちの目印。画面末尾だけを見る (過去ログの誤検知を避ける)
-prompt_re='Do you want to|Allow|Yes, and don.t ask|❯ 1\.|Esc to cancel'
+prompt_re='Do you want to|Yes, and don.t ask|❯ 1\.|Esc to cancel'
 
 # pane 指定 (session:window.pane / %id) ならそのまま、ウィンドウ指定なら全 pane を読む。
 # ウィンドウ指定だと tmux はアクティブ pane だけ返す。workmux 等のサイドバー pane が

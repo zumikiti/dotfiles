@@ -127,7 +127,7 @@ tmux new-window -d -P -F '#{window_id}' -n pr-<N> -c <worktree> "claude --permis
 
 ### 5. 完了待ち
 
-同梱スクリプトで完了マーカー `✅ pr-review-loop 完了 (PR #<N>)`（または中断マーカー `⛔ pr-review-loop 中断 (PR #<N>)`）を待つ。各 pane の末尾 15 行に、行頭の `●` / `⏺` を除いて行全体がマーカーと一致する行があるときだけ検出する。`📊 最終レビューレポート` は CI 見届けより前に出るので完了の目印にしない。
+同梱スクリプトで完了マーカー `✅ pr-review-loop 完了 (PR #<N>)`（または中断マーカー `⛔ pr-review-loop 中断 (PR #<N>)`）を待つ。各 pane の末尾 15 行に、行頭の `●` / `⏺` を除いて行全体がマーカーと一致する行があるときだけ検出する。`📊 最終レビューレポート` は CI 見届けより前に出るので完了の目印にしない。検知ロジックの正は `scripts/wait-loop.sh`（ここは要約）。
 
 ```bash
 ~/.claude/skills/task-to-pr-loop/scripts/wait-loop.sh <target> <N> [max-minutes]
