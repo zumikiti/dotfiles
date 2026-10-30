@@ -32,7 +32,7 @@ PR 1 本（または積み上げ PR の列を下から順に）を、CodeRabbit 
 
 `scripts/pr-status.sh <PR> [owner/repo]`（読み取り専用）。最終 head の SHA に対する CI と CodeRabbit の状態を JSON で出す。
 
-- `ci.verdict`: `success` / `pending` / `failed` / `not_started`（0 件。衝突などで未起動）。check-runs と旧来のコミットステータスの両方を集計する
+- `ci.verdict`: `success` / `pending` / `failed` / `not_started`（0 件。衝突などで未起動）。check-runs と旧来のコミットステータスの両方を集計する（CodeRabbit 自身のステータス / check は除く。それは `coderabbit.checksOnHead` で見る）
 - `coderabbit.latestStateOnHead`: 最終 head に対する CodeRabbit の最新レビュー状態（`APPROVED` / `CHANGES_REQUESTED` / `COMMENTED` / `DISMISSED` / `PENDING` / null。GitHub API の値がそのまま入る）。null なら最終 head は未レビュー
 - `coderabbit.recentComments`: CodeRabbit の直近コメント冒頭（レート制限・進行中の判別用）
 - `coderabbit.checksOnHead`: CodeRabbit が最終 head の SHA に付けたコミットステータス / check（名前に coderabbit を含むもの）。空なら最終 head への紐付けはない。success は「最終 head のレビューが完了した」合図で、承認ではない（待機を抜ける条件にだけ使う）

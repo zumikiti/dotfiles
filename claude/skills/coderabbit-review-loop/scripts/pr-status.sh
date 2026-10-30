@@ -20,7 +20,11 @@ base_branch=$(jq -r .baseRefName <<<"$view")
 # base の必須承認数。rulesets（read 権限で取れる）と旧来のブランチ保護（admin 権限が必要・rulesets は反映されない）の最大値を使う。
 # 旧保護は「Branch not protected」なら 0、それ以外の失敗は不明。両方取れなければ null（呼び出し側は止める側に倒す）
 base_enc=$(jq -rn --arg b "$base_branch" '$b|@uri')
-rules_n=$(gh api "repos/$repo/rules/branches/$base_enc" --jq '[.[] | select(.type=="pull_request") | .parameters.required_approving_review_count // 0] | max // 0' 2>/dev/null || true)
+# rulesets の取得失敗は「ルールなし」と区別できないので、失敗したら legacy の結果にかかわらず null（不明）にする
+if ! rules_n=$(gh api "repos/$repo/rules/branches/$base_enc" --jq '[.[] | select(.type=="pull_request") | .parameters.required_approving_review_count // 0] | max // 0' 2>/dev/null); then
+  rules_n=""
+  rules_failed=1
+fi
 if prot=$(gh api "repos/$repo/branches/$base_enc/protection" --jq '.required_pull_request_reviews.required_approving_review_count // 0' 2>&1); then
   prot_n=$prot
 elif grep -q 'Branch not protected' <<<"$prot"; then
@@ -28,7 +32,11 @@ elif grep -q 'Branch not protected' <<<"$prot"; then
 else
   prot_n=""
 fi
-base_required_approvals=$(jq -n --arg a "$rules_n" --arg b "$prot_n" '[$a,$b | select(test("^[0-9]+$")) | tonumber] | if length==0 then null else max end')
+if [[ -n ${rules_failed:-} ]]; then
+  base_required_approvals=null
+else
+  base_required_approvals=$(jq -n --arg a "$rules_n" --arg b "$prot_n" '[$a,$b | select(test("^[0-9]+$")) | tonumber] | if length==0 then null else max end')
+fi
 
 # CI: コミット SHA 単位で取る（PR 単位の表示は push 直後に旧 head の結果を返すことがある）
 checks=$(gh api --paginate "repos/$repo/commits/$sha/check-runs?per_page=100" --jq '.check_runs[] | {name, status, conclusion}' | jq -s .)
@@ -38,6 +46,8 @@ statuses=$(jq '[.statuses[] | {name: .context, status: (if .state=="pending" the
 checks=$(jq -s 'add' <<<"$checks$statuses")
 # CodeRabbit が最終 head の SHA に付けたコミットステータス / check（コメント時刻に頼らず head への紐付けで判定できる）
 cr_head=$(jq -c '[.[] | select(.name|test("coderabbit";"i")) | {name, status, conclusion}]' <<<"$checks")
+# CI の verdict は CodeRabbit 自身のステータスを除く（レビュー待ちと CI 待ちを混ぜない）
+ci_checks=$(jq -c '[.[] | select(.name|test("coderabbit";"i")|not)]' <<<"$checks")
 
 # CodeRabbit のレビュー（どの commit に対するものか）
 reviews=$(gh api --paginate "repos/$repo/pulls/$pr/reviews?per_page=100" \
@@ -52,10 +62,10 @@ owner=${repo%%/*}; name=${repo##*/}
 unresolved=$(gh api graphql -f query='
 query($o:String!,$n:String!,$p:Int!,$endCursor:String){repository(owner:$o,name:$n){pullRequest(number:$p){reviewThreads(first:100,after:$endCursor){pageInfo{hasNextPage endCursor} nodes{isResolved}}}}}' \
   -f o="$owner" -f n="$name" -F p="$pr" --paginate \
-  --jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved|not)] | length' | jq -s add)
+  --jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved|not)] | length' | jq -s 'add // 0')
 unresolved=${unresolved:-0}
 
-jq -n --argjson v "$view" --argjson c "$checks" --argjson r "$reviews" --argjson k "$comments" --argjson u "$unresolved" --arg sha "$sha" --arg hca "$head_committed_at" --arg def "$default_branch" --argjson req "$base_required_approvals" --argjson crh "$cr_head" '
+jq -n --argjson v "$view" --argjson c "$ci_checks" --argjson r "$reviews" --argjson k "$comments" --argjson u "$unresolved" --arg sha "$sha" --arg hca "$head_committed_at" --arg def "$default_branch" --argjson req "$base_required_approvals" --argjson crh "$cr_head" '
   ($r | map(select(.commit_id==$sha))) as $onhead
   | ($c|map(select(.status!="completed"))|length) as $pending
   | ($c|map(select(.status=="completed" and (.conclusion|IN("success","skipped","neutral")|not)))|length) as $failed
