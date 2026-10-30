@@ -37,7 +37,7 @@ PR 1 本（または積み上げ PR の列を下から順に）を、CodeRabbit 
 - `coderabbit.recentComments`: CodeRabbit の直近コメント冒頭（レート制限・進行中の判別用）
 - `coderabbit.checksOnHead`: CodeRabbit が最終 head の SHA に付けたコミットステータス / check（名前に coderabbit を含むもの）。空なら最終 head への紐付けはない。success は「最終 head のレビューが完了した」合図で、承認ではない（待機を抜ける条件にだけ使う）
 - `reviewDecision`: 古い head の APPROVED を引き継ぐことがあるので、承認の根拠には `latestStateOnHead` を使う
-- `baseIsDefault` / `defaultBranch` / `baseRequiredApprovals`: base がデフォルトブランチか、base の必須承認数（rulesets の `pull_request` ルールと旧ブランチ保護の最大値。どちらにも無ければ 0、両方取れないときだけ null。旧保護 API が権限不足で取れなくても、GitHub 側で承認必須なら `mergeStateStatus` が CLEAN にならず手順 8 で止まる）。`baseIsDefault` が true、または `baseRequiredApprovals` が 1 以上か null なら手順 8 は人のレビュー待ちで止める（null は権限不足の可能性があるので止める側に倒す。`release*` / `production` / `staging` 等の名前も補助的に止める）
+- `baseIsDefault` / `defaultBranch` / `baseRequiredApprovals`: base がデフォルトブランチか、base の必須承認数（rulesets の `pull_request` ルールと旧ブランチ保護の最大値。どちらにも無ければ 0。rulesets の取得に失敗したときは旧保護の結果によらず null、rulesets が取れて旧保護だけ失敗したときは rulesets の値を使う。旧保護 API が権限不足で取れなくても、GitHub 側で承認必須なら `mergeStateStatus` が CLEAN にならず手順 8 で止まる）。`baseIsDefault` が true、または `baseRequiredApprovals` が 1 以上か null なら手順 8 は人のレビュー待ちで止める（null は権限不足の可能性があるので止める側に倒す。`release*` / `production` / `staging` 等の名前も補助的に止める）
 - `headSha` / `headCommittedAt`: 最終 head の SHA とそのコミット日時。committer date は push 時刻ではなく、承認の根拠にはならない。`recentComments[].created_at` > `headCommittedAt` は、待機を抜けて再確認に進む目安にだけ使う
 - `coderabbit.reviewsOnHead`（最終 head に対するレビュー一覧）/ `coderabbit.lastReviewedSha`（CodeRabbit が最後にレビューした SHA。`headSha` と違えば最終 head は未レビュー）
 - `ci.total` / `ci.pending` / `ci.failed`: チェックの総数・未完了数・失敗数

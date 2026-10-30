@@ -18,7 +18,8 @@ head_committed_at=$(gh api "repos/$repo/commits/$sha" --jq .commit.committer.dat
 # base が既定ブランチか・必須承認数は人のレビュー必須の判定に使う
 base_branch=$(jq -r .baseRefName <<<"$view")
 # base の必須承認数。rulesets（read 権限で取れる）と旧来のブランチ保護（admin 権限が必要・rulesets は反映されない）の最大値を使う。
-# 旧保護は「Branch not protected」なら 0、それ以外の失敗は不明。両方取れなければ null（呼び出し側は止める側に倒す）
+# 旧保護は「Branch not protected」なら 0、それ以外の失敗は不明。rulesets が取れなければ旧保護の結果によらず null、
+# rulesets だけ取れれば（旧保護が失敗でも）その値を使う。null は呼び出し側が止める側に倒す
 base_enc=$(jq -rn --arg b "$base_branch" '$b|@uri')
 # rulesets の取得失敗は「ルールなし」と区別できないので、失敗したら legacy の結果にかかわらず null（不明）にする
 if ! rules_n=$(gh api "repos/$repo/rules/branches/$base_enc" --jq '[.[] | select(.type=="pull_request") | .parameters.required_approving_review_count // 0] | max // 0' 2>/dev/null); then

@@ -87,7 +87,8 @@ for name in "${names[@]}"; do
   fi
 
   if [ "$kind" = workmux ]; then
-    # -f は確認プロンプトの省略 (dirty / 未 push は上のガードで判定済み)
+    # -f は確認プロンプトの省略に加え、未コミット変更も無視して消す (workmux remove --help)。
+    # 安全なのは、上のガードが dirty / 未 push の worktree を既に拒否しているため
     cmd=(workmux remove -f)
     [ $delbranch -eq 1 ] || cmd+=(-k)
     cmd+=("$(basename "$path")")
