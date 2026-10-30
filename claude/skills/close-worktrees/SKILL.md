@@ -31,6 +31,7 @@ cd <リポジトリ>   # 本体でもワークツリー内でもよい
 - 未 push 判定は upstream に依存しない。upstream なし・upstream が gone のブランチも、リモートに無いコミットがあれば拒否する。リモート追跡ブランチは最後の fetch 時点の情報なので、push 済みかの最終確認は fetch 後が確実。
 - ブランチは既定で残す (PR が open のことが多いため)。`--delete-branch` で初めて消す。
 - 本体ワークツリー (`git worktree list` の 1 件目) は対象にならない。
+- .gitignore 対象のファイル (コピーした `.env` / `.screenshot.env`、ローカル DB など) は確認しない。ワークツリーごと削除されるので、残したいものは先に退避する。
 
 ## Gotchas
 

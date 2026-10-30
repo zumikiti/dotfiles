@@ -36,7 +36,7 @@ main=$(printf '%s\n' "$porcelain" | awk '/^worktree /{sub(/^worktree /,""); prin
 entries=$(printf '%s\n' "$porcelain" | awk -v RS= -F'\n' 'NR>1{p="";b="";for(i=1;i<=NF;i++){if($i~/^worktree /)p=substr($i,10);if($i~/^branch /)b=substr($i,8)}sub(/^refs\/heads\//,"",b);print p"\t"b}')
 
 rc=0
-removed=()
+removed=() removed_paths=() removed_branches=()
 for name in "${names[@]}"; do
   path="" branch=""
   while IFS=$'\t' read -r p b; do
@@ -87,6 +87,7 @@ for name in "${names[@]}"; do
   fi
 
   if [ "$kind" = workmux ]; then
+    # -f は確認プロンプトの省略 (dirty / 未 push は上のガードで判定済み)
     cmd=(workmux remove -f)
     [ $delbranch -eq 1 ] || cmd+=(-k)
     cmd+=("$(basename "$path")")
@@ -101,7 +102,7 @@ for name in "${names[@]}"; do
   echo "  + (cd $main && ${cmd[*]})"
   if [ $dry -eq 0 ]; then
     (cd "$main" && "${cmd[@]}") || { echo "[fail] $name" >&2; rc=1; continue; }
-    removed+=("$name")
+    removed+=("$name") removed_paths+=("$path") removed_branches+=("$branch")
   fi
 done
 
@@ -109,9 +110,11 @@ if [ $dry -eq 0 ] && [ ${#removed[@]} -gt 0 ]; then
   git -C "$main" worktree prune
   echo "--- git worktree list"
   git -C "$main" worktree list
-  for name in ${removed[@]+"${removed[@]}"}; do
-    if git -C "$main" worktree list --porcelain | grep -qE "^(worktree .*[/]${name}$|branch refs/heads/${name}$)"; then
-      echo "[warn] $name はまだ worktree list に残っている" >&2; rc=1
+  wl=$(git -C "$main" worktree list --porcelain)
+  for i in "${!removed[@]}"; do
+    # 解決済みのパス / ブランチで固定文字列の行一致を取る (name は正規表現にしない)
+    if grep -qxF "worktree ${removed_paths[$i]}" <<<"$wl" || { [ -n "${removed_branches[$i]}" ] && grep -qxF "branch refs/heads/${removed_branches[$i]}" <<<"$wl"; }; then
+      echo "[warn] ${removed[$i]} はまだ worktree list に残っている" >&2; rc=1
     fi
   done
 fi
