@@ -46,10 +46,17 @@ function readEnvFile(file) {
 const root = sh('git rev-parse --show-toplevel');
 const file = [process.cwd(), root].filter(Boolean).map((d) => path.join(d, '.screenshot.env')).find(fs.existsSync);
 // deliberate: a git-tracked env file may come from an untrusted checkout, so never use it
-const tracked = file && (() => { try { execFileSync('git', ['ls-files', '--error-unmatch', path.basename(file)], { cwd: path.dirname(file), stdio: 'ignore' }); return true; } catch { return false; } })();
-if (tracked) { console.error('ERROR: .screenshot.env is tracked by git; refusing to use it'); process.exit(1); }
+// ls-files exit 0 = tracked (refuse), 1 = inside a repo and untracked (trusted). Anything else (not a repo, safe.directory error) is unverified
+const lsStatus = file && (() => { try { execFileSync('git', ['ls-files', '--error-unmatch', path.basename(file)], { cwd: path.dirname(file), stdio: 'ignore' }); return 0; } catch (e) { return typeof e.status === 'number' ? e.status : -1; } })();
+if (lsStatus === 0) { console.error('ERROR: .screenshot.env is tracked by git; refusing to use it'); process.exit(1); }
 const cfg = file ? readEnvFile(file) : {};
-for (const k of ['SCREENSHOT_BASE_URL', 'SCREENSHOT_COOKIE']) if (process.env[k]) cfg[k] = process.env[k];
+// deliberate: cwd may be outside any repo, so an unverified file is still loaded; but then BASE_URL and COOKIE must come from one source so a file's URL never receives the real env's cookie
+const pairKeys = ['SCREENSHOT_BASE_URL', 'SCREENSHOT_COOKIE'];
+if (file && lsStatus !== 1 && pairKeys.some((k) => process.env[k])) {
+  console.error('WARN: .screenshot.env is not verified as git-ignored; ignoring its SCREENSHOT_BASE_URL/SCREENSHOT_COOKIE because the environment sets one');
+  for (const k of pairKeys) delete cfg[k];
+}
+for (const k of pairKeys) if (process.env[k]) cfg[k] = process.env[k];
 // deliberate: executable path comes from the real environment only; an untrusted repo's .screenshot.env must not pick the executable
 const chromiumEnv = process.env.SCREENSHOT_CHROMIUM;
 

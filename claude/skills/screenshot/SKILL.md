@@ -10,7 +10,7 @@ description: 新規画面や修正した画面を Claude 自身が目で確認�
 ## 前提
 
 - dotfiles の flox 環境（manifest で宣言済み。chromium は Linux のみ、Mac は Google Chrome）を有効にして使う
-- 初回のみ `~/.claude/skills/screenshot/scripts/` で `npm ci`（lock どおりに入れる。ブラウザはダウンロードされない）
+- 初回のみ `~/.claude/skills/screenshot/scripts/` で `npm ci --ignore-scripts`（lock どおりに入れる。ブラウザはダウンロードされない）
 - VM からホストの Docker へは `http://host.internal:<port>`（OrbStack の名前。Docker Desktop なら `host.docker.internal`）
 
 ## 設定
@@ -22,7 +22,7 @@ SCREENSHOT_BASE_URL=http://host.internal:<port>
 SCREENSHOT_COOKIE="name=PLACEHOLDER; name2=PLACEHOLDER"
 ```
 
-- 同名の環境変数があればファイルより優先される
+- 同名の環境変数があればファイルより優先される。ただしファイルが git リポジトリ内で未追跡と確認できない場合（リポジトリ外など）は、環境変数が `SCREENSHOT_BASE_URL` / `SCREENSHOT_COOKIE` のどちらかでも設定されていればファイル側の両方を無視する（URL と Cookie の出所を揃えるため）
 - `SCREENSHOT_CHROMIUM`（chromium のパス、任意）は環境変数のみ。ファイルからは読まない
 - Cookie の注入は対象 URL が `SCREENSHOT_BASE_URL` と同じオリジン（スキーム+ホスト+ポート）のときだけ。ただし Cookie 自体はホスト単位で送られ、ポートは区別されない（同じホストの別ポートのアプリにも届く）
 - URL のスキームは http / https のみ（`file://` などは拒否）。出力先は `.png` 必須
