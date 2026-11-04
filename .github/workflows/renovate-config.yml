@@ -3,6 +3,8 @@ name: Renovate Config
 # renovate.json は Dotfiles CI (Lua lint) では検証されないため、
 # 設定が壊れていてもマージできてしまう。本ワークフローで塞ぐ。
 on:
+  # Renovate App の版が上がったときに手で再検証できるように
+  workflow_dispatch:
   push:
     branches: [ main ]
     paths:
@@ -22,10 +24,14 @@ jobs:
   validate:
     name: Validate renovate.json
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          # 後続の npx が第三者コードを動かすためトークンを .git/config に残さない
+          persist-credentials: false
 
       # renovate@44 は Node ^24.11 を要求する。ランナー既定の Node 22 では動かない
       - name: Set up Node.js
