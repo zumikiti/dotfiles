@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "customManagers:githubActionsVersions"],
+  "platformAutomerge": false,
   "packageRules": [
     {
       "description": "node-version は renovate の engines.node に合わせて手で上げる。major の自動提案は無効",
@@ -8,6 +9,11 @@
       "matchFileNames": [".github/workflows/renovate-config.yml"],
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "description": "digest 更新（GitHub Actions の SHA、fisher プラグインの SHA）は CI 成功後に Renovate 自身がマージする。minor / major は手動レビュー",
+      "matchUpdateTypes": ["digest"],
+      "automerge": true
     }
   ],
   "customManagers": [

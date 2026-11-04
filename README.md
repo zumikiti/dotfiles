@@ -64,7 +64,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/$fisher_sha/funct
 fisher update
 ```
 
-> SHA の更新は Renovate の PR で提案される（手で `fish/fish_plugins` を編集してもよい）。マージ後にローカルで `fisher update` を実行すると、固定した SHA が反映される。
+> SHA の更新は Renovate の PR で提案され、digest 更新は CI 成功後に Renovate が自動マージする（手で `fish/fish_plugins` を編集してもよい）。マージ後にローカルで `fisher update` を実行すると、固定した SHA が反映される。
 
 ## install vim 
 ### Alacritty
