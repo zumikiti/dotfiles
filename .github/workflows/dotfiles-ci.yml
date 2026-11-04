@@ -23,7 +23,7 @@ jobs:
           luaVersion: '5.4' # luacheck実行用。luajit-openrestyはmanifestの65536定数制限でluarocks installが失敗するため5.4を使用
 
       - name: Set up LuaRocks
-        uses: leafo/gh-actions-luarocks@e65774a6386cb4f24e293dca7fc4ff89165b64c5 # v4
+        uses: leafo/gh-actions-luarocks@1c4a92caecc8f6850f673cbadfd57b3e555417ce # v6
 
       # 3. luacheck のインストール
       - name: Install luacheck
