@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "customManagers:githubActionsVersions"],
+  "platformAutomerge": false,
   "packageRules": [
     {
       "description": "node-version は renovate の engines.node に合わせて手で上げる。major の自動提案は無効",
@@ -8,6 +9,20 @@
       "matchFileNames": [".github/workflows/renovate-config.yml"],
       "matchUpdateTypes": ["major"],
       "enabled": false
+    },
+    {
+      "description": "GitHub Actions の浮動メジャータグ（v4 等）の digest 更新は PR のチェック成功後に Renovate 自身がマージする。完全一致タグ（v4.3.1 等）の digest 変更は上流のタグ付け替えなので対象外。version 更新（major / minor / patch）も手動",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["digest"],
+      "matchCurrentValue": "/^v\\d+$/",
+      "automerge": true
+    },
+    {
+      "description": "fisher プラグイン（fish/fish_plugins の SHA）の digest 更新も Renovate 自身がマージする。上流の既定ブランチ HEAD を追い CI では検証されないが、反映は手元で fisher update を実行した時点なので、そこでレビューする",
+      "matchManagers": ["custom.regex"],
+      "matchFileNames": ["fish/fish_plugins"],
+      "matchUpdateTypes": ["digest"],
+      "automerge": true
     }
   ],
   "customManagers": [
