@@ -3,7 +3,7 @@ name: Renovate Config
 # renovate.json は Dotfiles CI (Lua lint) では検証されないため、
 # 設定が壊れていてもマージできてしまう。本ワークフローで塞ぐ。
 on:
-  # Renovate App の版が上がったときに手で再検証できるように
+  # 任意のタイミングで手で再検証できるように
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -41,7 +41,7 @@ jobs:
 
       # 引数なしで実行すると renovate.json をリポジトリ設定として自動検出する。
       # --strict: 移行が必要な旧キー (fileMatch, config:base 等) も失敗扱いにする
-      # RENOVATE_VERSION は上の annotation を customManagers:githubActionsVersions が拾い、
+      # RENOVATE_VERSION は下の env の annotation を customManagers:githubActionsVersions が拾い、
       # Renovate が自動で更新 PR を出す。node-version は renovate の engines.node
       # (現在 ^24.11.0) に収まる範囲で手で上げる。renovate.json で node の major 更新を
       # 無効にしているのはそのため
