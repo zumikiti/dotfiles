@@ -64,7 +64,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/$fisher_sha/funct
 fisher update
 ```
 
-> 更新は Manual Update Policy に従い、`fish/fish_plugins` の SHA を編集してから `fisher update` を実行し、変更をコミットする。
+> SHA の更新は Renovate の PR で提案される（手で `fish/fish_plugins` を編集してもよい）。マージ後にローカルで `fisher update` を実行すると、固定した SHA が反映される。
 
 ## install vim 
 ### Alacritty

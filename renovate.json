@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "customManagers:githubActionsVersions"],
+  "packageRules": [
+    {
+      "description": "node-version は renovate の engines.node に合わせて手で上げる。major の自動提案は無効",
+      "matchDepNames": ["node"],
+      "matchFileNames": [".github/workflows/renovate-config.yml"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "fisher plugins pinned by commit SHA (owner/repo@<sha40>)",
+      "managerFilePatterns": ["/^fish/fish_plugins$/"],
+      "matchStrings": ["(?<depName>[\\w.-]+/[\\w.-]+)@(?<currentDigest>[0-9a-f]{40})"],
+      "datasourceTemplate": "git-refs",
+      "packageNameTemplate": "https://github.com/{{{depName}}}"
+    }
+  ]
+}
