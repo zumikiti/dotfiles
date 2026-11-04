@@ -11,7 +11,7 @@
       "enabled": false
     },
     {
-      "description": "GitHub Actions の浮動メジャータグ（v4 等）の digest 更新は PR のチェック成功後に Renovate 自身がマージする。完全一致タグ（v4.3.1 等）の digest 変更は上流のタグ付け替えなので対象外。fisher プラグインは git-refs で上流 HEAD を追い、CI でも検証されないため手動レビュー。minor / major も手動",
+      "description": "GitHub Actions の浮動メジャータグ（v4 等）の digest 更新は PR のチェック成功後に Renovate 自身がマージする。完全一致タグ（v4.3.1 等）の digest 変更は上流のタグ付け替えなので対象外。fisher プラグインは git-refs で上流 HEAD を追い、CI でも検証されないため手動レビュー。version 更新（major / minor / patch）も手動",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["digest"],
       "matchCurrentValue": "/^v\\d+$/",

@@ -64,7 +64,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/$fisher_sha/funct
 fisher update
 ```
 
-> SHA の更新は Renovate の PR で提案される（手で `fish/fish_plugins` を編集してもよい）。fisher プラグインの更新は上流 main の HEAD を追っており CI では検証されないため、自動マージせず手でレビューしてマージする（GitHub Actions の digest 更新のみ CI 成功後に Renovate が自動マージする）。マージ後にローカルで `fisher update` を実行すると、固定した SHA が反映される。
+> SHA の更新は Renovate の PR で提案される（手で `fish/fish_plugins` を編集してもよい）。fisher プラグインの更新は上流の既定ブランチの HEAD を追っており CI では検証されないため、自動マージせず手でレビューしてマージする（GitHub Actions の浮動メジャータグ `v4` 等の digest 更新のみ、CI 成功後に Renovate が自動マージする）。マージ後にローカルで `fisher update` を実行すると、固定した SHA が反映される。
 
 ## install vim 
 ### Alacritty
