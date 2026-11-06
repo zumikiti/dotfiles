@@ -57,7 +57,7 @@ PR 1 本（または積み上げ PR の列を下から順に）を、CodeRabbit 
 積み上げでは、直前 PR のレビュー修正やリベースで親が変わる。素の `git rebase` だと古い親のコミットが混ざる。
 
 - own commits（この PR だけのコミット）を特定する。`gh pr view <N> --json commits`、または base が直前 PR ブランチを指している間の `git log origin/<base>..origin/<head>`。マージして base が変わる前に、次の PR の own commits を進捗ログへ記録しておく。
-- 直前 PR がマージコミットでそのまま入ったなら載せ直し不要。`git merge-base --is-ancestor <直前 PR の head> origin/<base>` と、`git log origin/<base>..origin/<head>` が own commits だけであることを確認して次へ進む。
+- 直前 PR がマージコミットでそのまま入ったなら載せ直し不要。`git merge-base --is-ancestor <直前 PR の head> origin/<base>` と、`git log origin/<base>..origin/<head>` が own commits だけであることを確認して次へ進む。`<直前 PR の head>` はブランチ名ではなく、閉じる前に進捗ログへ記録した `pr-status.sh` の `headSha` を使う（手順 8-5 の `--delete-branch` で直前 PR のローカルブランチが消えるため）。
 - 直前 PR にレビュー修正が積まれていた場合のみ `git rebase --onto origin/<base> <own commits の最初の親>` で載せ直す。merge コミットが混ざっているなら cherry-pick で own commits を順に載せる。
 - 載せ直し後は `git diff origin/<base>...HEAD --stat` が意図したファイルだけか確認し、後述「検証」を通してから `git push --force-with-lease`（この載せ直し由来の force push のみ。レビュー修正は通常 push）。
 - 共有部品（基底クラス、共通ヘルパ、改名したクラスなど）が直前 PR で変わっていたら、この PR のコードを追従させ、テストを通して CI を確認する。
@@ -116,7 +116,24 @@ CodeRabbit の指摘は `gh api repos/<repo>/pulls/<N>/comments --jq '.[] | sele
 2. 上記で止まらない統合ブランチ向けは、`ci.verdict` が `success`、承認済み（最終 head）、`mergeable` が `MERGEABLE`、`mergeStateStatus` が `CLEAN`（`UNSTABLE` / `BLOCKED` なら止めて原因を報告）を確認でき次第、ユーザーへの確認なしにマージする。
 3. マージ方式はリポジトリの慣例を確認する（`gh pr list --state merged` のマージコミットの形、CLAUDE.md、ブランチ保護）。積み上げではマージコミットにする（後続ブランチがそのまま乗り、own commits が崩れないため）。
 4. `gh pr merge <N> --merge --match-head-commit <headSha>`（方式は慣例に合わせて変えるが `--match-head-commit` は必須）。`<headSha>` は、承認済み・CI 成功と判定した同じ `scripts/pr-status.sh` の出力の `headSha` を使う。head が動いてマージに失敗したら、フラグを外して再試行せず手順 4 の状態確認に戻る。実行環境の権限設定が優先する。auto mode などで拒否されたら回避せず、状態を整理してユーザーに渡す。
-5. 積み上げなら、次の PR の base が付け替わったか `gh pr view <N+1> --json baseRefName` で確認し、されていなければ付け替える。次の PR の own commits を記録し、その PR の手順 1 へ進む。
+5. マージ済みなら、その PR の worktree を `close-worktrees` で閉じる（手順 9 のコマンドで）。閉じる前に `headSha` を進捗ログへ記録しておく。
+6. 積み上げなら、次の PR の base が付け替わったか `gh pr view <N+1> --json baseRefName` で確認し、されていなければ付け替える。次の PR の own commits を記録し、その PR の手順 1 へ進む。
+
+### 9. worktree の後片付け
+
+PR の処理が終わったら（マージ済み、または「止めて報告する条件」で報告を書き終えた後）、その PR の worktree を `close-worktrees` スキルで閉じる。close.sh は worktree の中から呼んでも動く。
+
+```bash
+~/.claude/skills/close-worktrees/close.sh [--delete-branch] <ブランチ>
+```
+
+- パスに `__worktrees/` を含む（workmux 製）worktree は閉じない。`workmux remove` は tmux ウィンドウごと消すため、起動側の後始末に任せる
+- 今いるのがメイン worktree 自体（`git worktree list` の 1 行目と同じパス）なら閉じない
+- close.sh の後は自分の worktree が消えているので、以降の Bash は `cd <メイン worktree または次 PR の worktree> &&` を付けて呼ぶ（次の PR へ進んでも Bash を呼び続けるため）
+- `--delete-branch` を付けてよいのはマージ済みのときだけ。止めて報告するときは付けず、ブランチも残す
+- `--force` は使わない。close.sh が拒否した（終了 1。未コミット・未 push など）ら、理由を報告に書いて worktree を残す
+- squash マージでリモートブランチが消えると「未 push」と出て拒否されることがある。`--force` で迂回せず、残したまま報告する（人が MERGED を確認して手動で `--force` する手順は close-worktrees スキルにあるが、ループでは使わず人に渡す）
+- 閉じ済みの worktree に `--delete-branch` 付きで再実行すると「見つからない」（終了 1）になり、ブランチは残る。ブランチだけ消すなら `git branch -d <ブランチ>`
 
 ## 検証（コード変更を push する前に）
 
@@ -132,7 +149,7 @@ CodeRabbit の指摘は `gh api repos/<repo>/pulls/<N>/comments --jq '.[] | sele
 
 ## 複数 PR の運用（コーディネーターがいる場合）
 
-親セッションは 1 PR ずつサブエージェントに任せる。進捗ログ（scratchpad のファイル）に、PR 番号・やったこと・未解決事項・次 PR の own commits を追記させ、手順の追加事項は手順書に書いて申し送る。サブエージェントの `model` は `subagent-model-policy` に従って明示する。
+親セッションは 1 PR ずつサブエージェントに任せる。各 PR の worktree は、その PR がマージされた直後（次の PR へ進む前）に手順 9 で閉じる。進捗ログ（scratchpad のファイル）に、PR 番号・やったこと・未解決事項・次 PR の own commits を追記させ、手順の追加事項は手順書に書いて申し送る。サブエージェントの `model` は `subagent-model-policy` に従って明示する。
 
 ## 報告形式（簡潔に、日本語）
 
@@ -140,6 +157,7 @@ CodeRabbit の指摘は `gh api repos/<repo>/pulls/<N>/comments --jq '.[] | sele
 - 最終 head の SHA、承認の根拠（`APPROVED` が最終 head のものか、古い head の引き継ぎか）、CI の結果
 - CodeRabbit の指摘と対処（採用・不採用と理由、スコープ外）
 - 追加コミット一覧と検証の実施状況
+- worktree の後片付け（閉じた: パス / 残した: 理由）
 - 次 PR への申し送り（衝突しそうな箇所、own commits）
 
 ## やってはいけないこと
@@ -153,3 +171,4 @@ CodeRabbit の指摘は `gh api repos/<repo>/pulls/<N>/comments --jq '.[] | sele
 - チェック 0 件・衝突中を CI 成功と扱う
 - 先回りの内部レビューで base を PR ブランチへ merge する（own commits の特定が崩れる）
 - 指摘を根拠なく却下する、マージ拒否を回避して強行する
+- `close.sh --force` で未 push・未コミットのある worktree を閉じる
