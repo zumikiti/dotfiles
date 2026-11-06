@@ -23,6 +23,11 @@
       "matchFileNames": ["fish/fish_plugins"],
       "matchUpdateTypes": ["digest"],
       "automerge": true
+    },
+    {
+      "description": "npm は公開後 72 時間以内なら unpublish でき、Merge Confidence も 3 日未満は High にならないため、npm（renovate）の更新は公開 3 日後から提案する。git-refs（fisher）はリリース日時を持たず無期限保留になるので npm に限定する",
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "3 days"
     }
   ],
   "customManagers": [
