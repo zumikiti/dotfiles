@@ -145,7 +145,7 @@ push 後に CI があれば、正常完了まで見届ける。
 
 「終わった」とは、最終レポートを出し、push と PR 本文更新が済み、6. の CI 監視が `pending` 無しで終了した時点（45 分の上限で打ち切り、まだ `pending` の check を報告した場合を含む）を指す（CI 修正枠を使った場合はその再 CI も含む）。ここまでを Monitor で見届け、途中で終わらない。
 
-- 終了時に `git status --short` と `git log @{u}..` を確認し、未コミット・未 push があれば最終レポートに明記する
+- 終了時に `git status --short` と `git log --oneline HEAD --not --remotes` を確認し、未コミット・未 push があれば最終レポートに明記する
 - 完了マーカー: `✅ pr-review-loop 完了 (PR #<N>)` を出す。6. の CI 監視が終わってから（45 分の上限で打ち切った場合は、`pending` の check を報告してから。CI が無ければ最終レポートの後に）、後片付け（次項）の**前**に出し、それ以前には出さない。マーカーは単独の 1 行メッセージにせず、最終レポート（報告文）の末尾の行に置く。後片付けの出力はマーカーの後に続いてよい
 - 後片付け: マーカーを出したら、`close-worktrees` スキルで自分の worktree を閉じる。コマンドが今いる worktree 自体を消すので、先にメイン worktree へ移る
   1. `git worktree list` の 1 行目をメイン worktree のパス、`git branch --show-current` を現在のブランチとして控える
