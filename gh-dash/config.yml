@@ -93,6 +93,18 @@ keybindings:
       name: open in octo.nvim
       command: >
         nvim -c "Octo pr edit {{.PrNumber}}"
+    - key: W
+      name: wt switch to PR
+      command: >
+        cd "{{.RepoPath}}" &&
+        wt switch pr:{{.PrNumber}} -x fish
+    # --name pr-{{.PrNumber}}-loop は workmux/pr-review-loop.yaml が sed 's/^pr-//; s/-loop$//' で PR 番号に戻す。両方を揃えて変えること
+    - key: L
+      name: claude pr-review-loop
+      command: >
+        cd "{{.RepoPath}}" &&
+        workmux add --pr {{.PrNumber}} --name pr-{{.PrNumber}}-loop -o
+        --config ~/.config/workmux/pr-review-loop.yaml
     - key: d
       name: tuicr diff
       command: >
