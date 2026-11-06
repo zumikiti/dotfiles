@@ -136,7 +136,7 @@ tmux new-window -d -P -F '#{window_id}' -n pr-<N> -c <worktree> "claude --permis
 | 出力 / 終了コード | 意味 | 対応 |
 |---|---|---|
 | `[done]` / 0 | 完了マーカーを検出 | 6. へ |
-| `[gone]` / 1 | ウィンドウが消えた（claude が落ちた・終了した。workmux 製の worktree が閉じられた場合も、マーカー検出の前に消えることがある） | 後片付けせず、ワークツリーと PR の状態を確認して報告 |
+| `[gone]` / 1 | ウィンドウが消えた（claude が落ちた・終了した） | 後片付けせず、ワークツリーと PR の状態を確認して報告 |
 | `[aborted]` / 3 | 中断マーカーを検出（loop が続行不能と判断） | ウィンドウは閉じず後片付けもしない。ログから中断理由を取り、ユーザーに報告 |
 | `[timeout]` / 2 | 既定 90 分で終わらない | ウィンドウを残したまま状況を報告 |
 | 引数不正 / 64、tmux 無し / 65 | 数字でない PR 番号・max-minutes 等、または tmux が見つからない | 入力を直して再実行 |
@@ -155,18 +155,20 @@ tmux capture-pane -p -t <target>.<claude pane index> -S - > <scratchpad>/pr-<N>-
 gh pr checks <N> --json name,bucket                 # CI の最終状態
 tmux kill-window -t <target>                        # <target> は @N
 git worktree list                                   # loop が自分で閉じたか確認
-# worktree がまだ残っているときだけ（loop が拒否して残した場合）:
+```
+
+`git worktree list` に worktree が残っているときだけ（loop が拒否して残した場合）次を実行する。`--dry-run` が拒否を出したら本番の `close.sh` は呼ばず、残っている変更・コミットを報告する。
+
+```bash
 git -C <worktree> status --short
 git -C <worktree> log --oneline HEAD --not --remotes  # 空であること
 cd <main repo> && ~/.claude/skills/close-worktrees/close.sh --dry-run feature/<slug>
 cd <main repo> && ~/.claude/skills/close-worktrees/close.sh feature/<slug>
 ```
 
-- `pr-review-loop` は完了マーカーの後に自分の worktree を `close.sh` で閉じる（マーカーは後片付けの前に出るので、`[done]` 後のログ回収は間に合う）。wt 製の worktree では tmux ウィンドウは残るので、`kill-window` はこちらで行う
-- `git worktree list` に worktree が無ければ loop が閉じ済みで、`close.sh` は呼ばない（呼んでも「見つからない」で終了 1 になるが、これはエラーではない）。ログ末尾の `🧹` 行で確認してもよい
-
-- `close.sh` はブランチを既定で残す（PR が open なので消さない）
-- 残っていた worktree を `close.sh` が dirty / 未 push で拒否したら（終了 1）、`--force` は使わない。残っている変更・コミットを報告し、ワークツリーは残す。loop が push しきれなかった作業を消さないため
+- `pr-review-loop` は完了マーカーの後に自分の worktree を閉じ、閉じた後にマーカーをもう一度最終行に出す。wt 製では tmux ウィンドウは残るので `kill-window` はこちらで行う
+- `git worktree list` に無ければ loop が閉じ済みで `close.sh` は呼ばない（呼ぶと「見つからない」で終了 1 になるが、これは skip であり拒否ではない）
+- 残っていた worktree を dirty / 未 push で拒否されたら `--force` は使わず残す。残っている変更・コミットを報告する（loop が push しきれなかった作業を消さないため）。`close.sh` はブランチを既定で残す（PR が open なので消さない）
 
 ### 7. 報告
 
