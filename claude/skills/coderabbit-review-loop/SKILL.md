@@ -129,7 +129,7 @@ PR の処理が終わったら（マージ済み、または「止めて報告�
 
 - パスに `__worktrees/` を含む（workmux 製）worktree は閉じない。`workmux remove` は tmux ウィンドウごと消すため、起動側の後始末に任せる
 - 今いるのがメイン worktree 自体（`git worktree list` の 1 行目と同じパス）なら閉じない
-- close.sh の後は自分の worktree が消えているので、以降の Bash は `cd <メイン worktree> &&` を付けて呼ぶ（次の PR へ進んでも Bash を呼び続けるため）
+- close.sh の後は自分の worktree が消えているので、以降の Bash は `cd <メイン worktree または次 PR の worktree> &&` を付けて呼ぶ（次の PR へ進んでも Bash を呼び続けるため）
 - `--delete-branch` を付けてよいのはマージ済みのときだけ。止めて報告するときは付けず、ブランチも残す
 - `--force` は使わない。close.sh が拒否した（終了 1。未コミット・未 push など）ら、理由を報告に書いて worktree を残す
 - squash マージでリモートブランチが消えると「未 push」と出て拒否されることがある。`--force` で迂回せず、残したまま報告する（人が MERGED を確認して手動で `--force` する手順は close-worktrees スキルにあるが、ループでは使わず人に渡す）
