@@ -166,7 +166,7 @@ cd <main repo> && ~/.claude/skills/close-worktrees/close.sh --dry-run feature/<s
 cd <main repo> && ~/.claude/skills/close-worktrees/close.sh feature/<slug>
 ```
 
-- `pr-review-loop` は完了マーカーの後に自分の worktree を閉じ、閉じた後にマーカーをもう一度最終行に出す。wt 製では tmux ウィンドウは残るので `kill-window` はこちらで行う
+- `pr-review-loop` は自分の worktree を閉じてから完了マーカーを最終行に出す。`[done]` の時点で後片付けは済んでいる（拒否された場合は残っている）。wt 製では tmux ウィンドウは残るので `kill-window` はこちらで行う
 - `git worktree list` に無ければ loop が閉じ済みで `close.sh` は呼ばない（呼ぶと「見つからない」で終了 1 になるが、これは skip であり拒否ではない）
 - 残っていた worktree を dirty / 未 push で拒否されたら `--force` は使わず残す。残っている変更・コミットを報告する（loop が push しきれなかった作業を消さないため）。`close.sh` はブランチを既定で残す（PR が open なので消さない）
 
