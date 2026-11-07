@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "dependencies": {
+    "@getpaseo/cli": "^0.8.0"
+  }
+}
