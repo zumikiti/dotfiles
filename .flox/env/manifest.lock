@@ -52,11 +52,6 @@
         "pkg-path": "jq",
         "version": "1.8.1"
       },
-      "jujutsu": {
-        "pkg-path": "jujutsu",
-        "pkg-group": "jujutsu",
-        "version": "0.43.0"
-      },
       "lsd": {
         "pkg-path": "lsd"
       },
@@ -144,63 +139,583 @@
   },
   "packages": [
     {
-      "attr_path": "jujutsu",
+      "attr_path": "fish",
       "broken": false,
-      "derivation": "/nix/store/28gc91z9fvg245a3rs6r4v6rx4130ahc-jujutsu-0.43.0.drv",
-      "description": "Git-compatible DVCS that is both simple and powerful",
-      "install_id": "jujutsu",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
-      "name": "jujutsu-0.43.0",
-      "pname": "jujutsu",
-      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
-      "rev_count": 1027867,
-      "rev_date": "2026-07-05T04:06:12Z",
-      "scrape_date": "2026-07-06T03:13:12.573421Z",
+      "derivation": "/nix/store/8qahl5bwfp7wkwv9l6wgp407vvdnizmf-fish-4.9.3.drv",
+      "description": "Smart and user-friendly command line shell",
+      "install_id": "fish",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "fish-4.9.3",
+      "pname": "fish",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.084372Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
-      "version": "0.43.0",
+      "version": "4.9.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/mwn1fik4pg397khf5c2ajfvnazcm7rjv-jujutsu-0.43.0"
+        "doc": "/nix/store/8ij0lig9n2ckmm0sgp13lddblw5lhaaw-fish-4.9.3-doc",
+        "out": "/nix/store/89xsm9bg4z03cgbbxlcz036df1n1jzzk-fish-4.9.3"
       },
       "system": "aarch64-darwin",
-      "group": "jujutsu",
+      "group": "shell",
       "priority": 5
     },
     {
-      "attr_path": "jujutsu",
+      "attr_path": "fish",
       "broken": false,
-      "derivation": "/nix/store/n0fhs5w41764q5l1xjnrhcm38mcm557d-jujutsu-0.43.0.drv",
-      "description": "Git-compatible DVCS that is both simple and powerful",
-      "install_id": "jujutsu",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
-      "name": "jujutsu-0.43.0",
-      "pname": "jujutsu",
-      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
-      "rev_count": 1027867,
-      "rev_date": "2026-07-05T04:06:12Z",
-      "scrape_date": "2026-07-06T03:41:44.340431Z",
+      "derivation": "/nix/store/2rh65x7qr23028ahcyxrr5bpvrhgzl9n-fish-4.9.3.drv",
+      "description": "Smart and user-friendly command line shell",
+      "install_id": "fish",
+      "license": "GPL-2.0-only",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "fish-4.9.3",
+      "pname": "fish",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:02.683297Z",
       "stabilities": [
-        "staging",
         "unstable"
       ],
       "unfree": false,
-      "version": "0.43.0",
+      "version": "4.9.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/ri54j3mpnz9hck1jr4i4myzhqb7lj9h1-jujutsu-0.43.0"
+        "doc": "/nix/store/b1hrn2znpj7sx7jqql70jjphxnyp31p4-fish-4.9.3-doc",
+        "out": "/nix/store/aa4magf3q4i8chj3f9da58js2x9k5s6s-fish-4.9.3"
       },
       "system": "aarch64-linux",
-      "group": "jujutsu",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "neovim",
+      "broken": false,
+      "derivation": "/nix/store/648xxp699b25h37v4fmjpzpv9gn8jiil-neovim-0.12.6.drv",
+      "description": "Vim text editor fork focused on extensibility and agility",
+      "install_id": "neovim",
+      "license": "[ Apache-2.0, Vim ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "neovim-0.12.6",
+      "pname": "neovim",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.228403Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.12.6",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/33kmv3xq6hspzl46ynvb1wna8mznjmg2-neovim-0.12.6"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "neovim",
+      "broken": false,
+      "derivation": "/nix/store/81a9gzqzna410h5gkxn71mia657mi67b-neovim-0.12.6.drv",
+      "description": "Vim text editor fork focused on extensibility and agility",
+      "install_id": "neovim",
+      "license": "[ Apache-2.0, Vim ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "neovim-0.12.6",
+      "pname": "neovim",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:02.940583Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.12.6",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/b58hy199azsskql3rkcrq8x51l4zr99h-neovim-0.12.6"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.nord",
+      "broken": false,
+      "derivation": "/nix/store/ypl6wl6bpgb82c4xsag53fz6zaigv2f2-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
+      "description": "Nord Tmux theme with plugin support",
+      "install_id": "nord",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
+      "pname": "nord",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.502347Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-03-03",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/bsk8z43f10r8np84m3fxvn6g8ah8347y-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.nord",
+      "broken": false,
+      "derivation": "/nix/store/qgpk95f50pq50g49clgxh02bam8vjvm6-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
+      "description": "Nord Tmux theme with plugin support",
+      "install_id": "nord",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
+      "pname": "nord",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:03.181088Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-03-03",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/wnxr26009sc0i7c6lg776anf7ypbdydi-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "oh-my-posh",
+      "broken": false,
+      "derivation": "/nix/store/63k3gkk6kiy9vmva7clrafkn0xgl4zsr-oh-my-posh-30.9.0.drv",
+      "description": "Prompt theme engine for any shell",
+      "install_id": "oh-my-posh",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "oh-my-posh-30.9.0",
+      "pname": "oh-my-posh",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.248996Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "30.9.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/dndnfz3lv1ybl7pwxi7ylx2w9xmas3gq-oh-my-posh-30.9.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "oh-my-posh",
+      "broken": false,
+      "derivation": "/nix/store/235b5yrxw0qw5x2cz2d5fmjwafd4rm5g-oh-my-posh-30.9.0.drv",
+      "description": "Prompt theme engine for any shell",
+      "install_id": "oh-my-posh",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "oh-my-posh-30.9.0",
+      "pname": "oh-my-posh",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:02.959668Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "30.9.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/acj9vcwwj73qn6qngl9vw642jvs0sybw-oh-my-posh-30.9.0"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.power-theme",
+      "broken": false,
+      "derivation": "/nix/store/xf2d6wd7k4n1462yvhvvifjfr7hadswq-tmuxplugin-power-1.0-unstable-2024-04-14.drv",
+      "description": "Tmux powerline theme",
+      "install_id": "power-theme",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-power-1.0-unstable-2024-04-14",
+      "pname": "power-theme",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.502373Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2024-04-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/z54vk6bs4f36a0mr68cacga55802wxmr-tmuxplugin-power-1.0-unstable-2024-04-14"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.power-theme",
+      "broken": false,
+      "derivation": "/nix/store/h2l73id55ah894jsxdkg7g41fnzfcyp1-tmuxplugin-power-1.0-unstable-2024-04-14.drv",
+      "description": "Tmux powerline theme",
+      "install_id": "power-theme",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-power-1.0-unstable-2024-04-14",
+      "pname": "power-theme",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:03.181117Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2024-04-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/d0f21yypw4mkv4slrn26vxxmlsi6a8dd-tmuxplugin-power-1.0-unstable-2024-04-14"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.resurrect",
+      "broken": false,
+      "derivation": "/nix/store/xpq2b5s9asapbz85gzcbjl1bb2qmczkb-tmuxplugin-resurrect-4.0.0-unstable-2022-05-01.drv",
+      "description": "Restore tmux environment after system restart",
+      "install_id": "resurrect",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-resurrect-4.0.0-unstable-2022-05-01",
+      "pname": "resurrect",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.502381Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-05-01",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/bdp64raxpa3yn8bk9x235brzzh9mwm3y-tmuxplugin-resurrect-4.0.0-unstable-2022-05-01"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.resurrect",
+      "broken": false,
+      "derivation": "/nix/store/fnv9sr79rlnljwgzq60bq6fkv501j0dm-tmuxplugin-resurrect-4.0.0-unstable-2022-05-01.drv",
+      "description": "Restore tmux environment after system restart",
+      "install_id": "resurrect",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-resurrect-4.0.0-unstable-2022-05-01",
+      "pname": "resurrect",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:03.181125Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-05-01",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/piszh6qbm19wi11b18f5mk57m59vn8yj-tmuxplugin-resurrect-4.0.0-unstable-2022-05-01"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "rtk",
+      "broken": false,
+      "derivation": "/nix/store/gdxg56nafr0s450sd90fizwc010zr6ab-rtk-1.1.0.drv",
+      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
+      "install_id": "rtk",
+      "license": "[ Apache-2.0 ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "rtk-1.1.0",
+      "pname": "rtk",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.441264Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.1.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/rmbfhhyfih2yrbb0cb3vl2znlhhqap7q-rtk-1.1.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "rtk",
+      "broken": false,
+      "derivation": "/nix/store/zpls2gris2c1hg7jxdi8iskzfppihis1-rtk-1.1.0.drv",
+      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
+      "install_id": "rtk",
+      "license": "[ Apache-2.0 ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "rtk-1.1.0",
+      "pname": "rtk",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:03.113625Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.1.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/8j3n740gxq6jhp3x6zgwbl2vbr0d2m9i-rtk-1.1.0"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/04ci5qf85lmnxhfk0pybhwr2ln2krpxm-tmuxplugin-sensible-3.0.0-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-sensible-3.0.0-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.502392Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/lzg7vaycqgg1qzhk1yhaj302d1sl5m73-tmuxplugin-sensible-3.0.0-unstable-2022-08-14"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.sensible",
+      "broken": false,
+      "derivation": "/nix/store/s3zfmlvknc9pizzjg1jjd1bj5c80hqkz-tmuxplugin-sensible-3.0.0-unstable-2022-08-14.drv",
+      "install_id": "sensible",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-sensible-3.0.0-unstable-2022-08-14",
+      "pname": "sensible",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:03.181137Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2022-08-14",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/5xijqfq3ffbarsgqkwrn8z89dg79m17x-tmuxplugin-sensible-3.0.0-unstable-2022-08-14"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmux",
+      "broken": false,
+      "derivation": "/nix/store/wxc05z7c42mb16ayn9k5b7mgx7p2inax-tmux-3.8.drv",
+      "description": "Terminal multiplexer",
+      "install_id": "tmux",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmux-3.8",
+      "pname": "tmux",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.502244Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.8",
+      "outputs_to_install": [
+        "man",
+        "out",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/zb9in17zpgprykq6yzssmxqshizi1gjz-tmux-3.8-man",
+        "out": "/nix/store/0rw6c2f25c7z5w2apss5ljif9jig68bm-tmux-3.8"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmux",
+      "broken": false,
+      "derivation": "/nix/store/rdr96jf93j4plcdwmr6jh8j9gcbry85n-tmux-3.8.drv",
+      "description": "Terminal multiplexer",
+      "install_id": "tmux",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmux-3.8",
+      "pname": "tmux",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:03.180934Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "3.8",
+      "outputs_to_install": [
+        "man",
+        "out",
+        "out"
+      ],
+      "outputs": {
+        "man": "/nix/store/527146i618ql803kbd3x6kjymqwiw2yz-tmux-3.8-man",
+        "out": "/nix/store/pk5i0i1wpaxgqw459xl7d1961avbycx9-tmux-3.8"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/bf8innr4wczbzmk7cpybcib0zfnbna5n-tmuxplugin-yank-2.3.0-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-yank-2.3.0-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T05:45:38.502490Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/wmikv0nsb9fzbflk3q1z3hjqvcrw6nl0-tmuxplugin-yank-2.3.0-unstable-2023-07-19"
+      },
+      "system": "aarch64-darwin",
+      "group": "shell",
+      "priority": 5
+    },
+    {
+      "attr_path": "tmuxPlugins.yank",
+      "broken": false,
+      "derivation": "/nix/store/m2bg2zanm7g9vdk32al4p35y1ak2p9ng-tmuxplugin-yank-2.3.0-unstable-2023-07-19.drv",
+      "install_id": "yank",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "name": "tmuxplugin-yank-2.3.0-unstable-2023-07-19",
+      "pname": "yank",
+      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
+      "rev_count": 1108983,
+      "rev_date": "2026-11-05T10:58:29Z",
+      "scrape_date": "2026-11-08T06:10:03.181239Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2023-07-19",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/9427nd4fi4fg5g2hzzh2f6w2nbaa5y3w-tmuxplugin-yank-2.3.0-unstable-2023-07-19"
+      },
+      "system": "aarch64-linux",
+      "group": "shell",
       "priority": 5
     },
     {
@@ -1606,586 +2121,6 @@
       },
       "system": "aarch64-linux",
       "group": "workmux",
-      "priority": 5
-    },
-    {
-      "attr_path": "fish",
-      "broken": false,
-      "derivation": "/nix/store/8qahl5bwfp7wkwv9l6wgp407vvdnizmf-fish-4.9.3.drv",
-      "description": "Smart and user-friendly command line shell",
-      "install_id": "fish",
-      "license": "GPL-2.0-only",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "fish-4.9.3",
-      "pname": "fish",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.084372Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "4.9.3",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "doc": "/nix/store/8ij0lig9n2ckmm0sgp13lddblw5lhaaw-fish-4.9.3-doc",
-        "out": "/nix/store/89xsm9bg4z03cgbbxlcz036df1n1jzzk-fish-4.9.3"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "fish",
-      "broken": false,
-      "derivation": "/nix/store/2rh65x7qr23028ahcyxrr5bpvrhgzl9n-fish-4.9.3.drv",
-      "description": "Smart and user-friendly command line shell",
-      "install_id": "fish",
-      "license": "GPL-2.0-only",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "fish-4.9.3",
-      "pname": "fish",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:02.683297Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "4.9.3",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "doc": "/nix/store/b1hrn2znpj7sx7jqql70jjphxnyp31p4-fish-4.9.3-doc",
-        "out": "/nix/store/aa4magf3q4i8chj3f9da58js2x9k5s6s-fish-4.9.3"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "neovim",
-      "broken": false,
-      "derivation": "/nix/store/648xxp699b25h37v4fmjpzpv9gn8jiil-neovim-0.12.6.drv",
-      "description": "Vim text editor fork focused on extensibility and agility",
-      "install_id": "neovim",
-      "license": "[ Apache-2.0, Vim ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "neovim-0.12.6",
-      "pname": "neovim",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.228403Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.12.6",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/33kmv3xq6hspzl46ynvb1wna8mznjmg2-neovim-0.12.6"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "neovim",
-      "broken": false,
-      "derivation": "/nix/store/81a9gzqzna410h5gkxn71mia657mi67b-neovim-0.12.6.drv",
-      "description": "Vim text editor fork focused on extensibility and agility",
-      "install_id": "neovim",
-      "license": "[ Apache-2.0, Vim ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "neovim-0.12.6",
-      "pname": "neovim",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:02.940583Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.12.6",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/b58hy199azsskql3rkcrq8x51l4zr99h-neovim-0.12.6"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.nord",
-      "broken": false,
-      "derivation": "/nix/store/ypl6wl6bpgb82c4xsag53fz6zaigv2f2-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
-      "description": "Nord Tmux theme with plugin support",
-      "install_id": "nord",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
-      "pname": "nord",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.502347Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2023-03-03",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/bsk8z43f10r8np84m3fxvn6g8ah8347y-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.nord",
-      "broken": false,
-      "derivation": "/nix/store/qgpk95f50pq50g49clgxh02bam8vjvm6-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
-      "description": "Nord Tmux theme with plugin support",
-      "install_id": "nord",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
-      "pname": "nord",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:03.181088Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2023-03-03",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/wnxr26009sc0i7c6lg776anf7ypbdydi-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "oh-my-posh",
-      "broken": false,
-      "derivation": "/nix/store/63k3gkk6kiy9vmva7clrafkn0xgl4zsr-oh-my-posh-30.9.0.drv",
-      "description": "Prompt theme engine for any shell",
-      "install_id": "oh-my-posh",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "oh-my-posh-30.9.0",
-      "pname": "oh-my-posh",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.248996Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "30.9.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/dndnfz3lv1ybl7pwxi7ylx2w9xmas3gq-oh-my-posh-30.9.0"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "oh-my-posh",
-      "broken": false,
-      "derivation": "/nix/store/235b5yrxw0qw5x2cz2d5fmjwafd4rm5g-oh-my-posh-30.9.0.drv",
-      "description": "Prompt theme engine for any shell",
-      "install_id": "oh-my-posh",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "oh-my-posh-30.9.0",
-      "pname": "oh-my-posh",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:02.959668Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "30.9.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/acj9vcwwj73qn6qngl9vw642jvs0sybw-oh-my-posh-30.9.0"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.power-theme",
-      "broken": false,
-      "derivation": "/nix/store/xf2d6wd7k4n1462yvhvvifjfr7hadswq-tmuxplugin-power-1.0-unstable-2024-04-14.drv",
-      "description": "Tmux powerline theme",
-      "install_id": "power-theme",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-power-1.0-unstable-2024-04-14",
-      "pname": "power-theme",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.502373Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2024-04-14",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/z54vk6bs4f36a0mr68cacga55802wxmr-tmuxplugin-power-1.0-unstable-2024-04-14"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.power-theme",
-      "broken": false,
-      "derivation": "/nix/store/h2l73id55ah894jsxdkg7g41fnzfcyp1-tmuxplugin-power-1.0-unstable-2024-04-14.drv",
-      "description": "Tmux powerline theme",
-      "install_id": "power-theme",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-power-1.0-unstable-2024-04-14",
-      "pname": "power-theme",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:03.181117Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2024-04-14",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/d0f21yypw4mkv4slrn26vxxmlsi6a8dd-tmuxplugin-power-1.0-unstable-2024-04-14"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.resurrect",
-      "broken": false,
-      "derivation": "/nix/store/xpq2b5s9asapbz85gzcbjl1bb2qmczkb-tmuxplugin-resurrect-4.0.0-unstable-2022-05-01.drv",
-      "description": "Restore tmux environment after system restart",
-      "install_id": "resurrect",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-resurrect-4.0.0-unstable-2022-05-01",
-      "pname": "resurrect",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.502381Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2022-05-01",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/bdp64raxpa3yn8bk9x235brzzh9mwm3y-tmuxplugin-resurrect-4.0.0-unstable-2022-05-01"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.resurrect",
-      "broken": false,
-      "derivation": "/nix/store/fnv9sr79rlnljwgzq60bq6fkv501j0dm-tmuxplugin-resurrect-4.0.0-unstable-2022-05-01.drv",
-      "description": "Restore tmux environment after system restart",
-      "install_id": "resurrect",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-resurrect-4.0.0-unstable-2022-05-01",
-      "pname": "resurrect",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:03.181125Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2022-05-01",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/piszh6qbm19wi11b18f5mk57m59vn8yj-tmuxplugin-resurrect-4.0.0-unstable-2022-05-01"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "rtk",
-      "broken": false,
-      "derivation": "/nix/store/gdxg56nafr0s450sd90fizwc010zr6ab-rtk-1.1.0.drv",
-      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
-      "install_id": "rtk",
-      "license": "[ Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "rtk-1.1.0",
-      "pname": "rtk",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.441264Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "1.1.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/rmbfhhyfih2yrbb0cb3vl2znlhhqap7q-rtk-1.1.0"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "rtk",
-      "broken": false,
-      "derivation": "/nix/store/zpls2gris2c1hg7jxdi8iskzfppihis1-rtk-1.1.0.drv",
-      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
-      "install_id": "rtk",
-      "license": "[ Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "rtk-1.1.0",
-      "pname": "rtk",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:03.113625Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "1.1.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/8j3n740gxq6jhp3x6zgwbl2vbr0d2m9i-rtk-1.1.0"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.sensible",
-      "broken": false,
-      "derivation": "/nix/store/04ci5qf85lmnxhfk0pybhwr2ln2krpxm-tmuxplugin-sensible-3.0.0-unstable-2022-08-14.drv",
-      "install_id": "sensible",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-sensible-3.0.0-unstable-2022-08-14",
-      "pname": "sensible",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.502392Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2022-08-14",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/lzg7vaycqgg1qzhk1yhaj302d1sl5m73-tmuxplugin-sensible-3.0.0-unstable-2022-08-14"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.sensible",
-      "broken": false,
-      "derivation": "/nix/store/s3zfmlvknc9pizzjg1jjd1bj5c80hqkz-tmuxplugin-sensible-3.0.0-unstable-2022-08-14.drv",
-      "install_id": "sensible",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-sensible-3.0.0-unstable-2022-08-14",
-      "pname": "sensible",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:03.181137Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2022-08-14",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/5xijqfq3ffbarsgqkwrn8z89dg79m17x-tmuxplugin-sensible-3.0.0-unstable-2022-08-14"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmux",
-      "broken": false,
-      "derivation": "/nix/store/wxc05z7c42mb16ayn9k5b7mgx7p2inax-tmux-3.8.drv",
-      "description": "Terminal multiplexer",
-      "install_id": "tmux",
-      "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmux-3.8",
-      "pname": "tmux",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.502244Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "3.8",
-      "outputs_to_install": [
-        "man",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "man": "/nix/store/zb9in17zpgprykq6yzssmxqshizi1gjz-tmux-3.8-man",
-        "out": "/nix/store/0rw6c2f25c7z5w2apss5ljif9jig68bm-tmux-3.8"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmux",
-      "broken": false,
-      "derivation": "/nix/store/rdr96jf93j4plcdwmr6jh8j9gcbry85n-tmux-3.8.drv",
-      "description": "Terminal multiplexer",
-      "install_id": "tmux",
-      "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmux-3.8",
-      "pname": "tmux",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:03.180934Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "3.8",
-      "outputs_to_install": [
-        "man",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "man": "/nix/store/527146i618ql803kbd3x6kjymqwiw2yz-tmux-3.8-man",
-        "out": "/nix/store/pk5i0i1wpaxgqw459xl7d1961avbycx9-tmux-3.8"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.yank",
-      "broken": false,
-      "derivation": "/nix/store/bf8innr4wczbzmk7cpybcib0zfnbna5n-tmuxplugin-yank-2.3.0-unstable-2023-07-19.drv",
-      "install_id": "yank",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-yank-2.3.0-unstable-2023-07-19",
-      "pname": "yank",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T05:45:38.502490Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2023-07-19",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/wmikv0nsb9fzbflk3q1z3hjqvcrw6nl0-tmuxplugin-yank-2.3.0-unstable-2023-07-19"
-      },
-      "system": "aarch64-darwin",
-      "group": "shell",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.yank",
-      "broken": false,
-      "derivation": "/nix/store/m2bg2zanm7g9vdk32al4p35y1ak2p9ng-tmuxplugin-yank-2.3.0-unstable-2023-07-19.drv",
-      "install_id": "yank",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "name": "tmuxplugin-yank-2.3.0-unstable-2023-07-19",
-      "pname": "yank",
-      "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
-      "rev_count": 1108983,
-      "rev_date": "2026-11-05T10:58:29Z",
-      "scrape_date": "2026-11-08T06:10:03.181239Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2023-07-19",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/9427nd4fi4fg5g2hzzh2f6w2nbaa5y3w-tmuxplugin-yank-2.3.0-unstable-2023-07-19"
-      },
-      "system": "aarch64-linux",
-      "group": "shell",
       "priority": 5
     }
   ]
