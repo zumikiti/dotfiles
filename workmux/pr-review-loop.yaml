@@ -1,0 +1,14 @@
+# gh-dash の L キー (checkout + claude pr-review-loop) 専用。
+# `workmux add --config` で差し込む。PR 番号は --name pr-<N>-loop で決まる
+# worktree ディレクトリ名 ($PWD) から取り出して claude に `/pr-review-loop <N>` を渡す。
+# 終了後に worktree/ブランチ/ウィンドウを片付ける（claude を抜けたときに走る。スキル側は閉じない）。
+# 片付けの clean / push 済み判定は close.sh に集約している（判定が食い違わないよう yaml では持たない）。
+# 拒否されたら (未コミット / 未 push / detached / rebase 途中など) worktree は残り、理由が表示される。
+# close.sh は workmux の handle (= worktree ディレクトリ名) で解決し、--delete-branch で
+# worktree・ウィンドウ・ローカルブランチを消す (従来の workmux remove -f と同じ)。
+# C と L は同じ PR に同時には使えない。
+# 他人の PR のチェックアウト内のファイル (.workmux/PROMPT-*.md 等) は読まない。
+# 読むと PR 作者がコミットしたファイルでプロンプトを差し込めてしまうため。
+panes:
+  - command: 'claude "/pr-review-loop $(basename "$PWD" | sed -e "s/^pr-//" -e "s/-loop\$//") use sub agents"; bash ~/.claude/skills/close-worktrees/close.sh --delete-branch "$(basename "$PWD")"'
+    focus: true
