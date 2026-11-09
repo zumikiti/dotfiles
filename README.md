@@ -26,7 +26,7 @@ ln -s ~/dotfiles/karabiner.json ~/.config/karabiner/
 # first-wave CLI tools are defined in .flox/env/manifest.toml
 flox activate -d ~/dotfiles
 ```
-Linux では `flox activate` 時に `hook.on-activate` が `~/.profile` に管理ブロックを書き込み、以後 bash の対話ログインで自動的に `flox activate -d ~/dotfiles` して fish に入る（activate に失敗したらメッセージを出して bash のまま）。macOS では自動 activate しないので、シェルごとに `flox activate -d ~/dotfiles` する。
+Linux では `flox activate` 時に `hook.on-activate` が `~/.profile` に管理ブロックを書き込み、以後 `~/.profile` を読む対話ログインシェル（bash なら `~/.bash_profile` が無い場合）で自動的に `flox activate -d ~/dotfiles` して fish に入る（activate や fish の起動に失敗したらメッセージを出してログインシェルのまま）。macOS では自動 activate しないので、シェルごとに `flox activate -d ~/dotfiles` する。
 
 ## install fish
 ```sh
