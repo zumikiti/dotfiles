@@ -32,9 +32,6 @@ worktrunk.pkg-path = "worktrunk"
 worktrunk.version = "0.53.0"
 jq.pkg-path = "jq"
 jq.version = "1.8.1"
-herdr.pkg-path = "flox/herdr"
-herdr.pkg-group = "herdr"
-herdr.version = "0.7.0"
 htop.pkg-path = "htop"
 htop.version = "3.5.1"
 gh-dash.pkg-path = "gh-dash"
@@ -45,15 +42,14 @@ jujutsu.version = "0.43.0"
 tuicr.pkg-path = "tuicr"
 tuicr.pkg-group = "tuicr"
 tuicr.version = "0.19.1"
-tuicr.systems = ["aarch64-darwin", "aarch64-linux", "x86_64-linux"]
 ffmpeg.pkg-path = "ffmpeg"
 gcc.pkg-path = "gcc"
 workmux.pkg-path = "flox/workmux"
 workmux.pkg-group = "workmux"
 chromium.pkg-path = "chromium"
-chromium.systems = ["aarch64-linux", "x86_64-linux"]
+chromium.systems = ["aarch64-linux"]
 noto-fonts-cjk-sans.pkg-path = "noto-fonts-cjk-sans"
-noto-fonts-cjk-sans.systems = ["aarch64-linux", "x86_64-linux"]
+noto-fonts-cjk-sans.systems = ["aarch64-linux"]
 awscli2.pkg-path = "awscli2"
 ssm-session-manager-plugin.pkg-path = "ssm-session-manager-plugin"
 # gum.pkg-path = "gum"
@@ -156,9 +152,6 @@ on-activate = '''
   _seed pi/agent/settings.json.template "$HOME/.pi/agent/settings.json"
   # custom oxlm provider definition (models.json is read-only config)
   _link pi/agent/models.json "$HOME/.pi/agent/models.json"
-
-  # herdr
-  _link herdr/config.toml    "$HOME/.config/herdr/config.toml"
 
   # gh-dash
   _link gh-dash/config.yml "$HOME/.config/gh-dash/config.yml"
@@ -280,12 +273,8 @@ $end"
 
 ## Other Environment Options -----------------------------------------
 [options]
-# Systems that environment is compatible with
-# systems = [
-#   "aarch64-darwin",
-#   "aarch64-linux",
-#   "x86_64-darwin",
-#   "x86_64-linux",
-# ]
+# Systems that environment is compatible with. Explicit on purpose: see
+# docs/adr/0003. (Supported values also include x86_64-darwin, x86_64-linux.)
+systems = ["aarch64-darwin", "aarch64-linux"]
 # Uncomment to disable CUDA detection.
 # cuda-detection = false
