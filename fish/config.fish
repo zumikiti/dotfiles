@@ -92,7 +92,7 @@ function dh --wraps='gh dash -c ~/dotfiles/gh-dash/config.yml' --description 'al
 end
 
 function wt-clean --description 'Remove all worktrees except main'
-  wt remove -f -y (wt list --format=json | jq -r '.[] | select(.is_main | not) | .branch')
+  wt remove -f -y (wt list --format=json | jq -r '.items[] | select(.worktree.main | not) | .branch')
 end
 
 # workmux
