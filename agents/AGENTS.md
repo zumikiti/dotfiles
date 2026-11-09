@@ -57,6 +57,5 @@
 
 # Claude-Only Skills
 - Claude-only skills, especially `subagent-model-policy`, must not be loaded outside Claude Code.
-- In opencode this is enforced by `permission.skill` in `opencode/opencode.json`, not by this rule alone.
 
 @RTK.md
