@@ -180,6 +180,9 @@ on-activate = '''
   # owned by this hook -- the repo is its source of truth. POSIX-only so
   # /bin/sh (dash) can read it; ~/.profile cannot be symlinked because it
   # holds other system content and must exist *before* `flox activate`.
+  # No `exec`: if activation fails (bad manifest, broken env, no fish) the
+  # login falls back to the plain login shell instead of dying. fish's own
+  # exit status is masked to 0 so a normal logout still exits in one go.
   if [ "$(uname -s)" = "Linux" ]; then
     _ensure_profile_bootstrap() {
       profile="$HOME/.profile"
@@ -189,7 +192,8 @@ on-activate = '''
 # Managed by dotfiles flox env (manifest.toml). Do not edit by hand.
 case \$- in *i*)
   if [ -z \"\$FLOX_ENV\" ] && command -v flox >/dev/null 2>&1; then
-    exec flox activate -d \"\$HOME/dotfiles\" -- fish -l
+    flox activate -d \"\$HOME/dotfiles\" -- sh -c 'command -v fish >/dev/null 2>&1 || exit 127; fish -l; exit 0' && exit
+    echo \"dotfiles: flox activate failed; staying in the login shell\" >&2
   fi ;;
 esac
 $end"
