@@ -4,7 +4,9 @@ We will declare `[options] systems = ["aarch64-darwin", "aarch64-linux"]` explic
 
 **Systems are explicit.** With `options.systems` unset, `flox` ≤ 1.14 implicitly included `x86_64-darwin`, which silently held package resolution (and so upgrades) back to older versions ([discourse](https://discourse.flox.dev/t/x86-64-darwin-environments-may-resolve-to-older-package-versions/1268)). nixpkgs 26.05 is also the last release supporting `x86_64-darwin`. The only machines in use are an aarch64 Linux VM (OrbStack) and an Apple Silicon Mac, so only those two are listed. Adding a system later is a one-line change. Per-package `systems` lists must stay within these two.
 
-**Version constraints live only in single-package pkg-groups.** An exact `version` in `toplevel` or in a shared group freezes the whole group, because the group resolves against one nixpkgs revision. A pin is allowed only on a package in its own `pkg-group`; the lockfile is the pin for everything else. The existing `toplevel` pins (`worktrunk`, `jq`, `htop`, `gh-dash`) predate this rule and are a known deviation until they are removed in a follow-up update.
+**Version constraints live only in single-package pkg-groups.** An exact `version` in `toplevel` or in a shared group freezes the whole group, because the group resolves against one nixpkgs revision. A pin is allowed only on a package in its own `pkg-group`; the lockfile is the pin for everything else. The `toplevel` pins that predated this rule (`worktrunk`, `jq`, `htop`, `gh-dash`) have been removed.
+
+**The `shell` group holds the login path and agent tooling.** A package goes in `shell` when its breakage would lock you out or break the terminal (fish, tmux and its plugins, the prompt, the editor, and Claude/agent tooling such as `rtk`), so it can be upgraded and reviewed separately from `toplevel`.
 
 **Never merge a raise of `schema-version` or `lockfile-version` until every machine's `flox` CLI supports it.** The Login Bootstrap activates `flox` at login, so an older CLI that cannot read the manifest or lockfile breaks the login environment.
 
