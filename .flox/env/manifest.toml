@@ -182,7 +182,11 @@ on-activate = '''
   # holds other system content and must exist *before* `flox activate`.
   # No `exec`: if activation fails (bad manifest, broken env, no fish) the
   # login falls back to the plain login shell instead of dying. fish's own
-  # exit status is masked to 0 so a normal logout still exits in one go.
+  # exit status is masked to 0 so a normal logout still exits in one go;
+  # death by signal (>128, e.g. fish crashing at startup) is passed through
+  # so it falls back too instead of disconnecting on every login.
+  # deliberate: a fish that exits non-zero *normally* right away still logs
+  # out (re-login works); distinguish it if that ever hides real failures.
   if [ "$(uname -s)" = "Linux" ]; then
     _ensure_profile_bootstrap() {
       profile="$HOME/.profile"
@@ -192,8 +196,8 @@ on-activate = '''
 # Managed by dotfiles flox env (manifest.toml). Do not edit by hand.
 case \$- in *i*)
   if [ -z \"\$FLOX_ENV\" ] && command -v flox >/dev/null 2>&1; then
-    flox activate -d \"\$HOME/dotfiles\" -- sh -c 'command -v fish >/dev/null 2>&1 || exit 127; fish -l; exit 0' && exit
-    echo \"dotfiles: flox activate failed; staying in the login shell\" >&2
+    flox activate -d \"\$HOME/dotfiles\" -- sh -c 'command -v fish >/dev/null 2>&1 || exit 127; fish -l; s=\$?; [ \$s -gt 128 ] && exit \$s; exit 0' && exit
+    echo \"dotfiles: flox activate or fish failed (status \$?); staying in the login shell\" >&2
   fi ;;
 esac
 $end"
