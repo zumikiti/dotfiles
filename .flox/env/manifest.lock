@@ -9,8 +9,7 @@
       "chromium": {
         "pkg-path": "chromium",
         "systems": [
-          "aarch64-linux",
-          "x86_64-linux"
+          "aarch64-linux"
         ]
       },
       "diffnav": {
@@ -44,11 +43,6 @@
       "go": {
         "pkg-path": "go"
       },
-      "herdr": {
-        "pkg-path": "flox/herdr",
-        "pkg-group": "herdr",
-        "version": "0.7.0"
-      },
       "htop": {
         "pkg-path": "htop",
         "version": "3.5.1"
@@ -77,8 +71,7 @@
       "noto-fonts-cjk-sans": {
         "pkg-path": "noto-fonts-cjk-sans",
         "systems": [
-          "aarch64-linux",
-          "x86_64-linux"
+          "aarch64-linux"
         ]
       },
       "oh-my-posh": {
@@ -111,12 +104,7 @@
       "tuicr": {
         "pkg-path": "tuicr",
         "pkg-group": "tuicr",
-        "version": "0.19.1",
-        "systems": [
-          "aarch64-darwin",
-          "aarch64-linux",
-          "x86_64-linux"
-        ]
+        "version": "0.19.1"
       },
       "workmux": {
         "pkg-path": "flox/workmux",
@@ -134,105 +122,17 @@
       }
     },
     "hook": {
-      "on-activate": "  # --- Apply dotfiles: symlink configs into place ---------------------\n  # Idempotent and silent once linked; runs on every `flox activate`\n  # (incl. fish login). A pre-existing real file is backed up to *.bak\n  # before it is replaced by a symlink.\n  dotfiles=\"$FLOX_ENV_PROJECT\"\n\n  _link() {\n    # _link <path-relative-to-dotfiles> <absolute-target>\n    src=\"$dotfiles/$1\"\n    dst=\"$2\"\n    [ -e \"$src\" ] || return 0\n    # already the right symlink? stay quiet.\n    [ \"$(readlink \"$dst\" 2>/dev/null)\" = \"$src\" ] && return 0\n    mkdir -p \"$(dirname \"$dst\")\"\n    if [ -e \"$dst\" ] && [ ! -L \"$dst\" ]; then\n      mv \"$dst\" \"$dst.bak\"\n      echo \"dotfiles: backed up $dst -> $dst.bak\"\n    fi\n    ln -sfn \"$src\" \"$dst\"\n    echo \"dotfiles: linked $dst\"\n  }\n\n  # _seed: copy a dotfiles FILE into place, overwriting the target each\n  # activate. Used for mutable runtime config (e.g. pi agent settings)\n  # that the app rewrites in place -- a symlink would dirty the repo and\n  # a one-time copy would stop propagating repo-side updates. The repo\n  # copy is the source of truth; user changes in the live file do not\n  # survive the next `flox activate`.\n  _seed() {\n    # _seed <path-relative-to-dotfiles> <absolute-target>\n    src=\"$dotfiles/$1\"\n    dst=\"$2\"\n    [ -e \"$src\" ] || return 0\n    mkdir -p \"$(dirname \"$dst\")\"\n    # Replace any pre-existing symlink with a real file (write-through\n    # would otherwise corrupt the repo); keep a one-time backup.\n    if [ -L \"$dst\" ]; then\n      rm -f \"$dst\"\n    elif [ -e \"$dst\" ] && ! cmp -s \"$src\" \"$dst\"; then\n      mv \"$dst\" \"$dst.bak\"\n      echo \"dotfiles: backed up $dst -> $dst.bak\"\n    fi\n    cp \"$src\" \"$dst\"\n    echo \"dotfiles: seeded $dst\"\n  }\n\n  # shell / tmux / tig\n  _link .tigrc            \"$HOME/.tigrc\"\n  _link .tmux.conf        \"$HOME/.tmux.conf\"\n\n  # nvim\n  _link nvim/init.lua     \"$HOME/.config/nvim/init.lua\"\n  _link nvim/lua          \"$HOME/.config/nvim/lua\"\n\n  # fish\n  _link fish/config.fish  \"$HOME/.config/fish/config.fish\"\n  _link fish/fish_plugins \"$HOME/.config/fish/fish_plugins\"\n  _link fish/posh-themes  \"$HOME/.config/fish/posh-themes\"\n\n  # alacritty\n  _link alacritty         \"$HOME/.config/alacritty\"\n\n  # shared agent rules (single source of truth; CLAUDE.md imports it)\n  _link agents/AGENTS.md     \"$HOME/.claude/AGENTS.md\"\n  _link agents/AGENTS.md     \"$HOME/.config/opencode/AGENTS.md\"\n  _link agents/AGENTS.md     \"$HOME/.pi/agent/AGENTS.md\"\n\n  # claude code\n  _link claude/CLAUDE.md     \"$HOME/.claude/CLAUDE.md\"\n  _link claude/skills        \"$HOME/.claude/skills\"\n  _link claude/settings.json \"$HOME/.claude/settings.json\"\n\n  # opencode\n  _link opencode/opencode.json \"$HOME/.config/opencode/opencode.json\"\n  _link opencode/agents        \"$HOME/.config/opencode/agents\"\n\n  # pi\n  # settings.json is rewritten in place by pi on every run; seed it from\n  # the template on each activate so the repo copy stays the single\n  # source of truth (the symlink version would dirty the repo).\n  _seed pi/agent/settings.json.template \"$HOME/.pi/agent/settings.json\"\n  # custom oxlm provider definition (models.json is read-only config)\n  _link pi/agent/models.json \"$HOME/.pi/agent/models.json\"\n\n  # herdr\n  _link herdr/config.toml    \"$HOME/.config/herdr/config.toml\"\n\n  # gh-dash\n  _link gh-dash/config.yml \"$HOME/.config/gh-dash/config.yml\"\n\n  # workmux\n  _link workmux/pr-review.yaml \"$HOME/.config/workmux/pr-review.yaml\"\n  _link workmux/pr-review-loop.yaml \"$HOME/.config/workmux/pr-review-loop.yaml\"\n\n  # macOS only: karabiner\n  if [ \"$(uname -s)\" = \"Darwin\" ]; then\n    _link karabiner.json  \"$HOME/.config/karabiner/karabiner.json\"\n  fi\n\n  unset -f _link\n\n  # --- Login bootstrap: auto-enter flox + fish on interactive login ---\n  # (Linux only) Keep a managed block in ~/.profile so interactive login\n  # shells re-enter this flox env and drop into fish. The block is fully\n  # owned by this hook -- the repo is its source of truth. POSIX-only so\n  # /bin/sh (dash) can read it; ~/.profile cannot be symlinked because it\n  # holds other system content and must exist *before* `flox activate`.\n  # No `exec`: if activation fails (bad manifest, broken env, fish missing\n  # or not runnable) the login falls back to the plain login shell instead\n  # of dying. `fish -N -c true` is the runnability probe: `command -v` alone\n  # passes a fish that exists but can't exec (126/127 would then be masked\n  # to 0 and log out on every login). fish's own exit status is masked to 0\n  # so a normal logout still exits in one go; crash statuses (132-136, 139:\n  # ILL/TRAP/ABRT/BUS/FPE/SEGV, e.g. fish crashing at startup) are passed\n  # through so the login falls back instead of disconnecting on every login.\n  # INT/HUP/TERM are masked too: fish's bare `exit` reuses the last status,\n  # so Ctrl-C then `exit` gives 130, which must still log out in one go.\n  # deliberate: sh can't tell a crash from `exit 139` after a crashed\n  # command, and other non-zero exits still log out; refine if that bites.\n  if [ \"$(uname -s)\" = \"Linux\" ]; then\n    _ensure_profile_bootstrap() {\n      profile=\"$HOME/.profile\"\n      begin=\"# >>> dotfiles flox login >>>\"\n      end=\"# <<< dotfiles flox login <<<\"\n      block=\"$begin\n# Managed by dotfiles flox env (manifest.toml). Do not edit by hand.\ncase \\$- in *i*)\n  if [ -z \\\"\\$FLOX_ENV\\\" ] && command -v flox >/dev/null 2>&1; then\n    flox activate -d \\\"\\$HOME/dotfiles\\\" -- sh -c 'fish -N -c true >/dev/null 2>&1 || exit 127; fish -l; s=\\$?; case \\$s in 13[2-6]|139) exit \\$s ;; esac; exit 0' && exit\n    echo \\\"dotfiles: flox activate or fish failed (status \\$?); staying in the login shell\\\" >&2\n  fi ;;\nesac\n$end\"\n\n      [ -e \"$profile\" ] || : > \"$profile\"\n\n      # new = the file with any prior managed block stripped, then a\n      # freshly rendered block appended. Both sides of the compare go\n      # through command substitution so trailing-newline handling matches\n      # and the rewrite (and its message) stays quiet when unchanged.\n      new=\"$(\n        awk -v b=\"$begin\" -v e=\"$end\" \\\n          '$0==b{skip=1;next} $0==e{skip=0;next} !skip{print}' \"$profile\"\n        printf '%s\\n' \"$block\"\n      )\"\n      if [ \"$new\" != \"$(cat \"$profile\")\" ]; then\n        printf '%s\\n' \"$new\" > \"$profile\"\n        echo \"dotfiles: updated flox login bootstrap in $profile\"\n      fi\n    }\n    _ensure_profile_bootstrap\n    unset -f _ensure_profile_bootstrap\n  fi\n"
+      "on-activate": "  # --- Apply dotfiles: symlink configs into place ---------------------\n  # Idempotent and silent once linked; runs on every `flox activate`\n  # (incl. fish login). A pre-existing real file is backed up to *.bak\n  # before it is replaced by a symlink.\n  dotfiles=\"$FLOX_ENV_PROJECT\"\n\n  _link() {\n    # _link <path-relative-to-dotfiles> <absolute-target>\n    src=\"$dotfiles/$1\"\n    dst=\"$2\"\n    [ -e \"$src\" ] || return 0\n    # already the right symlink? stay quiet.\n    [ \"$(readlink \"$dst\" 2>/dev/null)\" = \"$src\" ] && return 0\n    mkdir -p \"$(dirname \"$dst\")\"\n    if [ -e \"$dst\" ] && [ ! -L \"$dst\" ]; then\n      mv \"$dst\" \"$dst.bak\"\n      echo \"dotfiles: backed up $dst -> $dst.bak\"\n    fi\n    ln -sfn \"$src\" \"$dst\"\n    echo \"dotfiles: linked $dst\"\n  }\n\n  # _seed: copy a dotfiles FILE into place, overwriting the target each\n  # activate. Used for mutable runtime config (e.g. pi agent settings)\n  # that the app rewrites in place -- a symlink would dirty the repo and\n  # a one-time copy would stop propagating repo-side updates. The repo\n  # copy is the source of truth; user changes in the live file do not\n  # survive the next `flox activate`.\n  _seed() {\n    # _seed <path-relative-to-dotfiles> <absolute-target>\n    src=\"$dotfiles/$1\"\n    dst=\"$2\"\n    [ -e \"$src\" ] || return 0\n    mkdir -p \"$(dirname \"$dst\")\"\n    # Replace any pre-existing symlink with a real file (write-through\n    # would otherwise corrupt the repo); keep a one-time backup.\n    if [ -L \"$dst\" ]; then\n      rm -f \"$dst\"\n    elif [ -e \"$dst\" ] && ! cmp -s \"$src\" \"$dst\"; then\n      mv \"$dst\" \"$dst.bak\"\n      echo \"dotfiles: backed up $dst -> $dst.bak\"\n    fi\n    cp \"$src\" \"$dst\"\n    echo \"dotfiles: seeded $dst\"\n  }\n\n  # shell / tmux / tig\n  _link .tigrc            \"$HOME/.tigrc\"\n  _link .tmux.conf        \"$HOME/.tmux.conf\"\n\n  # nvim\n  _link nvim/init.lua     \"$HOME/.config/nvim/init.lua\"\n  _link nvim/lua          \"$HOME/.config/nvim/lua\"\n\n  # fish\n  _link fish/config.fish  \"$HOME/.config/fish/config.fish\"\n  _link fish/fish_plugins \"$HOME/.config/fish/fish_plugins\"\n  _link fish/posh-themes  \"$HOME/.config/fish/posh-themes\"\n\n  # alacritty\n  _link alacritty         \"$HOME/.config/alacritty\"\n\n  # shared agent rules (single source of truth; CLAUDE.md imports it)\n  _link agents/AGENTS.md     \"$HOME/.claude/AGENTS.md\"\n  _link agents/AGENTS.md     \"$HOME/.config/opencode/AGENTS.md\"\n  _link agents/AGENTS.md     \"$HOME/.pi/agent/AGENTS.md\"\n\n  # claude code\n  _link claude/CLAUDE.md     \"$HOME/.claude/CLAUDE.md\"\n  _link claude/skills        \"$HOME/.claude/skills\"\n  _link claude/settings.json \"$HOME/.claude/settings.json\"\n\n  # opencode\n  _link opencode/opencode.json \"$HOME/.config/opencode/opencode.json\"\n  _link opencode/agents        \"$HOME/.config/opencode/agents\"\n\n  # pi\n  # settings.json is rewritten in place by pi on every run; seed it from\n  # the template on each activate so the repo copy stays the single\n  # source of truth (the symlink version would dirty the repo).\n  _seed pi/agent/settings.json.template \"$HOME/.pi/agent/settings.json\"\n  # custom oxlm provider definition (models.json is read-only config)\n  _link pi/agent/models.json \"$HOME/.pi/agent/models.json\"\n\n  # gh-dash\n  _link gh-dash/config.yml \"$HOME/.config/gh-dash/config.yml\"\n\n  # workmux\n  _link workmux/pr-review.yaml \"$HOME/.config/workmux/pr-review.yaml\"\n  _link workmux/pr-review-loop.yaml \"$HOME/.config/workmux/pr-review-loop.yaml\"\n\n  # macOS only: karabiner\n  if [ \"$(uname -s)\" = \"Darwin\" ]; then\n    _link karabiner.json  \"$HOME/.config/karabiner/karabiner.json\"\n  fi\n\n  unset -f _link\n\n  # --- Login bootstrap: auto-enter flox + fish on interactive login ---\n  # (Linux only) Keep a managed block in ~/.profile so interactive login\n  # shells re-enter this flox env and drop into fish. The block is fully\n  # owned by this hook -- the repo is its source of truth. POSIX-only so\n  # /bin/sh (dash) can read it; ~/.profile cannot be symlinked because it\n  # holds other system content and must exist *before* `flox activate`.\n  # No `exec`: if activation fails (bad manifest, broken env, fish missing\n  # or not runnable) the login falls back to the plain login shell instead\n  # of dying. `fish -N -c true` is the runnability probe: `command -v` alone\n  # passes a fish that exists but can't exec (126/127 would then be masked\n  # to 0 and log out on every login). fish's own exit status is masked to 0\n  # so a normal logout still exits in one go; crash statuses (132-136, 139:\n  # ILL/TRAP/ABRT/BUS/FPE/SEGV, e.g. fish crashing at startup) are passed\n  # through so the login falls back instead of disconnecting on every login.\n  # INT/HUP/TERM are masked too: fish's bare `exit` reuses the last status,\n  # so Ctrl-C then `exit` gives 130, which must still log out in one go.\n  # deliberate: sh can't tell a crash from `exit 139` after a crashed\n  # command, and other non-zero exits still log out; refine if that bites.\n  if [ \"$(uname -s)\" = \"Linux\" ]; then\n    _ensure_profile_bootstrap() {\n      profile=\"$HOME/.profile\"\n      begin=\"# >>> dotfiles flox login >>>\"\n      end=\"# <<< dotfiles flox login <<<\"\n      block=\"$begin\n# Managed by dotfiles flox env (manifest.toml). Do not edit by hand.\ncase \\$- in *i*)\n  if [ -z \\\"\\$FLOX_ENV\\\" ] && command -v flox >/dev/null 2>&1; then\n    flox activate -d \\\"\\$HOME/dotfiles\\\" -- sh -c 'fish -N -c true >/dev/null 2>&1 || exit 127; fish -l; s=\\$?; case \\$s in 13[2-6]|139) exit \\$s ;; esac; exit 0' && exit\n    echo \\\"dotfiles: flox activate or fish failed (status \\$?); staying in the login shell\\\" >&2\n  fi ;;\nesac\n$end\"\n\n      [ -e \"$profile\" ] || : > \"$profile\"\n\n      # new = the file with any prior managed block stripped, then a\n      # freshly rendered block appended. Both sides of the compare go\n      # through command substitution so trailing-newline handling matches\n      # and the rewrite (and its message) stays quiet when unchanged.\n      new=\"$(\n        awk -v b=\"$begin\" -v e=\"$end\" \\\n          '$0==b{skip=1;next} $0==e{skip=0;next} !skip{print}' \"$profile\"\n        printf '%s\\n' \"$block\"\n      )\"\n      if [ \"$new\" != \"$(cat \"$profile\")\" ]; then\n        printf '%s\\n' \"$new\" > \"$profile\"\n        echo \"dotfiles: updated flox login bootstrap in $profile\"\n      fi\n    }\n    _ensure_profile_bootstrap\n    unset -f _ensure_profile_bootstrap\n  fi\n"
     },
     "profile": {},
-    "options": {}
+    "options": {
+      "systems": [
+        "aarch64-darwin",
+        "aarch64-linux"
+      ]
+    }
   },
   "packages": [
-    {
-      "attr_path": "herdr",
-      "broken": false,
-      "derivation": "/nix/store/jp2zks5p7xssi8vqk2j7cnw75ya5i4yi-herdr-0.7.0.drv",
-      "description": "Agent multiplexer that lives in your terminal",
-      "install_id": "herdr",
-      "license": "AGPL-3.0-only",
-      "locked_url": "https://github.com/flox/floxenvs?rev=9335e0828de86d7cbcc83f38226518302179a50a",
-      "name": "herdr-0.7.0",
-      "pname": "herdr",
-      "rev": "9335e0828de86d7cbcc83f38226518302179a50a",
-      "rev_count": 9730,
-      "rev_date": "2026-06-21T19:11:38Z",
-      "scrape_date": "2026-10-28T02:42:14.782264737Z",
-      "stabilities": [
-        "staging",
-        "unstable",
-        "stable"
-      ],
-      "unfree": false,
-      "version": "0.7.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/28acjf26dih3mn9si5cw649zmknvhrbb-herdr-0.7.0"
-      },
-      "system": "aarch64-darwin",
-      "group": "herdr",
-      "priority": 5
-    },
-    {
-      "attr_path": "herdr",
-      "broken": false,
-      "derivation": "/nix/store/cbivd855wppfc07bihzwj308g35p3v4r-herdr-0.7.0.drv",
-      "description": "Agent multiplexer that lives in your terminal",
-      "install_id": "herdr",
-      "license": "AGPL-3.0-only",
-      "locked_url": "https://github.com/flox/floxenvs?rev=9335e0828de86d7cbcc83f38226518302179a50a",
-      "name": "herdr-0.7.0",
-      "pname": "herdr",
-      "rev": "9335e0828de86d7cbcc83f38226518302179a50a",
-      "rev_count": 9730,
-      "rev_date": "2026-06-21T19:11:38Z",
-      "scrape_date": "2026-10-28T02:42:14.782276487Z",
-      "stabilities": [
-        "staging",
-        "unstable",
-        "stable"
-      ],
-      "unfree": false,
-      "version": "0.7.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/91v13lzh1qh3h4xhcicsvc9pxsg7cm67-herdr-0.7.0"
-      },
-      "system": "aarch64-linux",
-      "group": "herdr",
-      "priority": 5
-    },
-    {
-      "attr_path": "herdr",
-      "broken": false,
-      "derivation": "/nix/store/laiyiaq8hzy5zdhnl8iq9bfac5kc4n8f-herdr-0.7.0.drv",
-      "description": "Agent multiplexer that lives in your terminal",
-      "install_id": "herdr",
-      "license": "AGPL-3.0-only",
-      "locked_url": "https://github.com/flox/floxenvs?rev=9335e0828de86d7cbcc83f38226518302179a50a",
-      "name": "herdr-0.7.0",
-      "pname": "herdr",
-      "rev": "9335e0828de86d7cbcc83f38226518302179a50a",
-      "rev_count": 9730,
-      "rev_date": "2026-06-21T19:11:38Z",
-      "scrape_date": "2026-10-28T02:42:14.782280028Z",
-      "stabilities": [
-        "staging",
-        "unstable",
-        "stable"
-      ],
-      "unfree": false,
-      "version": "0.7.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/zqaypqflgh0g7v2qkb4kjgvi7h7b3siw-herdr-0.7.0"
-      },
-      "system": "x86_64-linux",
-      "group": "herdr",
-      "priority": 5
-    },
     {
       "attr_path": "jujutsu",
       "broken": false,
@@ -290,36 +190,6 @@
         "out": "/nix/store/ri54j3mpnz9hck1jr4i4myzhqb7lj9h1-jujutsu-0.43.0"
       },
       "system": "aarch64-linux",
-      "group": "jujutsu",
-      "priority": 5
-    },
-    {
-      "attr_path": "jujutsu",
-      "broken": false,
-      "derivation": "/nix/store/5p90xpcsr1902vgah3rhwnkh3397cysi-jujutsu-0.43.0.drv",
-      "description": "Git-compatible DVCS that is both simple and powerful",
-      "install_id": "jujutsu",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d407951447dcd00442e97087bf374aad70c04cea",
-      "name": "jujutsu-0.43.0",
-      "pname": "jujutsu",
-      "rev": "d407951447dcd00442e97087bf374aad70c04cea",
-      "rev_count": 1027867,
-      "rev_date": "2026-07-05T04:06:12Z",
-      "scrape_date": "2026-07-06T04:40:47.832586Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.43.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/w10748j1nsa40j6yjxvissjm8ljq4wlf-jujutsu-0.43.0"
-      },
-      "system": "x86_64-linux",
       "group": "jujutsu",
       "priority": 5
     },
@@ -388,40 +258,6 @@
       "priority": 5
     },
     {
-      "attr_path": "awscli2",
-      "broken": false,
-      "derivation": "/nix/store/dbl9vmw4sbrfxby3gn2n61k50wwgqhqv-awscli2-2.34.24.drv",
-      "description": "Unified tool to manage your AWS services",
-      "install_id": "awscli2",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "awscli2-2.34.24",
-      "pname": "awscli2",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:35.234084Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.34.24",
-      "outputs_to_install": [
-        "out",
-        "out",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "dist": "/nix/store/d61f9km3qfzb3xwa1nzd662ii8607zdh-awscli2-2.34.24-dist",
-        "out": "/nix/store/1kxvaj17xxfl0dznykiqn2ikscajpwag-awscli2-2.34.24"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "chromium",
       "broken": false,
       "derivation": "/nix/store/9yw67cn29p05akzdszy56b7dmvmpqvl7-chromium-149.0.7827.102.drv",
@@ -449,37 +285,6 @@
         "sandbox": "/nix/store/p5vfz3v97x584ggh6n5p6v3siv91gykg-chromium-149.0.7827.102-sandbox"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "chromium",
-      "broken": false,
-      "derivation": "/nix/store/ay03bykz1jyx4mlcxcnc6smm50w54ypq-chromium-149.0.7827.102.drv",
-      "description": "Open source web browser from Google",
-      "install_id": "chromium",
-      "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "chromium-149.0.7827.102",
-      "pname": "chromium",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:35.749122Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "149.0.7827.102",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/f3sl5bk5yrga37qrrqyycv66zgblkr04-chromium-149.0.7827.102",
-        "sandbox": "/nix/store/d7dnffiwnzxmvvmr3p61gs6i6harvjbb-chromium-149.0.7827.102-sandbox"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -540,36 +345,6 @@
         "out": "/nix/store/m066z30z1yyd6kvlm9kdps01j07130wm-diffnav-0.11.0"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "diffnav",
-      "broken": false,
-      "derivation": "/nix/store/xi5ays5c92jp4y7q4jywi6bj8g11xic0-diffnav-0.11.0.drv",
-      "description": "Git diff pager based on delta but with a file tree, à la GitHub",
-      "install_id": "diffnav",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "diffnav-0.11.0",
-      "pname": "diffnav",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:36.221695Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.11.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/hihr7bmdvcyzli5z88bfawh9ljg5x6fc-diffnav-0.11.0"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -650,44 +425,6 @@
       "priority": 5
     },
     {
-      "attr_path": "ffmpeg",
-      "broken": false,
-      "derivation": "/nix/store/w2033f07wb4jymqjdbn1qb125bskdpr7-ffmpeg-8.1.drv",
-      "description": "Complete, cross-platform solution to record, convert and stream audio and video",
-      "install_id": "ffmpeg",
-      "license": "[ LGPL-2.1-or-later, GPL-2.0-or-later, LGPL-3.0-or-later, GPL-3.0-or-later ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "ffmpeg-8.1",
-      "pname": "ffmpeg",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:36.834003Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "8.1",
-      "outputs_to_install": [
-        "bin",
-        "bin",
-        "man"
-      ],
-      "outputs": {
-        "bin": "/nix/store/281zx8sanx5fcp8j6advwics7gwdvdaz-ffmpeg-8.1-bin",
-        "data": "/nix/store/pxxjhd9y7z2anp67bp6j4002r9bnwizf-ffmpeg-8.1-data",
-        "dev": "/nix/store/7rv05vh6qh1sfiirhjkfjp2gskqhxdp9-ffmpeg-8.1-dev",
-        "doc": "/nix/store/m0k08lknppyyk6dh58157i835da3qnxx-ffmpeg-8.1-doc",
-        "lib": "/nix/store/xvrjmskfrp07gmh1zzlyfkv50nw40dcv-ffmpeg-8.1-lib",
-        "man": "/nix/store/dnnz7b0444c6pb6q8rippk90sl0pnz1n-ffmpeg-8.1-man",
-        "out": "/nix/store/84h52wlvlvb2y7hmm6338m7i4m1mpi0v-ffmpeg-8.1"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "fish",
       "broken": false,
       "derivation": "/nix/store/xyqfqqhsgpnpzjasqp8rcq15v966ccg8-fish-4.7.1.drv",
@@ -746,37 +483,6 @@
         "out": "/nix/store/a8q1dgp3hbmxrqgpbw34rncf6dmv9jg4-fish-4.7.1"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "fish",
-      "broken": false,
-      "derivation": "/nix/store/c5bncn8mk669nvv9hl5wd3z2fzdyxisa-fish-4.7.1.drv",
-      "description": "Smart and user-friendly command line shell",
-      "install_id": "fish",
-      "license": "GPL-2.0-only",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "fish-4.7.1",
-      "pname": "fish",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:36.892417Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "4.7.1",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "doc": "/nix/store/gm9m3y8vwiifmm2f2rsdwjwc42pkyh7n-fish-4.7.1-doc",
-        "out": "/nix/store/gdlvizwr80wwccx2v39h2as02rs0d1nb-fish-4.7.1"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -843,39 +549,6 @@
         "out": "/nix/store/y50c3w1v45yqh2r3npgmdzrr9n0wsic7-fzf-0.73.1"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "fzf",
-      "broken": false,
-      "derivation": "/nix/store/wnwwfw3jl1axwlzv3n19k6k5a470sxsf-fzf-0.73.1.drv",
-      "description": "Command-line fuzzy finder written in Go",
-      "install_id": "fzf",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "fzf-0.73.1",
-      "pname": "fzf",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:37.158048Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.73.1",
-      "outputs_to_install": [
-        "man",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "man": "/nix/store/v4rwmla9l2b02373vpyq5lskdffhjfgx-fzf-0.73.1-man",
-        "out": "/nix/store/pmddi2yfyf2ldrngm9yr4qa2q8mssa59-fzf-0.73.1"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -947,44 +620,6 @@
       "priority": 5
     },
     {
-      "attr_path": "gcc",
-      "broken": false,
-      "derivation": "/nix/store/y7wnv3kycy9gpxzwmny1sppi7il9i31a-gcc-wrapper-15.2.0.drv",
-      "description": "GNU Compiler Collection, version 15.2.0 (wrapper script)",
-      "install_id": "gcc",
-      "license": "GPL-3.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "gcc-wrapper-15.2.0",
-      "pname": "gcc",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:37.217059Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "15.2.0",
-      "outputs_to_install": [
-        "man",
-        "man",
-        "man",
-        "out",
-        "out",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "info": "/nix/store/5b0hplrl0n9g159mcis4jca1fjd4822a-gcc-wrapper-15.2.0-info",
-        "man": "/nix/store/r35yg8h1w630r3lmnyglwhv5nvk284mx-gcc-wrapper-15.2.0-man",
-        "out": "/nix/store/788mx070y81zjlg5ipcl0cra3afviw9k-gcc-wrapper-15.2.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "gh",
       "broken": false,
       "derivation": "/nix/store/shyqzsdzlaz0ay7wq22kmllqiiag5bk4-gh-2.93.0.drv",
@@ -1045,36 +680,6 @@
       "priority": 5
     },
     {
-      "attr_path": "gh",
-      "broken": false,
-      "derivation": "/nix/store/g2ny647j4ipcy7qfmdvizw36avkzrwbh-gh-2.93.0.drv",
-      "description": "GitHub CLI tool",
-      "install_id": "gh",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "gh-2.93.0",
-      "pname": "gh",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:37.316175Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.93.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/fxvyz1dx5wp87qgbd6dfkmqqb4fypm3b-gh-2.93.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "gh-dash",
       "broken": false,
       "derivation": "/nix/store/sjz3l438w5cm94ncy67wfrfdq9415x54-gh-dash-4.24.1.drv",
@@ -1131,36 +736,6 @@
         "out": "/nix/store/iwhnvfhr2wsgwqdm0fv980cg088a03yv-gh-dash-4.24.1"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "gh-dash",
-      "broken": false,
-      "derivation": "/nix/store/006rprwfwl65pgnn7hl9zhsbsd4m1j76-gh-dash-4.24.1.drv",
-      "description": "Github Cli extension to display a dashboard with pull requests and issues",
-      "install_id": "gh-dash",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "gh-dash-4.24.1",
-      "pname": "gh-dash",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:37.319167Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "4.24.1",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/zk6qahqfzjzw5d4bwc6mhkbzdyv0xhl0-gh-dash-4.24.1"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -1227,42 +802,6 @@
         "out": "/nix/store/ixp98f9avf8ikpdrmp40cj33g0dazyp9-git-2.54.0"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "git",
-      "broken": false,
-      "derivation": "/nix/store/4cj9yvavrj3052nk4kyzzqvy5562dz04-git-2.54.0.drv",
-      "description": "Distributed version control system",
-      "install_id": "git",
-      "license": "GPL-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "git-2.54.0",
-      "pname": "git",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:37.378330Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.54.0",
-      "outputs_to_install": [
-        "out",
-        "out",
-        "out",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "debug": "/nix/store/72fyakk8w8idjbksk0h8jbkq6sgvcm85-git-2.54.0-debug",
-        "doc": "/nix/store/l444690y78nfdwyzm6mghagl7xa97myf-git-2.54.0-doc",
-        "out": "/nix/store/bcnisk3ydfgv26v2gw3zlky24g00yww2-git-2.54.0"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -1337,44 +876,6 @@
       "priority": 5
     },
     {
-      "attr_path": "gnumake",
-      "broken": false,
-      "derivation": "/nix/store/071w65kmbjhwpx84fcg8xl2adw38321p-gnumake-4.4.1.drv",
-      "description": "Tool to control the generation of non-source files from sources",
-      "install_id": "gnumake",
-      "license": "GPL-3.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "gnumake-4.4.1",
-      "pname": "gnumake",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:38.168408Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "4.4.1",
-      "outputs_to_install": [
-        "man",
-        "out",
-        "out",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "debug": "/nix/store/q683z843wi7xs96pngh1kinnx88vn2if-gnumake-4.4.1-debug",
-        "doc": "/nix/store/wxg27bzsljjw4k72m9b2v6a0fx5a68s0-gnumake-4.4.1-doc",
-        "info": "/nix/store/03d41qgjsrhcr3fzq2z99ry07rahnj0v-gnumake-4.4.1-info",
-        "man": "/nix/store/bmvqa5ym318mymhxlwwmxq8wxal958p4-gnumake-4.4.1-man",
-        "out": "/nix/store/d3bwqm6bymhy3pdgbvf7vxjqfp31m3j1-gnumake-4.4.1"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "go",
       "broken": false,
       "derivation": "/nix/store/3wcz439vgpp14pn7jmfnhj1gfjz16pfm-go-1.26.3.drv",
@@ -1432,38 +933,6 @@
         "out": "/nix/store/jkcwcbwvhgzmxg59798z4clmj4bfv42i-go-1.26.3"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "go",
-      "broken": false,
-      "derivation": "/nix/store/zalhv7i71i9c3v7vm61psf2arglbzjfg-go-1.26.3.drv",
-      "description": "Go Programming language",
-      "install_id": "go",
-      "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "go-1.26.3",
-      "pname": "go",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:38.187124Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "1.26.3",
-      "outputs_to_install": [
-        "out",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/33fw5m31lfcnk4ff2f0df7j2bxnh8lgk-go-1.26.3"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -1528,38 +997,6 @@
         "out": "/nix/store/f8psqg5ml1pk2y9dxf918wbaa4hv24qz-htop-3.5.1"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "htop",
-      "broken": false,
-      "derivation": "/nix/store/gdfafzff69brslnvrpr1w49kxrqmkr8f-htop-3.5.1.drv",
-      "description": "Interactive process viewer",
-      "install_id": "htop",
-      "license": "GPL-2.0-only",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "htop-3.5.1",
-      "pname": "htop",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:57.558389Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "3.5.1",
-      "outputs_to_install": [
-        "man",
-        "out"
-      ],
-      "outputs": {
-        "man": "/nix/store/3qcjf7r5k1ai8jwk9pw14g71bzymn6fj-htop-3.5.1-man",
-        "out": "/nix/store/m6krqcxjpy79lz037j8dlahiwdlixv4i-htop-3.5.1"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -1641,47 +1078,6 @@
       "priority": 5
     },
     {
-      "attr_path": "jq",
-      "broken": false,
-      "derivation": "/nix/store/pq80zlnpxhzi25ninrrjjl0y1sd90hzk-jq-1.8.1.drv",
-      "description": "Lightweight and flexible command-line JSON processor",
-      "install_id": "jq",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "jq-1.8.1",
-      "pname": "jq",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:47:59.629960Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "1.8.1",
-      "outputs_to_install": [
-        "bin",
-        "bin",
-        "bin",
-        "bin",
-        "bin",
-        "bin",
-        "man",
-        "man"
-      ],
-      "outputs": {
-        "bin": "/nix/store/s04d6wm3kqjdgr7zdhlk214f6a2291ks-jq-1.8.1-bin",
-        "dev": "/nix/store/fmsvbcz2s85pmszdvwp4mhlamiv5lnzg-jq-1.8.1-dev",
-        "doc": "/nix/store/hhh2h4x4rhh6qbqa6620bvhz652cgw4m-jq-1.8.1-doc",
-        "man": "/nix/store/ncw52xsl5hgplh8csybbp9fli64iw1aq-jq-1.8.1-man",
-        "out": "/nix/store/7a1hndk12kz9wwh9sz8hzkkwgxq6rrnk-jq-1.8.1"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "lsd",
       "broken": false,
       "derivation": "/nix/store/k238nz1cjf8gx6ayqa09yaa38ilwkasr-lsd-1.2.0.drv",
@@ -1742,36 +1138,6 @@
       "priority": 5
     },
     {
-      "attr_path": "lsd",
-      "broken": false,
-      "derivation": "/nix/store/s1b88p1lz2259hdb1w3xwhx56xzrd7qp-lsd-1.2.0.drv",
-      "description": "Next gen ls command",
-      "install_id": "lsd",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "lsd-1.2.0",
-      "pname": "lsd",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:48:10.173477Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "1.2.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/qiylrniwycskbnk9ladmi1nzkb2p5nm8-lsd-1.2.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "neovim",
       "broken": false,
       "derivation": "/nix/store/7klxw1yblccaaj0p434s3f1jsir74v6j-neovim-0.12.2.drv",
@@ -1828,36 +1194,6 @@
         "out": "/nix/store/jhnhj653bfjhc0yxnq8mac76kk2jnqhl-neovim-0.12.2"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "neovim",
-      "broken": false,
-      "derivation": "/nix/store/ccpk13f9s7wwsppavpmwyvspk2m3wrj2-neovim-0.12.2.drv",
-      "description": "Vim text editor fork focused on extensibility and agility",
-      "install_id": "neovim",
-      "license": "[ Apache-2.0, Vim ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "neovim-0.12.2",
-      "pname": "neovim",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:48:16.609834Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.12.2",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/jk2rz33v6vprn2pnksfypby4z0swm1f9-neovim-0.12.2"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -1927,38 +1263,6 @@
       "priority": 5
     },
     {
-      "attr_path": "nodejs",
-      "broken": false,
-      "derivation": "/nix/store/f8i8jydaqs0ngxm97c091zna2mnjb43f-nodejs-24.15.0.drv",
-      "description": "Event-driven I/O framework for the V8 JavaScript engine",
-      "install_id": "nodejs",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "nodejs-24.15.0",
-      "pname": "nodejs",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:48:17.971319Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "24.15.0",
-      "outputs_to_install": [
-        "out",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/5a8ysg1jnj8jmzzyfcfw7rvpvnp5rfpa-nodejs-24.15.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "tmuxPlugins.nord",
       "broken": false,
       "derivation": "/nix/store/hhxiw71c5m85wzrh47kjibnxdbx7ckky-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
@@ -2019,36 +1323,6 @@
       "priority": 5
     },
     {
-      "attr_path": "tmuxPlugins.nord",
-      "broken": false,
-      "derivation": "/nix/store/fkagbl7ixkzdpagmc0plxbq7say9lkaz-tmuxplugin-nord-0.3.0-unstable-2023-03-03.drv",
-      "description": "Nord Tmux theme with plugin support",
-      "install_id": "nord",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "tmuxplugin-nord-0.3.0-unstable-2023-03-03",
-      "pname": "nord",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:50:48.324610Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2023-03-03",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/8gwr649rbm2nrlrbd75w6bjs6f93bx06-tmuxplugin-nord-0.3.0-unstable-2023-03-03"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "noto-fonts-cjk-sans",
       "broken": false,
       "derivation": "/nix/store/4mw0jydfzba9h131n9pmhsfjsbn8171b-noto-fonts-cjk-sans-2.004.drv",
@@ -2075,36 +1349,6 @@
         "out": "/nix/store/40cl5db70id6lz0vvl8y3h0yx086ljxh-noto-fonts-cjk-sans-2.004"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "noto-fonts-cjk-sans",
-      "broken": false,
-      "derivation": "/nix/store/h9x8mi7s97hdsqan15593h865ycq4j5d-noto-fonts-cjk-sans-2.004.drv",
-      "description": "Beautiful and free fonts for CJK languages",
-      "install_id": "noto-fonts-cjk-sans",
-      "license": "OFL-1.1",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "noto-fonts-cjk-sans-2.004",
-      "pname": "noto-fonts-cjk-sans",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:48:18.144848Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.004",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/ysq41nkq340qr8zxgpzyamxczvp5zl7y-noto-fonts-cjk-sans-2.004"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -2169,36 +1413,6 @@
       "priority": 5
     },
     {
-      "attr_path": "oh-my-posh",
-      "broken": false,
-      "derivation": "/nix/store/bmhqyfjijkd61l9qr1figy0ww6rrvhxg-oh-my-posh-29.14.0.drv",
-      "description": "Prompt theme engine for any shell",
-      "install_id": "oh-my-posh",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "oh-my-posh-29.14.0",
-      "pname": "oh-my-posh",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:48:24.678416Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "29.14.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/nk0f5h3fkb0p5lwmasgmlzp62b1q3xir-oh-my-posh-29.14.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "tmuxPlugins.power-theme",
       "broken": false,
       "derivation": "/nix/store/lb5jjkclfr4mydw6xnp27s6sxxcv7hbk-tmuxplugin-power-unstable-2024-05-12.drv",
@@ -2255,36 +1469,6 @@
         "out": "/nix/store/hds5xmiwnllg47h9iv5pkamq57mh877w-tmuxplugin-power-unstable-2024-05-12"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.power-theme",
-      "broken": false,
-      "derivation": "/nix/store/przd6pix0asc2lz5i7iv2clg46zc2kd7-tmuxplugin-power-unstable-2024-05-12.drv",
-      "description": "Tmux powerline theme",
-      "install_id": "power-theme",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "tmuxplugin-power-unstable-2024-05-12",
-      "pname": "power-theme",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:50:48.351958Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2024-05-12",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/3z5x5y04fl2ccdiwjkzm0xjjc4syhf14-tmuxplugin-power-unstable-2024-05-12"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -2349,36 +1533,6 @@
       "priority": 5
     },
     {
-      "attr_path": "tmuxPlugins.resurrect",
-      "broken": false,
-      "derivation": "/nix/store/9arf7zdf0scpvhjn0iwwm3v6vsi1j8v8-tmuxplugin-resurrect-unstable-2022-05-01.drv",
-      "description": "Restore tmux environment after system restart",
-      "install_id": "resurrect",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "tmuxplugin-resurrect-unstable-2022-05-01",
-      "pname": "resurrect",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:50:48.359893Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2022-05-01",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/z3cpsr4p1bq3j1glay47x9pdnwh6bh48-tmuxplugin-resurrect-unstable-2022-05-01"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "ripgrep",
       "broken": false,
       "derivation": "/nix/store/6g9dmzcg20l8n6mi9237msypxl2qw9ag-ripgrep-15.1.0.drv",
@@ -2435,37 +1589,6 @@
         "out": "/nix/store/ayxgmx0yf8mjfym3jprkkrjql1hyh8wy-ripgrep-15.1.0"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "ripgrep",
-      "broken": false,
-      "derivation": "/nix/store/iqqcq02llqxrgbid7g8q56vqkdvs20ww-ripgrep-15.1.0.drv",
-      "description": "Utility that combines the usability of The Silver Searcher with the raw speed of grep",
-      "install_id": "ripgrep",
-      "license": "[ Unlicense, MIT ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "ripgrep-15.1.0",
-      "pname": "ripgrep",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:49:43.220486Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "15.1.0",
-      "outputs_to_install": [
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/ixsp81bia5w1fqd2d59vwbcfqk3n5231-ripgrep-15.1.0"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -2530,36 +1653,6 @@
       "priority": 5
     },
     {
-      "attr_path": "rtk",
-      "broken": false,
-      "derivation": "/nix/store/phmmxmwl9fic0ngrsabli40s31c4cr33-rtk-0.42.0.drv",
-      "description": "CLI proxy that reduces LLM token consumption by 60-90% on common dev commands",
-      "install_id": "rtk",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "rtk-0.42.0",
-      "pname": "rtk",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:49:44.548509Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.42.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/xp2ivm9j72jfs7dii947a64awf7l68my-rtk-0.42.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "tmuxPlugins.sensible",
       "broken": false,
       "derivation": "/nix/store/1w4biawarb1zpfbh9mxq7nsjhnskzg00-tmuxplugin-sensible-unstable-2022-08-14.drv",
@@ -2612,34 +1705,6 @@
         "out": "/nix/store/w169fr55q7f0kx483dq3ks4k9v9r52q2-tmuxplugin-sensible-unstable-2022-08-14"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.sensible",
-      "broken": false,
-      "derivation": "/nix/store/yw0yfw28z7qqrq6pnccv05lkps0183r2-tmuxplugin-sensible-unstable-2022-08-14.drv",
-      "install_id": "sensible",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "tmuxplugin-sensible-unstable-2022-08-14",
-      "pname": "sensible",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:50:48.371541Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2022-08-14",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/456fcrba2mrlwicxan9i20bd0zjvyz9y-tmuxplugin-sensible-unstable-2022-08-14"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -2702,38 +1767,6 @@
         "out": "/nix/store/72nxr4vwlggrr3p2znp8wsd5njfjkh7s-ssm-session-manager-plugin-1.2.792.0"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "ssm-session-manager-plugin",
-      "broken": false,
-      "derivation": "/nix/store/1zh7qlg3jj753qjlnv89jqnb2ih5x6hn-ssm-session-manager-plugin-1.2.792.0.drv",
-      "description": "Amazon SSM Session Manager Plugin",
-      "install_id": "ssm-session-manager-plugin",
-      "license": "Apache-2.0",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "ssm-session-manager-plugin-1.2.792.0",
-      "pname": "ssm-session-manager-plugin",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:50:13.899683Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "1.2.792.0",
-      "outputs_to_install": [
-        "out",
-        "out",
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/01pjsnvr5g36rgphn18pcalqi586sb2m-ssm-session-manager-plugin-1.2.792.0"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -2804,39 +1837,6 @@
       "priority": 5
     },
     {
-      "attr_path": "tig",
-      "broken": false,
-      "derivation": "/nix/store/wzdfr9qrij4jy0bay5is0mvm5mr5k1li-tig-2.6.0.drv",
-      "description": "Text-mode interface for git",
-      "install_id": "tig",
-      "license": "GPL-2.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "tig-2.6.0",
-      "pname": "tig",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:50:47.610622Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.6.0",
-      "outputs_to_install": [
-        "man",
-        "out"
-      ],
-      "outputs": {
-        "doc": "/nix/store/x7hjv1f18cc38hfg1p8jwgixfnxawbcs-tig-2.6.0-doc",
-        "man": "/nix/store/1mh3rqkjl28ac60f35fjiprswiin177j-tig-2.6.0-man",
-        "out": "/nix/store/8ryy8aq784622jiw45hjpg2bf59ab5wf-tig-2.6.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "tmux",
       "broken": false,
       "derivation": "/nix/store/ycb4n326gzy5w5g7fm9cd051ga2igxrm-tmux-3.6a.drv",
@@ -2901,38 +1901,6 @@
       "priority": 5
     },
     {
-      "attr_path": "tmux",
-      "broken": false,
-      "derivation": "/nix/store/m0dw7b0iqh8c75x33mi129zwn1fhjyji-tmux-3.6a.drv",
-      "description": "Terminal multiplexer",
-      "install_id": "tmux",
-      "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "tmux-3.6a",
-      "pname": "tmux",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:50:48.211091Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "3.6a",
-      "outputs_to_install": [
-        "man",
-        "out"
-      ],
-      "outputs": {
-        "man": "/nix/store/2wj5f8mjg8x2md3hr5zlrv1jc6vc1134-tmux-3.6a-man",
-        "out": "/nix/store/ajvll7kw423j98gc0hry86bgic4lanl5-tmux-3.6a"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "worktrunk",
       "broken": false,
       "derivation": "/nix/store/zq3nyw09dnxkcvn1g64ccadk100wrksj-worktrunk-0.53.0.drv",
@@ -2993,36 +1961,6 @@
       "priority": 5
     },
     {
-      "attr_path": "worktrunk",
-      "broken": false,
-      "derivation": "/nix/store/gixl4lgnlqi56akm2kb2nri4i2fw2g3z-worktrunk-0.53.0.drv",
-      "description": "Git worktree manager for parallel AI agent workflows",
-      "install_id": "worktrunk",
-      "license": "[ MIT, Apache-2.0 ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "worktrunk-0.53.0",
-      "pname": "worktrunk",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:51:33.245539Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.53.0",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/a354r83bjm4h4gxwgnn3cw8yrxycal7x-worktrunk-0.53.0"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "tmuxPlugins.yank",
       "broken": false,
       "derivation": "/nix/store/v4y2k6kal9hvczcpmb55w8b8dq0p0f03-tmuxplugin-yank-unstable-2023-07-19.drv",
@@ -3075,34 +2013,6 @@
         "out": "/nix/store/8izkw0f8x5g3i1zh7x3i2iyl29f9s364-tmuxplugin-yank-unstable-2023-07-19"
       },
       "system": "aarch64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "tmuxPlugins.yank",
-      "broken": false,
-      "derivation": "/nix/store/lk843zn4hshfpn7kyhgfgc16c3jdvjjl-tmuxplugin-yank-unstable-2023-07-19.drv",
-      "install_id": "yank",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "tmuxplugin-yank-unstable-2023-07-19",
-      "pname": "yank",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:50:48.464787Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2023-07-19",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/h2658l91bzn0vbfj4i6i63xhmdni37xk-tmuxplugin-yank-unstable-2023-07-19"
-      },
-      "system": "x86_64-linux",
       "group": "toplevel",
       "priority": 5
     },
@@ -3167,36 +2077,6 @@
       "priority": 5
     },
     {
-      "attr_path": "zoxide",
-      "broken": false,
-      "derivation": "/nix/store/i0lg06v6qm1xlf4pcsyy72i7drq43nw3-zoxide-0.9.9.drv",
-      "description": "Fast cd command that learns your habits",
-      "install_id": "zoxide",
-      "license": "[ MIT ]",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "name": "zoxide-0.9.9",
-      "pname": "zoxide",
-      "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
-      "rev_count": 1014179,
-      "rev_date": "2026-06-10T06:56:03Z",
-      "scrape_date": "2026-06-12T04:51:38.960646Z",
-      "stabilities": [
-        "staging",
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.9.9",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/rm4j8cv6xnmwc6ys4zdfpwamkmn8g1cd-zoxide-0.9.9"
-      },
-      "system": "x86_64-linux",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
       "attr_path": "tuicr",
       "broken": false,
       "derivation": "/nix/store/vhlncimb1imshk9fsq22ylvi45r81v6v-tuicr-0.19.1.drv",
@@ -3255,60 +2135,31 @@
       "priority": 5
     },
     {
-      "attr_path": "tuicr",
-      "broken": false,
-      "derivation": "/nix/store/dfy7srw3ivqssrnp1qdlc48yk68iljkr-tuicr-0.19.1.drv",
-      "description": "Review AI-generated diffs like a GitHub pull request, right from your terminal",
-      "install_id": "tuicr",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=643809054d65fdd466a63e3155b8c498cb483c04",
-      "name": "tuicr-0.19.1",
-      "pname": "tuicr",
-      "rev": "643809054d65fdd466a63e3155b8c498cb483c04",
-      "rev_count": 1046609,
-      "rev_date": "2026-08-02T17:49:26Z",
-      "scrape_date": "2026-08-04T06:04:23.036068Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "0.19.1",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/xywv9f2d7b6mhqcxvqihlzsha9pvicb9-tuicr-0.19.1"
-      },
-      "system": "x86_64-linux",
-      "group": "tuicr",
-      "priority": 5
-    },
-    {
       "attr_path": "workmux",
       "broken": false,
-      "derivation": "/nix/store/3ypyi79l2djbmj3mcqfkf8kmaq3fkn1j-workmux-0.1.247.drv",
+      "derivation": "/nix/store/7d6qm9x9bzbc3vfhd4414vbh4n7nip7q-workmux-0.1.276.drv",
       "description": "Git worktrees + tmux windows for zero-friction parallel dev",
       "install_id": "workmux",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/floxenvs?rev=33b50baaa2c72cbf93a50faff2862d64862146ea",
-      "name": "workmux-0.1.247",
+      "locked_url": "https://github.com/flox/floxenvs?rev=8fdc4f3d1c927040a6eeacc0a0db6c6afffc7c04",
+      "name": "workmux-0.1.276",
       "pname": "workmux",
-      "rev": "33b50baaa2c72cbf93a50faff2862d64862146ea",
-      "rev_count": 21959,
-      "rev_date": "2026-08-26T02:01:18Z",
-      "scrape_date": "2026-10-28T02:42:14.782837405Z",
+      "rev": "8fdc4f3d1c927040a6eeacc0a0db6c6afffc7c04",
+      "rev_count": 28641,
+      "rev_date": "2026-10-14T08:09:25Z",
+      "scrape_date": "2026-11-09T02:48:26.903913317Z",
       "stabilities": [
-        "staging",
         "unstable",
+        "staging",
         "stable"
       ],
       "unfree": false,
-      "version": "0.1.247",
+      "version": "0.1.276",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/yrig9pl0a4zcqw0dcmqlpsm3y0syybv8-workmux-0.1.247"
+        "out": "/nix/store/7bgmpcmr5ha7l3gsz6w0brggga8bmvrb-workmux-0.1.276"
       },
       "system": "aarch64-darwin",
       "group": "workmux",
@@ -3317,62 +2168,31 @@
     {
       "attr_path": "workmux",
       "broken": false,
-      "derivation": "/nix/store/ami64aybhqq0k84vrzmycppb4iacg4s6-workmux-0.1.247.drv",
+      "derivation": "/nix/store/067ph1jzlbms8lci24z8yk80x51dqw67-workmux-0.1.276.drv",
       "description": "Git worktrees + tmux windows for zero-friction parallel dev",
       "install_id": "workmux",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/floxenvs?rev=33b50baaa2c72cbf93a50faff2862d64862146ea",
-      "name": "workmux-0.1.247",
+      "locked_url": "https://github.com/flox/floxenvs?rev=8fdc4f3d1c927040a6eeacc0a0db6c6afffc7c04",
+      "name": "workmux-0.1.276",
       "pname": "workmux",
-      "rev": "33b50baaa2c72cbf93a50faff2862d64862146ea",
-      "rev_count": 21959,
-      "rev_date": "2026-08-26T02:01:18Z",
-      "scrape_date": "2026-10-28T02:42:14.782838363Z",
+      "rev": "8fdc4f3d1c927040a6eeacc0a0db6c6afffc7c04",
+      "rev_count": 28641,
+      "rev_date": "2026-10-14T08:09:25Z",
+      "scrape_date": "2026-11-09T02:48:26.903923609Z",
       "stabilities": [
-        "staging",
         "unstable",
+        "staging",
         "stable"
       ],
       "unfree": false,
-      "version": "0.1.247",
+      "version": "0.1.276",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/df6phg0gwv7fw5mkzyqnln7pqq7lclk1-workmux-0.1.247"
+        "out": "/nix/store/wa1qpq5f1gv20rcaagh1pfzramxilzs6-workmux-0.1.276"
       },
       "system": "aarch64-linux",
-      "group": "workmux",
-      "priority": 5
-    },
-    {
-      "attr_path": "workmux",
-      "broken": false,
-      "derivation": "/nix/store/5xaklchk040y926xz6gjk76j2mr3l6wp-workmux-0.1.247.drv",
-      "description": "Git worktrees + tmux windows for zero-friction parallel dev",
-      "install_id": "workmux",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/floxenvs?rev=33b50baaa2c72cbf93a50faff2862d64862146ea",
-      "name": "workmux-0.1.247",
-      "pname": "workmux",
-      "rev": "33b50baaa2c72cbf93a50faff2862d64862146ea",
-      "rev_count": 21959,
-      "rev_date": "2026-08-26T02:01:18Z",
-      "scrape_date": "2026-10-28T02:42:14.782840530Z",
-      "stabilities": [
-        "staging",
-        "unstable",
-        "stable"
-      ],
-      "unfree": false,
-      "version": "0.1.247",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/h511yzhaard4nfccb8a0fxbqvvgl5xa0-workmux-0.1.247"
-      },
-      "system": "x86_64-linux",
       "group": "workmux",
       "priority": 5
     }
