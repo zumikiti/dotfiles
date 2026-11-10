@@ -26,7 +26,7 @@ ln -s ~/dotfiles/karabiner.json ~/.config/karabiner/
 # first-wave CLI tools are defined in .flox/env/manifest.toml
 flox activate -d ~/dotfiles
 ```
-`fish` にログインしたときは `fish/config.fish` で自動的に `flox activate -d ~/dotfiles` される。
+Linux では `flox activate` 時に `hook.on-activate` が `~/.profile` に管理ブロックを書き込み、以後 `~/.profile` を読む対話ログインシェル（bash なら `~/.bash_profile` が無い場合）で自動的に `flox activate -d ~/dotfiles` して fish に入る（activate や fish の起動に失敗したらメッセージを出してログインシェルのまま）。macOS では自動 activate しないので、シェルごとに `flox activate -d ~/dotfiles` する。
 
 ## install fish
 ```sh
@@ -35,7 +35,7 @@ brew install fnm
 
 fish
 
-# fish にログインし直すと dotfiles の flox 環境が有効になる
+# Linux ではログインし直すと ~/.profile 経由で dotfiles の flox 環境に入り fish が起動する
 
 # replace config.fish
 cd ~/.config/fish
@@ -102,13 +102,13 @@ tmux プラグインは TPM をやめ、flox の `[install]`（`tmuxPlugins.*`�
 `flox activate` 済みの環境で tmux を起動すれば自動で適用される（`C-s + I` は不要）。
 
 ```sh
-# fish にログイン（= flox activate 済み）した後に tmux を起動するだけ
+# ログイン（~/.profile 経由で flox activate 済みの fish）した後に tmux を起動するだけ
 tmux
 ```
 
 ## install tig
 ```sh
-fish にログインした後に tig を使える
+# flox activate 済みのシェルで tig を使える
 ```
 
 ## 開発 (CI / Lint / Format)
